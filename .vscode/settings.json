@@ -44,5 +44,6 @@
                 "pdflatex"
             ]
         },
-    ]
+    ],
+    "cSpell.language": "es-ES,en-GB"
 }
