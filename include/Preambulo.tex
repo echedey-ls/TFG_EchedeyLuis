@@ -144,3 +144,7 @@
                                     language=Python,
                                     numbers=left}
                                 \makeatother
+
+% Custom link command
+% https://tex.stackexchange.com/questions/121865/nameref-how-to-display-section-name-and-its-number
+\newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}}
