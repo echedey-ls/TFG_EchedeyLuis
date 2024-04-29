@@ -1,26 +1,38 @@
 % Documento de ayuda que explica los campos soportados por cada tipo de elemento en la bibliografía
 % https://mirror.las.iastate.edu/tex-archive/macros/latex/contrib/IEEEtran/bibtex/IEEEtran_bst_HOWTO.pdf
 
-% A continuacion se muestran dos ejemplos, una web, un libro.
-% Páginas webs de papers y artículos ofrecen un "Cite this", que suele dar el código BibTex para citar dicho artículo/paper.
-
-@online{recomendaciones,
-  author = {ETSIINF},
-  title = {Recomendaciones sobre el contenido de la Memoria Final},
-  year = {2017},
-  url = {http://www.fi.upm.es/?pagina=1475},
-  urldate = {2017-01-01}
-}
-
+@article{pvlib_python,
+  doi       = {10.21105/joss.05994},
+  url       = {https://doi.org/10.21105/joss.05994},
+  year      = {2023},
+  publisher = {The Open Journal},
+  volume    = {8},
+  number    = {92},
+  pages     = {5994},
+  author    = {Kevin S. Anderson and Clifford W. Hansen and William F. Holmgren and Adam R. Jensen and Mark A. Mikofski and Anton Driesse},
+  title     = {pvlib python: 2023 project update},
+  journal   = {Journal of Open Source Software}
+} 
 
 @article{stein_models_2009,
-title = {Models used to assess the performance of photovoltaic systems.},
-author = {Stein, Joshua S and Klise, Geoffrey T},
-abstractNote = {This report documents the various photovoltaic (PV) performance models and software developed and utilized by researchers at Sandia National Laboratories (SNL) in support of the Photovoltaics and Grid Integration Department. In addition to PV performance models, hybrid system and battery storage models are discussed. A hybrid system using other distributed sources and energy storage can help reduce the variability inherent in PV generation, and due to the complexity of combining multiple generation sources and system loads, these models are invaluable for system design and optimization. Energy storage plays an important role in reducing PV intermittency and battery storage models are used to understand the best configurations and technologies to store PV generated electricity. Other researcher's models used by SNL are discussed including some widely known models that incorporate algorithms developed at SNL. There are other models included in the discussion that are not used by or were not adopted from SNL research but may provide some benefit to researchers working on PV array performance, hybrid system models and energy storage. The paper is organized into three sections to describe the different software models as applied to photovoltaic performance, hybrid systems, and battery storage. For each model, there is a description which includes where to find the model, whether it is currently maintained and any references that may be available. Modeling improvements underway at SNL include quantifying the uncertainty of individual system components, the overall uncertainty in modeled vs. measured results and modeling large PV systems. SNL is also conducting research into the overall reliability of PV systems.},
-doi = {10.2172/974415},
-url = {https://www.osti.gov/biblio/974415},
-place = {United States},
-year = {2009},
-month = {12}
+  title        = {Models used to assess the performance of photovoltaic systems.},
+  author       = {Stein, Joshua S and Klise, Geoffrey T},
+  abstractnote = {This report documents the various photovoltaic (PV) performance models and software developed and utilized by researchers at Sandia National Laboratories (SNL) in support of the Photovoltaics and Grid Integration Department. In addition to PV performance models, hybrid system and battery storage models are discussed. A hybrid system using other distributed sources and energy storage can help reduce the variability inherent in PV generation, and due to the complexity of combining multiple generation sources and system loads, these models are invaluable for system design and optimization. Energy storage plays an important role in reducing PV intermittency and battery storage models are used to understand the best configurations and technologies to store PV generated electricity. Other researcher's models used by SNL are discussed including some widely known models that incorporate algorithms developed at SNL. There are other models included in the discussion that are not used by or were not adopted from SNL research but may provide some benefit to researchers working on PV array performance, hybrid system models and energy storage. The paper is organized into three sections to describe the different software models as applied to photovoltaic performance, hybrid systems, and battery storage. For each model, there is a description which includes where to find the model, whether it is currently maintained and any references that may be available. Modeling improvements underway at SNL include quantifying the uncertainty of individual system components, the overall uncertainty in modeled vs. measured results and modeling large PV systems. SNL is also conducting research into the overall reliability of PV systems.},
+  doi          = {10.2172/974415},
+  url          = {https://www.osti.gov/biblio/974415},
+  place        = {United States},
+  year         = {2009},
+  month        = {12}
 }
 
+@inproceedings{pvlib_history,
+  author    = {Stein, Joshua S. and Holmgren, William F. and Forbess, Jessica and Hansen, Clifford W.},
+  booktitle = {2016 IEEE 43rd Photovoltaic Specialists Conference (PVSC)},
+  title     = {PVLIB: Open source photovoltaic performance modeling functions for Matlab and Python},
+  year      = {2016},
+  volume    = {},
+  number    = {},
+  pages     = {3425-3430},
+  keywords  = {MATLAB;Temperature measurement;Mathematical model;Data models;Atmospheric modeling;Meteorology;Parameter estimation},
+  doi       = {10.1109/PVSC.2016.7750303}
+}
