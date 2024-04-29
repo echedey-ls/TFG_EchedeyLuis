@@ -1,3 +1,4 @@
 # exclude build folder but pdf output
 build/*
 !build/*.pdf
+*.log
