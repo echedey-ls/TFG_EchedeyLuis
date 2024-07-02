@@ -15,17 +15,43 @@ En este capítulo se cubre el estado del arte de la energía solar fotovoltaica 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{La energía solar fotovoltica} \label{sct:energia-solar}
+\section{La energía solar fotovoltaica} \label{sct:energia-solar}
 
-<<Explicación, en secciones, del estado del arte de las diferentes tecnologías, estudios, sistemas, etc., que trata este Trabajo de Fin de Grado, con referencias a la información, artículos, estudios, etc. que se tratan, como a continuación: \cite{stein_models_2009}>>
+En esta sección se presentará el estado del arte de las diferentes tecnologías, estudios y sistemas relacionados con la energía solar fotovoltaica.
+
+La energía solar fotovoltaica es una tecnología que convierte la radiación solar en electricidad utilizando células solares mediante el efecto fotoeléctrico \cite[][pp. 701-706]{böer2002survey}.
+Este fenómeno consiste en la generación de una corriente eléctrica cuando la luz incide sobre un material semiconductor y excita los electrones de la banda de valencia a la banda de conducción. Esta excitación genera un par electrón-hueco que se separa por la acción de un campo eléctrico externo (en cuyo caso no se produce energía neta positiva) o mediante la distribución de cargas en un semiconductor p-n, que permite la extracción de energía. Este último caso es el de aplicación en células solares fotovoltaicas, pues la intención es obtener energía eléctrica.
+
+Existen varias tecnologías de células solares, como las de silicio, las de película delgada y las más experimentales de concentración y de otros materiales orgánicos y multiunión, que se agrupan en generaciones \cite{Shubbak_2019}. Cada generación responde a una serie de características e implantación en el mercado, donde destacan:
+
+\begin{itemize}
+    \item Primera generación: células de silicio monocristalino y policristalino.
+          Se encuentran bien implantadas en el mercado y son las más utilizadas en aplicaciones fotovoltaicas. Según el límite teórico que alcanzaban Shockley y Queisser en 1961, el silicio es el material más apropiado para la fabricación de células solares, ya que su banda prohibida de 1.1 eV es la que mejor se ajusta al máximo de la radiación solar \cite[][p. 1126]{böer2002survey}. Sin embargo, presentan un coste de producción moderado y un alto uso de material. El límite de eficiencia teórico obtenido por los anteriores autores es del 33.7\% \cite{Shockley_Queisser_1961}, pero asumen que no tratan con células solares de concentración ni con células solares de múltiples uniones o tándem.
+    \item Segunda generación: células de película delgada, como las de teluluro de cadmio ($CdTe$), las de di-seleniuro de cobre, indio y galio (\textit{Copper indium gallium selenide}) ($CuInGaSe_2$), las de arseniuro de galio (\textit{Gallium arsenide}) ($GaAs$) y las de silicio amorfo ($a-Si:H$).
+          Destacan por ser de capa delgada (\textit{thin-film}) y, consecuentemente, más baratas de producir por el bajo uso de material, si bien pueden llegar a ser composiciones más caras.
+          Nótese que el silicio amorfo es ampliamente utilizado, en especial en aplicaciones de baja potencia, como calculadoras, pero su eficiencia es inferior a las células de silicio cristalino.
+    \item Tercera generación: células de concentración, células de múltiples uniones y células orgánicas.
+          Se encuentran en fase de investigación y desarrollo, y se caracterizan por su alta eficiencia y coste elevado.
+          Por un lado destacan la tecnología de concentración, que emplea lentes para concentrar la luz solar en células solares de alta eficiencia, normalmente de múltiples uniones, que pueden alcanzar eficiencias superiores al 40\% \cite[][Tabla 5]{Green_Dunlop_Yoshita_Kopidakis_Bothe_Siefer_Hao_2024}. Se emplean sistemas ópticos para disminuir el uso de material semiconductor, el principar factor de coste en estas células.
+\end{itemize}
+
+Cada una tiene sus propias características y aplicaciones específicas. Las células de primera y segunda generación son las más comunes en aplicaciones fotovoltaicas, mientras que las de tercera generación se encuentran en fase de investigación y desarrollo. Se remite el lector a \cite{Shubbak_2019} para una revisión más detallada de cada grupo y las peculiaridades de cada material.
+
+En cuanto a los sistemas fotovoltaicos, se han desarrollado diferentes configuraciones, como sistemas conectados a la red, sistemas autónomos y sistemas de bombeo \cite{Perpinan2020}. Cada configuración tiene sus propias ventajas y desafíos, y se han realizado investigaciones para optimizar su diseño y operación. En todos estos casos, es fundamental contar con herramientas de simulación y análisis para evaluar el rendimiento de los sistemas, optimizar su diseño y diagnosticar fallos a partir de datos meteorológicos.
+
+En resumen, el estado del arte de la energía solar fotovoltaica abarca una amplia gama de tecnologías, estudios y sistemas. En este Trabajo de Fin de Grado, se tratarán algunas de las propuestas que se han realizado en el ámbito de la simulación y el análisis de sistemas fotovoltaicos, con un enfoque particular en la librería \textit{pvlib python}.
 
 \section{Simulación de sistemas fotovoltaicos} \label{sct:simulaciones}
 
-La importancia de simulaciones y análisis previo a la implantación de sistemas fotovoltaicos tanto para inversores, operaciones de financiación y diseñadores ha dado lugar a múltiples herramientas software como \textit{PVsyst}, \textit{SAM} y muchas más \cite{stein_models_2009}.
+La importancia de simulaciones y análisis previo a la implantación de sistemas fotovoltaicos tanto para inversores, operaciones de financiación y diseñadores ha dado lugar a múltiples herramientas software y modelos como V Watts, PVGIS, PV-Online, PV*SOL, PVsyst, System Advisor Model (SAM) y muchas más \cite{stein_models_2009, Kumar_2017}. Normalmente estas herramientas propietarias tienen un foco muy específico en que un usuario pueda calcular el rédito energético y económico de una instalación fotovoltaica, pero no en la investigación y validación de modelos científicos. En \ref{sct:pvlib} se comprobará que la librería \textit{pvlib python} se centra en la investigación y validación de modelos científicos para la simulación de sistemas fotovoltaicos, y que estos cálculos de rédito energético tienen más peso en el lado del usuario.
 
-Dentro de este grupo de herramientas, surge la iniciativa de código abierto PVLIB-MatLab con origen en los laboratorios de \textit{Sandia National Laboratories, EEUU} hacia el año 2009 \cite{pvlib_history}. Posteriormente, en 2013\footnote{\url{https://web.archive.org/web/20240411190506/https://pvlib-python.readthedocs.io/en/stable/\#history-and-acknowledgement}} inicia el desarrollo de la versión en Python, que es la que se trata en este trabajo \cite{pvlib_python}.
+Dentro de este grupo de herramientas, surge la iniciativa de código abierto PVLIB-MatLab con origen en los laboratorios de \textit{Sandia National Laboratories, EEUU} hacia el año 2009 \cite{Stein_Holmgren_Forbess_Hansen_2016}. Posteriormente, en 2013\footnote{\url{https://web.archive.org/web/20240411190506/https://pvlib-python.readthedocs.io/en/stable/\#history-and-acknowledgement}} inicia el desarrollo de la versión en Python \cite{Anderson_Hansen_Holmgren_Jensen_Mikofski_Driesse_2023, Stein_2012, Andrews_Stein_Hansen_Riley_2014, Holmgren_Andrews_Lorenzo_Stein_2015, Holmgren_Groenendyk_2016}, que es de la que trata este trabajo.
+
+La librería \textit{pvlib python} aporta una serie de mejoras a su contrapartida en MATLAB, entre ellas la infraestructura de tests, la documentación y otros procedimientos de Integración Continua y Desarrollo Continuo (\textit{CI/CD}) que facilitan el desarrollo, opuesto a la ausencia de tests, control de versiones en un documento de Microsoft Word y, en general, la falta de mantenimiento y actividad de la versión en MATLAB\footnote{\url{http://web.archive.org/web/20211207215130/https://pvlib-python.readthedocs.io/en/v0.9.0/comparison_pvlib_matlab.html}}.
 
 \section{La librería pvlib python} \label{sct:pvlib}
+
+La librería \textit{pvlib python} es una biblioteca de código abierto que proporciona herramientas para la simulación, análisis e investigación de sistemas fotovoltaicos. Se encuentra desarrollada para el lenguaje de programación interpretado Python \cite{CS-R9526}, que es ampliamente utilizado en la comunidad científica y de desarrollo de software.
 
 \subsection{Objetivos de la librería} \label{ssct:pvlib:objetivos}
 
