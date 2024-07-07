@@ -45,5 +45,15 @@
             ]
         },
     ],
-    "cSpell.language": "es-ES,en-GB"
+    "cSpell.language": "es-ES,en-GB",
+    "cSpell.words": [
+        "renderizado",
+        "submódulo"
+    ],
+    "cSpell.ignoreWords": [
+        "antiguedad",
+        "deadsnakes",
+        "librer",
+        "librerias"
+    ]
 }

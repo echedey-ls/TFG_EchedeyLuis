@@ -1,40 +1,385 @@
 \chapter{Desarrollo} \label{chp:desarrollo}
 
-<<Capítulo dedicado a describir el desarrollo del Trabajo realizado. De acuerdo con el tutor, este capítulo puede tener distintas estructuras, e incluso pueden existir varios capítulos.>>
-
-<<Todos los capítulos deben empezar en una página nueva.>>
-
-<<Los apartados dentro de los capítulos se numeran de forma jerárquica, pero siempre deben estar alineados al margen izquierdo>>
+En este capítulo se describen el \textit{modus operandi} del autor de este Trabajo Fin de Grado para contribuir a la librería de modelado fotovoltaico \textit{pvlib python}. Se detallan las herramientas y el entorno de desarrollo empleados, así como las contribuciones de todo índole realizadas, abiertas o planificadas.
 
 \section{Entorno de desarrollo y herramientas utilizadas} \label{sct:desarrollo:entorno}
 
+En el caso del autor de este Trabajo Fin de Grado, se emplea el siguiente software para el desarrollo del proyecto consistentemente:
+
+\begin{itemize}
+    \item \textit{Visual Studio Code}: es el editor de código que se emplea para escribir y editar el código fuente del proyecto. Es un editor de código semi-abierto, ligero y rápido que cuenta con una amplia gama de extensiones para facilitar el desarrollo de software. Es una alternativa multipropósito a otros editores de código como \textit{PyCharm} o \textit{Spyder} en el caso de Python. Es importante denotar que la gran inmensa utilidad que proporciona \textit{VSCode} es gracias a las extensiones creadas por la comunidad de desarrolladores, que permiten desde la edición de archivos de texto plano hasta la depuración de código, pasando por la integración con servicios de control de versiones y la ejecución de tests de forma visual. He aquí extensiones que se emplean en el desarrollo del proyecto:
+          \begin{itemize}
+              \item \textit{Python}: es la extensión que se emplea para el desarrollo de código en Python. Proporciona funcionalidades como la autocompletación de código, la visualización de la documentación de las funciones, la ejecución de scripts y la depuración de código.
+              \item \textit{Ruff}: permite formatear el código según las directrices de estilo de \textit{flake8}.
+              \item \textit{GitHub Copilot}: un asistente de generación de código en línea integrado en el editor, que se emplea para sugerir fragmentos de código y documentación en función del contexto. Agiliza el desarrollo.
+              \item \textit{Code Spell Checker}: es un corrector ortográfico que se emplea para detectar errores de ortografía en el código y en la documentación.
+              \item \textit{Jupyter Notebooks}: es la extensión que se emplea para editar y ejecutar \textit{notebooks} de Jupyter en el editor, un formato que permite visualizar las variables del contexto y facilita el debugging interactivo. Los ejemplos de \textit{pvlib python} se realizan con un formato similar a las celdas de texto o código de una \textit{notebook}.
+              \item Resaltado de sintaxis de varios formatos de archivos, como \textit{reStructuredText}, \textit{Markdown}, \textit{YAML} y \textit{TOML}: para facilitar la edición de la documentación y los archivos de configuración.
+
+          \end{itemize}
+
+    \item \textit{GitHub Desktop}: es la interfaz gráfica que se emplea para colaborar en el desarrollo del proyecto. Permite visualizar los cambios, crear \textit{branches}, hacer \textit{commits}, \textit{pull requests} y \textit{merges}, entre otros.
+    \item \textit{pip} y \textit{venv}: como gestor de paquetes y entornos aislados de desarrollo de Python nativos. Se emplean para instalar las dependencias del proyecto y usar entornos con las versiones específicas requeridas aislado del resto del sistema.
+
+
+\end{itemize}
+
+De forma discreta, se ha hecho uso de otras herramientas como:
+
+\begin{itemize}
+    \item \textit{Git}: para clonar las ramas del autor de este TFG y correr partes de la integración continua, normalmente la documentación, en las máquinas virtuales de linux provistas por la UPM\footnote{Accesible a través de \url{https://escritorio.upm.es/}}.
+    \item \textit{Miniconda}: una distribución de Python que se emplea para instalar y gestionar las dependencias del proyecto. Facilita la creación de entornos virtuales y la instalación de paquetes de Python. Se utilizó para diagnosticar un error de precisión por la compilación de algunas librerías y que hacía fallar un test.
+    \item \textit{LibreOffice Calc}: para generar datos de prueba y comprobar las implementaciones de las ecuaciones de los modelos.
+\end{itemize}
+
+El desarrollo de la librería se ha hecho habitualmente en Windows 10, en un portátil HP \textit{15-dw2003ns} así que se ha aprovechado a usar el subsistema de Windows para Linux (\textit{WSL}) para ejecutar tests y construir la documentación en un entorno similar al de integración continua. No obstante, por los recursos limitados del portátil, y por poder cambiar de ramas mientras se construye la documentación, se ha hecho uso de las máquinas virtuales de la UPM para ejecutar los tests y construir la documentación.
+
+\subsection{La documentación}
+
+En esta sección pondremos en valor lo que realmente es lo más importante de un proyecto de programación, en especial de código abierto: la documentación. Es más, el valor de todas las aportaciones es documentar lo más rigurosamente posible los modelos y métodos que se implementan, tanto para dar a conocerlos como para que el uso sea correcto.
+
+Como se comentaba anteriormente, la documentación de la librería \textit{pvlib python} se encuentra alojada en la plataforma \textit{ReadTheDocs}, que expone los archivos HTML para que los usuarios puedan consultarla en línea. La documentación se genera automáticamente a partir de los comentarios en el código fuente, que se escriben en formato \textit{reStructuredText} y se construye con el framework \textit{sphinx}.
+
+Existen archivos específicos para indicar qué funciones o métodos son públicos, hacer páginas de inicio, de referencia, de ejemplos, de instalación, de contribución, etc. Además, se pueden incluir imágenes, tablas, gráficos, enlaces, referencias, entre otros elementos que facilitan la comprensión de los conceptos.
+
+\textit{sphinx} emplea el estilo de documentación de \textit{pydata-sphinx-theme}, que organiza las secciones de la documentación y da un estilo homogéneo a la web. Además, para la creación de los ejemplos se emplea la extensión \textit{sphinx-gallery}, que ejecuta unos scripts de Python similares en secciones a una \textit{notebook} de Jupyter y captura la salida de texto estándar y los gráficos para mostrarlos en la documentación.
+
+La \textit{docstring} de cada función, que es el comentario que se escribe en la primera línea de la definición de la función y se emplea para autogenerar la documentación, utiliza el estilo de \textit{numpydoc}. Este estilo permite incluir información sobre los parámetros de entrada, los valores de retorno, las excepciones que se pueden lanzar, entre otros. Además, se pueden incluir ejemplos de uso de la función e informar avisos de precaución sobre aspectos más específicos.
+
+A continuación, una plantilla de ejemplo de documentación y de código de una función cualquiera:
+
+\begin{lstlisting}[language=Python]
+def example_model(param1, param2):
+    """
+    Brief model description.
+
+    Long model description, also found at [1]_.
+
+    .. versionadded:: 0.1.0
+
+    .. warning::
+       This docstring is an example.
+
+    Parameters
+    ----------
+    param1 : numeric
+      Description of the parameter.
+    param2 : numeric
+      Description of the parameter.
+
+    Returns
+    -------
+    float
+        Return type of the function.
+
+    Notes
+    -----
+    Additional notes about the function, detailed explanations if needed. Even an equation:
+
+    .. math::
+
+       f(x, y) = x + y
+
+    Examples
+    --------
+    >>> example_model(1, 5)
+    6.0
+
+    References
+    ----------
+    .. [1] Author, A. (2024). Title of the paper. Journal, 1(1), 1-10. :doi:`10.0001/populate`
+    """
+    return float(param1 + param2)
+\end{lstlisting}
+
+Esta función, una vez listada en el archivo correspondiente del índice que nos interese -aquí usamos el submódulo \lstinline{pvlib.solarposition} como ejemplo-, creará una página como la que se muestra en la figura \ref{fig:doc_function_example}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{./images/doc_example/function_stretch.png}
+    \caption{Un ejemplo de renderizado de la documentación de una función en \textit{pvlib python}.}
+    \label{fig:doc_function_example}
+\end{figure}
+
+Por otro lado, un ejemplo cuenta con la siguiente estructura:
+
+\begin{lstlisting}[language=Python]
+"""
+Example title
+=============
+
+Brief model description (shown in preview card).
+"""
+
+# %%
+# Text paragraph, in reStructuredText format. Can use sections, subsections, etc., and math as in LaTeX.
+# More text.
+
+# This is a comment (there is a newline above)
+import matplotlib.pyplot as plt
+from pvlib import example_model
+print("Hello, world!")
+plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
+plt.show()
+
+# %%
+# Return to paragraph text.
+
+sum_val = example_model(1, 5)
+print(f"Sum of 1 and 5 is {sum_val}.")
+\end{lstlisting}
+
+Este archivo, ubicado en la carpeta correcta (aquí el archivo es \lstinline{docs\examples\solar-position\example_example.py}), hará que se cree automáticamente una página como la que se muestra en la figura \ref{fig:doc_use_example}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{./images/doc_example/example_stretch.png}
+    \caption{Un ejemplo de página de ejemplo en la documentación de \textit{pvlib python}.}
+    \label{fig:doc_use_example}
+\end{figure}
+
+A continuación se muestran los comandos que deben ejecutarse para construir la documentación:
+
+\begin{itemize}
+    \item En un sistema basado en \textit{Linux} o \textit{WSL}.
+    \item Clonando el repositorio original de la librería con \textit{Git}.
+    \item Empleando las mismas versiones que a día de la redacción de este documento se emplea en la integración continua (\textit{pvlib python=0.11.0}) - en especial hay que hacer la instalación de Python3.8.
+    \item Con el entorno aislado de desarrollo (\textit{venv}) activado.
+    \item Y realizando una instalación local mediante \textit{pip}.
+\end{itemize}
+
+\begin{lstlisting}[language=bash]
+# instalar Python 3.8 desde el repositorio de deadsnakes,
+# en las librerias por defecto de Ubuntu no se encuentra disponible por antiguedad
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+sudo apt-get update
+sudo apt-get install python3.8 python3.8-venv -y
+
+# clonar el repositorio de pvlib python
+git clone https://github.com/pvlib/pvlib-python
+cd pvlib-python
+
+# crear el entorno virtual, instalar pvlib y las dependencias de la documentacion
+python3.8 -m venv .venv
+source .venv/bin/activate
+python3.8 -m pip install .[doc]
+
+# construir la documentacion
+cd docs/sphinx
+make html
+
+# abrir la documentacion en el navegador
+xdg-open build/html/index.html
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Contribuciones científicas} \label{sct:desarrollo:contribuciones_cientificas}
 
 \subsection{Modelado de ajuste espectral}
 
-\subsubsection{Fundamento teórico}
+\begin{itemize}
+    \item \pr{1658}
+\end{itemize}
 
-\subsubsection{Resultado}
-
-\subsection{Cálculo del cénit solar projectado sobre las coordenadas de un colector}
-
-\subsubsection{Fundamento teórico}
-
-\subsubsection{Resultado}
-
-\subsection{Cálculo de fracción de sombra unidimensional}
+El desarrollo inició en Septiembre de 2022, en Febrero de 2023 se planteó la \textit{pull request}, que finalmente se cerró en Mayo de 2023 sin incluirse los cambios en la librería.
 
 \subsubsection{Fundamento teórico}
 
+El modelo \cite{Martín_Ruiz_1999} plantea una relación entre la efectividad bajo un espectro estándar y la efectividad bajo un espectro arbitrario caracterizado por la masa de aire y el índice de claridad. Al principio de la implementación, tanto el autor de este TFG como el mentor del proyecto, César Domínguez, pensaron que se trataba de un modelo de ajuste similar a otros en la literatura que corrigen la irradiancia incidente, para dar lugar a la efectiva. Ejemplos de estos modelos ya se encontraban en la librería, como el modelo desarrollado por la empresa \textit{First Solar} descrito en \cite{Lee_Panchula_2016}. Además, para la versión 0.11.0 de la librería un compañero del programa \textit{Google Summer of Code} implementó un par de modelos más que funcionan de la misma forma. Los modelos en cuestión crean un factor de ajuste $M$ que se define como:
+
+\begin{equation} \label{eq:ajuste_articulo_Nuria}
+    M = \frac{S_{efE(\lambda)}}{S_{ef\bar{G}(\lambda)}}
+\end{equation}
+
+Resultó que, tras un elevado esfuerzo que llevó meses, el modelo en \cite{Martín_Chivelet_1999} no se ajustaba a esta descripción. Sin embargo, era una de las tres relaciones que se planteaban en la tesis doctoral de Nuria Martín Chivelet \cite{Martín_Chivelet_1999}, que es:
+
+\begin{equation}
+    PS = 1 - \frac{S_{efE(\lambda)}}{S_{ef\bar{G}(\lambda)}}\frac{E_{\lambda<\lambda_0}}{\bar{G}_{\lambda<\lambda_0}}\frac{\bar{G}}{E}
+\end{equation}
+
+Se puede observar que la ecuación \ref{eq:ajuste_articulo_Nuria} solo contempla una parte de la definición que aplica del ajuste espectral, por ende, invalida la aplicación que se esperaba del modelo de dicho artículo.
+
 \subsubsection{Resultado}
+
+Se descarta aplicar los procedimientos descritos en su tesis \cite{Martín_Chivelet_1999} por:
+
+\begin{itemize}
+    \item La ausencia de acceder al documento de forma online.
+    \item La ausencia de una versión en inglés, que pueda servir como referencia.
+    \item La particularidad de los datos sobre los que se hace el modelo.
+\end{itemize}
+
+Lamentablemente, incluso tras contactar presencialmente con la autora y habiendo disfrutado tanto de una explicación detallada de su modelo científico como de la posibilidad de continuar en esa misma línea de trabajo, y contando con una copia física de su tesis, se desestima continuar en esa línea de trabajo debido a las razones anteriores.
+
+Se cierra la \textit{pull request}.
+
+\subsection{Proyección del cenit solar sobre las coordenadas de un colector} \label{sct:desarrollo:contribuciones_cientificas:proyeccion_cenit}
+
+\begin{itemize}
+    \item \issue{1734}
+    \item \pr{1904}
+\end{itemize}
+
+Esta es la primera de una trilogía de contribuciones que se plantean para aplicar un modelo de pérdidas por sombreado en módulos con diodos bypass, cuyo autores pertenecen a la Escuela Técnica Superior de Ingeniería y Diseño Industrial, \textit{ETSIDI}. El objetivo de esta primera contribución es calcular la proyección del cenit solar sobre las coordenadas de un colector, que se emplea para calcular la fracción de sombra unidimensional en geometrías de paneles que comparten eje de rotación en común.
+
+Las otras dos contribuciones son \ref{sct:desarrollo:contribuciones_cientificas:fraccion_sombra} y \ref{sct:desarrollo:contribuciones_cientificas:perdidas_sombreado}.
+
+Esta funcionalidad ya existía como parte de alguna función de la librería, así que el aporte consistió en rehacerla de nuevo empleando una referencia bibliográfica y contrastando las implementaciones. Por supuesto, la documentación se cobro la parte más importante del tiempo de desarrollo.
+
+\subsubsection{Fundamento teórico}
+
+Dos cálculos de bastante interés en geometría solar es obtener los ángulos óptimos de seguimiento  para un colector y calcular la fracción de sombra unidimensional incidente. Ambos cálculos tienen en común un paso muy importante, que es saber con qué ángulo inciden los rayos directos del Sol sobre la superficie del colector, pero referenciado al plano de rotación del mismo. Nos encontramos estos dos casos de uso:
+
+\begin{itemize}
+    \item Para el cálculo de los ángulos óptimos de seguimiento en seguidores de un solo eje, asumiendo que interesa seguir al Sol en su trayectoria diaria, se debe conocer el ángulo de incidencia de los rayos solares sobre la superficie del colector en el plano de rotación del mismo. Es decir, proyectar el cenit solar en el plano perpendicular al eje de rotación del colector, que es aquel que contiene todos los vectores normales al plano del colector.
+    \item En el caso de la fracción unidimensional de sombra, interesa saber en donde impactan los límites del colector frontal sobre el trasero. Para ello, se proyecta el cenit solar en el plano perpendicular al eje de rotación del colector, que es aquel que contiene los dos vectores normales a los planos de los colectores.
+\end{itemize}
+
+\subsubsection{Resultado}
+
+Después de cincuenta y tres comentarios en la propuesta, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.10.4}.
+
+Accesible en \linkDocsFunction{pvlib.shading.projected\_solar\_zenith\_angle}.
+
+\subsection{Cálculo de fracción de sombra unidimensional} \label{sct:desarrollo:contribuciones_cientificas:fraccion_sombra}
+
+\begin{itemize}
+    \item \issue{1689}
+    \item \pr{1962}
+\end{itemize}
+
+Esta propuesta es la segunda de la trilogía de propuestas para poder aplicar un modelo de pérdidas por sombreado. Continúa con la propuesta anterior, \ref{sct:desarrollo:contribuciones_cientificas:proyeccion_cenit}, y se encarga de calcular la fracción de sombra unidimensional en paneles con determinadas geometrías. La última propuesta de la trilogía es \ref{sct:desarrollo:contribuciones_cientificas:perdidas_sombreado}.
+
+Aquí se plantea la aplicación de un modelo para conocer la fracción de sombra unidimensional en paneles que comparten eje de rotación en común. La implementación se basa en \cite{Anderson_Jensen_2024}. No obstante, la implementación inició con un póster de conferencia anterior, a partir de una propuesta de cambios de un trabajador de \textit{First Solar} en la librería \textit{pvlib python}, que se puede consultar en \url{https://github.com/pvlib/pvlib-python/pull/1725}.
+
+\subsubsection{Fundamento teórico}
+
+El modelo propuesto en \cite{Anderson_Jensen_2024} parte de un diseño de dos colectores que comparten la misma dirección del eje, y uno se encuentra más cercano al Sol que el otro. Lo interesante de este diseño es que tiene en cuenta múltiples variables de diseño, como la pendiente, la separación entre el eje y el plano colector, e inclinaciones distintas del colector sombreado y el que sombrea.
+
+Se requiere conocer el ángulo proyectado del cenit. A partir de este ángulo, mediante intersección de rectas, se puede conocer la fracción de sombra unidimensional. Realmente se trata de una función muy compleja por el número de entradas que tiene, pues adicionalmente el cálculo de esta proyección se hace internamente en la función para simplificar la API -es decir, la interfaz programática.
+
+Las ecuaciones no son de interés para este documento, pero se pueden consultar en \cite{Anderson_Jensen_2024}.
+
+\subsubsection{Resultado}
+
+Después de 102 comentarios en la propuesta, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.0}, junto con un ejemplo ilustrativo que tiene en cuenta posibles dificultades que pueda encontrar un usuario\footnote{Véase en \url{https://pvlib-python.readthedocs.io/en/latest/gallery/shading/plot_shaded_fraction1d_ns_hsat_example.html}.}.
+
+Accesible en \linkDocsFunction{pvlib.shading.shaded\_fraction1d}.
+
+\subsection{Pérdidas por sombreado en módulos con diodos de bypass} \label{sct:desarrollo:contribuciones_cientificas:perdidas_sombreado}
+
+\begin{itemize}
+    \item \issue{2063}
+    \item \pr{2070}
+\end{itemize}
+
+Con esta propuesta finaliza la trilogía de contribuciones del modelo de pérdidas por sombreado en módulos con diodos de bypass. Las dos propuestas anteriores son \ref{sct:desarrollo:contribuciones_cientificas:proyeccion_cenit} y \ref{sct:desarrollo:contribuciones_cientificas:fraccion_sombra}.
+
+La propuesta es de un modelo realizado por personal de la \textit{ETSIDI} y se encarga de calcular las pérdidas por sombreado en módulos con diodos de bypass. La implementación se basa en el trabajo de Martínez-Moreno, F. and Muñoz, J. and Lorenzo, E., en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}.
+
+\subsubsection{Fundamento teórico}
+
+Los módulos de paneles solares de silicio se conforman de múltiples células fotovoltaicas. Una célula, cuando es irradiada por la luz solar, genera una corriente eléctrica. Si conectamos todas las células en serie, la corriente generada por todas las células es la misma, pero la tensión generada por cada célula se suma. Si una célula se sombrea, la corriente generada por ella disminuye, y por tanto la corriente generada por el conjunto disminuye. Esta célula sombreada se comporta como una carga para el resto, pues deben forzar la corriente que pasa por este elemento (que se suele modelar como un diodo). Supone un riesgo de seguridad y de degradación, pues una célula sombreada puede calentarse excesivamente y dañar las capas materiales de su módulo.
+
+La solución que se emplea industrialmente consiste en añadir \textit{diodos de bypass}. Estos permiten que, cuando una serie de células tiene sombra, la corriente mayoritaria generada por el resto de células bien iluminadas fluya a través de este diodo, y no de la célula sombreada. De esta forma, se protege frente al sobrecalentamiento y la degradación temprana.
+
+Ha de hacerse énfasis en que un diodo protege varias células, ya que no es rentable económicamente poner un diodo por cada célula. El planteamiento que nos encontramos en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010} consiste en, a partir del número de grupos de células protegidos por un diodo, asumir que la tensión de este grupo es nula por tener un diodo en conducción y cancelar la potencia que generaría.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./images/bypass_diodes/bypass_diodes.png}
+    \caption{Esquema de un módulo con 3 diodos de bypass.}
+    \label{fig:diodos_bypass}
+\end{figure}
+
+En la imagen \ref{fig:diodos_bypass}, si suponemos que la célula número 1 está sombreada, la corriente mayoritaria generada por los grupos 17 a 32 y 33 a 48 fluye a través del diodo que está en paralelo con las células 1 a 16. No importa en este caso la corriente del grupo 1 a 16, pues la tensión de este grupo es nula por tener un diodo en conducción.
+
+Nótese que estos grupos se definen en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010} como \textit{bloques}, y un bloque está sombreado en cuanto una de sus células recibe una fracción infinitesimal de sombra.
+
+Lo más complicado de esta contribución es explicar en detalle cómo identificar el número de bloques y su disposición en el módulo, pues existen varias posibilidades. Hay módulos lo suficientemente pequeños para que solo tengan un diodo, los hay con dos y con tres diodos, y los hay \textit{half-cut} que también tienen 3 diodos, pero con una disposición que crea 6 bloques en vez de 3. Además, la progresión de los bloques que se va sombreando depende del sistema y la geometría de las sombras.
+
+El resultado de este modelo establece la cantidad de potencia que se perdería respecto de las mismas condiciones sin sombra, $1 - \frac{P_\text{sombreado}}{{no\,sombreado}}$. Además, anular la potencia de un bloque sombreado se hace sobre la componente directa de la irradiancia, que es la que normalmente genera las sombras, pues la componente difusa sigue impactando en las células sombreadas y creando un mínima parte de aporte energético.
+
+La expresión de pérdidas de potencia es la ecuación \ref{eq:perdidas_sombreado}, Eqs. [6] y [8] en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}.
+
+\begin{equation*} \label{eq:perdidas_sombreado}
+\begin{split}
+    (1 - F_{ES}) &= (1 - F_{GS}) \left(1 - \frac{N_{SB}}{N_{TB} + 1}\right) \quad \text{(6)}\\
+    \left(1 - \frac{P_{S}}{P_{NS}}\right) &= \left(1 - \frac{\left[(B + D^{CIR})(1 - F_{ES}) + D^{ISO} + R\right]}{G}\right) \quad \text{(8)}
+\end{split}
+\end{equation*}
+
+\subsubsection{Resultado}
+
+Tras unos 85 comentarios, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.0}, junto con un ejemplo de caso de uso\footnote{Véase en \url{https://pvlib-python.readthedocs.io/en/latest/gallery/shading/plot_martinez_shade_loss.html}.}.
+
+Accesible en \linkDocsFunction{pvlib.shading.direct\_martinez}.
+
+\subsection{Fracción diaria de radiación difusa fotosintetizable en función de la fracción difusa global}
+
+\begin{itemize}
+    \item \issue{2047}
+    \item \pr{2048}
+\end{itemize}
+
+Esta contribución se trata de un pequeño modelo que abre un nuevo tema en la librería: la agrivoltaica. La agrivoltaica es una técnica en la que coexisten la producción de energía solar y la producción agrícola en un mismo terreno. La ventaja es que un exceso de irradiancia puede ser perjudicial para la plantación, y el retorno económico del terreno puede ser mayor que si solo se dedicase a la producción de energía solar. Además, contribuye positivamente en la polémica de utilizar suelo exclusivamente para la producción de energía.
+
+El modelo en cuestión es la continuación de un trabajo realizado por Spitters C. J. T. et al. que cubre la separación de irradiación en directa y difusa en general \cite{Spitters_Toussaint_Goudriaan_1986}, y que posteriormente él simplifica en una sola expresión en \cite{Spitters_1986}. El objetivo de este modelado que hace es calcular la fracción de irradiación difusa que es útil para las plantas -es decir, fotosintetizable- a partir de la fracción de irradiación difusa global.
+
+\subsubsection{Fundamento teórico}
+
+La irradiación difusa fotosintetizable (\textit{PAR}, por sus siglas en inglés), es la radiación difusa que se encuentra en el rango de longitudes de onda que las plantas pueden absorber y utilizar para la fotosíntesis. Es interesante de cara a simular el crecimiento y producción de las plantas, y se emplea en modelos de cultivo. Esto último queda fuera del alcance de la librería, pero se plantea como un paso en motivar y facilitar el diseño de sistemas agrivoltaicos.
+
+Se suele utilizar irradiación diaria $[J/m^2/dia]$, en vez de valores instantáneos como en la simulación de sistemas fotovoltaicos $[W/m^2]$.
+
+Un análisis de distintos modelos y la validación de los mismos se puede encontrar en \cite{Ma_Lu_Zainali_Stridh_Avelin_Amaducci_Colauzzi_Campana_2022}. Este artículo es del cual origina la propuesta de contribución.
+
+\subsubsection{Resultado}
+
+Con la mayor complicación de discernir las unidades de entrada, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.0}, junto con un ejemplo de uso\footnote{Véase en \url{https://pvlib-python.readthedocs.io/en/latest/gallery/agrivoltaics/plot_diffuse_PAR_Spitters_relationship.html}.}.
+
+Accesible en \linkDocsFunction{pvlib.irradiance.diffuse\_par\_spitters}.
 
 \subsection{Modelo de pérdidas por heterogeneidad de irradiancia por célula}
 
+\begin{itemize}
+    \item \issue{1541}
+    \item \pr{2046}
+\end{itemize}
+
+Esta contribución implementa un modelo de pérdidas sobre la potencia de salida para módulos bifaciales, es decir, aquellos que pueden recibir irradiación solar tanto por una cara delantera como por la trasera. El modelo se aplica para tener en cuenta irradiancia que no es homogénea en la superficie del módulo. Se trata del trabajo descrito en \cite{Deline_Ayala_Pelaez_MacAlpine_Olalla_2020}.
+Presenta interés en sistemas bifaciales, donde la cara trasera normalmente se expone a la luz reflejada por el suelo y otras obstrucciones, y por tanto la irradiancia de esa cara no es homogénea.
+
 \subsubsection{Fundamento teórico}
+
+Anteriormente se explicaba el mecanismo de interconexión de células solares fotovoltaicas, y cómo una célula sombreada puede actuar como una carga para el resto de células. De forma similar ocurre a pequeña escala, cuando una o varias células reciben valores de irradiancia ligeramente distintos al resto. La célula que recibe menos irradiancia actúa como una carga para el resto, y la potencia de salida del módulo se ve reducida.
+
+Desde un punto de vista computacional, resolver un sistema de múltiples células, cada una con su propia irradiancia, es realmente costoso en tiempo y en recursos. Cada célula tendría su propia curva I-V, que representa cuanta corriente y tensión genera dependiendo del punto de tensión de trabajo. El planteamiento que se hace en \cite{Deline_Ayala_Pelaez_MacAlpine_Olalla_2020} es realizar un trabajo previo de caracterización de la heterogeneidad, cuantificarla y establecer un modelo de menor orden de complejidad.
+
+Para caracterizar distribuciones de irradiancia, en el artículo de Deline et al. se plantea utilizar la desviación estándar, muy común para distribuciones normales, o la \textit{Diferencia Absoluta Media Relativa} (\textit{RMAD}, por sus siglas en inglés), que es una medida de dispersión que se argumenta ser más adecuada para distribuciones no normales \cite{Ginis_mean_difference_2003}.
+
+La pérdida de potencia de salida $M$ (véase \ref{eq:perdidas_sombreado}) se calcula con un polinomio evaluado en la \textit{RMAD}, 
+
+\begin{equation} \label{eq:perdidas_heterogeneidad}
+    M = 1 - \frac{P_\text{array}}{\sum P_\text{cells}}
+\end{equation}
+
+donde $P_\text{array}$ es la potencia de salida del módulo, y $P_\text{cells}$ es la potencia máxima de salida de cada célula.
+
+Se proponen dos modelos para el polinomio que define $M$, para dos perfiles de irradiancias globales distintos: uno para sistemas sujetos fijos y otro para seguidores de un eje. No obstante, solo se implementa el de sistemas fijos ya que la referencia indica que para valores anuales parece ser más preciso.
 
 \subsubsection{Resultado}
 
+Tras una ardua discusión de 86 comentarios en los que se plantean distintas formas de implementar el modelo, aclaraciones sobre las unidades de entrada y salida, y modificaciones al planteamiento original, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.1} (sin publicar oficialmente a día de la redacción de este documento), junto con un ejemplo de uso\footnote{Véase en \url{https://pvlib-python.readthedocs.io/en/latest/gallery/bifacial/plot_irradiance_nonuniformity_loss.html}.}.
+
+Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
+
 \subsection{Transformación de respuesta espectral a eficiencia cuántica externa}
+
+\begin{itemize}
+    \item \issue{2040}
+    \item \pr{2041}
+\end{itemize}
 
 \subsubsection{Fundamento teórico}
 
@@ -42,36 +387,131 @@
 
 \subsection{Adición de base de datos de respuesta espectral de algunas tecnologías}
 
+\begin{itemize}
+    \item \issue{2037}
+    \item \pr{2038}
+\end{itemize}
+
 \subsubsection{Fundamento teórico}
 
 \subsubsection{Resultado}
 
 \subsection{Adición de espectro estándar completo ASTM G173-03}
 
+\begin{itemize}
+    \item \issue{2039}
+    \item \pr{1963}
+\end{itemize}
+
 \subsubsection{Fundamento teórico}
 
 \subsubsection{Resultado}
 
+\subsection{Cálculo geométrico de sombras a partir de escenas en 3D}
+
+\begin{itemize}
+    \item \issue{2069}
+    \item \pr{2106}
+\end{itemize}
+\subsubsection{Fundamento teórico}
+
+\subsubsection{Resultado}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Contribuciones técnicas} \label{sct:desarrollo:contribuciones_tecnicas}
 
-\subsection{Arreglo a los tests de integración continua}
+\subsection{Arreglo a los tests de integración continua en Windows al emplear Conda}
 
+\begin{itemize}
+    \item \issue{2000}
+    \item \pr{2007}
+\end{itemize}
 \subsubsection{Resultado}
 
 \subsection{Arreglo a un parámetro ignorado en una función de transposición inversa}
 
+\begin{itemize}
+    \item \issue{1970}
+    \item \pr{1971}
+\end{itemize}
 \subsubsection{Resultado}
 
-\subsection{Dar soporte a otra función para el cálculo del IAM en el diseño orientado a objetos}
+\subsection{Dar soporte a otra función para el cálculo del IAM en el flujo orientado a objetos}
 
+\begin{itemize}
+    \item \issue{1742}
+    \item \pr{1832}
+\end{itemize}
 \subsubsection{Resultado}
 
-\subsection{Suprimir una advertencia en la publicación del paquete}
+\subsection{Suprimir una advertencia al publicar la distribución en PyPI}
+
+\begin{itemize}
+    \item \pr{1778}
+\end{itemize}
 
 \subsubsection{Resultado}
 
 \subsection{Exponer parámetros de tolerancia para resolver el modelo de un diodo}
 
+\begin{itemize}
+    \item \issue{1249}
+    \item \pr{1764}
+\end{itemize}
+
 \subsubsection{Resultado}
 
-\section{Contribuciones menores} \label{sct:desarrollo:contribuciones_documentacion}
+\subsection{Modificar tolerancias erróneas en varios tests unitarios}
+
+\begin{itemize}
+    \item \pr{2082}
+\end{itemize}
+
+\subsubsection{Resultado}
+
+\subsection{Arreglo de un bug que ignoraba parámetros de una función}
+
+\begin{itemize}
+    \item \issue{2018}
+    \item \pr{2020}
+\end{itemize}
+\subsubsection{Resultado}
+
+\subsection{Actualizar versiones de las dependencias de la documentación}
+
+\begin{itemize}
+    \item \pr{2112}
+\end{itemize}
+
+\subsubsection{Resultado}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Contribuciones menores} \label{sct:desarrollo:contribuciones_menores}
+
+\subsection{Corrección de erratas en la documentación}
+
+\begin{itemize}
+    \item \pr{1599}
+    \item \pr{1833}
+\end{itemize}
+\subsection{Corrección de erratas tipográficas}
+
+\begin{itemize}
+    \item \pr{1776}
+    \item \pr{1860}
+    \item \pr{1996}
+\end{itemize}
+
+\subsection{Modificación de escritura de los parámetros opcionales}
+
+\begin{itemize}
+    \item \issue{1574}
+    \item \pr{1828}
+    \item \pr{2084}
+\end{itemize}
+
+\subsection{Limpieza de advertencias al construir la documentación}
+
+\begin{itemize}
+    \item \pr{2030}
+\end{itemize}

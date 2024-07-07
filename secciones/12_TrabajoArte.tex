@@ -123,11 +123,37 @@ El proyecto de código abierto \textit{pvlib python} cuenta múltiple caracterí
 
 \end{itemize}
 
-\subsection{Estructura de la librería} \label{ssct:pvlib:estructura}
+\subsection{Repositorio del proyecto} \label{ssct:pvlib:repositorio}
+
+Como se ha mencionado anteriormente, el código de la librería \textit{pvlib python} se encuentra alojado en un repositorio de código abierto. Un repositorio es una carpeta que contiene una series de archivos, de los cuales los más importantes se gestionan mediante un sistema de control de versiones, \textit{VCS} por sus siglas en inglés. Este sistema permite llevar un registro de los cambios realizados en los archivos, así como la posibilidad de volver a versiones anteriores en caso de que se produzca un error o un fallo en el código. El uso de esta herramienta es indispensable en proyectos de software, ya que facilita la colaboración entre los desarrolladores y la gestión de las versiones del código.
+
+En el caso de \textit{pvlib python}, el repositorio se encuentra alojado en la plataforma GitHub, que es una de las más populares para el alojamiento de proyectos de código abierto.
+
+El repositorio cuenta con múltiples archivos y sub-carpetas que configuran el proyecto. Algunos de los más destacables son:
+
+\begin{itemize}
+      \item \texttt{README.md}: es el primer archivo en verse en la plataforma online y contiene la descripción del proyecto, su propósito y cómo instalarlo, entre otros.
+      \item \texttt{LICENSE}: es el archivo que contiene la licencia del proyecto, en este caso la licencia \textit{BSD 3-Clause}.
+      \item \texttt{pyproject.toml}, \texttt{setup.cfg}, \texttt{setup.py}, \texttt{MANIFEST.in}: son los archivos que definen la configuración del proyecto, como el nombre, la versión, la descripción, las dependencias, los archivos que componen una distribución precompilada o de código fuente, etc. que los usuarios verán en la plataformas de distribución de paquetes.
+      \item \texttt{docs/}: es la carpeta que contiene la documentación del proyecto, que se genera automáticamente a partir de los comentarios en el código.
+      \item \texttt{pvlib/}: es la carpeta que contiene el código fuente de la librería, organizado en sub-carpetas y archivos según su funcionalidad. Los tests unitarios y de integración se encuentran en esta carpeta.
+      \item \texttt{AUTHORS.md}, \texttt{CODE\_OF\_CONDUCT.md}, \texttt{codecov.yml}, \texttt{readthedocs.yml}, \texttt{paper/}, \texttt{ci/}, \texttt{benchmarks/} y \texttt{.github/}: son archivos y carpetas que contienen información adicional sobre el proyecto y la configuración de todos los flujos de integración continua: destacan los tests, los benchmarks y la documentación.
+
+\end{itemize}
 
 \subsection{Herramientas de desarrollo del proyecto} \label{ssct:pvlib:herramientas}
 
-\begin{lstlisting}[language=Python]
-import pvlib
+Como tal, el desarrollo del proyecto requiere el conocimiento de algunas herramientas que permiten la colaboración con el repositorio principal y cumplir con las directrices de desarrollo del proyecto.
 
-\end{lstlisting}
+En el lado de las herramientas esenciales, se encuentran:
+
+\begin{itemize}
+      \item \textit{Git}: como sistema de control de versiones que se emplea para gestionar los cambios en el código.
+      \item \textit{GitHub}: es la plataforma de alojamiento de proyectos de código abierto que se emplea para colaborar en el desarrollo del proyecto. Permite crear \textit{issues} para reportar errores o sugerir mejoras, proponer cambios y revisarlos públicamente en \textit{pull requests}. Además proporciona máquinas virtuales para ejecutar los procedimientos de integración y desarrollo continuos.
+      \item \textit{ReadTheDocs} junto con \textit{sphinx}: es la plataforma que se emplea para ejecutar \textit{sphinx}, el framework que produce la documentación en formato HTML, y alojar el producto. La documentación se escribe en formato \textit{reStructuredText} y se genera automáticamente a partir de los comentarios en el código, scripts con los ejemplos y archivos fuente con el cuerpo más general.
+      \item \textit{pytest}: es la librería de Python que se emplea para escribir y ejecutar tests unitarios y de integración en el código. Facilita la creación de \textit{mocks} u observadores del estado de partes del mismo proyecto, la reutilización de datos de tests y la ejecución opcional de los tests en función de las dependencias disponibles y visualizar los resultados en un informe. Posiblemente la mejor utilidad es poder ejecutar los tests uno a uno, en grupos o todos a la vez.
+      \item \textit{Codecov}: es la plataforma que se emplea para medir la cobertura de los tests en el código. Permite visualizar la cobertura de los tests en un informe y comprobar si se están realizando pruebas suficientes en el código.
+      \item \textit{flake8}: es una utilidad que detecta errores de estilo en el código, como la longitud de las líneas, la indentación, la presencia de espacios en blanco, entre otros. Facilita la escritura de código limpio y legible, por ende, mantenible.
+
+\end{itemize}
+
