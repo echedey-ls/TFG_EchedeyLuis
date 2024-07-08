@@ -211,7 +211,7 @@ Se descarta aplicar los procedimientos descritos en su tesis \cite{Martín_Chive
 
 Lamentablemente, incluso tras contactar presencialmente con la autora y habiendo disfrutado tanto de una explicación detallada de su modelo científico como de la posibilidad de continuar en esa misma línea de trabajo, y contando con una copia física de su tesis, se desestima continuar en esa línea de trabajo debido a las razones anteriores.
 
-Se cierra la \textit{pull request}.
+Se cierra la propuesta.
 
 \subsection{Proyección del cenit solar sobre las coordenadas de un colector} \label{sct:desarrollo:contribuciones_cientificas:proyeccion_cenit}
 
@@ -234,6 +234,8 @@ Dos cálculos de bastante interés en geometría solar es obtener los ángulos �
     \item Para el cálculo de los ángulos óptimos de seguimiento en seguidores de un solo eje, asumiendo que interesa seguir al Sol en su trayectoria diaria, se debe conocer el ángulo de incidencia de los rayos solares sobre la superficie del colector en el plano de rotación del mismo. Es decir, proyectar el cenit solar en el plano perpendicular al eje de rotación del colector, que es aquel que contiene todos los vectores normales al plano del colector.
     \item En el caso de la fracción unidimensional de sombra, interesa saber en donde impactan los límites del colector frontal sobre el trasero. Para ello, se proyecta el cenit solar en el plano perpendicular al eje de rotación del colector, que es aquel que contiene los dos vectores normales a los planos de los colectores.
 \end{itemize}
+
+Se puede encontrar en más detalle en el artículo de Lorenzo, Narvarte y Muñoz en \cite{Lorenzo_Narvarte_Muñoz_2011}, personal de la \textit{ETSIDI}, a partir del cual continúa el trabajo de \cite{Anderson_Mikofski_2020}, sección sobre \textit{True-Tracking Angle}. Esta última referencia es ampliamente utilizada a lo largo del repositorio.
 
 \subsubsection{Resultado}
 
@@ -374,16 +376,37 @@ Tras una ardua discusión de 86 comentarios en los que se plantean distintas for
 
 Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
 
-\subsection{Transformación de respuesta espectral a eficiencia cuántica externa}
+\subsection{Transformación de respuesta espectral a eficiencia cuántica externa y viceversa}
 
 \begin{itemize}
     \item \issue{2040}
     \item \pr{2041}
 \end{itemize}
 
+Esta contribución podría calificarse de menor debido a la ausencia de dificultades en su implementación. No obstante, por dotar de una nueva funcionalidad científica a la librería, se incluye en este apartado.
+
+La propuesta consiste en dos funciones, una inversa de la otra, que conviertan la respuesta espectral a eficiencia cuántica externa y viceversa.
+
 \subsubsection{Fundamento teórico}
 
+La eficiencia cuántica externa es una medida de la eficiencia de una célula solar, y se define como la razón de fotones incidentes que generan una corriente eléctrica para determinado color de la luz. La respuesta espectral es la corriente generada por una célula solar en función de la longitud de onda de la luz incidente.
+
+La relación entre ambas es la siguiente \cite[pp. 15-16, Eq. \brackettext{7}]{Markvart2012-un}:
+
+\begin{equation}
+    SR(\lambda) = \frac{q \cdot \lambda}{h \cdot c} \cdot EQE(\lambda)
+\end{equation}
+
 \subsubsection{Resultado}
+
+Además de la relación, se añade la posibilidad de normalizar los valores de salida, es decir, hacer que el máximo retornado sea 1. Se incluyen los cambios sin mayores dificultades en la versión \texttt{0.11.0} de la librería.
+
+Accesibles en:
+
+\begin{itemize}
+    \item \linkDocsFunction{pvlib.spectrum.qe\_to\_sr}.
+    \item \linkDocsFunction{pvlib.spectrum.sr\_to\_qe}.
+\end{itemize}
 
 \subsection{Adición de base de datos de respuesta espectral de algunas tecnologías}
 
@@ -392,9 +415,17 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
     \item \pr{2038}
 \end{itemize}
 
+Con esta propuesta se pretendía añadir una serie de respuestas espectrales o de eficiencia cuántica externa de células solares de distintas tecnologías comunes, para facilitar la investigación.
+
 \subsubsection{Fundamento teórico}
 
+Una curva de respuesta espectral indica la capacidad que tiene un semiconductor fotovoltaico en convertir la luz incidente en corriente eléctrica en función de la longitud de onda. La eficiencia cuántica externa similarmente es una medida de la eficiencia de una célula solar para convertir fotones en pares electrón-hueco.
+
+Dependiendo de la tecnología de cada material, la respuesta varía. Además, se puede argumentar que otros aspectos constructivos también afectan, como los espesores de las capas y la presencia de impurezas.
+
 \subsubsection{Resultado}
+
+La propuesta no se llegó a añadir a la librería, ya que los datos provistos de un repositorio público (en Duramat\footnote{Véase \url{https://www.osti.gov/biblio/2204677}.}) no estaban respaldados por un procedimiento que garantizase que los datos fuera representativos. Se cierra la propuesta.
 
 \subsection{Adición de espectro estándar completo ASTM G173-03}
 
@@ -403,9 +434,29 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
     \item \pr{1963}
 \end{itemize}
 
+Esta adición plantea añadir las componentes de irradiancia directa y extraterrestre del estándar ASTM G173-03, que es un espectro de referencia para la radiación solar en la superficie terrestre. La componente global ya se encontraba en la librería. Se aprovecha para añadir flexibilidad y prevenir la adición de nuevos estándares, como el similar ASTM G173-23 en un futuro.
+
 \subsubsection{Fundamento teórico}
 
+Un espectro estándar es de gran utilidad para comparar módulos y establecer métodos idénticos de tomar las medidas en la industria. En el caso del espectro estándar ASTM G173-03, se establecen una serie de puntos entre los 280 nm y los 4000 nm que simulan una distribución espectral bastante plausible.
+
+La irradiancia extraterrestre es la irradiancia que se recibe en el espacio, y la irradiancia directa es la irradiancia que se recibe en la superficie terrestre sin ser dispersada por la atmósfera, y la global es toda la que se recibe en la superficie terrestre.
+
+El estándar ASTM G173-03 se encuentra en \cite{astm_g173-03}, pero los valores del espectro están disponibles abiertamente en \url{https://www.nrel.gov/grid/solar-resource/spectra-am1.5.html}.
+La nueva revisión ASTM G173-23 se encuentra en \cite{astm_g173-23}, pero no cuenta con datos abiertos en la red a día de la redacción de este documento.
+
 \subsubsection{Resultado}
+
+Se implementa esta función más genérica, y se hace obsoleta la antigua función (\linkDocsFunction{pvlib.spectrum.get\_am15g}) que solo devolvía la componente global. Se incluyen los cambios en la versión \texttt{0.11.0} de la librería, junto con un ejemplo en la documentación\footnote{Véase en \url{https://pvlib-python.readthedocs.io/en/stable/gallery/spectrum/plot_standard_ASTM_G173-03.html}.}. El ejemplo se puede encontrar en la figura \ref{fig:espectro_astm_g173-03}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./images/spectra/astm-g173-03.png}
+    \caption{Ejemplo en la documentación con el espectro estándar ASTM G173-03 completo.}
+    \label{fig:espectro_astm_g173-03}
+\end{figure}
+
+Accesible en \linkDocsFunction{pvlib.spectrum.get\_reference\_spectra}.
 
 \subsection{Cálculo geométrico de sombras a partir de escenas en 3D}
 
@@ -413,20 +464,146 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
     \item \issue{2069}
     \item \pr{2106}
 \end{itemize}
+
+Se ha podido comprobar que el cálculo de sombras en sistemas fotovoltaicos dentro de \textit{pvlib python} es un tema que se ha mejorado a lo largo de este TFG. Adicionalmente, se ha podido comprobar que la librería no cuenta con una función que permita calcular sombras a partir de escenas en 3D, pero realmente parece ser un tema sobre el que hay literatura. Además, \textit{PVsyst}, un software de simulación de sistemas fotovoltaicos, cuenta con esta funcionalidad.
+
+Todo esto se puede explorar en un artículo sobre el sombreado de campos de cultivo en sistemas agrivoltaicos \cite{Zainali_Ma_Lu_Stridh_Avelin_Amaducci_Colauzzi_Campana_2023}.
+
+La propuesta que aquí se hace realiza una generalización del cálculo de sombras a superficies limitadas y libres en el espacio 3D.
+
+Es importante denotar que esta propuesta está pendiente de revisión y aprobación, en especial de saber si merecerá o no la pena incluirla en la librería por la complejidad que añade y algunas modificaciones al procedimiento del artículo original.
+
 \subsubsection{Fundamento teórico}
 
+Para esta contribución es imprescindible tratar algunos temas de geometría y cálculo vectorial:
+
+\begin{itemize}
+    \item Definición de una recta a partir de un punto y un vector.
+    \item Intersección de una recta con un plano.
+    \item Traslación de puntos.
+    \item Rotación de puntos respecto del origen, mediante matrices de rotación o representación de ángulos de Euler.
+    \item Limitar superficies a determinadas coordenadas de otro plano.
+\end{itemize}
+
+No se ahonda en estos detalles ya que para realizar una contribución de esta índole se requiere conocer otras utilidades que nos brinden las librerías de cálculo científico en Python, como \textit{NumPy}, \textit{SciPy} y \textit{Shapely}. La primera es muy conocida por permitir el cálculo con vectores, la segunda por facilitar múltiples tipos de cálculos matemáticos y la tercera por permitir cálculos geométricos y geoespaciales. No obstante, la intersección plano-recta y la traslación de puntos son operaciones que se pueden realizar muy fácilmente con los operadores de Python.
+
+Lo primero que necesita un flujo de trabajo de este tipo es definir coordenadas para los objetos de la escena y sus límites. Para ello, habrá de establecerse un sistema de referencia. En el caso de la propuesta realizada, se opta por cambiar el sistema de coordenadas propuesto en \cite{Zainali_Ma_Lu_Stridh_Avelin_Amaducci_Colauzzi_Campana_2023} por el de \cite{Anderson_Mikofski_2020}, que es más conocido y utilizado en la librería.
+
+Posteriormente, una vez creadas las superficies, tanto las sombreadas como las que generan sombras, se debe calcular el vector de posición solar. Este vector se calcula a partir de la posición del Sol en el cielo, que se puede obtener con la función \linkDocsFunction{pvlib.solarposition.get\_solarposition} y con relaciones trigonométricas.
+
+A continuación, se proyectan los vértices de las superficies que sombrean sobre el plano sombreado, y estos puntos definirán una sombra en la escena 3D. Nótese por tanto que esta sombra puede y debe tener tres coordenadas.
+
+Para obtener la sombra 3D final, debe limitarse los límites de esta a la superficie de interés. Para esto se emplea \textit{Shapely}, que permite realizar operaciones geométricas con polígonos.
+
+Si se desease obtener la sombra en un plano 2D, para realizar otros cálculos y facilitar la visualización, se debe realizar una traslación que ubique la figura en un plano que pase por el origen y unas rotaciones contrarias a las que definen el plano sobre la que se proyectó.
+
 \subsubsection{Resultado}
+
+Ahondando en los detalles, el autor de este mismo TFG decide crear un paradigma orientado a objectos para facilitar el uso de esta funcionalidad. Se plantean dos objetos, uno base para cualquier superficie poligonal (\texttt{FlatSurface}) y una especialización para superficies rectangulares, que son las más comunes en sistemas fotovoltaicos (\texttt{RectangularSurface}).
+
+El diagrama UML resultante sería:
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{./images/shading_3d/shading_classes.png}
+    \caption{Diagrama UML de la propuesta de cálculo de sombras en 3D.}
+    \label{fig:uml_sombreado}
+\end{figure}
+
+La elección de un diagrama tan sencillo no es arbitraria: aquí prima la simplicidad y la facilidad de revisar el código para determinar si tiene valor o no dentro de la librería \textit{pvlib python}. Y realmente se logra muy bien facilitar la API. Véase el ejemplo desarrollado a continuación:
+
+\begin{lstlisting}[language=Python]
+from pvlib.spatial import RectangularSurface
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+import shapely
+
+solar_azimuth = 165  # degrees
+solar_zenith = 75  # degrees
+
+# Define two rows of panels
+row1 = RectangularSurface(  # south-most row
+    center=[0, 0, 3], azimuth=165, tilt=20, axis_tilt=10, width=2, length=20
+)
+
+row2 = RectangularSurface(  # north-most row
+    center=[0, 3, 3], azimuth=165, tilt=30, axis_tilt=10, width=2, length=20
+)
+
+# Calculate shadows
+shades_3d = row2.get_3D_shades_from(solar_zenith, solar_azimuth, row1)
+shades_2d = row2.get_2D_shades_from(
+    solar_zenith, solar_azimuth, shades_3d=shades_3d
+)
+
+# Plot
+row_style = {"color": "darkblue", "alpha": 0.5}
+shade_style = {"color": "dimgrey", "alpha": 0.8}
+row_style_2d = {**row_style, "add_points": False}
+shade_style_2d = {**shade_style, "add_points": False}
+
+fig = plt.figure(figsize=(10, 10))
+
+# Split the figure in two axes
+gs = fig.add_gridspec(10, 1)
+ax1 = fig.add_subplot(gs[0:7, 0], projection="3d")
+ax2 = fig.add_subplot(gs[8:, 0])
+
+# 3D plot
+ax1.view_init(
+    elev=60,
+    azim=-30,  # matplotlib's azimuth is right-handed to Z+, measured from X+
+)
+row1.plot(ax=ax1, **row_style)
+row2.plot(ax=ax1, **row_style)
+for shade in shades_3d.geoms:
+    if shade.is_empty:
+        continue  # skip empty shades; else an exception will be raised
+    # use Matplotlib's Poly3DCollection natively since experimental
+    # shapely.plotting.plot_polygon does not support 3D
+    vertexes = shade.exterior.coords[:-1]
+    ax1.add_collection3d(Poly3DCollection([vertexes], **shade_style))
+
+ax1.axis("equal")
+ax1.set_zlim(0)
+ax1.set_xlabel("West(-) <X> East(+) [m]")
+ax1.set_ylabel("South(-) <Y> North(+) [m]")
+
+# 2D plot
+row2_2d = row2.representation_in_2D_space()
+shapely.plotting.plot_polygon(row2_2d, ax=ax2, **row_style_2d)
+for shade in shades_2d.geoms:
+    shapely.plotting.plot_polygon(shade, ax=ax2, **shade_style_2d)
+
+# Calculate the shaded fraction
+shaded_fraction = sum(shade.area for shade in shades_2d.geoms) / row2_2d.area
+print(f"The shaded fraction is {shaded_fraction:.2f}")
+\end{lstlisting}
+
+Debe denotarse que la mayor parte del código supone imprimir la escena y las sombras por pantalla. La parte más interesante, que es el cálculo de las sombras y la fracción sombreada, se reduce a unas pocas 14 líneas de puro código, mientras que se necesitan 27 para mostrar el resultado en 3D y 2D. La escena con las sombras es la que se muestra en la figura \ref{fig:sombreado_3d}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./images/shading_3d/sphx_glr_plot_spatial_row_to_row_shading_001.png}
+    \caption{Ejemplo de sombreado para coordenadas solares instantáneas en 3D.}
+    \label{fig:sombreado_3d}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Contribuciones técnicas} \label{sct:desarrollo:contribuciones_tecnicas}
 
-\subsection{Arreglo a los tests de integración continua en Windows al emplear Conda}
+\subsection{Arreglo a los tests de integración continua en Windows con Conda}
 
 \begin{itemize}
     \item \issue{2000}
     \item \pr{2007}
 \end{itemize}
+
+Por causas desconocidas, pero que se pueden intuir, fallaba un test que esperaba con bastante precisión que una entrada numérica a una función que resuelve la curva I-V del diodo devolviese un cero casi exacto. Se determinó que la causa era un exceso de precisión que se le pedía al test, y se modificó para que aceptase un margen de error mayor.
+
 \subsubsection{Resultado}
+
+El cambio se incluyó con éxito.
 
 \subsection{Arreglo a un parámetro ignorado en una función de transposición inversa}
 
@@ -434,7 +611,14 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
     \item \issue{1970}
     \item \pr{1971}
 \end{itemize}
+
+Hasta avanzadas versiones en la librería no se añadieron los procedimientos de integración continua que existen a día de hoy y permiten identificar fallos de análisis estático en el código. Estos fallos son aquellos que se pueden identificar sin necesidad de ejecutar el código, y en este caso se trataba de un parámetro que no se estaba utilizando en una función.
+
+Este parámetro sin usarse fue encontrado por el autor de este mismo TFG gracias al resaltado de sintaxis y procedió a modificar la función para que lo utilizase. El parámetro era \texttt{xtol} de la función \linkDocsFunction{pvlib.irradiance.ghi\_from\_poa\_driesse\_2023}. Esta función hace una transposición inversa, que es deducir la irradiancia global horizontal a partir de la irradiancia en un plano inclinado, mediante un método numérico. El parámetro \texttt{xtol} es la tolerancia absoluta en la convergencia del método numérico.
+
 \subsubsection{Resultado}
+
+El cambio se incluyó con éxito, aportando tests de integridad para la función.
 
 \subsection{Dar soporte a otra función para el cálculo del IAM en el flujo orientado a objetos}
 
@@ -442,7 +626,14 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
     \item \issue{1742}
     \item \pr{1832}
 \end{itemize}
+
+El modificador del ángulo de incidencia tiene en cuenta la reflexión de la luz incidente cuando impacta oblicuamente en una superficie. La librería \textit{pvlib python} cuenta con muchos modelos que calculan este modificador, pero no todos están disponibles en la \texttt{Modelchain}, un flujo de trabajo orientado a objetos que facilita la simulación de sistemas fotovoltaicos.
+
+El modelo que faltaba dar soporte era un interpolador de datos ángulo-modificador, \linkDocsFunction{pvlib.iam.interp}.
+
 \subsubsection{Resultado}
+
+El cambio se incluyó con éxito y ahora se encuentra disponible su interfaz en la \texttt{Modelchain}, en \linkDocsFunction{pvlib.modelchain.ModelChain.interp\_aoi\_loss}.
 
 \subsection{Suprimir una advertencia al publicar la distribución en PyPI}
 
@@ -450,7 +641,13 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
     \item \pr{1778}
 \end{itemize}
 
+Es buena práctica revisar los procedimientos que se realizan automáticamente, ya que con cierta frecuencia dan lugar a advertencias que se ignoran por no ser una cuestión crítica. Dentro de la labor que decide aplicar el autor de este TFG, se revisa manualmente el proceso de testeo, construcción y publicación de la librería en PyPI, y se detecta una advertencia que se puede suprimir aportando un parámetro en el fichero del proyecto.
+
+No se trata de nada crítico: tan sólo es la plataforma PyPI que solicita explícitamente el formato del texto de la descripción del proyecto.
+
 \subsubsection{Resultado}
+
+El cambio se incluyó con éxito, gracias también a la profunda revisión de un mantenedor que detectó un fallo en el formato que el autor de este TFG había especificado.
 
 \subsection{Exponer parámetros de tolerancia para resolver el modelo de un diodo}
 
@@ -459,7 +656,11 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
     \item \pr{1764}
 \end{itemize}
 
+Una de las solicitudes que algún usuario había planteado como mejora era la posibilidad de modificar los parámetros de tolerancia de los métodos numéricos que se utilizan para resolver la curva I-V de un diodo. Estos métodos son iterativos y requieren de una precisión para converger. 
+
 \subsubsection{Resultado}
+
+El cambio se incluyó con éxito, y se añadieron tests profundos para asegurar que los parámetros de tolerancia se recibían adecuadamente.
 
 \subsection{Modificar tolerancias erróneas en varios tests unitarios}
 
@@ -467,15 +668,24 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
     \item \pr{2082}
 \end{itemize}
 
+Originalmente la librería empleó un framework de testing que especificaba las tolerancias como número de decimales después de la coma. Al cambiar de framework al nuevo y más moderno \textit{pytest}, no se modificaron estos números para reflejar el nuevo significado de las tolerancias, como un margen absoluto en torno al que deben estar los números.
+
 \subsubsection{Resultado}
 
-\subsection{Arreglo de un bug que ignoraba parámetros de una función}
+El cambio se incluyó con éxito, sin diagnosticar ningún fallo derivado de esta errata.
+
+\subsection{Arreglo de un bug que ignoraba parámetros de una función de lectura de bases de datos}
 
 \begin{itemize}
     \item \issue{2018}
     \item \pr{2020}
 \end{itemize}
+
+En \textit{pvlib python} existe la función \linkDocsFunction{pvlib.pvsystem.retrieve\_sam} que permite leer de bases de datos ya inclusas en la librería mediante o remotas mediante una URL, mediante dos parámetros distintos. Resulta que si se especificaban ambos, solo se leía la base de datos de la distribución, y no la remota, sin emitir ningún aviso.
+
 \subsubsection{Resultado}
+
+Se aplicó un patrón de diseño que excluía la posibilidad de que ambos parámetros se especificasen a la vez, y se incluyó sin dificultades.
 
 \subsection{Actualizar versiones de las dependencias de la documentación}
 
@@ -483,7 +693,11 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
     \item \pr{2112}
 \end{itemize}
 
+Esta contribución se trata de otro de los trabajos en curso que lleva el autor de este TFG a día de redacción de este documento. Se trata de actualizar las versiones de las dependencias de la documentación, que se construye automáticamente con \textit{Sphinx} y algunas extensiones extras, para dotar de un nuevo \textit{look and feel} a la documentación.
+
 \subsubsection{Resultado}
+
+Se sigue trabajando en esta contribución, procurando que pueda pasar el mayor tiempo posible sin necesidad de ser actualizada.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Contribuciones menores} \label{sct:desarrollo:contribuciones_menores}
@@ -492,15 +706,20 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
 
 \begin{itemize}
     \item \pr{1599}
-    \item \pr{1833}
-\end{itemize}
-\subsection{Corrección de erratas tipográficas}
-
-\begin{itemize}
-    \item \pr{1776}
     \item \pr{1860}
     \item \pr{1996}
 \end{itemize}
+
+Sin mayor elaboración al respecto, se han solventado erratas en la documentación.
+
+\subsection{Corrección de erratas en ejemplos y en código}
+
+\begin{itemize}
+    \item \pr{1776}
+    \item \pr{1833}
+\end{itemize}
+
+Son pequeñas modificaciones que no requieren mayor explicación: actualizar la salida de un ejemplo y comprobar que el único script de ejemplo que no se ejecuta, lo hiciera.
 
 \subsection{Modificación de escritura de los parámetros opcionales}
 
@@ -510,8 +729,16 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
     \item \pr{2084}
 \end{itemize}
 
+En Python existe un patrón de diseño que es darle el valor \texttt{None} a los parámetros opcionales, y luego comprobar si son \texttt{None} para asignarles un valor por defecto o ignorarlos si fuese el caso. Normalmente, a la hora de documentarlo lo normal es indicar que el parámetro es opcional, pero en la librería se indicaba que el valor por defecto era \texttt{None}, lo cual es redundante y obfusca las intenciones del código.
+
+Se cambiaron todas las ocurrencias de \texttt{default None} a \texttt{optional}, aunque hubo que iterar múltiples veces para dar con todos los falsos negativos y no obtener falsos positivos. Para esta tarea se empleó el buscador en archivos integrado en \textit{Visual Studio Code}, que está basado en \textit{ripgrep} y hace uso de expresiones regulares, una forma de búsqueda y sustitución muy potente. Las expresiones regulares son un lenguaje formal que permite buscar patrones en texto, por ejemplo sustituyendo un carácter por grupos de caracteres, o buscando un patrón que se repite un número determinado de veces.
+
 \subsection{Limpieza de advertencias al construir la documentación}
 
 \begin{itemize}
     \item \pr{2030}
 \end{itemize}
+
+De nuevo en la línea de erradicar advertencias en los flujos de integración continua, se eliminaron advertencias que se emitían al construir la documentación. Estas advertencias no eran críticas, pero al formar parte de unos registros que se consultaban con cierta periodicidad cada vez que alguien hacía contribuciones, era preferible evitar ruido visual a la hora de revisar.
+
+Además, se mejoró así el renderizado de la documentación en bastantes casos.
