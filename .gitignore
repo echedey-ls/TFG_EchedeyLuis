@@ -2,3 +2,4 @@
 build/*
 !build/*.pdf
 *.log
+/versioning-pdf
