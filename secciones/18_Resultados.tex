@@ -1,24 +1,77 @@
 \chapter{Resultados y conclusiones} \label{chp:resultados}
 
-<<Breve explicación, por secciones, de los contenidos de este capítulo>>
+En este capítulo se presentan los resultados obtenidos en el desarrollo del Trabajo Fin de Grado, aquellos tanto satisfactorios como los que no, y se extraen conclusiones personales del estudiante. Además, se proponen posibles líneas de trabajo futuro, algunas que seguirán desarrollándose y otras que se podrían seguir a partir de este TFG.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Resultados} \label{sct:resultados_resultados}
 
-<<Resumen de resultados obtenidos en el TFG>>
+A pesar de que los ciclos de revisiones y correcciones toman un elevado tiempo de desarrollo, se han conseguido implementar varios modelos y funcionalidades nuevos en \textit{pvlib-python}. Además, se ha mejorado la documentación de la librería y se han corregido errores en la misma. Cabe destacar:
+
+\begin{enumerate}
+    \item Exponer el cálculo de la proyección del cenit solar sobre las coordenadas de un colector.
+    \item Implementar un cálculo de la fracción de sombra unidimensional.
+    \item La implementación de un modelo de pérdidas de potencia por sombreado, según número de diodos de bypass.
+    \item Un modelo de fracción de irradiancia difusa fotosintetizable, en función de la irradiancia difusa global.
+    \item Un modelo de pérdidas de potencia por heterogeneidad en la irradiancia incidente, de interés para módulos bifaciales.
+    \item Dos funciones de conversión recíprocas de responsividad espectral y eficiencia cuántica externa, con la posibilidad de normalizar la salida.
+    \item Adición de una función general para obtener espectros estándares, que cuenta con el estándar ASTM G173-03, pero que será muy fácilmente extendible.
+    \item Solventar 5 bugs y 2 características nuevas de las que han informado usuarios varios.
+    \item Mejorar la documentación ya existente de forma amplia.
+    \item Participar en detectar posibles contribuciones para primeros contribuyentes en el futuro.
+    \item Aportar ideas y planteamientos que faciliten contribuir a la librería.
+\end{enumerate}
+
+Algunas cifras significativas, para la librería \textbf{\textit{pvlib-python}} son:
+
+\begin{itemize}
+    \item Se han aceptado 22 \textit{pull requests}.
+    \item Se han desestimado 4 \textit{pull requests}.
+    \item Se mantienen abiertas 6 \textit{pull requests}.
+    \item Se han revisado 14 \textit{pull requests} de otros usuarios.
+    \item Se han abierto 18 \textit{issues}.
+    \begin{itemize}
+        \item De las cuales se han cerrado 11 \textit{issues}.
+    \end{itemize}
+    \item Se ha participado en 24 \textit{issues} de otros usuarios.
+    \begin{itemize}
+        \item De las cuales se han cerrado 13 \textit{issues}.
+    \end{itemize}
+\end{itemize}
+
+Adicionalmente, se aprecia impacto en otros repositorios, como:
+
+\begin{itemize}
+    \item \textit{solarfactors}: un repositorio para el cálculo de factores de vista de sistemas bifaciales, en una escena 2D.
+    \begin{itemize}
+        \item Se ha informado de problemas de compatibilidad con la versión de Python 3.12 por el uso de la dependencia \texttt{shapely<2}\footnote{Véase \url{https://github.com/pvlib/solarfactors/issues/16}.}.
+    \end{itemize}
+    \item \textit{openpvtools/pv-foss-engagement}: una página con información sobre distintas librerías de Python empleadas en fotovoltaica.
+    \begin{itemize}
+        \item Se ha informado de la ausencia de \textit{solarfactors} en la lista de librerías\footnote{Véase \url{https://github.com/openpvtools/pv-foss-engagement/issues/8}.}.
+    \end{itemize}
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Conclusiones personales} \label{sct:resultados_conclusiones}
+\section{Conclusiones} \label{sct:resultados:conclusiones}
 
-<<Conclusiones personales del estudiante sobre el trabajo realizado>>
+Con la realización de este Trabajo Fin de Grado, se promueven y mejoran proyectos de código abierto ya establecidos, lo que garantiza la usabilidad de las aportaciones realizadas. Además, el estudiante ha adquirido una serie de habilidades y conocimientos que le serán útiles en su carrera profesional.
+
+Se han mejorado múltiples aspectos de la librería \textit{pvlib-python}, desde errores menores en el código a la implementación de nuevos modelos y funcionalidades. Se ha mejorado la documentación bastante, dotando al proyecto de una mayor usabilidad. El aporte de este TFG es completamente transversal a todos los efectos de este repositorio y se espera que sea de utilidad para la comunidad científica y técnica. Se espera que además se facilite el acceso de nuevos contribuyentes a la librería.
+
+Desde un punto de vista más personal, el alumno declara la alineación de sus motivaciones y expectativas con los resultados obtenidos. Asimismo cree viable una mayor oferta de trabajos fin de grado en la misma línea, si bien es cierto que hay dos aspectos que podrían haberse mejorado:
+
+\begin{itemize}
+    \item Los artículos que se ofrecían candidatos a aportar a veces no contaban con requisitos funcionales razonables para hacer de ellos una propuesta formal.
+    \item La planificación del trabajo, que responde a ciclos de trabajo extensos por el aprendizaje paralelo al desarrollo, la demora de las revisiones de .
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Trabajo futuro} \label{sct:resultados_trabajofuturo}
+\section{Trabajo futuro} \label{sct:resultados:trabajofuturo}
 
 <<Trabajo futuro que no se haya podido realizar o siguientes pasos que tomará el desarrollo realizado en este TFG>>

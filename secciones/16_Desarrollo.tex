@@ -1,6 +1,8 @@
 \chapter{Desarrollo} \label{chp:desarrollo}
 
-En este capítulo se describen el \textit{modus operandi} del autor de este Trabajo Fin de Grado para contribuir a la librería de modelado fotovoltaico \textit{pvlib python}. Se detallan las herramientas y el entorno de desarrollo empleados, así como las contribuciones de todo índole realizadas, abiertas o planificadas.
+La primera parte de este capítulo describe el \textit{modus operandi} del autor de este Trabajo Fin de Grado para contribuir a la librería de modelado fotovoltaico \textit{pvlib-python}, en el que se detallan las herramientas y el entorno de desarrollo empleados.
+
+En el resto de secciones se tratarán las contribuciones de todo índole realizadas, abiertas o planificadas, agrupadas por la temática y la importancia. En aquellas más complejas, se describirán las bases teóricas y se contará el resultado de la propuesta, si es aceptado o no. 
 
 \section{Entorno de desarrollo y herramientas utilizadas} \label{sct:desarrollo:entorno}
 
@@ -13,12 +15,12 @@ En el caso del autor de este Trabajo Fin de Grado, se emplea el siguiente softwa
               \item \textit{Ruff}: permite formatear el código según las directrices de estilo de \textit{flake8}.
               \item \textit{GitHub Copilot}: un asistente de generación de código en línea integrado en el editor, que se emplea para sugerir fragmentos de código y documentación en función del contexto. Agiliza el desarrollo.
               \item \textit{Code Spell Checker}: es un corrector ortográfico que se emplea para detectar errores de ortografía en el código y en la documentación.
-              \item \textit{Jupyter Notebooks}: es la extensión que se emplea para editar y ejecutar \textit{notebooks} de Jupyter en el editor, un formato que permite visualizar las variables del contexto y facilita el debugging interactivo. Los ejemplos de \textit{pvlib python} se realizan con un formato similar a las celdas de texto o código de una \textit{notebook}.
+              \item \textit{Jupyter Notebooks}: es la extensión que se emplea para editar y ejecutar \textit{notebooks} de Jupyter en el editor, un formato que permite visualizar las variables del contexto y facilita el debugging interactivo. Los ejemplos de \textit{pvlib-python} se realizan con un formato similar a las celdas de texto o código de una \textit{notebook}.
               \item Resaltado de sintaxis de varios formatos de archivos, como \textit{reStructuredText}, \textit{Markdown}, \textit{YAML} y \textit{TOML}: para facilitar la edición de la documentación y los archivos de configuración.
 
           \end{itemize}
 
-    \item \textit{GitHub Desktop}: es la interfaz gráfica que se emplea para colaborar en el desarrollo del proyecto. Permite visualizar los cambios, crear \textit{branches}, hacer \textit{commits}, \textit{pull requests} y \textit{merges}, entre otros.
+    \item \textit{GitHub Desktop}: es la interfaz gráfica que se emplea para colaborar en el desarrollo del proyecto. Permite visualizar los cambios, crear \textit{ramas}, hacer \textit{commits}, \textit{pull requests} y \textit{merges}, entre otros. En resumen, administra nuestra copia del repositorio para que los desarrolladores del proyecto puedan revisar y aceptar las propuestas.
     \item \textit{pip} y \textit{venv}: como gestor de paquetes y entornos aislados de desarrollo de Python nativos. Se emplean para instalar las dependencias del proyecto y usar entornos con las versiones específicas requeridas aislado del resto del sistema.
 
 
@@ -27,7 +29,7 @@ En el caso del autor de este Trabajo Fin de Grado, se emplea el siguiente softwa
 De forma discreta, se ha hecho uso de otras herramientas como:
 
 \begin{itemize}
-    \item \textit{Git}: para clonar las ramas del autor de este TFG y correr partes de la integración continua, normalmente la documentación, en las máquinas virtuales de linux provistas por la UPM\footnote{Accesible a través de \url{https://escritorio.upm.es/}}.
+    \item \textit{Git}: para clonar las ramas del autor de este TFG y correr partes de la integración continua, normalmente la documentación, en las máquinas virtuales de linux provistas por la UPM\footnote{Accesible a través de \url{https://escritorio.upm.es/}.}.
     \item \textit{Miniconda}: una distribución de Python que se emplea para instalar y gestionar las dependencias del proyecto. Facilita la creación de entornos virtuales y la instalación de paquetes de Python. Se utilizó para diagnosticar un error de precisión por la compilación de algunas librerías y que hacía fallar un test.
     \item \textit{LibreOffice Calc}: para generar datos de prueba y comprobar las implementaciones de las ecuaciones de los modelos.
 \end{itemize}
@@ -36,19 +38,19 @@ El desarrollo de la librería se ha hecho habitualmente en Windows 10, en un por
 
 \subsection{La documentación}
 
-En esta sección pondremos en valor lo que realmente es lo más importante de un proyecto de programación, en especial de código abierto: la documentación. Es más, el valor de todas las aportaciones es documentar lo más rigurosamente posible los modelos y métodos que se implementan, tanto para dar a conocerlos como para que el uso sea correcto.
+En esta sección pondremos en valor lo que realmente es lo más importante de un proyecto de programación, en especial de código abierto: la documentación. Es más, se puede argumentar el valor de todas las aportaciones es documentar lo más rigurosamente posible los modelos y métodos que se implementan, tanto para dar a conocerlos como para que el uso sea correcto.
 
-Como se comentaba anteriormente, la documentación de la librería \textit{pvlib python} se encuentra alojada en la plataforma \textit{ReadTheDocs}, que expone los archivos HTML para que los usuarios puedan consultarla en línea. La documentación se genera automáticamente a partir de los comentarios en el código fuente, que se escriben en formato \textit{reStructuredText} y se construye con el framework \textit{sphinx}.
+Como se comentaba anteriormente, la documentación de la librería \textit{pvlib-python} se encuentra alojada en la plataforma \textit{ReadTheDocs}, que expone los archivos HTML para que los usuarios puedan consultarla en línea. La documentación se genera automáticamente a partir de los comentarios en el código fuente, que se escriben en formato \textit{reStructuredText} y se construye con el framework \textit{sphinx}.
 
 Existen archivos específicos para indicar qué funciones o métodos son públicos, hacer páginas de inicio, de referencia, de ejemplos, de instalación, de contribución, etc. Además, se pueden incluir imágenes, tablas, gráficos, enlaces, referencias, entre otros elementos que facilitan la comprensión de los conceptos.
 
-\textit{sphinx} emplea el estilo de documentación de \textit{pydata-sphinx-theme}, que organiza las secciones de la documentación y da un estilo homogéneo a la web. Además, para la creación de los ejemplos se emplea la extensión \textit{sphinx-gallery}, que ejecuta unos scripts de Python similares en secciones a una \textit{notebook} de Jupyter y captura la salida de texto estándar y los gráficos para mostrarlos en la documentación.
+\textit{sphinx} emplea el estilo de documentación de \textit{pydata-sphinx-theme}, que organiza las secciones de la documentación y da un estilo homogéneo a la web. Además, para la creación de los ejemplos se emplea la extensión \textit{sphinx-gallery}, que ejecuta unos scripts de Python por secciones similares a una \textit{notebook} de Jupyter y captura la salida de texto estándar y los gráficos para mostrarlos en la documentación.
 
 La \textit{docstring} de cada función, que es el comentario que se escribe en la primera línea de la definición de la función y se emplea para autogenerar la documentación, utiliza el estilo de \textit{numpydoc}. Este estilo permite incluir información sobre los parámetros de entrada, los valores de retorno, las excepciones que se pueden lanzar, entre otros. Además, se pueden incluir ejemplos de uso de la función e informar avisos de precaución sobre aspectos más específicos.
 
 A continuación, una plantilla de ejemplo de documentación y de código de una función cualquiera:
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, caption={Ejemplo de documentación de una función en \textit{pvlib-python}.}, label={lst:doc_function_example}]
 def example_model(param1, param2):
     """
     Brief model description.
@@ -97,13 +99,13 @@ Esta función, una vez listada en el archivo correspondiente del índice que nos
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{./images/doc_example/function_stretch.png}
-    \caption{Un ejemplo de renderizado de la documentación de una función en \textit{pvlib python}.}
+    \caption{Un ejemplo de renderizado de la documentación de una función en \textit{pvlib-python}.}
     \label{fig:doc_function_example}
 \end{figure}
 
 Por otro lado, un ejemplo cuenta con la siguiente estructura:
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, caption={Plantilla para elaborar un ejemplo en \textit{pvlib-python}.}, label={lst:doc_example_example}]
 """
 Example title
 =============
@@ -134,7 +136,7 @@ Este archivo, ubicado en la carpeta correcta (aquí el archivo es \lstinline{doc
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{./images/doc_example/example_stretch.png}
-    \caption{Un ejemplo de página de ejemplo en la documentación de \textit{pvlib python}.}
+    \caption{Un ejemplo de página de ejemplo en la documentación de \textit{pvlib-python}.}
     \label{fig:doc_use_example}
 \end{figure}
 
@@ -143,19 +145,19 @@ A continuación se muestran los comandos que deben ejecutarse para construir la 
 \begin{itemize}
     \item En un sistema basado en \textit{Linux} o \textit{WSL}.
     \item Clonando el repositorio original de la librería con \textit{Git}.
-    \item Empleando las mismas versiones que a día de la redacción de este documento se emplea en la integración continua (\textit{pvlib python=0.11.0}) - en especial hay que hacer la instalación de Python3.8.
+    \item Empleando las mismas versiones que a día de la redacción de este documento se emplea en la integración continua (\textit{pvlib-python=0.11.0}) - en especial hay que hacer la instalación de Python3.8.
     \item Con el entorno aislado de desarrollo (\textit{venv}) activado.
     \item Y realizando una instalación local mediante \textit{pip}.
 \end{itemize}
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=bash, caption={Comandos para construir la documentación de \textit{pvlib-python}.}, label={lst:doc_build}]
 # instalar Python 3.8 desde el repositorio de deadsnakes,
 # en las librerias por defecto de Ubuntu no se encuentra disponible por antiguedad
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 sudo apt-get update
 sudo apt-get install python3.8 python3.8-venv -y
 
-# clonar el repositorio de pvlib python
+# clonar el repositorio de pvlib-python
 git clone https://github.com/pvlib/pvlib-python
 cd pvlib-python
 
@@ -185,19 +187,29 @@ El desarrollo inició en Septiembre de 2022, en Febrero de 2023 se planteó la \
 
 \subsubsection{Fundamento teórico}
 
-El modelo \cite{Martín_Ruiz_1999} plantea una relación entre la efectividad bajo un espectro estándar y la efectividad bajo un espectro arbitrario caracterizado por la masa de aire y el índice de claridad. Al principio de la implementación, tanto el autor de este TFG como el mentor del proyecto, César Domínguez, pensaron que se trataba de un modelo de ajuste similar a otros en la literatura que corrigen la irradiancia incidente, para dar lugar a la efectiva. Ejemplos de estos modelos ya se encontraban en la librería, como el modelo desarrollado por la empresa \textit{First Solar} descrito en \cite{Lee_Panchula_2016}. Además, para la versión 0.11.0 de la librería un compañero del programa \textit{Google Summer of Code} implementó un par de modelos más que funcionan de la misma forma. Los modelos en cuestión crean un factor de ajuste $M$ que se define como:
+El modelo \cite{Martín_Ruiz_1999} plantea una relación entre la efectividad bajo un espectro estándar y la efectividad bajo un espectro arbitrario caracterizado por la masa de aire y el índice de claridad. Al principio de la implementación, tanto el autor de este TFG como el mentor del proyecto, César Domínguez, pensaron que se trataba de un modelo de ajuste similar a otros en la literatura que corrigen la irradiancia incidente, para dar lugar a la efectiva. Ejemplos de estos modelos ya se encontraban en la librería, como el modelo desarrollado por la empresa \textit{First Solar} descrito en \cite{Lee_Panchula_2016} o el de Caballero et al. en \cite{Caballero_Fernández_Theristis_Almonacid_Nofuentes_2018}. Además, para la versión 0.11.0 de la librería un compañero del programa \textit{Google Summer of Code} implementó un par de modelos más que funcionan de la misma forma. Los modelos en cuestión crean un factor de ajuste $M$ que se define, según el estándar IEC 60904-7 \cite[Eq. (2)]{Caballero_Fernández_Theristis_Almonacid_Nofuentes_2018}:
+
+\begin{equation}
+    M = \frac
+    {\int_{\lambda_1}^{\lambda_2} E(\lambda) SR(\lambda) d\lambda \int_{\lambda_3}^{\lambda_4} E^*(\lambda) d\lambda}
+    {\int_{\lambda_1}^{\lambda_2} E^*(\lambda) SR(\lambda) d\lambda \int_{\lambda_3}^{\lambda_4} E(\lambda) d\lambda}
+\end{equation}
+
+Resultó que, tras un elevado esfuerzo que llevó meses, el modelo en \cite{Martín_Ruiz_1999} no se ajustaba a esta descripción, sino que planteaba la siguiente ecuación:
 
 \begin{equation} \label{eq:ajuste_articulo_Nuria}
     M = \frac{S_{efE(\lambda)}}{S_{ef\bar{G}(\lambda)}}
 \end{equation}
 
-Resultó que, tras un elevado esfuerzo que llevó meses, el modelo en \cite{Martín_Chivelet_1999} no se ajustaba a esta descripción. Sin embargo, era una de las tres relaciones que se planteaban en la tesis doctoral de Nuria Martín Chivelet \cite{Martín_Chivelet_1999}, que es:
+Sin embargo, era la fracción de las tres relaciones que se planteaban en la tesis doctoral de Nuria Martín Chivelet \cite{Martín_Chivelet_1999}, que es:
 
 \begin{equation}
     PS = 1 - \frac{S_{efE(\lambda)}}{S_{ef\bar{G}(\lambda)}}\frac{E_{\lambda<\lambda_0}}{\bar{G}_{\lambda<\lambda_0}}\frac{\bar{G}}{E}
 \end{equation}
 
 Se puede observar que la ecuación \ref{eq:ajuste_articulo_Nuria} solo contempla una parte de la definición que aplica del ajuste espectral, por ende, invalida la aplicación que se esperaba del modelo de dicho artículo.
+
+Es gracias a los tutores que se identifica este error tras solicitar una comparación con modelos ya existentes.
 
 \subsubsection{Resultado}
 
@@ -211,7 +223,7 @@ Se descarta aplicar los procedimientos descritos en su tesis \cite{Martín_Chive
 
 Lamentablemente, incluso tras contactar presencialmente con la autora y habiendo disfrutado tanto de una explicación detallada de su modelo científico como de la posibilidad de continuar en esa misma línea de trabajo, y contando con una copia física de su tesis, se desestima continuar en esa línea de trabajo debido a las razones anteriores.
 
-Se cierra la propuesta.
+Se cierra la propuesta tres meses después de plantearla.
 
 \subsection{Proyección del cenit solar sobre las coordenadas de un colector} \label{sct:desarrollo:contribuciones_cientificas:proyeccion_cenit}
 
@@ -252,13 +264,15 @@ Accesible en \linkDocsFunction{pvlib.shading.projected\_solar\_zenith\_angle}.
 
 Esta propuesta es la segunda de la trilogía de propuestas para poder aplicar un modelo de pérdidas por sombreado. Continúa con la propuesta anterior, \ref{sct:desarrollo:contribuciones_cientificas:proyeccion_cenit}, y se encarga de calcular la fracción de sombra unidimensional en paneles con determinadas geometrías. La última propuesta de la trilogía es \ref{sct:desarrollo:contribuciones_cientificas:perdidas_sombreado}.
 
-Aquí se plantea la aplicación de un modelo para conocer la fracción de sombra unidimensional en paneles que comparten eje de rotación en común. La implementación se basa en \cite{Anderson_Jensen_2024}. No obstante, la implementación inició con un póster de conferencia anterior, a partir de una propuesta de cambios de un trabajador de \textit{First Solar} en la librería \textit{pvlib python}, que se puede consultar en \url{https://github.com/pvlib/pvlib-python/pull/1725}.
+Aquí se plantea la aplicación de un modelo para conocer la fracción de sombra unidimensional en paneles que comparten eje de rotación en común. La implementación se basa en \cite{Anderson_Jensen_2024}. No obstante, la implementación inició con un póster de una conferencia anterior, a partir de una propuesta de cambios de un trabajador de \textit{First Solar} en la librería \textit{pvlib-python}, que se puede consultar en \url{https://github.com/pvlib/pvlib-python/pull/1725}.
 
 \subsubsection{Fundamento teórico}
 
 El modelo propuesto en \cite{Anderson_Jensen_2024} parte de un diseño de dos colectores que comparten la misma dirección del eje, y uno se encuentra más cercano al Sol que el otro. Lo interesante de este diseño es que tiene en cuenta múltiples variables de diseño, como la pendiente, la separación entre el eje y el plano colector, e inclinaciones distintas del colector sombreado y el que sombrea.
 
-Se requiere conocer el ángulo proyectado del cenit. A partir de este ángulo, mediante intersección de rectas, se puede conocer la fracción de sombra unidimensional. Realmente se trata de una función muy compleja por el número de entradas que tiene, pues adicionalmente el cálculo de esta proyección se hace internamente en la función para simplificar la API -es decir, la interfaz programática.
+Se requiere conocer el ángulo proyectado del cenit. A partir de este ángulo, mediante intersección de rectas, se puede conocer la fracción de sombra unidimensional. Realmente se trata de una función muy compleja por el número de entradas que tiene, pues adicionalmente el cálculo de esta proyección se hace internamente en la función para simplificar la API - es decir, la interfaz programática que usarán los usuarios.
+
+Se llama fracción de sombra \textbf{unidimensional} porque se mide la fracción de sombra a lo largo de la línea del avance para una misma azimuth pero distinta elevación solar. Normalmente este valor es el que dota de mayor información, pues los cambios de la sombra debido a la azimuth no cobran tanta importancia en la mayoría de ubicaciones terrestres. Son aquellas más cercanas a los polos los que más se ven afectados por la cambiante azimuth.
 
 Las ecuaciones no son de interés para este documento, pero se pueden consultar en \cite{Anderson_Jensen_2024}.
 
@@ -267,6 +281,10 @@ Las ecuaciones no son de interés para este documento, pero se pueden consultar 
 Después de 102 comentarios en la propuesta, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.0}, junto con un ejemplo ilustrativo que tiene en cuenta posibles dificultades que pueda encontrar un usuario\footnote{Véase en \url{https://pvlib-python.readthedocs.io/en/latest/gallery/shading/plot_shaded_fraction1d_ns_hsat_example.html}.}.
 
 Accesible en \linkDocsFunction{pvlib.shading.shaded\_fraction1d}.
+
+Los autores originales del modelo científico piden contrastar la implementación con la suya, y piden hacerlo en un futuro próximo, antes de la siguiente versión de la librería.
+
+Además, como anéctoda se ha de mencionar que durante el desarrollo de esta propuesta se identifica la ausencia de ejemplos que planteasen módulos orientados al Norte (propio de las instalaciones en el hemisferio Sur) en todo el repositorio, por lo que se incluye un ejemplo de este tipo en la documentación. Se puede atribuir el mérito a Rubén Nuñez por hablarme de este sesgo en el mundo científico.
 
 \subsection{Pérdidas por sombreado en módulos con diodos de bypass} \label{sct:desarrollo:contribuciones_cientificas:perdidas_sombreado}
 
@@ -465,7 +483,7 @@ Accesible en \linkDocsFunction{pvlib.spectrum.get\_reference\_spectra}.
     \item \pr{2106}
 \end{itemize}
 
-Se ha podido comprobar que el cálculo de sombras en sistemas fotovoltaicos dentro de \textit{pvlib python} es un tema que se ha mejorado a lo largo de este TFG. Adicionalmente, se ha podido comprobar que la librería no cuenta con una función que permita calcular sombras a partir de escenas en 3D, pero realmente parece ser un tema sobre el que hay literatura. Además, \textit{PVsyst}, un software de simulación de sistemas fotovoltaicos, cuenta con esta funcionalidad.
+Se ha podido comprobar que el cálculo de sombras en sistemas fotovoltaicos dentro de \textit{pvlib-python} es un tema que se ha mejorado a lo largo de este TFG. Adicionalmente, se ha podido comprobar que la librería no cuenta con una función que permita calcular sombras a partir de escenas en 3D, pero realmente parece ser un tema sobre el que hay literatura. Además, \textit{PVsyst}, un software de simulación de sistemas fotovoltaicos, cuenta con esta funcionalidad.
 
 Todo esto se puede explorar en un artículo sobre el sombreado de campos de cultivo en sistemas agrivoltaicos \cite{Zainali_Ma_Lu_Stridh_Avelin_Amaducci_Colauzzi_Campana_2023}.
 
@@ -510,9 +528,9 @@ El diagrama UML resultante sería:
     \label{fig:uml_sombreado}
 \end{figure}
 
-La elección de un diagrama tan sencillo no es arbitraria: aquí prima la simplicidad y la facilidad de revisar el código para determinar si tiene valor o no dentro de la librería \textit{pvlib python}. Y realmente se logra muy bien facilitar la API. Véase el ejemplo desarrollado a continuación:
+La elección de un diagrama tan sencillo no es arbitraria: aquí prima la simplicidad y la facilidad de revisar el código para determinar si tiene valor o no dentro de la librería \textit{pvlib-python}. Y realmente se logra muy bien facilitar la API. Véase el ejemplo desarrollado a continuación:
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, caption={Caso de uso de ejemplo para la propuesta de cálculo de sombras en 3D.}, label={lst:sombreado_3d}]
 from pvlib.spatial import RectangularSurface
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
@@ -627,7 +645,7 @@ El cambio se incluyó con éxito, aportando tests de integridad para la función
     \item \pr{1832}
 \end{itemize}
 
-El modificador del ángulo de incidencia tiene en cuenta la reflexión de la luz incidente cuando impacta oblicuamente en una superficie. La librería \textit{pvlib python} cuenta con muchos modelos que calculan este modificador, pero no todos están disponibles en la \texttt{Modelchain}, un flujo de trabajo orientado a objetos que facilita la simulación de sistemas fotovoltaicos.
+El modificador del ángulo de incidencia tiene en cuenta la reflexión de la luz incidente cuando impacta oblicuamente en una superficie. La librería \textit{pvlib-python} cuenta con muchos modelos que calculan este modificador, pero no todos están disponibles en la \texttt{Modelchain}, un flujo de trabajo orientado a objetos que facilita la simulación de sistemas fotovoltaicos.
 
 El modelo que faltaba dar soporte era un interpolador de datos ángulo-modificador, \linkDocsFunction{pvlib.iam.interp}.
 
@@ -681,7 +699,7 @@ El cambio se incluyó con éxito, sin diagnosticar ningún fallo derivado de est
     \item \pr{2020}
 \end{itemize}
 
-En \textit{pvlib python} existe la función \linkDocsFunction{pvlib.pvsystem.retrieve\_sam} que permite leer de bases de datos ya inclusas en la librería mediante o remotas mediante una URL, mediante dos parámetros distintos. Resulta que si se especificaban ambos, solo se leía la base de datos de la distribución, y no la remota, sin emitir ningún aviso.
+En \textit{pvlib-python} existe la función \linkDocsFunction{pvlib.pvsystem.retrieve\_sam} que permite leer de bases de datos ya inclusas en la librería mediante o remotas mediante una URL, mediante dos parámetros distintos. Resulta que si se especificaban ambos, solo se leía la base de datos de la distribución, y no la remota, sin emitir ningún aviso.
 
 \subsubsection{Resultado}
 
@@ -742,3 +760,19 @@ Se cambiaron todas las ocurrencias de \texttt{default None} a \texttt{optional},
 De nuevo en la línea de erradicar advertencias en los flujos de integración continua, se eliminaron advertencias que se emitían al construir la documentación. Estas advertencias no eran críticas, pero al formar parte de unos registros que se consultaban con cierta periodicidad cada vez que alguien hacía contribuciones, era preferible evitar ruido visual a la hora de revisar.
 
 Además, se mejoró así el renderizado de la documentación en bastantes casos.
+
+\section{Revisiones y participación con otros usuarios}
+
+\subsection{Revisión de propuestas de otros usuarios}
+
+En especial con aquellos compañeros partícipes bajo la subvención de \textit{Google Summer of Code}, pero también con otros usuarios que han planteado propuestas en la librería, se ha colaborado en la revisión de sus propuestas.
+
+Se podrían citar muchos ejemplos, ya que esta parte es bastante abundante por requerir un esfuerzo relativamente bajo: incluso revisando un propuesta basada en algún artículo, pero no pudiendo consultar este, se puede aportar mucho. Normalmente se ha revisado el renderizado y claridad de la documentación, y la integridad de los tests. Se presta máxima atención a la parte más social, dar el crédito a todos los nuevos implicados en la librería.
+
+En otras situaciones, se ha aportado información técnica sobre normativa, como en una propuesta de un modelo de pérdidas en transformadores. Revisores del código pidieron información sobre los tests que se realizan físicamente en transformadores de alta tensión. El mismo autor de este TFG aportó un ejemplo y la normativa que se sigue en España para realizar estos tests. Se agradece la colaboración de la empresa \textit{Laboratorio Central Oficial de Electrotecnia,} departamento de Alta Tensión, por facilitar la información.
+
+\subsection{Soporte técnico a usuarios}
+
+Otro aspecto, de no gran importancia ya que no se ha dispuesto de mucho tiempo para ello, es el soporte técnico a usuarios. Se ha respondido a preguntas en \textit{GitHub}, y en la lista de correo por \textit{Google Groups}. Implicarse en esto ha permitido conocer mejor la librería, detectar errores en el código y adelantar futuros errores con las dependencias.
+
+Es más, respecto de las dependencias, hay un inicio de trabajo parcial en eliminar la dependencia de una de las dependencias, valga la redundancia, de \textit{pvlib-python}. Se trata de \textit{solarfactors}, un clon mantenido por la comunidad de \textit{pvlib} del paquete \textit{pvfactors}, que es un software de simulación de factores de vista en sistemas fotovoltaicos bifaciales.

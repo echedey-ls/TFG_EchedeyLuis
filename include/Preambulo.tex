@@ -153,9 +153,9 @@
 
 % Custom link command
 % https://tex.stackexchange.com/questions/121865/nameref-how-to-display-section-name-and-its-number
-\newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}}
+\newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \textit{\nameref*{#1}}}}
 
-% Custom commands for linking GitHub issues, pull requests and discussions of the pvlib python library
+% Custom commands for linking GitHub issues, pull requests and discussions of the pvlib-python library
 \newcommand{\pvlibRepoLink}{https://github.com/pvlib/pvlib-python}
 % Issue
 \newcommand{\issue}[2][\pvlibRepoLink]{\href{#1/issues/#2}{\textit{Issue:} \texttt{\##2}}}
@@ -164,6 +164,6 @@
 % Discussion
 \newcommand{\discussion}[2][\pvlibRepoLink]{\href{#1/discussions/}{\textit{Discussion:} \texttt{\##2}}}
 
-% Custom commands for linking the documentation of the pvlib python library
+% Custom commands for linking the documentation of the pvlib-python library
 \newcommand{\pvlibDocsLink}{https://pvlib-python.readthedocs.io/en/latest}
 \newcommand{\linkDocsFunction}[2][\pvlibDocsLink]{\href{#1/reference/generated/#2.html}{\texttt{#2}}}
