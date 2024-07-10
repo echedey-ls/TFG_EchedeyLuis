@@ -18,6 +18,14 @@
 ]{hyperref}
 \usepackage{pdfpages}
 \usepackage{url}
+
+% format links rendering
+% https://tex.stackexchange.com/questions/23208/i-cannot-get-a-properly-underlined-hyperlink-in-blue
+\DeclareUrlCommand\ULurl{%
+  \renewcommand\UrlFont{\ttfamily\color{blue}}%
+  \renewcommand\UrlLeft{\uline\bgroup}%
+  \renewcommand\UrlRight{\egroup}}
+
 \usepackage[stable]{footmisc}
 \usepackage{parskip} % para separar párrafos con espacio.
 

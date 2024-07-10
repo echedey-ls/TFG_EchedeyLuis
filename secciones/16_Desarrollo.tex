@@ -2,7 +2,7 @@
 
 La primera parte de este capítulo describe el \textit{modus operandi} del autor de este Trabajo Fin de Grado para contribuir a la librería de modelado fotovoltaico \textit{pvlib-python}, en el que se detallan las herramientas y el entorno de desarrollo empleados.
 
-En el resto de secciones se tratarán las contribuciones de todo índole realizadas, abiertas o planificadas, agrupadas por la temática y la importancia. En aquellas más complejas, se describirán las bases teóricas y se contará el resultado de la propuesta, si es aceptado o no. 
+En el resto de secciones se tratarán las contribuciones de todo índole realizadas, abiertas o planificadas, agrupadas por la temática y la importancia. En aquellas más complejas, se describirán las bases teóricas y se contará el resultado de la propuesta, si es aceptado o no.
 
 \section{Entorno de desarrollo y herramientas utilizadas} \label{sct:desarrollo:entorno}
 
@@ -11,7 +11,7 @@ En el caso del autor de este Trabajo Fin de Grado, se emplea el siguiente softwa
 \begin{itemize}
     \item \textit{Visual Studio Code}: es el editor de código que se emplea para escribir y editar el código fuente del proyecto. Es un editor de código semi-abierto, ligero y rápido que cuenta con una amplia gama de extensiones para facilitar el desarrollo de software. Es una alternativa multipropósito a otros editores de código como \textit{PyCharm} o \textit{Spyder} en el caso de Python. Es importante denotar que la gran inmensa utilidad que proporciona \textit{VSCode} es gracias a las extensiones creadas por la comunidad de desarrolladores, que permiten desde la edición de archivos de texto plano hasta la depuración de código, pasando por la integración con servicios de control de versiones y la ejecución de tests de forma visual. He aquí extensiones que se emplean en el desarrollo del proyecto:
           \begin{itemize}
-              \item \textit{Python}: es la extensión que se emplea para el desarrollo de código en Python. Proporciona funcionalidades como la autocompletación de código, la visualización de la documentación de las funciones, la ejecución de scripts y la depuración de código.
+              \item \textit{Python}: es la extensión que se emplea para el desarrollo de código en Python. Proporciona funcionalidades como el autocompletado de código, la visualización de la documentación de las funciones, la ejecución de scripts y la depuración de código.
               \item \textit{Ruff}: permite formatear el código según las directrices de estilo de \textit{flake8}.
               \item \textit{GitHub Copilot}: un asistente de generación de código en línea integrado en el editor, que se emplea para sugerir fragmentos de código y documentación en función del contexto. Agiliza el desarrollo.
               \item \textit{Code Spell Checker}: es un corrector ortográfico que se emplea para detectar errores de ortografía en el código y en la documentación.
@@ -209,7 +209,7 @@ Sin embargo, era la fracción de las tres relaciones que se planteaban en la tes
 
 Se puede observar que la ecuación \ref{eq:ajuste_articulo_Nuria} solo contempla una parte de la definición que aplica del ajuste espectral, por ende, invalida la aplicación que se esperaba del modelo de dicho artículo.
 
-Es gracias a los tutores que se identifica este error tras solicitar una comparación con modelos ya existentes.
+Es gracias a los tutores que se identifica este error tras su solicitud de compararlo con modelos ya existentes.
 
 \subsubsection{Resultado}
 
@@ -234,13 +234,15 @@ Se cierra la propuesta tres meses después de plantearla.
 
 Esta es la primera de una trilogía de contribuciones que se plantean para aplicar un modelo de pérdidas por sombreado en módulos con diodos bypass, cuyo autores pertenecen a la Escuela Técnica Superior de Ingeniería y Diseño Industrial, \textit{ETSIDI}. El objetivo de esta primera contribución es calcular la proyección del cenit solar sobre las coordenadas de un colector, que se emplea para calcular la fracción de sombra unidimensional en geometrías de paneles que comparten eje de rotación en común.
 
-Las otras dos contribuciones son \ref{sct:desarrollo:contribuciones_cientificas:fraccion_sombra} y \ref{sct:desarrollo:contribuciones_cientificas:perdidas_sombreado}.
+Las otras dos contribuciones se detallan en \ref{sct:desarrollo:contribuciones_cientificas:fraccion_sombra} y en \ref{sct:desarrollo:contribuciones_cientificas:perdidas_sombreado}.
 
-Esta funcionalidad ya existía como parte de alguna función de la librería, así que el aporte consistió en rehacerla de nuevo empleando una referencia bibliográfica y contrastando las implementaciones. Por supuesto, la documentación se cobro la parte más importante del tiempo de desarrollo.
+Esta funcionalidad ya existía como parte de alguna función de la librería, así que el aporte consistió en rehacerla de nuevo empleando una referencia bibliográfica y contrastando las implementaciones. Por supuesto, la documentación se cobró la parte más importante del tiempo de desarrollo.
 
 \subsubsection{Fundamento teórico}
 
-Dos cálculos de bastante interés en geometría solar es obtener los ángulos óptimos de seguimiento  para un colector y calcular la fracción de sombra unidimensional incidente. Ambos cálculos tienen en común un paso muy importante, que es saber con qué ángulo inciden los rayos directos del Sol sobre la superficie del colector, pero referenciado al plano de rotación del mismo. Nos encontramos estos dos casos de uso:
+Dos cálculos de bastante interés en geometría solar es obtener los ángulos óptimos de seguimiento  para un colector y calcular la fracción de sombra unidimensional incidente. Ambos cálculos tienen en común un paso muy importante, que es saber con qué ángulo inciden los rayos directos del Sol sobre la superficie del colector, pero referenciado al plano de rotación del mismo. Para facilitar el entendimiento de este concepto, es preferible imaginar un sistema de rotación de un solo eje y considerar que un colector fijo es un caso particular de un seguidor uniaxial.
+
+Nos encontramos estos dos casos de uso:
 
 \begin{itemize}
     \item Para el cálculo de los ángulos óptimos de seguimiento en seguidores de un solo eje, asumiendo que interesa seguir al Sol en su trayectoria diaria, se debe conocer el ángulo de incidencia de los rayos solares sobre la superficie del colector en el plano de rotación del mismo. Es decir, proyectar el cenit solar en el plano perpendicular al eje de rotación del colector, que es aquel que contiene todos los vectores normales al plano del colector.
@@ -270,11 +272,35 @@ Aquí se plantea la aplicación de un modelo para conocer la fracción de sombra
 
 El modelo propuesto en \cite{Anderson_Jensen_2024} parte de un diseño de dos colectores que comparten la misma dirección del eje, y uno se encuentra más cercano al Sol que el otro. Lo interesante de este diseño es que tiene en cuenta múltiples variables de diseño, como la pendiente, la separación entre el eje y el plano colector, e inclinaciones distintas del colector sombreado y el que sombrea.
 
-Se requiere conocer el ángulo proyectado del cenit. A partir de este ángulo, mediante intersección de rectas, se puede conocer la fracción de sombra unidimensional. Realmente se trata de una función muy compleja por el número de entradas que tiene, pues adicionalmente el cálculo de esta proyección se hace internamente en la función para simplificar la API - es decir, la interfaz programática que usarán los usuarios.
+Se requiere conocer el ángulo proyectado del cenit. A partir de este ángulo, mediante intersección de rectas, se puede conocer la fracción de sombra unidimensional. Realmente se trata de una función muy compleja por el número de entradas que tiene, pues adicionalmente el cálculo de esta proyección se hace internamente en la función para simplificar la API - es decir, la interfaz programática que usarán los usuarios puede resultar densa.
 
-Se llama fracción de sombra \textbf{unidimensional} porque se mide la fracción de sombra a lo largo de la línea del avance para una misma azimuth pero distinta elevación solar. Normalmente este valor es el que dota de mayor información, pues los cambios de la sombra debido a la azimuth no cobran tanta importancia en la mayoría de ubicaciones terrestres. Son aquellas más cercanas a los polos los que más se ven afectados por la cambiante azimuth.
+Se llama fracción de sombra \textbf{unidimensional} porque se mide la fracción de sombra a lo largo de la línea del avance para una misma azimuth pero distinta elevación solar. Normalmente este valor es el que dota de mayor información, pues los cambios de la sombra debido a la azimuth no cobran tanta importancia en la mayoría de ubicaciones terrestres. Son aquellas más cercanas a los polos los que más se ven afectados por la cambiante azimuth. A continuación, la imagen \ref{fig:fraccion_sombra} muestra un esquema del sistema y su parte sombreada:
 
-Las ecuaciones no son de interés para este documento, pero se pueden consultar en \cite{Anderson_Jensen_2024}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./images/shading_1d/Anderson_Jensen_Fig3.png}
+    \caption{Esquema dos colectores parametrizados, donde uno sombrea al otro. La nomenclatura corresponde la ecuación \ref{eq:sombra_t}.\\Fuente: Figura 3 en \cite{Anderson_Jensen_2024}.}
+    \label{fig:fraccion_sombra}
+\end{figure}
+
+Las ecuaciones relevantes implementadas son (12) y (13) de \cite{Anderson_Jensen_2024}, \ref{eq:sombra_t} y \ref{eq:sombra_clip} respectivamente en este documento:
+
+\begin{equation} \label{eq:sombra_t}
+\begin{aligned}
+    t^* = &\ \frac{1}{2} \left( 1 + \left|\frac{\cos(\theta_1 - \theta_s)}{\cos(\theta_2 - \theta_s)}\right| \right) \\
+         &+ sgn(\theta_s) \frac{z_0}{\ell} \left( \frac{\sin(\theta_2 - \theta_s) - \sin(\theta_1 - \theta_s)}{\left|\cos(\theta_2 - \theta_s)\right|} \right) \\
+         &- \frac{p}{\ell} \left( \frac{\cos(\theta_s - \beta_c)}{\left|\cos(\theta_2 - \theta_s)\right| \cos(\beta_c)} \right)
+\end{aligned}
+\end{equation}
+
+\begin{equation} \label{eq:sombra_clip}
+    f_s =
+    \begin{cases}
+        0    &\quad \text{si } t^* < 0 \\
+        t^* &\quad 0 \leq t^* \leq 1  \\
+        1    &\quad \text{si } t^* > 1 \\
+    \end{cases}
+\end{equation}
 
 \subsubsection{Resultado}
 
@@ -282,9 +308,7 @@ Después de 102 comentarios en la propuesta, finalmente se incluyen los cambios 
 
 Accesible en \linkDocsFunction{pvlib.shading.shaded\_fraction1d}.
 
-Los autores originales del modelo científico piden contrastar la implementación con la suya, y piden hacerlo en un futuro próximo, antes de la siguiente versión de la librería.
-
-Además, como anéctoda se ha de mencionar que durante el desarrollo de esta propuesta se identifica la ausencia de ejemplos que planteasen módulos orientados al Norte (propio de las instalaciones en el hemisferio Sur) en todo el repositorio, por lo que se incluye un ejemplo de este tipo en la documentación. Se puede atribuir el mérito a Rubén Nuñez por hablarme de este sesgo en el mundo científico.
+Además, como anécdota se ha de mencionar que durante el desarrollo de esta propuesta se identifica la ausencia de ejemplos que planteasen módulos orientados al Norte (propio de las instalaciones en el hemisferio Sur) en todo el repositorio, por lo que se incluye un ejemplo de este tipo en la documentación. Se puede atribuir el mérito a Rubén Nuñez por hablar al estudiante del sesgo a favor del hemisferio norte en el mundo de la fotovoltaica.
 
 \subsection{Pérdidas por sombreado en módulos con diodos de bypass} \label{sct:desarrollo:contribuciones_cientificas:perdidas_sombreado}
 
@@ -293,9 +317,9 @@ Además, como anéctoda se ha de mencionar que durante el desarrollo de esta pro
     \item \pr{2070}
 \end{itemize}
 
-Con esta propuesta finaliza la trilogía de contribuciones del modelo de pérdidas por sombreado en módulos con diodos de bypass. Las dos propuestas anteriores son \ref{sct:desarrollo:contribuciones_cientificas:proyeccion_cenit} y \ref{sct:desarrollo:contribuciones_cientificas:fraccion_sombra}.
+Con esta propuesta finaliza la trilogía de contribuciones del modelo de pérdidas por sombreado en módulos con diodos de bypass. Las dos propuestas anteriores son descritas en \ref{sct:desarrollo:contribuciones_cientificas:proyeccion_cenit} y en \ref{sct:desarrollo:contribuciones_cientificas:fraccion_sombra}.
 
-La propuesta es de un modelo realizado por personal de la \textit{ETSIDI} y se encarga de calcular las pérdidas por sombreado en módulos con diodos de bypass. La implementación se basa en el trabajo de Martínez-Moreno, F. and Muñoz, J. and Lorenzo, E., en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}.
+La propuesta es de un modelo realizado por personal de la \textit{ETSIDI} y se encarga de calcular las pérdidas por sombreado en módulos con diodos de bypass. La implementación se basa en el trabajo de Martínez-Moreno, F., Muñoz, J. y Lorenzo, E., en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}.
 
 \subsubsection{Fundamento teórico}
 
@@ -303,7 +327,7 @@ Los módulos de paneles solares de silicio se conforman de múltiples células f
 
 La solución que se emplea industrialmente consiste en añadir \textit{diodos de bypass}. Estos permiten que, cuando una serie de células tiene sombra, la corriente mayoritaria generada por el resto de células bien iluminadas fluya a través de este diodo, y no de la célula sombreada. De esta forma, se protege frente al sobrecalentamiento y la degradación temprana.
 
-Ha de hacerse énfasis en que un diodo protege varias células, ya que no es rentable económicamente poner un diodo por cada célula. El planteamiento que nos encontramos en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010} consiste en, a partir del número de grupos de células protegidos por un diodo, asumir que la tensión de este grupo es nula por tener un diodo en conducción y cancelar la potencia que generaría.
+Ha de hacerse énfasis en que un diodo protege varias células, ya que no es rentable económicamente poner un diodo por cada célula. El planteamiento que nos encontramos en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010} consiste en, a partir del número de grupos de células protegidos por un diodo que se encuentran sombreados, asumir que la tensión de este grupo es nula por tener un diodo en conducción y cancelar la potencia que generaría.
 
 \begin{figure}[H]
     \centering
@@ -318,16 +342,16 @@ Nótese que estos grupos se definen en \cite{Martínez-Moreno_Muñoz_Lorenzo_201
 
 Lo más complicado de esta contribución es explicar en detalle cómo identificar el número de bloques y su disposición en el módulo, pues existen varias posibilidades. Hay módulos lo suficientemente pequeños para que solo tengan un diodo, los hay con dos y con tres diodos, y los hay \textit{half-cut} que también tienen 3 diodos, pero con una disposición que crea 6 bloques en vez de 3. Además, la progresión de los bloques que se va sombreando depende del sistema y la geometría de las sombras.
 
-El resultado de este modelo establece la cantidad de potencia que se perdería respecto de las mismas condiciones sin sombra, $1 - \frac{P_\text{sombreado}}{{no\,sombreado}}$. Además, anular la potencia de un bloque sombreado se hace sobre la componente directa de la irradiancia, que es la que normalmente genera las sombras, pues la componente difusa sigue impactando en las células sombreadas y creando un mínima parte de aporte energético.
+El resultado de este modelo establece la cantidad de potencia que se perdería respecto de las mismas condiciones sin sombra, $SL = 1 - \frac{P_\text{sombreado}}{P_{no\,sombreado}}$. Además, anular la potencia de un bloque sombreado se hace sobre la componente directa de la irradiancia, que es la que normalmente genera las sombras, pues la componente difusa sigue impactando en las células sombreadas y creando un mínima parte de aporte energético.
 
 La expresión de pérdidas de potencia es la ecuación \ref{eq:perdidas_sombreado}, Eqs. [6] y [8] en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}.
 
-\begin{equation*} \label{eq:perdidas_sombreado}
-\begin{split}
-    (1 - F_{ES}) &= (1 - F_{GS}) \left(1 - \frac{N_{SB}}{N_{TB} + 1}\right) \quad \text{(6)}\\
-    \left(1 - \frac{P_{S}}{P_{NS}}\right) &= \left(1 - \frac{\left[(B + D^{CIR})(1 - F_{ES}) + D^{ISO} + R\right]}{G}\right) \quad \text{(8)}
-\end{split}
-\end{equation*}
+\begin{equation} \label{eq:perdidas_sombreado}
+    \begin{alignedat}{3}
+        (1 - F_{ES}) &= (1 - F_{GS}) \left(1 - \frac{N_{SB}}{N_{TB} + 1}\right) \qquad &\text{(6)}\\
+        \left(1 - \frac{P_{S}}{P_{NS}}\right) &= \left(1 - \frac{\left[(B + D^{CIR})(1 - F_{ES}) + D^{ISO} + R\right]}{G}\right) \qquad &\text{(8)}
+    \end{alignedat}
+\end{equation}
 
 \subsubsection{Resultado}
 
@@ -344,15 +368,15 @@ Accesible en \linkDocsFunction{pvlib.shading.direct\_martinez}.
 
 Esta contribución se trata de un pequeño modelo que abre un nuevo tema en la librería: la agrivoltaica. La agrivoltaica es una técnica en la que coexisten la producción de energía solar y la producción agrícola en un mismo terreno. La ventaja es que un exceso de irradiancia puede ser perjudicial para la plantación, y el retorno económico del terreno puede ser mayor que si solo se dedicase a la producción de energía solar. Además, contribuye positivamente en la polémica de utilizar suelo exclusivamente para la producción de energía.
 
-El modelo en cuestión es la continuación de un trabajo realizado por Spitters C. J. T. et al. que cubre la separación de irradiación en directa y difusa en general \cite{Spitters_Toussaint_Goudriaan_1986}, y que posteriormente él simplifica en una sola expresión en \cite{Spitters_1986}. El objetivo de este modelado que hace es calcular la fracción de irradiación difusa que es útil para las plantas -es decir, fotosintetizable- a partir de la fracción de irradiación difusa global.
+El modelo en cuestión es la continuación de un trabajo realizado por Spitters C. J. T. et al. que cubre la separación de irradiación en directa y difusa en general \cite{Spitters_Toussaint_Goudriaan_1986}, y que posteriormente él desglosa en dos expresiones en \cite{Spitters_1986}, que se puede sustituir una en la otra. El objetivo de este modelado que hace es calcular la fracción de irradiación difusa que es útil para las plantas -es decir, fotosintetizable- a partir de la fracción de irradiación difusa global.
 
 \subsubsection{Fundamento teórico}
 
 La irradiación difusa fotosintetizable (\textit{PAR}, por sus siglas en inglés), es la radiación difusa que se encuentra en el rango de longitudes de onda que las plantas pueden absorber y utilizar para la fotosíntesis. Es interesante de cara a simular el crecimiento y producción de las plantas, y se emplea en modelos de cultivo. Esto último queda fuera del alcance de la librería, pero se plantea como un paso en motivar y facilitar el diseño de sistemas agrivoltaicos.
 
-Se suele utilizar irradiación diaria $[J/m^2/dia]$, en vez de valores instantáneos como en la simulación de sistemas fotovoltaicos $[W/m^2]$.
+Se utiliza irradiación diaria $[J/m^2/dia]$, en vez del valor instantáneo irradiancia propio de la simulación de sistemas fotovoltaicos $[W/m^2]$.
 
-Un análisis de distintos modelos y la validación de los mismos se puede encontrar en \cite{Ma_Lu_Zainali_Stridh_Avelin_Amaducci_Colauzzi_Campana_2022}. Este artículo es del cual origina la propuesta de contribución.
+Un análisis de distintos modelos y la validación de los mismos que contiene la expresión única se puede encontrar en \cite{Ma_Lu_Zainali_Stridh_Avelin_Amaducci_Colauzzi_Campana_2022}. Este artículo es del cual origina la propuesta de contribución.
 
 \subsubsection{Resultado}
 
@@ -360,7 +384,7 @@ Con la mayor complicación de discernir las unidades de entrada, finalmente se i
 
 Accesible en \linkDocsFunction{pvlib.irradiance.diffuse\_par\_spitters}.
 
-\subsection{Modelo de pérdidas por heterogeneidad de irradiancia por célula}
+\subsection{Modelo de pérdidas por heterogeneidad de irradiancia por célula} \label{sct:desarrollo:contribuciones_cientificas:heterogeneidad_irradiancia}
 
 \begin{itemize}
     \item \issue{1541}
@@ -372,13 +396,13 @@ Presenta interés en sistemas bifaciales, donde la cara trasera normalmente se e
 
 \subsubsection{Fundamento teórico}
 
-Anteriormente se explicaba el mecanismo de interconexión de células solares fotovoltaicas, y cómo una célula sombreada puede actuar como una carga para el resto de células. De forma similar ocurre a pequeña escala, cuando una o varias células reciben valores de irradiancia ligeramente distintos al resto. La célula que recibe menos irradiancia actúa como una carga para el resto, y la potencia de salida del módulo se ve reducida.
+Anteriormente se explicaba el mecanismo de interconexión de células solares fotovoltaicas, y cómo una célula sombreada puede actuar como una carga para el resto de células. De forma similar ocurre a pequeña escala, cuando una o varias células reciben valores de irradiancia ligeramente distintos al resto. La célula que recibe menos irradiancia limita la corriente, y la potencia de salida del módulo se ve reducida.
 
 Desde un punto de vista computacional, resolver un sistema de múltiples células, cada una con su propia irradiancia, es realmente costoso en tiempo y en recursos. Cada célula tendría su propia curva I-V, que representa cuanta corriente y tensión genera dependiendo del punto de tensión de trabajo. El planteamiento que se hace en \cite{Deline_Ayala_Pelaez_MacAlpine_Olalla_2020} es realizar un trabajo previo de caracterización de la heterogeneidad, cuantificarla y establecer un modelo de menor orden de complejidad.
 
-Para caracterizar distribuciones de irradiancia, en el artículo de Deline et al. se plantea utilizar la desviación estándar, muy común para distribuciones normales, o la \textit{Diferencia Absoluta Media Relativa} (\textit{RMAD}, por sus siglas en inglés), que es una medida de dispersión que se argumenta ser más adecuada para distribuciones no normales \cite{Ginis_mean_difference_2003}.
+Para caracterizar distribuciones de irradiancia, en el artículo de Deline et al. \cite{Deline_Ayala_Pelaez_MacAlpine_Olalla_2020} se plantea utilizar la desviación estándar, muy común para distribuciones normales, o la \textit{Diferencia Absoluta Media Relativa} (\textit{RMAD}, por sus siglas en inglés), que es una medida de dispersión que se argumenta ser más adecuada para distribuciones no normales \cite{Ginis_mean_difference_2003}.
 
-La pérdida de potencia de salida $M$ (véase \ref{eq:perdidas_sombreado}) se calcula con un polinomio evaluado en la \textit{RMAD}, 
+La pérdida de potencia de salida $M$ se calcula con un polinomio evaluado en \textit{RMAD}:
 
 \begin{equation} \label{eq:perdidas_heterogeneidad}
     M = 1 - \frac{P_\text{array}}{\sum P_\text{cells}}
@@ -394,6 +418,8 @@ Tras una ardua discusión de 86 comentarios en los que se plantean distintas for
 
 Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
 
+Los autores originales del modelo científico piden contrastar la implementación con la suya, y se valora hacerlo en un futuro próximo antes de la siguiente versión de la librería. Se plantea como tarea futura.
+
 \subsection{Transformación de respuesta espectral a eficiencia cuántica externa y viceversa}
 
 \begin{itemize}
@@ -403,7 +429,7 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
 
 Esta contribución podría calificarse de menor debido a la ausencia de dificultades en su implementación. No obstante, por dotar de una nueva funcionalidad científica a la librería, se incluye en este apartado.
 
-La propuesta consiste en dos funciones, una inversa de la otra, que conviertan la respuesta espectral a eficiencia cuántica externa y viceversa.
+La propuesta consiste en dos funciones, una inversa de la otra, que convierten la respuesta espectral y la eficiencia cuántica externa.
 
 \subsubsection{Fundamento teórico}
 
@@ -443,7 +469,7 @@ Dependiendo de la tecnología de cada material, la respuesta varía. Además, se
 
 \subsubsection{Resultado}
 
-La propuesta no se llegó a añadir a la librería, ya que los datos provistos de un repositorio público (en Duramat\footnote{Véase \url{https://www.osti.gov/biblio/2204677}.}) no estaban respaldados por un procedimiento que garantizase que los datos fuera representativos. Se cierra la propuesta.
+La propuesta no se llegó a añadir a la librería, ya que los datos provistos de un repositorio público (en Duramat\footnote{Véase \url{https://www.osti.gov/biblio/2204677}.}) no estaban respaldados por un procedimiento que garantizase que los datos fueran representativos. Se cierra la propuesta.
 
 \subsection{Adición de espectro estándar completo ASTM G173-03}
 
@@ -476,7 +502,7 @@ Se implementa esta función más genérica, y se hace obsoleta la antigua funci�
 
 Accesible en \linkDocsFunction{pvlib.spectrum.get\_reference\_spectra}.
 
-\subsection{Cálculo geométrico de sombras a partir de escenas en 3D}
+\subsection{Cálculo geométrico de sombras en 3D}
 
 \begin{itemize}
     \item \issue{2069}
@@ -521,7 +547,7 @@ Ahondando en los detalles, el autor de este mismo TFG decide crear un paradigma 
 
 El diagrama UML resultante sería:
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{./images/shading_3d/shading_classes.png}
     \caption{Diagrama UML de la propuesta de cálculo de sombras en 3D.}
@@ -659,7 +685,7 @@ El cambio se incluyó con éxito y ahora se encuentra disponible su interfaz en 
     \item \pr{1778}
 \end{itemize}
 
-Es buena práctica revisar los procedimientos que se realizan automáticamente, ya que con cierta frecuencia dan lugar a advertencias que se ignoran por no ser una cuestión crítica. Dentro de la labor que decide aplicar el autor de este TFG, se revisa manualmente el proceso de testeo, construcción y publicación de la librería en PyPI, y se detecta una advertencia que se puede suprimir aportando un parámetro en el fichero del proyecto.
+Es buena práctica revisar los procedimientos que se realizan automáticamente, ya que con cierta frecuencia dan lugar a advertencias que se ignoran por no ser una cuestión crítica. Dentro de la labor que decide aplicar el autor de este TFG, se revisa manualmente el proceso de tests unitarios, construcción y publicación de la librería en PyPI, y se detecta una advertencia que se puede suprimir aportando un parámetro en el fichero del proyecto.
 
 No se trata de nada crítico: tan sólo es la plataforma PyPI que solicita explícitamente el formato del texto de la descripción del proyecto.
 
@@ -674,7 +700,7 @@ El cambio se incluyó con éxito, gracias también a la profunda revisión de un
     \item \pr{1764}
 \end{itemize}
 
-Una de las solicitudes que algún usuario había planteado como mejora era la posibilidad de modificar los parámetros de tolerancia de los métodos numéricos que se utilizan para resolver la curva I-V de un diodo. Estos métodos son iterativos y requieren de una precisión para converger. 
+Una de las solicitudes que algún usuario había planteado como mejora era la posibilidad de modificar los parámetros de tolerancia de los métodos numéricos que se utilizan para resolver la curva I-V de un diodo. Estos métodos son iterativos y requieren de una precisión para converger.
 
 \subsubsection{Resultado}
 

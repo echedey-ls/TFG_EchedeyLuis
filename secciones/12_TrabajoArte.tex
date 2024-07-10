@@ -47,9 +47,16 @@ A partir de unos valores de \textit{GHI}, \textit{DNI} y \textit{DHI} -que son l
       GHI = DNI \cdot \cos(\theta) + DHI
 \end{equation}
 
-La existencia de los parámetros de entrada mencionados se explica mediante la necesidad de independizar las medidas de irradiancia solar de la superficie de interés, y lo que permiten cuantificar los instrumentos de medida en campo. Estos se tratan de piranómetros para medir \textit{GHI}; pirheliómetros, para \textit{DNI}; y piranómetros de sombra para \textit{DHI}.
+La existencia de los parámetros de entrada mencionados se explica mediante la necesidad de independizar las medidas de irradiancia solar de la superficie de interés, y lo que permiten cuantificar los instrumentos de medida en campo. Estos se tratan de piranómetros para medir \textit{GHI}; pirheliómetros, para \textit{DNI}; y piranómetros con disco para \textit{DHI}. En la figura \ref{fig:irrad_componentes} se puede observar la relación entre las componentes de la radiación solar y los instrumentos de medida:
 
-Esta radiación se descompone en tres componentes: la radiación directa, la radiación difusa y la radiación reflejada. La radiación directa es la que proviene del sol y llega directamente a la superficie de los módulos, la radiación difusa es la que proviene del cielo y se dispersa en todas direcciones, y la radiación reflejada o albedo es la que proviene de la reflexión y emisión de radiación sobre superficies cercanas. Estas componentes se suman para obtener la radiación total incidente en la superficie de los módulos, que es la que se emplea para calcular la producción de energía.
+\begin{figure}[H]
+      \centering
+      \includegraphics[width=0.7\textwidth]{./images/SoA_irrad/dni-dhi-ghi-1-768x437.png}
+      \caption{Componentes de la radiación solar y los instrumentos de medida. Recuperado de \url{http://web.archive.org/web/20230624215046/https://yellowhaze.in/wp-content/uploads/2017/01/dni-dhi-ghi-1-768x437.png}}
+      \label{fig:irrad_componentes}
+\end{figure}
+
+Esta radiación se descompone en tres componentes que dependen de la superficie incidente: la radiación directa, la radiación difusa y la radiación reflejada. La radiación directa es la que proviene del sol y llega directamente a la superficie de los módulos, la radiación difusa es la que proviene del cielo y se dispersa en todas direcciones, y la radiación reflejada o albedo es la que proviene de la reflexión y emisión de radiación sobre superficies cercanas. Estas componentes se suman para obtener la radiación total incidente en la superficie de los módulos, que es la que se emplea para calcular la producción de energía.
 
 En resumen, el estado del arte de la energía solar fotovoltaica abarca una amplia gama de tecnologías, estudios y sistemas. En este Trabajo de Fin de Grado se tratarán algunas de las propuestas que se han realizado en el ámbito de la simulación y el análisis de sistemas fotovoltaicos, con el enfoque particular en la librería \textit{pvlib-python}.
 
