@@ -1,6 +1,6 @@
 \chapter{Resultados y conclusiones} \label{chp:resultados}
 
-En este capítulo se presentan los resultados obtenidos en el desarrollo del Trabajo Fin de Grado, aquellos tanto satisfactorios como los que no, y se extraen conclusiones personales del estudiante. Además, se proponen posibles líneas de trabajo futuro, algunas que seguirán desarrollándose y otras que se podrían seguir a partir de este TFG.
+En este capítulo se resumen los resultados obtenidos en el desarrollo del Trabajo Fin de Grado, aquellos tanto satisfactorios como los que no, y se extraen conclusiones personales del estudiante. Además, se proponen posibles líneas de trabajo futuro, algunas que seguirán desarrollándose y otras que se podrían seguir a partir de este TFG.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -15,7 +15,7 @@ A pesar de que los ciclos de revisiones y correcciones toman un elevado tiempo d
     \item La implementación de un modelo de pérdidas de potencia por sombreado, según número de diodos de bypass.
     \item Un modelo de fracción de irradiancia difusa fotosintetizable, en función de la irradiancia difusa global.
     \item Un modelo de pérdidas de potencia por heterogeneidad en la irradiancia incidente, de interés para módulos bifaciales.
-    \item Dos funciones de conversión recíprocas de responsividad espectral y eficiencia cuántica externa, con la posibilidad de normalizar la salida.
+    \item Dos funciones de conversión recíprocas de responsividad espectral y eficiencia cuántica externa, con posibilidad de normalizar la salida.
     \item Adición de una función general para obtener espectros estándares, que cuenta con el estándar ASTM G173-03, pero que será muy fácilmente extendible.
     \item Solventar 5 bugs y 2 características nuevas de las que han informado usuarios varios.
     \item Mejorar la documentación ya existente de forma amplia.
@@ -23,7 +23,7 @@ A pesar de que los ciclos de revisiones y correcciones toman un elevado tiempo d
     \item Aportar ideas y planteamientos que faciliten contribuir a la librería.
 \end{enumerate}
 
-Algunas cifras significativas, para la librería \textbf{\textit{pvlib-python}} son:
+Algunas cifras significativas, para la librería \textit{pvlib-python} son:
 
 \begin{itemize}
     \item Se han aceptado 22 \textit{pull requests}.
@@ -40,16 +40,16 @@ Algunas cifras significativas, para la librería \textbf{\textit{pvlib-python}} 
     \end{itemize}
 \end{itemize}
 
-Adicionalmente, se aprecia impacto en otros repositorios, como:
+Adicionalmente se aprecia impacto en otros repositorios como:
 
 \begin{itemize}
     \item \textit{solarfactors}: un repositorio para el cálculo de factores de vista de sistemas bifaciales, en una escena 2D.
     \begin{itemize}
-        \item Se ha informado de problemas de compatibilidad con la versión de Python 3.12 por el uso de la dependencia \texttt{shapely<2}\footnote{Véase \url{https://github.com/pvlib/solarfactors/issues/16}.}.
+        \item Se ha informado de problemas de compatibilidad con la versión de Python 3.12 por el uso de la dependencia \texttt{shapely<2}\footnote{Véase \url{https://github.com/pvlib/solarfactors/issues/16}.}. Esta problemática es la anteriormente descrita en \ref{sct:desarrollo:soporte_tecnico}.
     \end{itemize}
     \item \textit{openpvtools/pv-foss-engagement}: una página con información sobre distintas librerías de Python empleadas en fotovoltaica.
     \begin{itemize}
-        \item Se ha informado de la ausencia de \textit{solarfactors} en la lista de librerías\footnote{Véase \url{https://github.com/openpvtools/pv-foss-engagement/issues/8}.}.
+        \item Se ha informado de la ausencia de \textit{solarfactors} en la lista de librerías\footnote{Véase \url{https://github.com/openpvtools/pv-foss-engagement/issues/8}.} y se deja abierta la futura colaboración.
     \end{itemize}
 \end{itemize}
 

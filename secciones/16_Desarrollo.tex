@@ -286,19 +286,19 @@ Se llama fracción de sombra \textbf{unidimensional} porque se mide la fracción
 Las ecuaciones relevantes implementadas son (12) y (13) de \cite{Anderson_Jensen_2024}, \ref{eq:sombra_t} y \ref{eq:sombra_clip} respectivamente en este documento:
 
 \begin{equation} \label{eq:sombra_t}
-\begin{aligned}
-    t^* = &\ \frac{1}{2} \left( 1 + \left|\frac{\cos(\theta_1 - \theta_s)}{\cos(\theta_2 - \theta_s)}\right| \right) \\
-         &+ sgn(\theta_s) \frac{z_0}{\ell} \left( \frac{\sin(\theta_2 - \theta_s) - \sin(\theta_1 - \theta_s)}{\left|\cos(\theta_2 - \theta_s)\right|} \right) \\
-         &- \frac{p}{\ell} \left( \frac{\cos(\theta_s - \beta_c)}{\left|\cos(\theta_2 - \theta_s)\right| \cos(\beta_c)} \right)
-\end{aligned}
+    \begin{aligned}
+        t^* = & \ \frac{1}{2} \left( 1 + \left|\frac{\cos(\theta_1 - \theta_s)}{\cos(\theta_2 - \theta_s)}\right| \right)                                            \\
+              & + sgn(\theta_s) \frac{z_0}{\ell} \left( \frac{\sin(\theta_2 - \theta_s) - \sin(\theta_1 - \theta_s)}{\left|\cos(\theta_2 - \theta_s)\right|} \right) \\
+              & - \frac{p}{\ell} \left( \frac{\cos(\theta_s - \beta_c)}{\left|\cos(\theta_2 - \theta_s)\right| \cos(\beta_c)} \right)
+    \end{aligned}
 \end{equation}
 
 \begin{equation} \label{eq:sombra_clip}
     f_s =
     \begin{cases}
-        0    &\quad \text{si } t^* < 0 \\
-        t^* &\quad 0 \leq t^* \leq 1  \\
-        1    &\quad \text{si } t^* > 1 \\
+        0   & \quad \text{si } t^* < 0 \\
+        t^* & \quad 0 \leq t^* \leq 1  \\
+        1   & \quad \text{si } t^* > 1 \\
     \end{cases}
 \end{equation}
 
@@ -643,7 +643,7 @@ Debe denotarse que la mayor parte del código supone imprimir la escena y las so
     \item \pr{2007}
 \end{itemize}
 
-Por causas desconocidas, pero que se pueden intuir, fallaba un test que esperaba con bastante precisión que una entrada numérica a una función que resuelve la curva I-V del diodo devolviese un cero casi exacto. Se determinó que la causa era un exceso de precisión que se le pedía al test, y se modificó para que aceptase un margen de error mayor.
+Por causas desconocidas, pero que se pueden intuir, fallaba un test que esperaba con bastante precisión que una entrada numérica a una función que resuelve la curva I-V del diodo devolviese un cero casi exacto. Se determinó que la causa era un exceso de precisión que se le pedía al test, y esto se cumplía en determinadas arquitecturas, y se modificó para que aceptase un margen de error mayor. Se puede deducir que se debe al entorno de pre-compilación de la librería.
 
 \subsubsection{Resultado}
 
@@ -702,6 +702,8 @@ El cambio se incluyó con éxito, gracias también a la profunda revisión de un
 
 Una de las solicitudes que algún usuario había planteado como mejora era la posibilidad de modificar los parámetros de tolerancia de los métodos numéricos que se utilizan para resolver la curva I-V de un diodo. Estos métodos son iterativos y requieren de una precisión para converger.
 
+Por defecto la tolerancia es de $10^{-6}$, lo que a este usuario le parecía excesivo. Nótese que dependen de los parámetros de la curva del diodo que haya que resolver.
+
 \subsubsection{Resultado}
 
 El cambio se incluyó con éxito, y se añadieron tests profundos para asegurar que los parámetros de tolerancia se recibían adecuadamente.
@@ -725,7 +727,7 @@ El cambio se incluyó con éxito, sin diagnosticar ningún fallo derivado de est
     \item \pr{2020}
 \end{itemize}
 
-En \textit{pvlib-python} existe la función \linkDocsFunction{pvlib.pvsystem.retrieve\_sam} que permite leer de bases de datos ya inclusas en la librería mediante o remotas mediante una URL, mediante dos parámetros distintos. Resulta que si se especificaban ambos, solo se leía la base de datos de la distribución, y no la remota, sin emitir ningún aviso.
+En \textit{pvlib-python} existe la función \linkDocsFunction{pvlib.pvsystem.retrieve\_sam} que permite leer de bases de datos ya inclusas en la librería o remotas mediante una URL, mediante dos parámetros distintos. Resulta que si se especificaban ambos, solo se leía la base de datos de la distribución, y no la remota, sin emitir ningún aviso.
 
 \subsubsection{Resultado}
 
@@ -737,7 +739,7 @@ Se aplicó un patrón de diseño que excluía la posibilidad de que ambos parám
     \item \pr{2112}
 \end{itemize}
 
-Esta contribución se trata de otro de los trabajos en curso que lleva el autor de este TFG a día de redacción de este documento. Se trata de actualizar las versiones de las dependencias de la documentación, que se construye automáticamente con \textit{Sphinx} y algunas extensiones extras, para dotar de un nuevo \textit{look and feel} a la documentación.
+Esta contribución se trata de otro de los trabajos en curso que lleva el autor de este TFG a día de redacción de este documento. Se trata de actualizar las versiones de las dependencias de la documentación, que se construye automáticamente con \textit{Sphinx} y algunas extensiones extras, para dotar de un nuevo \textit{look-and-feel} (o, estilo) a la documentación.
 
 \subsubsection{Resultado}
 
@@ -777,17 +779,57 @@ En Python existe un patrón de diseño que es darle el valor \texttt{None} a los
 
 Se cambiaron todas las ocurrencias de \texttt{default None} a \texttt{optional}, aunque hubo que iterar múltiples veces para dar con todos los falsos negativos y no obtener falsos positivos. Para esta tarea se empleó el buscador en archivos integrado en \textit{Visual Studio Code}, que está basado en \textit{ripgrep} y hace uso de expresiones regulares, una forma de búsqueda y sustitución muy potente. Las expresiones regulares son un lenguaje formal que permite buscar patrones en texto, por ejemplo sustituyendo un carácter por grupos de caracteres, o buscando un patrón que se repite un número determinado de veces.
 
+Se emplearon múltiples expresiones regulares, escritas en el sabor PCRE2, que es el que soporta \textit{ripgrep}. Según la utilidad, podemos encontrar pequeñas variaciones en la forma de escribir estas expresiones. En los \textit{commits} de la propuesta se indican todas las expresiones empleadas, pero aquí se adjuntan algunas de las usadas:
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabular}{l|l}
+        Expresión regular & Patrón de sustitución \\
+        \hline
+        \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*), default:? None\textbackslash{}.?} & \texttt{\$1\$2 : \$3, optional} \\
+        \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*), default:? None\.?} & \\
+        \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*) or {[}nN{]}one, optional} & \\
+        \hline
+        \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: {[}Nn{]}one, (?.*), default:? (?.*)\textbackslash{}.?} & \texttt{\$1\$2 : \$3, default \$4} \\
+        \hline
+        \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*) or {[}Nn{]}one(?.*)} & \texttt{\$1\$2 : \$3\$4} \\
+        \hline
+        \texttt{If None} & \texttt{If not specified,} \\
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Algunas de las expresiones regulares empleadas para modificar la escritura de los parámetros opcionales.}
+    \label{tab:expresiones_regulares_default_none}
+\end{table}
+
+Adicionalmente se arreglaron algunos links a los \textit{DOI}, que son identificadores únicos de documentos científicos, gracias también a la búsqueda y sustitución con expresiones regulares:
+
+\begin{itemize}
+    \item Expresión de búsqueda: \texttt{(?:doi|DOI):(?!\textasciigrave{})\textbackslash s?(.*?)(\textbackslash .\textbackslash n|\textbackslash n)}
+\end{itemize}
+\begin{itemize}
+    \item Expresión de sustitución: \texttt{:doi:\textasciigrave{}\$1\textasciigrave{}\$2}
+\end{itemize}
+
 \subsection{Limpieza de advertencias al construir la documentación}
 
 \begin{itemize}
     \item \pr{2030}
 \end{itemize}
 
-De nuevo en la línea de erradicar advertencias en los flujos de integración continua, se eliminaron advertencias que se emitían al construir la documentación. Estas advertencias no eran críticas, pero al formar parte de unos registros que se consultaban con cierta periodicidad cada vez que alguien hacía contribuciones, era preferible evitar ruido visual a la hora de revisar.
+De nuevo, en la línea de erradicar advertencias en los flujos de integración continua, se eliminaron advertencias que se emitían al construir la documentación. Estas advertencias no eran críticas, pero al formar parte de unos registros que se consultan con cierta periodicidad cada vez que alguien hace contribuciones, se prefiere evitar ruido visual. De esta forma, el proceso de revisión es más eficiente y no confunde ni a los revisores ni a los contribuyentes.
 
 Además, se mejoró así el renderizado de la documentación en bastantes casos.
 
-\section{Revisiones y participación con otros usuarios}
+\section{Interacciones con otros usuarios}
+
+Ha sido constante la comunicación con los revisores y los contribuyentes que más activos son en la librería. Se ha procurado perseguir una comunicación clara, concisa y razonada, y se ha agradecido la colaboración y la transmisión de nuevas ideas, si bien no se han aplicado todas. Este caso es el más esperable, pues se tratan de las personas con más responsabilidad sobre la librería.
+
+Por otro lado, se ha ayudado a guiar a los compañeros alumnos del \textit{Google Summer of Code} en sus propuestas y reuniones.
+
+Y finalmente, con el sector de usuarios que discretamente han participado, bien por dudas o por descubrir errores, se ha transmitido y aportado con claridad y amabilidad.
+
+A continuación se puede encontrar en más detalle estos dos últimos grupos, que son lo de mayor interés.
 
 \subsection{Revisión de propuestas de otros usuarios}
 
@@ -797,8 +839,10 @@ Se podrían citar muchos ejemplos, ya que esta parte es bastante abundante por r
 
 En otras situaciones, se ha aportado información técnica sobre normativa, como en una propuesta de un modelo de pérdidas en transformadores. Revisores del código pidieron información sobre los tests que se realizan físicamente en transformadores de alta tensión. El mismo autor de este TFG aportó un ejemplo y la normativa que se sigue en España para realizar estos tests. Se agradece la colaboración de la empresa \textit{Laboratorio Central Oficial de Electrotecnia,} departamento de Alta Tensión, por facilitar la información.
 
-\subsection{Soporte técnico a usuarios}
+\subsection{Soporte técnico a usuarios} \label{sct:desarrollo:soporte_tecnico}
 
 Otro aspecto, de no gran importancia ya que no se ha dispuesto de mucho tiempo para ello, es el soporte técnico a usuarios. Se ha respondido a preguntas en \textit{GitHub}, y en la lista de correo por \textit{Google Groups}. Implicarse en esto ha permitido conocer mejor la librería, detectar errores en el código y adelantar futuros errores con las dependencias.
 
-Es más, respecto de las dependencias, hay un inicio de trabajo parcial en eliminar la dependencia de una de las dependencias, valga la redundancia, de \textit{pvlib-python}. Se trata de \textit{solarfactors}, un clon mantenido por la comunidad de \textit{pvlib} del paquete \textit{pvfactors}, que es un software de simulación de factores de vista en sistemas fotovoltaicos bifaciales.
+Es más, respecto de las dependencias, se inicia parcialmente un trabajo en eliminar una sub-dependencia de una de las dependencias, valga la redundancia, de \textit{pvlib-python}. Se trata de \textit{solarfactors}, un clon mantenido por la comunidad de \textit{pvlib} del paquete \textit{pvfactors}, que es un software de simulación de factores de vista en sistemas fotovoltaicos bifaciales.
+
+Sucede que esta dependencia utiliza una versión antigua e incompatible de \textit{Shapely}, que no se puede instalar en Python 3.12, así que se plantea eliminarla. Este trabajo, si bien iniciado, resulta especialmente complejo por trabajar con un código base novedoso para el alumno, por requerir una elevada inversión de tiempo y no estar ligado estrechamente a la librería objeto de este TFG.
