@@ -748,6 +748,35 @@ Se sigue trabajando en esta contribución, procurando que pueda pasar el mayor t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Contribuciones menores} \label{sct:desarrollo:contribuciones_menores}
 
+Aquí se tratan aquellas que no suponen un desafío ni técnico ni científico, si bien suponen y parten de la interacción en el repositorio y la identificación particular de necesidades.
+
+\subsection{Añadir una utilidad para obtener los ficheros de ejemplo internos de la librería}
+
+\begin{itemize}
+    \item \issue{924}
+    \item \pr{1763}
+\end{itemize}
+
+El objetivo consistió en añadir una función que ahorrase escribir la instrospección de la ubicación de la librería para formar las rutas manualmente.
+
+\begin{lstlisting}[language=python, caption={Fragmento de código utilizado normalmente para obtener la ruta de los ficheros de la librería}, label={lst:example_files_current}]
+import os
+import pvlib
+
+PVLIB_DIR = pvlib.__path__[0]
+DATA_FILE = os.path.join(PVLIB_DIR, 'data', '723170TYA.CSV')
+\end{lstlisting}
+
+Concretamente, la propuesta crea una función que se utilizaría como sigue:
+
+\begin{lstlisting}[language=python, caption={Fragmento de código utilizando la función propuesta para obtener la ruta de los ficheros de la librería}, label={lst:example_files_proposal}]
+import pvlib
+
+DATA_FILE = pvlib.tools.get_example_dataset_path('723170TYA.CSV')
+\end{lstlisting}
+
+Se desestima la propuesta porque se considera que primero deben reorganizarse todos los ficheros de ejemplo, si bien esto último nunca se ha puesto en marcha debido a la inmensidad de la tarea.
+
 \subsection{Corrección de erratas en la documentación}
 
 \begin{itemize}
@@ -815,13 +844,57 @@ Adicionalmente se arreglaron algunos links a los \textit{DOI}, que son identific
 
 \begin{itemize}
     \item \pr{2030}
+    \item \pr{2128}
 \end{itemize}
 
 De nuevo, en la línea de erradicar advertencias en los flujos de integración continua, se eliminaron advertencias que se emitían al construir la documentación. Estas advertencias no eran críticas, pero al formar parte de unos registros que se consultan con cierta periodicidad cada vez que alguien hace contribuciones, se prefiere evitar ruido visual. De esta forma, el proceso de revisión es más eficiente y no confunde ni a los revisores ni a los contribuyentes.
 
 Además, se mejoró así el renderizado de la documentación en bastantes casos.
 
-\section{Interacciones con otros usuarios}
+\subsection{Modificar documentación de parámetros para poder ejecutar procedimientos que verifican la integridad de la librería}
+
+\begin{itemize}
+    \item \pr{1790}
+\end{itemize}
+
+Desde el punto de vista personal del autor de este trabajo, se consideró buena opción introducir procedimientos para comprobar la correcta escritura de la documentación. Sin embargo, por el hecho de introducir nuevas herramientas que no eran del todo compatibles y requerir muchas modificaciones a la base de código actual, se desestimó la propuesta tempranamente.
+
+\subsection{Portar antiguos ejemplos de Jupyter a scripts integrados en la web}
+
+\begin{itemize}
+    \item \pr{1818}
+\end{itemize}
+
+En los inicios del repositorio, los ejemplos se redactaban en \textit{Jupyter Notebooks}, que son documentos interactivos para ejecutar código. Sin embargo, no se facilitó su acceso desde la página web, y por la complejidad que suponían, no se ejecutan con cada versión que se realizaba. Por ende, quedaron obsoletos pronto.
+
+En esta propuesta se extraían todos los comentarios de texto y los fragmentos de código y se estilizaban para que se pudieran ejecutar y ver en la página web. Se desestimó por tratarse de ejemplos obsoletos, con poco valor didáctico y de uso. A día de hoy, se pueden encontrar en la carpeta \texttt{docs/tutorials}.
+
+\subsection{Integración continua para verificar los links externos de la documentación}
+
+\begin{itemize}
+    \item \pr{1794}
+\end{itemize}
+
+Otra de las mejoras que el estudiante identifica como necesaria es comprobar que los links externos de la documentación funcionen correctamente, periódicamente. Resulta que el entorno de desarrollo de la documentación \textit{sphinx} permite realizar esto de forma sencilla, pero debe configurarse los comandos para crear el procedimiento de integración continua.
+
+Se mostró interés dependiendo del revisor; otros revisores preferían integrarlo en el proceso de publicación de las versiones. Es más, algún revisor contribuyó a arreglar los links que en ese momento se diagnosticaron rotos con ayuda del estudiante para poder ejecutar el procedimiento y verificar la integridad de los cambios. A día de redacción de este documento, no se ha tomado una decisión definitiva.
+
+\subsection{Eliminar una función obsoleta y olvidada}
+
+\begin{itemize}
+    \item \pr{2131}
+\end{itemize}
+
+La ubicación de la función \linkDocsFunction{pvlib.atmosphere.first\_solar\_spectral\_correction}\footnote{Este link podría no funcionar si finalmente se elimina.} se encontraba obsoleta tras plantear una reorganización de aquellos modelos relativos a correcciones espectrales. Se hubo avisado de su obsoleta existencia en la versión \texttt{0.10.0}, pero no se eliminó en la siguiente versión menor, \texttt{0.11.0}, que son aquellas que admiten cambios que pueden romper el código de los usuarios.
+
+Se plantea eliminar esta ocurrencia que no tiene fecha para su desaparición, pero lo más probable es que hasta una versión menor posterior no se elimine ya que supone cambios que pueden romper el código de usuarios. La siguiente es la versión menor \texttt{0.12.0}, aunque la versión de arreglos \texttt{0.11.1} se encuentra en desarrollo y se espera que se publique en Septiembre.
+
+La propuesta se mantiene abierta a día de hoy.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Interacción con otros usuarios}
 
 Ha sido constante la comunicación con los revisores y los contribuyentes que más activos son en la librería. Se ha procurado perseguir una comunicación clara, concisa y razonada, y se ha agradecido la colaboración y la transmisión de nuevas ideas, si bien no se han aplicado todas. Este caso es el más esperable, pues se tratan de las personas con más responsabilidad sobre la librería.
 
@@ -846,3 +919,32 @@ Otro aspecto, de no gran importancia ya que no se ha dispuesto de mucho tiempo p
 Es más, respecto de las dependencias, se inicia parcialmente un trabajo en eliminar una sub-dependencia de una de las dependencias, valga la redundancia, de \textit{pvlib-python}. Se trata de \textit{solarfactors}, un clon mantenido por la comunidad de \textit{pvlib} del paquete \textit{pvfactors}, que es un software de simulación de factores de vista en sistemas fotovoltaicos bifaciales.
 
 Sucede que esta dependencia utiliza una versión antigua e incompatible de \textit{Shapely}, que no se puede instalar en Python 3.12, así que se plantea eliminarla. Este trabajo, si bien iniciado, resulta especialmente complejo por trabajar con un código base novedoso para el alumno, por requerir una elevada inversión de tiempo y no estar ligado estrechamente a la librería objeto de este TFG.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Impacto en otros repositorios}
+
+\subsection{En \textit{pvlib/solarfactors}}
+
+Este repositorio se trata de un clon de \textit{pvfactors}, que se emplea para calcular factores de vista de sistemas fotovoltaicos bifaciales. Es un clon porque \textit{pvfactors} inició dentro de una empresa, que contaba con los permisos para administrar sus cambios, pero dejó de mantenerla. La comunidad de \textit{pvlib}, ya que la usaba en el repositorio \textit{pvlib-python}, decidió clonarla y mantenerla.
+
+\begin{itemize}
+    \item \issue{16}[https://github.com/pvlib/solarfactors]
+\end{itemize}
+
+Se ha informado sobre un problema de las dependencias de \textit{solarfactors} en \textit{Python 3.12}, y se ha propuesto eliminar la dependencia de \textit{Shapely} en favor de código nativo de Python. Se ha iniciado el trabajo, pero no se ha completado.
+
+\subsection{En \textit{openpvtools/pv-foss-engagement}}
+
+Este pequeño proyecto es un compendio de datos de contribuciones, contribuyentes y otras métricas relativas al impacto e interés que generan varias librerías de código abierto sobre la fotovoltaica.
+
+Se puede consultar en \url{https://openpvtools.github.io/pv-foss-engagement/}.
+
+\begin{itemize}
+    \item \issue{8}[https://github.com/openpvtools/pv-foss-engagement]
+    \item \pr{9}[https://github.com/openpvtools/pv-foss-engagement]
+\end{itemize}
+
+Se informa sobre la ausencia del clon citado anteriormente, \textit{pvlib/solarfactors}, en el repositorio. Se propone añadirlo, y un mantenedor añade los datos. Deja como posibilidad para el estudiante que proponga las modificaciones pertinentes para mostrarlo en la web.
+
+Se plantean los cambios, sin haber respuesta a día de esta redacción.
