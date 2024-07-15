@@ -297,7 +297,7 @@ Las ecuaciones relevantes implementadas son (12) y (13) de \cite{Anderson_Jensen
     f_s =
     \begin{cases}
         0   & \quad \text{si } t^* < 0 \\
-        t^* & \quad 0 \leq t^* \leq 1  \\
+        t^* & \quad \text{si } 0 \leq t^* \leq 1  \\
         1   & \quad \text{si } t^* > 1 \\
     \end{cases}
 \end{equation}
@@ -741,9 +741,11 @@ Se aplicó un patrón de diseño que excluía la posibilidad de que ambos parám
 
 Esta contribución se trata de otro de los trabajos en curso que lleva el autor de este TFG a día de redacción de este documento. Se trata de actualizar las versiones de las dependencias de la documentación, que se construye automáticamente con \textit{Sphinx} y algunas extensiones extras, para dotar de un nuevo \textit{look-and-feel} (o, estilo) a la documentación.
 
+Se prioriza que el renovado entorno pueda pasar el mayor tiempo posible sin generar problemas ni requerir atención.
+
 \subsubsection{Resultado}
 
-Se sigue trabajando en esta contribución, procurando que pueda pasar el mayor tiempo posible sin necesidad de ser actualizada.
+Se han aceptado los cambios, que serán visibles en la rama estable de la documentación de la próxima versión \texttt{0.11.1}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Contribuciones menores} \label{sct:desarrollo:contribuciones_menores}
@@ -885,7 +887,7 @@ Se mostró interés dependiendo del revisor; otros revisores preferían integrar
     \item \pr{2131}
 \end{itemize}
 
-La ubicación de la función \linkDocsFunction{pvlib.atmosphere.first\_solar\_spectral\_correction}\footnote{Este link podría no funcionar si finalmente se elimina.} se encontraba obsoleta tras plantear una reorganización de aquellos modelos relativos a correcciones espectrales. Se hubo avisado de su obsoleta existencia en la versión \texttt{0.10.0}, pero no se eliminó en la siguiente versión menor, \texttt{0.11.0}, que son aquellas que admiten cambios que pueden romper el código de los usuarios.
+La ubicación de la función \linkDocsFunction{pvlib.atmosphere.first\_solar\_spectral\_correction}\footnote{Este link podría no funcionar si finalmente se elimina.} se encontraba obsoleta tras plantear una reorganización de aquellos modelos relativos a correcciones espectrales. Se hubo avisado de su obsoleta ubicación en la versión \texttt{0.10.0}, pero no se eliminó en la siguiente versión menor, \texttt{0.11.0}, que son aquellas que admiten cambios que pueden romper el código de los usuarios.
 
 Se plantea eliminar esta ocurrencia que no tiene fecha para su desaparición, pero lo más probable es que hasta una versión menor posterior no se elimine ya que supone cambios que pueden romper el código de usuarios. La siguiente es la versión menor \texttt{0.12.0}, aunque la versión de arreglos \texttt{0.11.1} se encuentra en desarrollo y se espera que se publique en Septiembre.
 
@@ -945,6 +947,6 @@ Se puede consultar en \url{https://openpvtools.github.io/pv-foss-engagement/}.
     \item \pr{9}[https://github.com/openpvtools/pv-foss-engagement]
 \end{itemize}
 
-Se informa sobre la ausencia del clon citado anteriormente, \textit{pvlib/solarfactors}, en el repositorio. Se propone añadirlo, y un mantenedor añade los datos. Deja como posibilidad para el estudiante que proponga las modificaciones pertinentes para mostrarlo en la web.
+Se informa sobre la ausencia del clon citado anteriormente, \textit{pvlib/solarfactors}, en el repositorio. Se propone añadirlo, y un mantenedor añade los datos. Propone al estudiante que haga las modificaciones pertinentes para mostrarlo en la web.
 
 Se plantean los cambios, sin haber respuesta a día de esta redacción.
