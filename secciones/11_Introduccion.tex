@@ -9,7 +9,7 @@ Este Trabajo de Fin de Grado pretende potenciar la adquisición, investigación 
 
 \section{Motivación del proyecto} \label{sct:intro:motivacion}
 
-El alumno declara que la motivación para la realización de este Trabajo de Fin de Grado se fundamenta en su interés por las energías renovables, el código libre y su ya experiencia previa en desarrollo de software en Python, también de acceso abierto.
+La motivación del alumno para realizar este Trabajo de Fin de Grado se fundamenta en su interés por las energías renovables, el código libre y su experiencia previa en desarrollo de software en Python, también de acceso abierto.
 
 Asimismo una de las principales inquietudes del alumno es aplicar sus conocimientos en generar o facilitar nueva ciencia de forma accesible y contrastable, y que pueda ser utilizada por la comunidad científica y técnica de manera completamente transparente.
 
@@ -18,23 +18,23 @@ Asimismo una de las principales inquietudes del alumno es aplicar sus conocimien
 
 \section{Contexto del proyecto} \label{sct:intro:contexto}
 
-Con el incremento del interés por las energías renovables y las facilidades del desarrollo software como caldo de cultivo, se ha propuesto al alumno la realización de este Trabajo de Fin de Grado, que consiste en apoyar en el desarrollo de la biblioteca \textit{pvlib-python}.
+Con el incremento del interés por las energías renovables y las facilidades del desarrollo software como caldo de cultivo, se ha propuesto al alumno la realización de este Trabajo Fin de Grado, que consiste en apoyar en el desarrollo de la biblioteca \textit{pvlib-python}.
 
 La propuesta parte de los tutores del alumno, que son miembros del grupo de investigación \textit{Instruments and Systems Integration} del \textit{Instituto de Energía Solar} de la propia Universidad Politécnica de Madrid. Asimismo, el proyecto \textit{pvlib-python} es un proyecto de código abierto que se encuentra en desarrollo por otros investigadores de centros de investigación y universidades públicas de múltiples países, y algunos miembros de empresas privadas del mismo campo.
 
-El perfil de usuario de esta biblioteca se puede clasificar entre 3 grupos principales:
+El perfil de las personas usuarias de esta biblioteca se puede clasificar entre 3 grupos principales:
 
 \begin{itemize}
 
-    \item[•] Investigadores que desean realizar simulaciones y estudios de sistemas fotovoltaicos.
+    \item[•] Personal investigador que desean realizar simulaciones y estudios de sistemas fotovoltaicos.
 
-    \item[•] Ingenieros y técnicos que desean optimizar el diseño de instalaciones fotovoltaicas.
+    \item[•] Personal técnico y de ingeniería que desean optimizar el diseño de instalaciones fotovoltaicas.
 
-    \item[•] Ingenieros y técnicos que quieren identificar faltas en este tipo de instalaciones, mediante la comparación de datos reales con simulaciones.
+    \item[•] Personal técnico y de ingeniería que quieren identificar fallos en este tipo de instalaciones, mediante la comparación de datos reales con simulaciones.
 
 \end{itemize}
 
-Por supuesto, tratándose de un proyecto de código abierto, cualquier persona puede utilizar la biblioteca, por lo que no se descarta la posibilidad de que otros perfiles de usuario puedan beneficiarse de las mejoras realizadas en este Trabajo de Fin de Grado. En este aspecto, sucede que esta iniciativa democratiza el acceso por parte de usuarios más noveles en el campo de la energía solar fotovoltaica, que no tienen acceso a herramientas comerciales.
+Por supuesto, tratándose de un proyecto de código abierto, cualquier persona puede utilizar la biblioteca, por lo que no se descarta la posibilidad de que otros perfiles de usuarios puedan beneficiarse de las mejoras realizadas en este Trabajo de Fin de Grado. Es por ello que esta iniciativa democratiza el acceso de personas más noveles en el campo de la energía solar fotovoltaica, que pudieran no tener acceso a herramientas comerciales.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -45,23 +45,25 @@ La línea principal de este trabajo es la adición de nuevas funcionalidades a l
 
 \begin{itemize}
 
-    \item[•] Contribuir modelos científicos variados en propósito y utilidad.
+    \item[•] Contribuir con la aportación de modelos científicos variados en propósito y utilidad.
 
-    \item[•] Añadir otras funcionalidades, que no siendo modelos, sean útiles para el usuario.
+    \item[•] Añadir otras funcionalidades, que no siendo modelos, sean útiles para las personas usuarias.
 
     \item[•] Validar el funcionamiento mediante tests unitarios.
 
-    \item[•] Hacer que cada contribución sea usable aportando una documentación completa y concisa, didáctica si fuere necesario.
+    \item[•] Hacer que cada contribución sea accesible aportando una documentación completa y concisa, y didáctica si fuera necesario.
 
     \item[•] Seguir los rigurosos estándares de calidad de un proyecto científico de código libre.
-
-    \item[•] Ayudar a la comunidad de usuarios de la biblioteca a través de la resolución de dudas y problemas.
+    
+    \item[•] Promover la discusión sobre temas relacionados con la mejora de la biblioteca.
 
     \item[•] Participar en la revisión del código de otros contribuyentes.
 
-    \item[•] Crear asuntos y cuestiones que promuevan la mejora de la biblioteca, en especial para animar a otros contribuyentes a participar.
+    \item[•] Ayudar a la comunidad usuaria de la biblioteca resolviendo dudas y problemas.
 
-    \item[•] Ayudar a mantener la biblioteca actualizada para mejorar su ciclo de vida y arreglar fallos de forma preventiva.
+    \item[•] Animar e intentar involucrar a nuevas personas en el proyecto.
+
+    \item[•] Ayudar a mantener la biblioteca actualizada para mejorar su ciclo de vida y arreglar errores de forma preventiva.
 
 \end{itemize}
 
@@ -71,7 +73,7 @@ Por otra parte, entre los objetivos secundarios destacan:
 
     \item [•] Dar visibilidad a autores nacionales y de la Universidad Politécnica de Madrid.
 
-    \item [•] Potenciar proyectos de beneficio común desde la Universidad pública.
+    \item [•] Potenciar proyectos accesibles desde la Universidad pública.
 
 \end{itemize}
 
@@ -82,21 +84,21 @@ Si bien no es el propósito específico de este trabajo tratar estos últimos ob
 
 \section{Estructura del Documento} \label{sct:intro_estructura}
 
-La estructura de este Trabajo de Fin de Grado pretende ser intuitiva y distribuida por bloques sobre temas similares. El lector podrá leer a continuación:
+La estructura de este Trabajo de Fin de Grado pretende ser intuitiva y distribuida por bloques sobre temas similares, destacándose los siguientes:
 
 \begin{itemize}
 
-    \item[•] En \fullref{chp:state-of-the-art}, se da a conocer el estado actual de la energía solar fotovoltaica y algunas de las herramientas de simulación utilizadas.
+    \item[•] \fullref{chp:state-of-the-art}: da a conocer el estado actual de la energía solar fotovoltaica y algunas de las herramientas de simulación utilizadas.
 
         \begin{itemize}
-            \item[•] En \fullref{sct:pvlib}, se presentan las características de la biblioteca \textit{pvlib-python}.
+            \item[•] \fullref{sct:pvlib}: expone las características de la biblioteca \textit{pvlib-python}.
         \end{itemize}
 
-    \item[•] En \fullref{chp:desarrollo}, se detalla el desarrollo de las contribuciones propuestas a la biblioteca, con factores tanto técnicos como humanos sobre el resultado.
+    \item[•] \fullref{chp:desarrollo}: detalla el desarrollo de las contribuciones propuestas a la biblioteca, con factores tanto técnicos como humanos sobre el resultado.
 
-    \item[•] En \fullref{chp:impacto}, se presenta el impacto de las contribuciones realizadas tanto en la biblioteca como en otras, y en la comunidad del proyecto.
+    \item[•] \fullref{chp:impacto}: presenta el impacto de las contribuciones realizadas tanto en esta biblioteca como en otras, y en la comunidad del proyecto.
 
-    \item[•] En \fullref{chp:resultados}, se resume y se hace una valoración global de los resultados obtenidos.
+    \item[•] \fullref{chp:resultados}: resume y hace una valoración global de los resultados obtenidos.
 
         %% \item[•] En el Capítulo \ref{chp:conclusiones}, se presentan las conclusiones y se proponen futuras líneas de trabajo TODO
 
