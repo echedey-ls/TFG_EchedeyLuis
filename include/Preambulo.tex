@@ -169,3 +169,15 @@
 % Custom commands for linking the documentation of the pvlib-python library
 \newcommand{\pvlibDocsLink}{https://pvlib-python.readthedocs.io/en/latest}
 \newcommand{\linkDocsFunction}[2][\pvlibDocsLink]{\href{#1/reference/generated/#2.html}{\texttt{#2}}}
+
+% Shortcut for writing pvlib-python
+\newcommand{\pvlibpy}{\textit{pvlib-python}}
+
+% Environment for custom indentation
+\newlength\mystoreparindent
+\newenvironment{myparindent}[1]{%
+\setlength{\mystoreparindent}{\the\parindent}
+\setlength{\parindent}{#1}
+}{%
+\setlength{\parindent}{\mystoreparindent}
+}

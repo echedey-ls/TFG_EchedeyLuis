@@ -1,185 +1,19 @@
 \chapter{Desarrollo} \label{chp:desarrollo}
 
-La primera parte de este capítulo describe el \textit{modus operandi} del autor de este Trabajo Fin de Grado para contribuir a la librería de modelado fotovoltaico \textit{pvlib-python}, en el que se detallan las herramientas y el entorno de desarrollo empleados.
+En este capítulo se detallan las aportaciones realizadas a la librería \pvlibpy{} dentro del marco de este Trabajo Fin de Grado.
 
-En el resto de secciones se tratarán las contribuciones de toda índole realizadas, abiertas o planificadas, agrupadas por la temática y la importancia. En aquellas más complejas, se describirán las bases teóricas y se contará el resultado de la propuesta, si es aceptado o no.
-
-\section{Entorno de desarrollo y herramientas utilizadas} \label{sct:desarrollo:entorno}
-
-Para el desarrollo de este trabajo se emplea el siguiente software para el desarrollo del proyecto consistentemente a lo largo de toda su ejecución:
+Se ha separado en tres secciones, atendiendo principalmente a su tamaño y complejidad del desarrollo:
 
 \begin{itemize}
-    \item \textit{Visual Studio Code}: es el editor de código que se emplea para escribir y editar el código fuente del proyecto. Es un editor de código semi-abierto, ligero y rápido que cuenta con una amplia gama de extensiones para facilitar el desarrollo de software. Es una alternativa multipropósito a otros editores de código como \textit{PyCharm} o \textit{Spyder} en el caso de Python. Es multipropósito en cuanto admite el desarrollo de muchísimos lenguajes de programación y ficheros ampliamente utilizados en el desarrollo software.
-    
-    Es importante denotar que la inmensa utilidad que proporciona \textit{VSCode} es gracias a las extensiones creadas por la comunidad de desarrolladores, que permiten desde la edición de archivos de texto plano hasta la depuración del código, pasando por la integración con servicios de control de versiones y la ejecución de tests de forma visual. He aquí extensiones que se emplean en el desarrollo del proyecto:
-          \begin{itemize}
-              \item \textit{Python}: es la extensión que se emplea para el desarrollo de código en Python. Proporciona funcionalidades como el autocompletado de código, la visualización de la documentación de las funciones, la ejecución de scripts y la depuración de código.
-              \item \textit{Ruff}: permite formatear el código según las directrices de estilo de \textit{flake8}, la utilidad que da estilo uniforme al código de Python. Recordemos que establece limitaciones en cuanto a la longitud de las líneas y a la forma de escribir todo el código.
-              \item \textit{GitHub Copilot}: un asistente de generación de código en línea integrado en el editor, que se emplea para sugerir fragmentos de código y documentación en función del contexto. Agiliza el desarrollo.
-              \item \textit{Code Spell Checker}: es un corrector ortográfico que se emplea para detectar errores de ortografía en el código y en la documentación.
-              \item \textit{Jupyter Notebooks}: es la extensión que se emplea para editar y ejecutar \textit{notebooks} de Jupyter en el editor, un formato que permite visualizar las variables del contexto y facilita el debugging interactivo. Los ejemplos de \textit{pvlib-python} se realizan con un formato similar a las celdas de texto o código de una \textit{notebook}.
-              \item Resaltado de sintaxis de varios formatos de archivos, como \textit{reStructuredText}, \textit{Markdown}, \textit{YAML} y \textit{TOML}: para facilitar la edición de la documentación y los archivos de configuración.
-
-          \end{itemize}
-
-    \item \textit{GitHub Desktop}: es la interfaz gráfica que se emplea para colaborar en el desarrollo del proyecto. Permite visualizar los cambios, crear \textit{ramas}, hacer \textit{commits}, \textit{pull requests} y \textit{merges}, entre otros. En resumen, administra nuestra copia del repositorio para que los desarrolladores del proyecto puedan revisar y aceptar las propuestas.
-    \item \textit{pip} y \textit{venv}: como gestor de paquetes y entornos aislados de desarrollo de Python nativos. Se emplean para instalar las dependencias del proyecto y usar entornos con las versiones específicas requeridas aislado del resto del sistema.
-
-
+    \item En \fullref{sct:desarrollo:contribuciones_cientificas} se tratan aquellas que se espera que tengan mayor peso en los usuarios finales, pues incluyen modelos y utilidades alineadas con una mejor simulación de los sistemas fotovoltaicos.
+    \item En \fullref{sct:desarrollo:contribuciones_tecnicas} se encuentran algunas contribuciones cuyo desarrollo ha permitido a mejorar la calidad a largo plazo del proyecto mediante la resolución de errores, la adición de soporte a otras funciones dentro de los procedimientos y arreglos a los tests cuando estos fallaban.
+    \item En \fullref{sct:desarrollo:contribuciones_menores} se agrupan aportaciones que solo afectan al renderizado de la documentación, erratas o el tamaño de los cambios es reducido.
 \end{itemize}
-
-De forma discreta, se ha hecho uso de otras herramientas como:
-
-\begin{itemize}
-    \item \textit{Git}: para clonar las ramas del autor de este TFG y correr partes de la integración continua, normalmente la documentación, en las máquinas virtuales de linux provistas por la UPM\footnote{Accesible a través de \url{https://escritorio.upm.es/}.}.
-    \item \textit{Miniconda}: una distribución de Python que se emplea para instalar y gestionar las dependencias del proyecto. Facilita la creación de entornos virtuales y la instalación de paquetes de Python. Se utilizó para diagnosticar un error de precisión por la compilación de algunas librerías y que hacía fallar un test.
-    \item \textit{LibreOffice Calc}: para generar datos de prueba y comprobar las implementaciones de las ecuaciones de los modelos.
-\end{itemize}
-
-El desarrollo de la librería se ha hecho habitualmente en Windows 10, en un portátil HP \textit{15-dw2003ns} así que se ha aprovechado a usar el subsistema de Windows para Linux (\textit{WSL}) para ejecutar tests y construir la documentación en un entorno similar al de integración continua. No obstante, por los recursos limitados del portátil, y por poder cambiar de ramas mientras se construye la documentación, se ha hecho uso de las máquinas virtuales de la UPM para ejecutar los tests y construir la documentación.
-
-\subsection{La documentación}
-
-En esta sección pondremos en valor lo que realmente es lo más importante de un proyecto de programación, en especial de código abierto: la documentación. Es más, se puede argumentar que el valor de todas las aportaciones es documentar lo más rigurosamente posible los modelos y métodos que se implementan, tanto para facilitar su correcto uso como para divulgar su existencia y problemática que resuelven.
-
-Como se comentaba anteriormente, la documentación de la librería \textit{pvlib-python} se encuentra alojada en la plataforma \textit{ReadTheDocs}, que expone los archivos HTML para que las personas usuarias puedan consultarla en línea. La documentación se genera automáticamente a partir de los comentarios escritos en el código fuente, que se escriben en formato \textit{reStructuredText} y se construye con el framework \textit{sphinx}.
-
-Existen archivos específicos para indicar qué funciones o métodos son públicos, hacer páginas de inicio, de referencia, de ejemplos, de instalación, de contribución, etc. Además, se pueden incluir imágenes, tablas, gráficos, enlaces, referencias, entre otros elementos que facilitan la comprensión de los conceptos.
-
-\textit{Sphinx} emplea el estilo de documentación de \textit{pydata-sphinx-theme}, que organiza las secciones de la documentación y da un estilo homogéneo a la web. Además, para la creación de los ejemplos se emplea la extensión \textit{sphinx-gallery}, que ejecuta unos scripts de Python por secciones similares a una \textit{notebook} de Jupyter y captura la salida de texto estándar y los gráficos para mostrarlos en la documentación.
-
-La \textit{docstring} de cada función, que es el comentario que se escribe en la primera línea de la definición de la función y se emplea para autogenerar la documentación, utiliza el estilo de \textit{numpydoc}. Este estilo permite incluir información sobre los parámetros de entrada, los valores de retorno, las excepciones que se pueden lanzar, entre otros. Además, se pueden incluir ejemplos de uso de la función e informar avisos de precaución sobre aspectos más específicos.
-
-A continuación se muestra como ejemplo una función mínima con su plantilla de documentación y de código de una función escrita con este fin:
-
-\begin{lstlisting}[language=Python, caption={Ejemplo de documentación de una función en \textit{pvlib-python}.}, label={lst:doc_function_example}]
-def example_model(param1, param2):
-    """
-    Brief model description.
-
-    Long model description, also found at [1]_.
-
-    .. versionadded:: 0.1.0
-
-    .. warning::
-       This docstring is an example.
-
-    Parameters
-    ----------
-    param1 : numeric
-      Description of the parameter.
-    param2 : numeric
-      Description of the parameter.
-
-    Returns
-    -------
-    float
-        Return type of the function.
-
-    Notes
-    -----
-    Additional notes about the function, detailed explanations if needed. Even an equation:
-
-    .. math::
-
-       f(x, y) = x + y
-
-    Examples
-    --------
-    >>> example_model(1, 5)
-    6.0
-
-    References
-    ----------
-    .. [1] Author, A. (2024). Title of the paper. Journal, 1(1), 1-10. :doi:`10.0001/populate`
-    """
-    return float(param1 + param2)
-\end{lstlisting}
-
-Esta función, una vez listada en el archivo correspondiente del índice que nos interese -aquí usamos el submódulo \texttt{pvlib.solarposition} como ejemplo-, creará una página como la que se muestra en la figura \ref{fig:doc_function_example}:
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{./images/doc_example/function_stretch.png}
-    \caption{Un ejemplo de renderizado de la documentación de una función en \textit{pvlib-python}.}
-    \label{fig:doc_function_example}
-\end{figure}
-
-Por otro lado, la siguiente estructura pertenece a la redacción de un ejemplo en la documentación. Se emplea para mostrar cómo se usa una función dentro de un contexto más elaborado en cuanto a variables de entrada y salida. Puede incluir todas las características de la documentación de una función:
-
-\begin{lstlisting}[language=Python, caption={Plantilla para elaborar un ejemplo en \textit{pvlib-python}.}, label={lst:doc_example_example}]
-"""
-Example title
-=============
-
-Brief model description (shown in preview card).
-"""
-
-# %%
-# Text paragraph, in reStructuredText format. Can use sections, subsections, etc., and math as in LaTeX.
-# More text.
-
-# This is a comment (there is a newline above)
-import matplotlib.pyplot as plt
-from pvlib import example_model
-print("Hello, world!")
-plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
-plt.show()
-
-# %%
-# Return to paragraph text.
-
-sum_val = example_model(1, 5)
-print(f"Sum of 1 and 5 is {sum_val}.")
-\end{lstlisting}
-
-El texto anterior constituye un archivo que, ubicado en la carpeta correcta (aquí el archivo es \texttt{docs/examples/solar-position/example\_example.py}), hará que se cree automáticamente una página como la que se muestra en la Figura \ref{fig:doc_use_example}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{./images/doc_example/example_stretch.png}
-    \caption{Un ejemplo de uso en la documentación de \textit{pvlib-python}.}
-    \label{fig:doc_use_example}
-\end{figure}
-
-Por último queda construir la documentación. A continuación se muestran los comandos que deben ejecutarse para este fin:
-
-\begin{itemize}
-    \item En un sistema basado en \textit{Linux} o \textit{WSL}.
-    \item Clonando el repositorio original de la librería con \textit{Git}.
-    \item Empleando las mismas versiones que a día de la redacción de este documento se emplea en la integración continua (\textit{pvlib-python=0.11.0}) - en especial hay que hacer la instalación de Python3.8.
-    \item Con el entorno aislado de desarrollo (\textit{venv}) activado.
-    \item Y realizando una instalación local mediante \textit{pip}.
-\end{itemize}
-
-\begin{lstlisting}[language=bash, caption={Comandos para construir la documentación de \textit{pvlib-python}.}, label={lst:doc_build}]
-# instalar Python 3.8 desde el repositorio de deadsnakes,
-# en las librerias por defecto de Ubuntu no se encuentra disponible por antiguedad
-sudo add-apt-repository ppa:deadsnakes/ppa -y
-sudo apt-get update
-sudo apt-get install python3.8 python3.8-venv -y
-
-# clonar el repositorio de pvlib-python
-git clone https://github.com/pvlib/pvlib-python
-cd pvlib-python
-
-# crear el entorno virtual, instalar pvlib y las dependencias de la documentacion
-python3.8 -m venv .venv
-source .venv/bin/activate
-python3.8 -m pip install .[doc]
-
-# construir la documentacion
-cd docs/sphinx
-make html
-
-# abrir la documentacion en el navegador
-xdg-open build/html/index.html
-\end{lstlisting}
-
-Este conjunto de comandos ha sido ampliamente utilizado para la construcción de la documentación en entornos remotos y así aligerar la utilización de recursos en el portátil personal.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Contribuciones científicas} \label{sct:desarrollo:contribuciones_cientificas}
+
+Con estas se pretende mejorar las capacidades que ofrece la librería \pvlibpy{} en forma de utilidades completamente novedosas como modelos científicos.
 
 \subsection{Modelado de ajuste espectral}
 
@@ -189,11 +23,13 @@ Este conjunto de comandos ha sido ampliamente utilizado para la construcción de
 
 Esta propuesta plantea incluir otro modelo de ajuste espectral, un factor que toma un valor en torno a $1$ y que se emplea para corregir la irradiancia incidente en un módulo fotovoltaico debido a la variación del espectro de la luz solar. El modelo se basa en la tesis doctoral de Nuria Martín Chivelet \cite{Martín_Chivelet_1999} y en un artículo de la misma autora \cite{Martín_Ruiz_1999}.
 
-El desarrollo inició en Septiembre de 2022, en Febrero de 2023 se planteó la \textit{pull request}, que finalmente se cerró en Mayo de 2023 sin incluirse los cambios en la librería al detectar la invalidez del modelo.
+Este modelo es de gran interés para la librería ya que depende de dos variables que se pueden obtener con extrema facilidad y normalmente se encuentran en el flujo de simulación: la masa de aire absoluta y el índice de claridad. Sin embargo, otros modelos dependen de la cantidad de agua en la atmósfera, que no es tan sencillo de obtener, o son un polinomio en una sola variable, lo que disminuye la precisión del ajuste. 
+
+La propuesta finalmente se cierra sin incluirse los cambios en la librería al detectar que el modelo necesita otros modelos para funcionar, pero estos segundos no son fácilmente accesibles.
 
 \subsubsection{Fundamento teórico}
 
-El modelo \cite{Martín_Ruiz_1999} plantea una relación entre la efectividad bajo un espectro estándar y la efectividad bajo un espectro arbitrario caracterizado por la masa de aire y el índice de claridad. Al principio de la implementación, tanto el autor de este TFG como el mentor del proyecto, César Domínguez, pensaron que se trataba de un modelo de ajuste similar a otros en la literatura que corrigen la irradiancia incidente, para dar lugar a la efectiva. Ejemplos de estos modelos ya se encontraban en la librería, como el modelo desarrollado por la empresa \textit{First Solar} descrito en \cite{Lee_Panchula_2016} o el de Caballero et al. en \cite{Caballero_Fernández_Theristis_Almonacid_Nofuentes_2018}. Además, para la versión 0.11.0 de la librería un compañero del programa \textit{Google Summer of Code} implementó un par de modelos más que funcionan de la misma forma. Los modelos en cuestión crean un factor de ajuste $M$ que se define, según el estándar IEC 60904-7 \cite[Eq. (2)]{Caballero_Fernández_Theristis_Almonacid_Nofuentes_2018}:
+El modelo \cite{Martín_Ruiz_1999} plantea una relación entre la efectividad bajo un espectro estándar y la efectividad bajo un espectro arbitrario caracterizado por la masa de aire y el índice de claridad. Originalmente esto se confunde al desarrollar esta aportación con un modelo de ajuste similar a otros en la literatura que corrigen la irradiancia incidente, para dar lugar a la efectiva; ejemplos de estos modelos se encuentran en la librería, como el modelo desarrollado por la empresa \textit{First Solar} descrito en \cite{Lee_Panchula_2016} o el de Caballero et al. en \cite{Caballero_Fernández_Theristis_Almonacid_Nofuentes_2018}. Los modelos en cuestión crean un factor de ajuste $M$ que se define, según el estándar IEC 60904-7 \cite[Eq. (2)]{Caballero_Fernández_Theristis_Almonacid_Nofuentes_2018}:
 
 \begin{equation}
     M = \frac
@@ -201,35 +37,40 @@ El modelo \cite{Martín_Ruiz_1999} plantea una relación entre la efectividad ba
     {\int_{\lambda_1}^{\lambda_2} E^*(\lambda) SR(\lambda) d\lambda \int_{\lambda_3}^{\lambda_4} E(\lambda) d\lambda}
 \end{equation}
 
-Resultó que, tras un elevado esfuerzo que llevó meses, el modelo en \cite{Martín_Ruiz_1999} no se ajustaba a esta descripción, sino que planteaba la siguiente ecuación:
+Sin embargo, el modelo en \cite{Martín_Ruiz_1999} no se ajustaba a esta descripción, sino que planteaba la siguiente ecuación:
 
 \begin{equation} \label{eq:ajuste_articulo_Nuria}
-    M = \frac{S_{efE(\lambda)}}{S_{ef\bar{G}(\lambda)}}
+    \frac{S_{efE(\lambda)}}{S_{ef\bar{G}(\lambda)}} = c \exp^{a (K_t - 0.74) + b (AM - 1.5)}
 \end{equation}
 
-Sin embargo, era la fracción de las tres relaciones que se planteaban en la tesis doctoral de Nuria Martín Chivelet \cite{Martín_Chivelet_1999}, que es:
+Donde $S_{efE(\lambda)}$ es la efectividad bajo un espectro arbitrario, $S_{ef\bar{G}(\lambda)}$ es la efectividad bajo un espectro estándar, $K_t$ es el índice de claridad, $AM$ es la masa de aire, y $a$, $b$ y $c$ son constantes que dependen del material del módulo fotovoltaico y de cada componente de la irradiancia.
+
+Esta constituye la primera fracción de las tres relaciones que se plantean en la tesis doctoral de Nuria Martín Chivelet \cite{Martín_Chivelet_1999}, que es:
 
 \begin{equation}
     PS = 1 - \frac{S_{efE(\lambda)}}{S_{ef\bar{G}(\lambda)}}\frac{E_{\lambda<\lambda_0}}{\bar{G}_{\lambda<\lambda_0}}\frac{\bar{G}}{E}
 \end{equation}
 
-Se puede observar que la ecuación \ref{eq:ajuste_articulo_Nuria} solo contempla una parte de la definición que aplica del ajuste espectral, por ende, invalida la aplicación que se esperaba del modelo de dicho artículo.
-
-Se identifica este error a iniciativa de los tutores pues solicitaron que se comparara este modelo con otros ya implementados en la librería.
+Se puede observar que la ecuación \ref{eq:ajuste_articulo_Nuria} solo contempla una parte de la definición que aplica del ajuste espectral, por ende, invalida la implementación que se había hecho del modelo de dicho artículo.
 
 \subsubsection{Resultado}
 
-Se descarta aplicar los procedimientos descritos en su tesis \cite{Martín_Chivelet_1999} por:
+Para implementar este modelo se plantea una función que toma los valores de índice de claridad $K_t$, masa de aire $AM$ y el material, y devuelve el factor de ajuste espectral $M$ para cada componente de la irradiancia. Opcionalmente el usuario puede proveer sus propios coeficientes para cada componente.
+
+Este patrón de código crea un poco de complejidad en la implementación, pero facilita la aplicación de los ajustes a cada componente de la irradiancia.
+
+La documentación creada para la función es extensa y detallada; se puede consultar en \ref{sct:doc_modelo_nuria}.
+
+Además, se crea un ejemplo de uso para mostrar su uso en un contexto más amplio, que se puede consultar en \ref{sct:doc_ej_modelo_nuria}. Sobre este ejemplo se realiza una comparativa con los otros modelos de ajuste espectral de la librería y se detecta que no sigue las tendencias esperadas gracias a las dos últimas gráficas realizadas con este propósito.
+
+Si bien el modelo del artículo \cite{Martín_Ruiz_1999} se demuestra que no funciona para el propósito de ajuste espectral, se desestima la posibilidad de incluir todo el desarrollo elaborado en la tesis \cite{Martín_Chivelet_1999} por las siguientes razones:
 
 \begin{itemize}
-    \item La ausencia de acceder al documento de forma online.
-    \item La ausencia de una versión en inglés, que pueda servir como referencia.
-    \item La particularidad de los datos sobre los que se hace el modelo.
+    \item La imposibilidad de acceder al documento de forma online.
+    \item La ausencia de una versión en inglés.
 \end{itemize}
 
-Lamentablemente, incluso tras contactar presencialmente con la autora y habiendo disfrutado tanto de una explicación detallada de su modelo científico como de la posibilidad de continuar en esa misma línea de trabajo, y contando con una copia física de su tesis, se desestima continuar en esa línea de trabajo debido a las razones anteriores.
-
-Se cierra la propuesta tres meses después de plantearla.
+Estos puntos son determinantes, pues es imprescindible la referencia de una implementación sirva a la comunidad internacional; recordemos que el proyecto \pvlibpy{} está en inglés y se espera que sea accesible a cualquier persona interesada.
 
 \subsection{Proyección del cenit solar sobre las coordenadas de un colector} \label{sct:desarrollo:contribuciones_cientificas:proyeccion_cenit}
 
@@ -238,30 +79,36 @@ Se cierra la propuesta tres meses después de plantearla.
     \item \pr{1904}
 \end{itemize}
 
-Esta es la primera de una trilogía de contribuciones que se plantean para aplicar un modelo de pérdidas por sombreado en módulos con diodos bypass, cuyo autores pertenecen a la Escuela Técnica Superior de Ingeniería y Diseño Industrial, \textit{ETSIDI}. El objetivo de esta primera contribución es calcular la proyección del cenit solar sobre las coordenadas de un colector, y se utiliza para calcular la fracción de sombra unidimensional en geometrías de paneles que comparten eje de rotación en común.
+Esta es la primera de una trilogía de contribuciones que se plantean para aplicar un modelo de pérdidas por sombreado en módulos con diodos bypass. El objetivo de esta primera contribución es calcular la proyección del cenit solar sobre las coordenadas de un colector, y se utiliza para calcular la fracción de sombra unidimensional en geometrías de paneles que comparten eje de rotación en común.
 
-Las otras dos contribuciones se detallan en \ref{sct:desarrollo:contribuciones_cientificas:fraccion_sombra} y en \ref{sct:desarrollo:contribuciones_cientificas:perdidas_sombreado}.
+Las otras dos contribuciones se detallan en \fullref{sct:desarrollo:contribuciones_cientificas:fraccion_sombra} y en \fullref{sct:desarrollo:contribuciones_cientificas:perdidas_sombreado}.
 
-Esta funcionalidad ya existía como parte de alguna función de la librería, así que el aporte consistió en rehacerla de nuevo empleando una referencia bibliográfica y contrastando las implementaciones. Por supuesto, la documentación conllevó la parte más importante del tiempo de desarrollo.
+Esta funcionalidad ya existía integrada en el código de una función de la librería, así que el aporte consistió en rehacerla de nuevo empleando referencias bibliográficas y contrastando las implementaciones. No se extrajo de la función anterior para duplicar la revisión, pero más tarde se modificó para que la función antigua llamara a la nueva.
 
 \subsubsection{Fundamento teórico}
 
-Dos cálculos de bastante interés en geometría solar son obtener los ángulos óptimos de seguimiento  para un colector y calcular la fracción de sombra unidimensional incidente. Ambos cálculos tienen en común un paso muy importante, que es saber con qué ángulo inciden los rayos directos del Sol sobre la superficie del colector, pero referenciado al plano de rotación del mismo.
+Dos cálculos de bastante interés en geometría solar son obtener los ángulos óptimos de seguimiento para un colector y calcular la fracción de sombra incidente. Ambos cálculos tienen en común un paso muy importante, que es saber con qué ángulo inciden los rayos directos del Sol sobre la superficie del colector, pero referenciado al plano de rotación del mismo. Este plano de rotación equivale a la sección transversal de los colectores, por ello que sea de utilidad en la resolución de problemas analíticos.
 
-Para facilitar el entendimiento de este concepto, es preferible imaginar un sistema de rotación de un solo eje. Se puede considerar que un colector fijo, es decir, donde los módulos no rotan, es un caso particular de un seguidor uniaxial. Así será posible definir algunos conceptos más sencillamente.
+Para facilitar el entendimiento de este concepto, es preferible imaginar un sistema de rotación de un solo eje. Se puede considerar que un colector fijo, es decir, donde los módulos no rotan, es un caso particular de un seguidor uniaxial. Así será posible definir algunos conceptos relevantes para la geometría de una forma más sencilla.
 
-Nos encontramos estos dos casos de uso:
+Se encuentran estos dos casos de uso:
 
 \begin{itemize}
     \item Para el cálculo de los ángulos óptimos de seguimiento en seguidores de un solo eje, asumiendo que interesa seguir al Sol en su trayectoria diaria, se debe conocer el ángulo de incidencia de los rayos solares sobre la superficie del colector en el plano de rotación del mismo. Es decir, proyectar el cenit solar en el plano perpendicular al eje de rotación del colector, que es aquel que contiene todos los vectores normales al plano del colector.
     \item En el caso de la fracción unidimensional de sombra, interesa saber en donde impactan los límites del colector frontal sobre el trasero. Para ello, se proyecta el cenit solar en el plano perpendicular al eje de rotación del colector, que es aquel que contiene los dos vectores normales a los planos de los colectores.
 \end{itemize}
 
-Se puede encontrar en más detalle en el artículo de Lorenzo, Narvarte y Muñoz en \cite{Lorenzo_Narvarte_Muñoz_2011}, personal de la \textit{ETSIDI}, a partir del cual continúa el trabajo de \cite{Anderson_Mikofski_2020}, sección sobre \textit{True-Tracking Angle}. Esta última referencia es ampliamente utilizada a lo largo del repositorio.
+Se puede encontrar en más detalle en el artículo de Lorenzo, Narvarte y Muñoz en \cite{Lorenzo_Narvarte_Muñoz_2011} a partir del cual continúa el trabajo de \cite{Anderson_Mikofski_2020}, sección sobre \textit{True-Tracking Angle}. Esta última referencia es ampliamente utilizada a lo largo del repositorio.
 
 \subsubsection{Resultado}
 
-Después de cincuenta y tres comentarios en la propuesta, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.10.4}.
+Se crea una nueva función en el módulo \texttt{pvlib.shading} llamada \texttt{projected\_solar\_zenith\_angle}, que se encarga de calcular la proyección del cenit solar sobre las coordenadas de un colector.
+
+Esta función cuenta con un reducido número de parámetros de entrada: el cenit y el azimut solar y la orientación y la inclinación del eje del colector.
+
+Se puede consultar la documentación resultante en una captura de pantalla en \ref{sct:doc_proyeccion_cenit}.
+
+La propuesta es bien recibida y se incluyen los cambios como parte de la librería en la versión \texttt{0.10.4}.
 
 Accesible en \linkDocsFunction{pvlib.shading.projected\_solar\_zenith\_angle}.
 
@@ -272,9 +119,11 @@ Accesible en \linkDocsFunction{pvlib.shading.projected\_solar\_zenith\_angle}.
     \item \pr{1962}
 \end{itemize}
 
-Esta propuesta es la segunda de la trilogía de propuestas para poder aplicar un modelo de pérdidas por sombreado. Continúa con la propuesta anterior, \ref{sct:desarrollo:contribuciones_cientificas:proyeccion_cenit}, y se encarga de calcular la fracción de sombra unidimensional en paneles con determinadas geometrías.
+Esta propuesta es la segunda de la trilogía de propuestas para poder aplicar un modelo de pérdidas por sombreado. Continúa con la propuesta anterior, y se encarga de calcular la fracción de sombra unidimensional en paneles con determinadas geometrías.
 
-Aquí se plantea la aplicación de un modelo para conocer la fracción de sombra unidimensional en paneles que comparten eje de rotación en común. La implementación se basa en \cite{Anderson_Jensen_2024}. No obstante, la implementación inició con un póster de una conferencia anterior, a partir de una propuesta de cambios de un trabajador de \textit{First Solar} en la librería \textit{pvlib-python}, que se puede consultar en \url{https://github.com/pvlib/pvlib-python/pull/1725}.
+Aquí se plantea la aplicación de un modelo para conocer la fracción de sombra unidimensional en paneles que comparten eje de rotación en común. La implementación se basa en \cite{Anderson_Jensen_2024}.
+
+Este es un tema de interés sobre el que ya existían propuestas y discusiones en el repositorio, pero no se había llegado a implementar ninguna. Como contexto previo a la realización de esta propuesta, se puede mencionar la número \#1725 fundada en un póster desarrollado por \textit{First Solar} en la librería \pvlibpy, que se puede consultar en \url{https://github.com/pvlib/pvlib-python/pull/1725}.
 
 \subsubsection{Fundamento teórico}
 
@@ -306,19 +155,23 @@ Las ecuaciones relevantes implementadas son (12) y (13) de \cite{Anderson_Jensen
 \begin{equation} \label{eq:sombra_clip}
     f_s =
     \begin{cases}
-        0   & \quad \text{si } t^* < 0 \\
-        t^* & \quad \text{si } 0 \leq t^* \leq 1  \\
-        1   & \quad \text{si } t^* > 1 \\
+        0   & \quad \text{si } t^* < 0           \\
+        t^* & \quad \text{si } 0 \leq t^* \leq 1 \\
+        1   & \quad \text{si } t^* > 1           \\
     \end{cases}
 \end{equation}
 
 \subsubsection{Resultado}
 
-Después de 102 comentarios en la propuesta, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.0}, junto con un ejemplo ilustrativo que tiene en cuenta posibles dificultades a la hora de utilizarlo\footnote{Véase en \url{https://pvlib-python.readthedocs.io/en/latest/gallery/shading/plot_shaded_fraction1d_ns_hsat_example.html}.}.
+Después de 102 comentarios en la propuesta, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.0}.
+
+Se ha creado un ejemplo de uso para facilitar su uso y aplicar un patrón que facilita cambiar entre los valores adecuados de fracción de sombra, pues esta función solo entiende de los ángulos del seguidor que sombrea y del que es sombreado, pero no de cómo cambian sus roles a lo largo del día en el caso de un sistema con eje orientado Norte-Sur.
+
+La documentación de la función se puede previsualizar en \ref{sct:doc_fraccion_sombra}, y la del caso de uso en \ref{sct:doc_ej_fraccion_sombra}.
 
 Accesible en \linkDocsFunction{pvlib.shading.shaded\_fraction1d}.
 
-Además, como anécdota se ha de mencionar que durante el desarrollo de esta propuesta se identifica la ausencia de ejemplos de módulos orientados al Norte (propio de las instalaciones en el hemisferio Sur) en todo el repositorio, por lo que se añade un ejemplo de este tipo en la documentación.
+Además, como anécdota se ha de mencionar que durante el desarrollo de esta propuesta se identifica la ausencia de ejemplos de módulos orientados al Norte (propio de las instalaciones en el hemisferio Sur) en todo el repositorio, por lo que se añade un sencillo ejemplo de este tipo en la documentación del cuerpo de la función.
 
 \subsection{Pérdidas por sombreado en módulos con diodos de bypass} \label{sct:desarrollo:contribuciones_cientificas:perdidas_sombreado}
 
@@ -329,11 +182,15 @@ Además, como anécdota se ha de mencionar que durante el desarrollo de esta pro
 
 Con esta propuesta finaliza la trilogía de contribuciones del modelo de pérdidas por sombreado en módulos con diodos de bypass.
 
-La propuesta es de un modelo realizado por personal de la \textit{ETSIDI} y se encarga de calcular las pérdidas por sombreado en módulos con diodos de bypass. La implementación se basa en el trabajo de Martínez-Moreno, F., Muñoz, J. y Lorenzo, E., en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}.
+La propuesta es del modelo planteado por Martínez-Moreno, F., Muñoz, J. y Lorenzo, E., en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}. Este se encarga de calcular las pérdidas por sombreado en módulos con diodos de bypass.
 
 \subsubsection{Fundamento teórico}
 
-Los módulos de paneles solares de silicio se conforman de múltiples células fotovoltaicas. Una célula, cuando es irradiada por la luz solar, genera una corriente eléctrica. Si conectamos todas las células en serie, la corriente generada por todas las células es la misma, pero la tensión generada por cada célula se suma. Si una célula se sombrea, la corriente generada por ella disminuye, y por tanto la corriente generada por el conjunto también disminuye hasta ser similar a la menor de la producida por cada célula. Esta célula sombreada se comporta como una carga para el resto, pues deben forzar la corriente que pasa por este elemento (que se suele modelar como un diodo). Supone un riesgo de seguridad y de degradación, pues una célula sombreada puede calentarse excesivamente y dañar las capas materiales de su módulo.
+Los módulos de paneles solares de silicio se conforman de múltiples células fotovoltaicas. Una célula, cuando es irradiada por la luz solar, genera una corriente eléctrica. Si conectamos todas las células en serie, la corriente generada por todas las células es la misma, pero la tensión generada por cada célula se suma. Si una célula se sombrea, la corriente generada por ella disminuye, y hará que el resto de las células deban forzar la corriente por ella. Esta célula sombreada, polarizada inversamente, se comporta como una carga para el resto, y disipará energía en forma de calor.
+
+Este efecto no es proporcional a la superficie de la sombra, sino que varía en función de la geometría de la sombra, de la geometría de las células y la conexión de los diodos de bypass.
+
+Un riesgo que supone que un célula trabaje disipando energía, en vez de generando, es que puede calentarse excesivamente y dañar las capas materiales de su módulo.
 
 La solución que se emplea industrialmente consiste en añadir \textit{diodos de bypass}. Estos permiten que, cuando una serie de células tiene sombra, la corriente mayoritaria generada por el resto de células que están bien iluminadas fluya a través de este diodo, evitando así atravesar la célula sombreada; de esta forma, se protege frente al sobrecalentamiento y la degradación temprana.
 
@@ -346,7 +203,7 @@ Ha de hacerse énfasis en que cada diodo de bypass protege varias células, ya q
     \label{fig:diodos_bypass}
 \end{figure}
 
-En la imagen \ref{fig:diodos_bypass}, si suponemos que la célula número 1 está sombreada, la corriente mayoritaria generada por los grupos 17 a 32 y 33 a 48 fluye a través del diodo que está en paralelo con las células 1 a 16. No importa en este caso la corriente del grupo 1 a 16, pues la tensión de este grupo es nula por tener un diodo en conducción.
+En la imagen \ref{fig:diodos_bypass}, suponiendo que la célula número 1 está sombreada, la corriente mayoritaria generada por los grupos 17 a 32 y 33 a 48 fluye a través del diodo que está en paralelo con las células 1 a 16. No importa en este caso la corriente del grupo 1 a 16, pues la tensión de este grupo es nula por tener un diodo en conducción.
 
 Nótese que estos grupos se definen en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010} como \textit{bloques}, y según los datos provistos en sus datos originales, un bloque está sombreado en cuanto una de sus células recibe una fracción infinitesimal de sombra.
 
@@ -365,7 +222,11 @@ La expresión de pérdidas de potencia es la ecuación \ref{eq:perdidas_sombread
 
 \subsubsection{Resultado}
 
-Tras unos 85 comentarios, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.0}, junto con un ejemplo de caso de uso\footnote{Véase en \url{https://pvlib-python.readthedocs.io/en/latest/gallery/shading/plot_martinez_shade_loss.html}.}.
+Se plantea una función que toma como entrada las irradiancias global y directa; los números de bloques total y sombreados, y la fracción de sombra. Se deduce internamente la irradiancia difusa tanto del cielo como de albedo, y se calcula el factor de pérdidas por sombreado.
+
+La documentación de la función cuenta con un pequeño ejemplo de uso, y se puede consultar en \ref{sct:doc_modelo_perdidas_sombra}. Además, se incluye un ejemplo de uso en \ref{sct:doc_ej_perdidas_sombra} que compara distintas disposiciones de bloques por módulo a lo largo de un día, tanto en un solo módulo como en un sistema de módulos.
+
+Tras unos 85 comentarios, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.0}.
 
 Accesible en \linkDocsFunction{pvlib.shading.direct\_martinez}.
 
@@ -376,7 +237,7 @@ Accesible en \linkDocsFunction{pvlib.shading.direct\_martinez}.
     \item \pr{2048}
 \end{itemize}
 
-Esta contribución se trata de un pequeño modelo que abre un nuevo tema en la librería: la agrivoltaica. La agrivoltaica es una técnica en la que coexisten la producción de energía solar y la producción agrícola en un mismo terreno. La ventaja es que un exceso de irradiancia puede ser perjudicial para la plantación, y el retorno económico del terreno puede ser mayor que si solo se dedicase a la producción de energía solar. Además, disminuye el uso exclusivo de suelo para producción energética, que en ocasiones es un tema controversial.
+Esta contribución se trata de un pequeño modelo que abre un nuevo tema en la librería: la agrivoltaica. La agrivoltaica es una técnica en la que coexisten la producción de energía solar y la producción agrícola en un mismo terreno. La ventaja es que un exceso de irradiancia puede no aumentar la producción agrícola e incluso llegar a ser perjudicial para la plantación, y el retorno económico del terreno puede ser mayor que si solo se dedicase únicamente a la producción de energía solar o de alimentos. Además, disminuye el uso exclusivo de suelo para producción energética, que en ocasiones es un tema controversial\footnote{Por ejemplo, el siguiente artículo periodístico: \url{https://www.bbc.com/news/uk-politics-65926756}.}.
 
 El modelo en cuestión es la continuación de un trabajo realizado por Spitters C. J. T. et al. que cubre la separación de irradiación en directa y difusa en general \cite{Spitters_Toussaint_Goudriaan_1986}, y que posteriormente él desglosa en dos expresiones en \cite{Spitters_1986}, que se pueden sustituir una en la otra. El objetivo de este modelado es calcular la fracción de irradiación difusa que es útil para las plantas -es decir, fotosintetizable- a partir de la fracción de irradiación difusa global.
 
@@ -388,9 +249,22 @@ Se utiliza irradiación diaria $[J/m^2/dia]$, en vez del valor instantáneo irra
 
 Un análisis de distintos modelos y la validación de los mismos que contiene la expresión única se puede encontrar en \cite{Ma_Lu_Zainali_Stridh_Avelin_Amaducci_Colauzzi_Campana_2022}, artículo del que origina esta propuesta de contribución inicialmente.
 
+La fórmula que relaciona estas dos fracciones es la ecuación \ref{eq:fraccion_PAR}, que se puede encontrar en \cite{Spitters_1986}:
+
+\begin{equation} \label{eq:fraccion_PAR}
+    k_{d\_PAR} = \frac{PAR_{diffuse}}{PAR_{global}} = \frac{\left[1 + 0.3 \left(1 - \left(k_d\right) ^2\right)\right] k_d}
+    {1 + \left(1 - \left(k_d\right)^2\right) \cos ^2 (90 - \beta) \cos ^3 \beta}
+\end{equation}
+
+Donde $k_d$ es la fracción de irradiación difusa global, y $\beta$ es la elevación solar media diaria.
+
 \subsubsection{Resultado}
 
-La mayor complicación de este modelo resultó estar en discernir las unidades de entrada, pues normalmente en fotovoltaica se trabaja con unidades de potencia por unidad de área $\left[W/m^2\right]$, pero aquí se trabaja con energía, $\left[J/m^2\right]$. Finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.0}, junto con un ejemplo de uso\footnote{Véase en \url{https://pvlib-python.readthedocs.io/en/latest/gallery/agrivoltaics/plot_diffuse_PAR_Spitters_relationship.html}.}.
+Este modelo se implementa en una función que toma como entrada la fracción de irradiación difusa global y el cenit solar medio diario. Este cambio de elevación a cenit se hace porque este último se emplea más habitualmente en el repositorio.
+
+La documentación de la función es concisa y se puede consultar en \ref{sct:doc_par_difusa}. Por otro lado, se incluye un ejemplo de uso mucho más elaborado en \ref{sct:doc_ej_par_difusa} que muestra cómo varía la fracción de PAR difusa en función de la fracción de irradiación difusa global durante varios días de Septiembre.
+
+Finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.0}.
 
 Accesible en \linkDocsFunction{pvlib.irradiance.diffuse\_par\_spitters}.
 
@@ -426,7 +300,13 @@ Se proponen dos modelos para el polinomio que define $M$, para dos perfiles de i
 
 \subsubsection{Resultado}
 
-Tras involucrarse 7 personas y generar 86 comentarios en los que se plantean distintas formas de implementar el modelo, aclaraciones sobre las unidades de entrada y salida, y modificaciones al planteamiento original, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.1} (sin publicar oficialmente a día de la redacción de este documento), junto con un ejemplo de uso\footnote{Véase en \url{https://pvlib-python.readthedocs.io/en/latest/gallery/bifacial/plot_irradiance_nonuniformity_loss.html}.}.
+La implementación del modelo es casi directa, pues el patrón para evaluar un polinomio en determinados valores es directo con el uso de la librería \textit{NumPy}. Se añade un parámetro opcional para que la persona usuaria final pueda especificar su propio polinomio o emplear alguno otro provisto en el artículo original; y se añaden dos parámetros que corrigen el factor de pérdidas en función de los factores de forma de las células.
+
+Esta documentación es extensa porque es clave para su buen uso y entendimiento. Abarca desde la interfaz general hasta las ecuaciones que describen la entrada de \textit{RMAD} y cómo la heterogeneidad de la irradiancia trasera se propaga a la global. Se recomienda revisar la documentación de la función en \ref{sct:doc_modelo_ajuste_no_uniformidad}.
+
+Asimismo se ha aportado un ejemplo de uso que parte de la Figura 1 (A) e implementa la función que calcula la \textit{RMAD} y de la cual se deriva posteriormente la pérdida de potencia. Se acompaña de propiedades interesantes que pueden aligerar la ejecución. Se puede consultar en \ref{sct:doc_ej_modelo_ajuste_no_uniformidad}.
+
+Tras involucrarse 7 personas y generar 86 comentarios en los que se plantean distintas formas de implementar el modelo, aclaraciones sobre las unidades de entrada y salida, y modificaciones al planteamiento original, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.1} (sin publicar oficialmente a día de la redacción de este documento).
 
 Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
 
@@ -447,15 +327,19 @@ La propuesta consiste en dos funciones, una que convierte la respuesta espectral
 
 La eficiencia cuántica externa es una medida de la eficiencia de una célula solar, y se define como la razón de fotones incidentes que generan una corriente eléctrica para determinado color de la luz. La respuesta espectral es la corriente generada por una célula solar en función de la longitud de onda de la luz incidente.
 
-La relación entre ambas es la siguiente \cite[pp. 15-16, Eq. \brackettext{7}]{Markvart2012-un}:
-
-\begin{equation}
-    SR(\lambda) = \frac{q \cdot \lambda}{h \cdot c} \cdot EQE(\lambda)
-\end{equation}
+La relación entre ambas es la siguiente \cite[pp. 15-16, Eq. \brackettext{7}]{Markvart2012-un}. Se puede encontrar en la ecuación \ref{eq:relacion_sr_eqe}:
 
 \subsubsection{Resultado}
 
-Además de la relación, se añade la posibilidad de normalizar los valores de salida, es decir, hacer que el máximo retornado sea 1. Se incluyen los cambios sin mayores dificultades en la versión \texttt{0.11.0} de la librería.
+Ambas funciones se diseñan con un patrón que permite que la entrada sea única a través de una tabla tabulada e indexada por la longitud de onda en un \texttt{pandas.Series} o \texttt{pandas.DataFrame}, o bien mediante dos listas de irradiancias y longitudes de onda.
+
+Además, se añade la posibilidad de normalizar los valores de salida, es decir, hacer que el máximo retornado sea 1. Esta utilidad es interesante porque las medidas de eficiencia cuántica externa y respuesta espectral es habitual que sean relativas al dispositivo de medida, y se necesite hacer un tratamiento posterior para deducir los valores absolutos.
+
+Las dos funciones cuentan con ejemplos en el propio cuerpo de la documentación, y se puede consultar en \ref{sct:doc_sr_eq}.
+
+Se realizan tests que comprueban cada función por separado y otro que confirma que son recíprocas.
+
+Se incluyen los cambios sin mayores dificultades en la versión \texttt{0.11.0} de la librería.
 
 Accesibles en:
 
@@ -501,20 +385,17 @@ La irradiancia extraterrestre es la irradiancia que se recibe en el espacio, y l
 El estándar ASTM G173-03 se encuentra en \cite{astm_g173-03}, pero los valores del espectro están disponibles abiertamente en \url{https://www.nrel.gov/grid/solar-resource/spectra-am1.5.html}.
 La nueva revisión ASTM G173-23 se encuentra en \cite{astm_g173-23}, pero no cuenta con datos abiertos en la red a día de la redacción de este documento.
 
+Las componentes de este espectro se pueden consultar en la Figura \ref{sct:doc_ej_espectro_astm}.
+
 \subsubsection{Resultado}
 
 Esta implementación permite obtener el estándar completo y todas sus componentes, lo que hace que la antigua función que solo devolvía la componente global quede obsoleta (\linkDocsFunction{pvlib.spectrum.get\_am15g}). Se aportan cambios y se añaden tests para asegurar que la función obsoleta se elimina adecuadamente en el futuro.
 
-Se incluyen los cambios en la versión \texttt{0.11.0} de la librería, junto con un ejemplo en la documentación\footnote{Véase en \url{https://pvlib-python.readthedocs.io/en/stable/gallery/spectrum/plot_standard_ASTM_G173-03.html}.}.
+Se aplica un patrón que permitirá añadir otros estándares en el futuro sin necesidad de modificar la interfaz de los usuarios. Tanto los tests como la documentación requerirán modificaciones menores para añadir los nuevos estándares.
 
-El ejemplo se puede encontrar en la figura \ref{fig:espectro_astm_g173-03}.
+La documentación de esta utilidad se puede consultar en \ref{sct:doc_espectro_astm-173-03}. Además, se añade un ejemplo de uso, disponible para previsualizar en \ref{sct:doc_ej_espectro_astm}.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./images/spectra/astm-g173-03.png}
-    \caption{Ejemplo en la documentación con el espectro estándar ASTM G173-03 completo.}
-    \label{fig:espectro_astm_g173-03}
-\end{figure}
+Se incluyen los cambios en la versión \texttt{0.11.0} de la librería.
 
 Accesible en \linkDocsFunction{pvlib.spectrum.get\_reference\_spectra}.
 
@@ -525,7 +406,7 @@ Accesible en \linkDocsFunction{pvlib.spectrum.get\_reference\_spectra}.
     \item \pr{2106}
 \end{itemize}
 
-Se ha podido comprobar que el cálculo de sombras en sistemas fotovoltaicos dentro de \textit{pvlib-python} es un tema de interés que gracias a este TFG se ha mejorado. Adicionalmente, se ha podido comprobar que la librería no cuenta con una función que permita calcular sombras a partir de objetos en 3D, pero realmente parece ser un tema sobre el que hay literatura. Además, \textit{PVsyst}, un software de simulación de sistemas fotovoltaicos ampliamente conocido cuenta con esta funcionalidad.
+Se ha podido comprobar que el cálculo de sombras en sistemas fotovoltaicos dentro de \pvlibpy{} es un tema de interés que gracias a este TFG se ha mejorado. Adicionalmente, se ha podido comprobar que la librería no cuenta con una función que permita calcular sombras a partir de objetos en 3D, pero realmente parece ser un tema sobre el que hay literatura. Además, \textit{PVsyst}, un software de simulación de sistemas fotovoltaicos ampliamente conocido cuenta con esta funcionalidad.
 
 Todo esto se puede explorar en un artículo sobre el sombreado de campos de cultivo en sistemas agrivoltaicos \cite{Zainali_Ma_Lu_Stridh_Avelin_Amaducci_Colauzzi_Campana_2023}.
 
@@ -565,7 +446,7 @@ A continuación, se proyectan los vértices de las superficies que sombrean sobr
 
 Para obtener la sombra 3D final, debe limitarse los límites de esta a la superficie de interés. Para esto se emplea \textit{Shapely}, que permite realizar operaciones geométricas con polígonos.
 
-Si se desease obtener la sombra en un plano 2D, para realizar otros cálculos y facilitar la visualización, se debe realizar una traslación que ubique la figura en un plano que pase por el origen y unas rotaciones contrarias a las que definen el plano sobre la que se proyectó.
+Si se desease obtener la sombra en un plano 2D, para realizar otros cálculos y facilitar la visualización, se debe realizar una traslación que ubique la figura en un plano que pase por el origen y unas rotaciones contrarias a las que definen el plano sobre la que se proyectó. Este paso se hace trasladando los puntos del objeto en 3D tomando una referencia cualquiera en su mismo plano.
 
 \subsubsection{Resultado}
 
@@ -582,12 +463,12 @@ El diagrama UML resultante sería:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{./images/shading_3d/shading_classes.png}
+    \includegraphics[width=0.5\textwidth]{./images/shading_3d/shading_classes.png}
     \caption{Diagrama UML de la propuesta de cálculo de sombras en 3D.}
     \label{fig:uml_sombreado}
 \end{figure}
 
-La elección de un diagrama tan sencillo no es arbitraria: aquí prima la simplicidad y la facilidad de revisar el código para determinar si tiene valor o no dentro de la librería \textit{pvlib-python}. Y realmente se logra sintetizar la API con un buen compromiso entre lo automatizado y la intervención de una persona usuaria. Véase el ejemplo elaborado a continuación:
+La elección de un diagrama tan sencillo no es arbitraria: aquí prima la simplicidad y la facilidad de revisar el código para determinar si tiene valor o no dentro de la librería \pvlibpy. Y realmente se logra sintetizar la API con un buen compromiso entre lo automatizado y la intervención de una persona usuaria. Véase el ejemplo elaborado a continuación:
 
 \begin{lstlisting}[language=Python, caption={Caso de uso de ejemplo para la propuesta de cálculo de sombras en 3D.}, label={lst:sombreado_3d}]
 from pvlib.spatial import RectangularSurface
@@ -666,8 +547,14 @@ Debe denotarse que la mayor parte del código supone imprimir la escena y las so
     \label{fig:sombreado_3d}
 \end{figure}
 
+Puede consultarse la documentación de los dos objetos planteados en \ref{sct:doc_sombras_3d} y de los dos ejemplos de uso en \ref{sct:doc_ej_sombras_3d}. Uno de los ejemplos es una simulación temporal en la que se puede observar cómo varía la sombra a lo largo de los equinoccios y los solsticios, mientras que la otra es la misma escena planteada aquí arriba, pero con el texto explicativo propio de un ejemplo.
+
+Se deja abierto el aporte a la librería, con opiniones diversas sobre si incluir o no la propuesta.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Contribuciones técnicas} \label{sct:desarrollo:contribuciones_tecnicas}
+
+Son aquellas que requieren trabajar con el código base y hacer modificaciones pertinentes para mejorar las prestaciones de la librería. Por ejemplo, aquí se encontrarán algunos errores que se han arreglado o pequeñas funcionalidades que se han expuesto a la interfaz.
 
 \subsection{Arreglo a los tests de integración continua en Windows con Conda}
 
@@ -714,7 +601,7 @@ El cambio se incluyó con éxito, aportando tests de integridad para la función
 
 El modificador del ángulo de incidencia tiene en cuenta la reflexión de la luz incidente cuando impacta oblicuamente en una superficie transparente. Cuando la radiación es perpendicular a una superficie, se suele considerar que no hay pérdidas ($IAM = 1$), pero conforme el ángulo de incidencia aumenta, debido a la diferencia de índices de refracción una parte de la radiación se refleja, y las pérdidas aumentan ($IAM < 1$).
 
-La librería \textit{pvlib-python} cuenta con muchos modelos que calculan este modificador, pero no todos están disponibles en la \texttt{Modelchain}: un paradigma orientado a objetos que facilita la simulación de sistemas fotovoltaicos.
+La librería \pvlibpy{} cuenta con muchos modelos que calculan este modificador, pero no todos están disponibles en la \texttt{Modelchain}: un paradigma orientado a objetos que facilita la simulación de sistemas fotovoltaicos.
 
 El modelo al que le faltaba dar soporte era un interpolador de datos ángulo-modificador, \linkDocsFunction{pvlib.iam.interp}. Este toma valores experimentales para, mediante una estimación del valor que se pide, retornar el modificador que cabría esperar. Este interés fue reportado por un usuario donde explicaba que hay estándares para que se provean datos experimentales de este modificador, en vez de los coeficientes que otros modelos necesitan que se aporten.
 
@@ -741,7 +628,7 @@ Siguiendo este criterio, se revisa manualmente el proceso:
     \item Publicación de prueba en TestPyPI: se detecta una advertencia sobre el formato de la descripción que se obtiene de \texttt{README.md}, el archivo de presentación del proyecto.
 \end{enumerate}
 
-No se trata de nada crítico: tan sólo es la plataforma PyPI que solicita explícitamente el formato del texto de la descripción del proyecto. Puede aportarse en texto plano, MarkDown o reStructuredText.  % TODO: revisar
+No se trata de nada crítico: tan sólo es la plataforma PyPI que solicita explícitamente el formato del texto de la descripción del proyecto. Puede aportarse en texto plano, MarkDown o reStructuredText.
 
 \subsubsection{Resultado}
 
@@ -756,7 +643,7 @@ Se suprime adecuadamente la advertencia especificando que el formato es reStruct
 
 Esta contribución da inicio con la solicitud de un usuario que desea modificar los parámetros de tolerancia de unas funciones que resuelven las curvas I-V de las células o módulos fotovoltaicos.
 
-Estas curvas son de especial interés para saber cómo se va a comportar eléctricamente el circuito cuando se conecte una carga, pero la complejidad matemática que suponen hacen que se resuelvan mediante métodos numéricos. Estos métodos son iterativos y requieren de una precisión para converger.
+Estas curvas son de especial interés para saber cómo se va a comportar eléctricamente el circuito cuando se conecte una carga y hallar el punto de máxima potencia, pero la complejidad matemática que suponen hacen que se resuelvan mediante métodos numéricos. Estos métodos son iterativos y requieren de una precisión para converger.
 
 Por defecto esta tolerancia es de $10^{-6}$ [voltios, amperios o vatios], lo que a este usuario le parecía excesivo y quería agilizar el proceso modificando dicho valor. Este caso no es extensible a todos los contextos, pero el planteamiento es completamente válido sobre las hipótesis que plantea el usuario.
 
@@ -791,7 +678,7 @@ El cambio se incluyó con éxito, sin diagnosticar ningún fallo derivado de est
     \item \pr{2020}
 \end{itemize}
 
-En \textit{pvlib-python} existe la función \linkDocsFunction{pvlib.pvsystem.retrieve\_sam} que permite leer de bases de datos ya inclusas en la librería o remotas mediante una URL, mediante dos parámetros distintos. Resulta que si se especificaban ambos parámetros, solo se leía la base de datos de la distribución, y no la remota, sin emitir ningún aviso.
+En \pvlibpy{} existe la función \linkDocsFunction{pvlib.pvsystem.retrieve\_sam} que permite leer de bases de datos ya inclusas en la librería o remotas mediante una URL, mediante dos parámetros distintos. Resulta que si se especificaban ambos parámetros, solo se leía la base de datos de la distribución, y no la remota, sin emitir ningún aviso.
 
 \subsubsection{Resultado}
 
@@ -816,7 +703,7 @@ Se han aceptado los cambios, que serán visibles en la rama estable de la docume
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Contribuciones menores} \label{sct:desarrollo:contribuciones_menores}
 
-Aquí se tratan aquellas que no suponen un desafío ni técnico ni científico, si bien suponen y parten de la interacción en el repositorio y la identificación particular de necesidades.
+Aquí se tratan aquellas que no suponen un desafío ni técnico ni científico, si bien suponen y parten de la interacción en el repositorio y la identificación particular de necesidades. En especial, son cambios que únicamente modifican la documentación o no requieren de un análisis profundo.
 
 \subsection{Añadir una utilidad para obtener los ficheros de ejemplo internos de la librería}
 
@@ -878,24 +765,24 @@ Normalmente, a la hora de documentarlo lo recomendable es indicar que el paráme
 
 Se cambiaron todas las ocurrencias de \texttt{default None} a \texttt{optional}, aunque hubo que iterar múltiples veces para dar con todos los falsos negativos y no obtener falsos positivos. Para esta tarea se empleó el buscador en archivos integrado en \textit{Visual Studio Code}, que está basado en \textit{ripgrep} y hace uso de expresiones regulares, una forma de búsqueda y sustitución muy potente: las expresiones regulares son un lenguaje formal que permite buscar patrones en texto, por ejemplo sustituyendo un carácter por grupos de caracteres, o buscando un patrón que se repite un número determinado de veces.
 
-Se emplearon múltiples expresiones regulares, escritas en el sabor PCRE2, que es el que soporta \textit{ripgrep}. Según la utilidad, podemos encontrar pequeñas variaciones en la forma de escribir estas expresiones. En los \textit{commits} de la propuesta se indican todas las expresiones empleadas, pero aquí se adjuntan algunas de las usadas:
+Se emplearon múltiples expresiones regulares, escritas en el sabor PCRE2, que es el que soporta \textit{ripgrep}. Según la utilidad, se pueden encontrar pequeñas variaciones en la forma de escribir estas expresiones. En los \textit{commits} de la propuesta se indican todas las expresiones empleadas, pero aquí se adjuntan algunas de las usadas:
 
 \begin{table}[H]
     \centering
     \begin{adjustbox}{max width=\textwidth}
-    \begin{tabular}{l|l}
-        Expresión regular & Patrón de sustitución \\
-        \hline
-        \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*), default:? None\textbackslash{}.?} & \texttt{\$1\$2 : \$3, optional} \\
-        \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*), default:? None\.?} & \\
-        \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*) or {[}nN{]}one, optional} & \\
-        \hline
-        \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: {[}Nn{]}one, (?.*), default:? (?.*)\textbackslash{}.?} & \texttt{\$1\$2 : \$3, default \$4} \\
-        \hline
-        \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*) or {[}Nn{]}one(?.*)} & \texttt{\$1\$2 : \$3\$4} \\
-        \hline
-        \texttt{If None} & \texttt{If not specified,} \\
-    \end{tabular}
+        \begin{tabular}{l|l}
+            Expresión regular                                                                                       & Patrón de sustitución              \\
+            \hline
+            \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*), default:? None\textbackslash{}.?}               & \texttt{\$1\$2 : \$3, optional}    \\
+            \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*), default:? None\.?}                              &                                    \\
+            \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*) or {[}nN{]}one, optional}                        &                                    \\
+            \hline
+            \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: {[}Nn{]}one, (?.*), default:? (?.*)\textbackslash{}.?} & \texttt{\$1\$2 : \$3, default \$4} \\
+            \hline
+            \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*) or {[}Nn{]}one(?.*)}                             & \texttt{\$1\$2 : \$3\$4}           \\
+            \hline
+            \texttt{If None}                                                                                        & \texttt{If not specified,}         \\
+        \end{tabular}
     \end{adjustbox}
     \caption{Algunas de las expresiones regulares empleadas para modificar la escritura de los parámetros opcionales.}
     \label{tab:expresiones_regulares_default_none}
@@ -937,9 +824,9 @@ Sin embargo, por el hecho de introducir nuevas herramientas que no eran del todo
     \item \pr{1818}
 \end{itemize}
 
-En los inicios del repositorio, los ejemplos se redactaban en \textit{Jupyter Notebooks}, que son documentos interactivos para ejecutar código. Sin embargo, no se facilitó su acceso desde la página web, y por la complejidad que suponían, no se ejecutan con cada versión que se realizaba. Por ende, quedaron obsoletos pronto.
+En los inicios del repositorio, los ejemplos se redactaban en \textit{Jupyter Notebooks}, que son documentos interactivos para ejecutar código. Sin embargo, no se facilita su acceso desde la página web, y por la complejidad que suponen, no se ejecutan cada vez que se hacen comprobaciones al repositorio. Por ende, quedaron obsoletos pronto.
 
-En esta propuesta se extraían todos los comentarios de texto y los fragmentos de código y se estilizaban para que se pudieran ejecutar y ver en la página web. Se desestimó por tratarse de ejemplos obsoletos, con poco valor didáctico y utilizable. A día de hoy, se pueden encontrar en la carpeta \texttt{docs/tutorials}.
+En esta propuesta se extrajeron todos los comentarios de texto y los fragmentos de código y se estilizan para que se puedan ejecutar y ver en la página web. Se desestima por tratarse de ejemplos obsoletos, con poco valor didáctico y utilizable. A día de hoy, se pueden encontrar en la carpeta \texttt{docs/tutorials}.
 
 \subsection{Integración continua para verificar los links externos de la documentación}
 
@@ -947,11 +834,13 @@ En esta propuesta se extraían todos los comentarios de texto y los fragmentos d
     \item \pr{1794}
 \end{itemize}
 
-Otra de las mejoras que el estudiante identifica como necesaria es comprobar que los links externos de la documentación funcionen correctamente cada cierto tiempo. Resulta que el entorno de desarrollo de la documentación \textit{sphinx} permite realizar esto de forma sencilla, pero debe configurarse los comandos para crear el procedimiento de integración continua.
+Otra de las mejoras que se identifica como necesaria a lo largo de este proyecto es comprobar que los links externos de la documentación funcionan correctamente. Resulta que el entorno de desarrollo de la documentación \textit{sphinx} permite realizar esto periódicamente de forma sencilla, pero debe configurarse los comandos para crear el procedimiento de integración continua.
 
-Las opiniones de los mantenedores quedan divididas respecto a este tema: unos mostraban interés en incluirlo, otros preferían añadir pasos manuales para hacer la verificación aunque supusiese un costo en tiempo y asignase la responsabilidad a una sola persona.
+Las opiniones de los mantenedores quedan divididas respecto a este tema: unos muestran interés en incluirlo, otros prefieren añadir pasos manuales para hacer la verificación aunque suponga un costo en tiempo y asigne la responsabilidad a una sola persona.
 
-Adicionalmente, algún revisor contribuyó a arreglar los links que en ese momento se diagnosticaron rotos con ayuda del estudiante para poder ejecutar el procedimiento y verificar la integridad de los cambios. A día de la redacción de este documento, no se ha tomado una decisión definitiva, pero se mantiene abierta la propuesta.
+Adicionalmente, se ayuda a un mantenedor a ejecutar los tests y así actualizar los links que se encuentran rotos.
+
+A día de la redacción de este documento, no se ha tomado una decisión definitiva, pero se mantiene abierta la propuesta.
 
 \subsection{Eliminar una función obsoleta y olvidada}
 
@@ -964,65 +853,3 @@ La ubicación de la función \linkDocsFunction{pvlib.atmosphere.first\_solar\_sp
 Se plantea eliminar la presencia de dicha interfaz que no tiene fecha para su desaparición, pero lo más probable es que hasta una versión menor posterior no se elimine ya que supone cambios que pueden romper el código de usuarios. La siguiente es la versión menor \texttt{0.12.0}, aunque la versión de arreglos \texttt{0.11.1} se encuentra en desarrollo y se espera que se publique en Septiembre.
 
 La propuesta se mantiene abierta a día de esta redacción.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Interacción con otros usuarios}
-
-Ha sido constante la comunicación con mantenedores y contribuyentes que están más activos en la librería. Se ha procurado perseguir una comunicación clara, concisa y razonada, agradeciendo en todo momento la colaboración y la transmisión de nuevas ideas, independientemente de que los aportes no estén vinculados directamente a su implementación en la librería. En todo caso, se partía de la idea de que la participación principalmente se iba a realizar con las personas que han adquirido mayor compromiso y responsabilidad en el proyecto.
-
-Por otro lado, se ha ayudado a guiar a los compañeros alumnos del \textit{Google Summer of Code} en sus propuestas y reuniones.
-
-Y finalmente, con el sector de usuarios que discretamente han participado, bien por dudas o por descubrir errores, se ha transmitido y aportado con claridad y amabilidad.
-
-A continuación se puede encontrar en más detalle estos dos últimos grupos, que son lo de mayor interés.
-
-\subsection{Revisión de propuestas de otros usuarios}
-
-Se ha colaborado en la revisión de las propuestas de otros usuarios, en especial de aquellos que lo han hecho de forma más recurrente como los estudiantes de \textit{Google Summer of Code}. Se ha procurado aportar ideas y sugerencias para mejorar la calidad de las propuestas, enseñado a usar algunas características específicas de las herramientas de desarrollo y aclarado dudas.
-
-Se pueden citar muchos ejemplos ya que colaborar en este aspecto no requiere una inversión muy elevada de tiempo, pero ciertamente la relevancia dentro de este trabajo realizado no es muy significativa por ser el resultado exclusivo de la experiencia. No obstante, se ha procurado aportar en la medida de lo posible, y se ha hecho abundantemente con las mejores intenciones.
-
-Siempre se ha revisado el renderizado y claridad de la documentación, y la integridad de los tests. Se presta máxima atención a la parte más social: dar el crédito a todos los nuevos implicados en la librería y que los contribuyentes se sientan parte del resultado.
-
-En otras situaciones se ha aportado información técnica sobre normativa, como en una propuesta para modelar las pérdidas en transformadores. Aquí, los revisores pidieron confirmar datos sobre los tests que se realizan físicamente en transformadores de alta tensión. Se aportó un ejemplo y la normativa que se sigue en España/Europa para realizar estos tests con la colaboración del departamento de Alta Tensión del \textit{Laboratorio Central Oficial de Electrotecnia}.
-
-\subsection{Soporte técnico a usuarios} \label{sct:desarrollo:soporte_tecnico}
-
-Otro aspecto es la resolución de dudas que han surgido entre las personas usuarias, si bien no es el enfoque de este trabajo. Se ha respondido a preguntas en \textit{GitHub}, y en la lista de correo por \textit{Google Groups}. Implicarse en esto ha permitido conocer mejor la librería, detectar problemas en el código y adelantar futuros errores con las dependencias.
-
-Por ejemplo, algunas dudas surgían en torno a conceptos básicos como las medidas entre \textit{GHI}, \textit{DNI} y \textit{DHI}.
-
-En otro caso, se indicaba la imposibilidad de instalar una dependencia en Python 3.12, y se aportó una solución temporal. Es más, respecto de las dependencias, se inicia parcialmente un trabajo en eliminar una sub-dependencia de una de las dependencias, valga la redundancia, de \textit{pvlib-python}. Se trata de \textit{solarfactors}, un clon mantenido por la comunidad de \textit{pvlib} del paquete \textit{pvfactors}, que es un software de simulación de factores de vista en sistemas fotovoltaicos bifaciales.
-
-Sucede que esta dependencia utiliza una versión antigua e incompatible de \textit{Shapely}, que no se puede instalar en Python 3.12, así que se plantea eliminarla. Este trabajo, si bien iniciado localmente, resulta especialmente complejo por trabajar con un código novedoso y distinto, por requerir una elevada cantidad de cambios y no estar ligado estrechamente al objeto científico de este TFG.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Impacto en otros repositorios}
-
-\subsection{En \textit{pvlib/solarfactors}}
-
-Este repositorio se trata de un clon de \textit{pvfactors}, que se emplea para calcular factores de vista de sistemas fotovoltaicos bifaciales. Es un clon porque \textit{pvfactors} inició dentro de una empresa, que contaba con los permisos para administrar sus cambios, pero dejó de mantenerla. La comunidad de \textit{pvlib}, ya que la usaba en el repositorio \textit{pvlib-python}, decidió clonarla y mantenerla.
-
-\begin{itemize}
-    \item \issue{16}[https://github.com/pvlib/solarfactors]
-\end{itemize}
-
-Se detecta y se informa sobre un problema de las dependencias de \textit{solarfactors} en \textit{Python 3.12}, y se ha propuesto eliminar la dependencia de \textit{Shapely} en favor de código nativo de Python. Se ha iniciado el trabajo, pero no se ha completado por dificulta técnica y falta de vinculación con los objetivos de este trabajo.
-
-\subsection{En \textit{openpvtools/pv-foss-engagement}}
-
-Este pequeño proyecto es un compendio de librerías de código abierto de fotovoltaica, con sus datos de contribuciones, contribuyentes y otras métricas relativas al impacto e interés que generan.
-
-Se puede consultar en \url{https://openpvtools.github.io/pv-foss-engagement/}.
-
-\begin{itemize}
-    \item \issue{8}[https://github.com/openpvtools/pv-foss-engagement]
-    \item \pr{9}[https://github.com/openpvtools/pv-foss-engagement]
-\end{itemize}
-
-Se detecta y se informa sobre la ausencia del clon citado anteriormente, \textit{pvlib/solarfactors}, en este repositorio. Se propone añadirlo, y un mantenedor añade los datos. Deja como ejercicio que se añada una entrada en la web que muestre estos datos.
-
-Se plantean los cambios y, si bien no se han aceptado todavía, los comentarios son positivos.

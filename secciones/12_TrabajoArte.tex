@@ -1,14 +1,14 @@
-\chapter{Trabajo relacionado y Estado del Arte} \label{chp:state-of-the-art}
+\chapter{Fundamento Teórico y Estado del Arte} \label{chp:state-of-the-art}
 
-En este capítulo se cubre el estado del arte de la energía solar fotovoltaica y, particularmente, de la librería \textit{pvlib-python}. Se podrá encontrar en las siguientes secciones:
+En este capítulo se cubre el estado del arte de la energía solar fotovoltaica y, particularmente, de la librería \pvlibpy. Se podrá encontrar en las siguientes secciones:
 
 \begin{itemize}
 
-      \item[•] \fullref{sct:energia-solar}: explica el estado actual de la energía solar fotovoltaica y su fundamento teórico base.
+      \item \fullref{sct:energia-solar}: explica el estado actual de la energía solar fotovoltaica y su fundamento teórico base.
 
-      \item[•] \fullref{sct:simulaciones}: detalla las herramientas de simulación utilizadas en el sector fotovoltaico y el marco general de comparación de la librería \textit{pvlib-python}.
+      \item \fullref{sct:simulaciones}: detalla las herramientas de simulación utilizadas en el sector fotovoltaico y el marco general de comparación de la librería \pvlibpy.
 
-      \item[•] \fullref{sct:pvlib}: presenta las características de la biblioteca \textit{pvlib-python}.
+      \item \fullref{sct:pvlib}: presenta las características de la biblioteca \pvlibpy.
 
 \end{itemize}
 
@@ -37,19 +37,52 @@ Existen varias tecnologías de células solares, como las de silicio, las de pel
 
 Cada una tiene sus propias características y aplicaciones específicas. Las células de primera y segunda generación son las más comunes en aplicaciones fotovoltaicas, mientras que las de tercera generación se encuentran en fase de investigación y desarrollo. El lector puede remitirse a \cite{Shubbak_2019} para una revisión más detallada de cada grupo y las peculiaridades de cada material.
 
-En cuanto a los sistemas fotovoltaicos, se han desarrollado diferentes configuraciones, como sistemas conectados a la red, sistemas autónomos y sistemas de bombeo \cite{Perpinan2020}. Cada configuración tiene sus propias ventajas y desafíos, y se han realizado investigaciones para optimizar su diseño y operación. En todos estos casos, es fundamental contar con herramientas de simulación y análisis para evaluar el rendimiento de los sistemas, optimizar su diseño y diagnosticar fallos a partir de datos meteorológicos.
+En la siguiente sección se hace una revisión de algunos conceptos y efectos que intervienen en la producción de energía fotovoltaica.
 
-Toda simulación para un sistema fotovoltaico tradicional -en referencia a los colectores planos y no aquellos de concentración, que presentan otras características- se basa en la radiación solar incidente en la superficie de los módulos. Las variables de partida de una simulación siempre involucran valores meteorológicos como la radiación solar, la temperatura ambiente y la velocidad del viento. Adicionalmente, se emplean modelos empíricos para obtener valores como la radiación solar extraterrestre en la superficie de la atmósfera y deducir otros parámetros de entrada para el resto del flujo de cálculos, en función de los instantes de tiempo que se vayan a analizar.
+\subsection{Conceptos y efectos en los sistemas fotovoltaicos}
 
-A partir las componentes de la radiación solar \textit{GHI} -global en una superficie horizontal-, \textit{DNI} -directa en un plano normal al vector solar- y \textit{DHI} -difusa en la superficie horizontal- se pueden obtener los valores de radiación solar en una superficie inclinada y orientada en función de los ángulos de inclinación y orientación de los módulos, mediante modelos científicos más elaborados. Estas se relacionan mediante:
+Una gran cantidad de factores influyen en la utilidad y el retorno energético y económico de un sistema de generación fotovoltaico. Entender estos factores es fundamental para el diseño y la operación de sistemas PV. En las siguientes líneas se presentan algunos que son de especial interés.
 
-\begin{equation}
+\subsubsection{Radiación y espectro solar}
+
+La radiación es una onda electromagnética que se propaga a la velocidad de la luz y transmite energía. Como la misma luz visible, que cuenta con colores, la radiación que proviene del Sol también tiene diferentes longitudes de onda. Cuenta con regiones como la luz visible, el ultravioleta y el infrarrojo. La cantidad de energía que hay por cada ``color'' o longitud de onda se conoce como espectro solar.
+
+Por un lado, la irradiancia (radiación incidente) tiene unidades de potencia por unidad de área $[W/m^2]$, y el espectro solar es la distribución de este mismo por cada longitud de onda, por lo que se mide en $[W/m^2/nm]$.
+
+Dependiendo de las condiciones atmosféricas, la cantidad de masa de aire que debe atravesar y la presencia de unos gases u otros en diferentes concentraciones, la radiación extraterrestre sufre una reducción en ciertas longitudes de onda. Se debe a la absorción que presentan algunos gases. La forma que toma la radiación solar en la superficie terrestre es lo que se conoce como espectro solar terrestre. El estándar ASTM G173-03 \cite{astm_g173-03} describe un espectro estándar para analizar la radiación solar en la superficie terrestre. En la siguiente figura se puede observar el espectro solar terrestre global, el directo que proviene del Sol sin contar con reflexiones, y el extraterrestre:
+
+\begin{figure}[H]
+      \centering
+      \includegraphics[width=0.7\textwidth]{./images/SoA_irrad/astm_g173-03.png}
+      \caption{Espectro solar terrestre. Recuperado del ejemplo de este documento en \ref{sct:doc_ej_espectro_astm}.}
+      \label{fig:solar_spectrum}
+\end{figure}
+
+Para muchos análisis de radiación, se emplea más el valor global en potencia por unidad de área $[W/m^2]$ que el espectro, en $[W/m^2/nm]$, pues la forma del espectro no tiene grandes variaciones y el volumen de datos que se maneja es computacionalmente asequible.
+
+\subsubsection{Medida de la radiación solar}
+
+Hay tres medidas de la radiación solar que son interesantes para normalizar la forma en que se mide y posteriormente deducir la que pueda llegarle a un colector fotovoltaico. Estas son:
+
+\begin{itemize}
+      \item Global en una superficie horizontal (\textit{GHI}, \textit{Global Horizontal Irradiance}): es la radiación que llega a una superficie horizontal.
+      \item Directa normal al Sol (\textit{DNI}, \textit{Direct Normal Irradiance}): es la radiación que llega a una superficie normal al vector solar.
+      \item Difusa en una superficie horizontal (\textit{DHI}, \textit{Diffuse Horizontal Irradiance}): es la radiación que llega a una superficie horizontal tras ser dispersada por la atmósfera.
+\end{itemize}
+
+A partir de estas medidas, se puede modelar cuál será la radiación solar en una superficie inclinada y orientada en función de los ángulos de inclinación y acimut de los módulos, mediante modelos científicos conocidos como de transposición. Estas tres componentes se relacionan mediante:
+
+\begin{equation} \label{eq:ghi_dni_dhi}
       GHI = DNI \cdot \cos(\theta) + DHI
 \end{equation}
 
-Donde $\theta$ es el ángulo cenital del Sol (o sea, el ángulo entre la línea vertical y su posición), que normalmente se obtiene con modelos de posición solar a partir del instante de tiempo y la localización geográfica. Las unidades de las componentes de la radiación solar son $\si{\watt\per\meter\squared}$.
+Donde $\theta$ es el ángulo cenital del Sol (o sea, el ángulo entre la línea vertical y su posición), que normalmente se obtiene con modelos de posición solar a partir del instante de tiempo y la localización geográfica.
 
-La existencia de los parámetros de entrada mencionados permiten establecer una metodología común para tomar medidas de radiación solar, ya que la radiación incidente en la superficie de los módulos depende de su inclinación y orientación. Los instrumentos de medida en campo que permiten obtener estos parámetros son piranómetros para medir \textit{GHI}; pirheliómetros, para \textit{DNI}; y piranómetros con disco para \textit{DHI}. En la figura \ref{fig:irrad_componentes} se puede observar la relación entre las componentes de la radiación solar y los instrumentos de medida:
+La ecuación \ref{eq:ghi_dni_dhi} es interesante porque facilita comprobar la calidad de las medidas si existen las tres, y si solo existen dos de ellas, permite deducir la tercera.
+
+Las unidades de las componentes de la radiación solar son $\si{\watt\per\meter\squared}$.
+
+Los instrumentos de medida en campo que permiten obtener estos parámetros son piranómetros para medir \textit{GHI}; pirheliómetros, para \textit{DNI}; y piranómetros con disco para \textit{DHI}. En la figura \ref{fig:irrad_componentes} se puede observar la relación entre las componentes de la radiación solar y los instrumentos de medida:
 
 \begin{figure}[H]
       \centering
@@ -58,114 +91,150 @@ La existencia de los parámetros de entrada mencionados permiten establecer una 
       \label{fig:irrad_componentes}
 \end{figure}
 
-Esta radiación se descompone en tres componentes que dependen de la superficie incidente: la radiación directa, la radiación difusa y la radiación reflejada. La radiación directa es la que proviene del sol y llega directamente a la superficie de los módulos, la radiación difusa es la que proviene del cielo y se dispersa en todas direcciones, y la radiación reflejada o albedo es la que proviene de la reflexión y emisión de radiación sobre superficies cercanas. Estas componentes se suman para obtener la radiación total incidente en la superficie de los módulos, que es la que se emplea para calcular la producción de energía.
+\subsubsection{Transposición e irradiancia en un colector plano}
 
-En resumen, el estado del arte de la energía solar fotovoltaica abarca una amplia gama de tecnologías, estudios y sistemas. En este Trabajo de Fin de Grado se tratarán algunas de las propuestas que se han realizado en el ámbito de la simulación y en el análisis de sistemas fotovoltaicos, con el enfoque particular en la librería \textit{pvlib-python}.
+Al orientar un colector fotovoltaico, la radiación que llega a este dependerá de la inclinación y el acimut del colector. La radiación que llega a un colector plano se puede descomponer en tres componentes: la radiación directa, la radiación difusa -del cielo- y la radiación reflejada -del suelo-:
+
+\begin{itemize}
+      \item Componente directa o circunsolar: es la radiación que llega directamente del Sol sin reflexiones. Es la mayoritaria en días despejados.
+      \item Componente difusa: es la radiación que llega de la atmósfera tras ser dispersada por las partículas en suspensión y las nubes.
+      \item Componente difusa del suelo o albedo: es la reflejada por el entorno. Se puede asumir que es nula para un módulo orientado horizontalmente.
+\end{itemize}
+
+Para calcular estas componentes en el plano del generador a partir de las medidas de radiación solar vistas en la sección anterior, se emplean modelos de transposición. Se tratan de relaciones geométricas entre la irradiancia en el plano horizontal y el inclinado. El modelo más común es el de Pérez \cite{Perez_Ineichen_Seals_Michalsky_Stewart_1990}, pero hay otros como el Pérez-Driesse que solventa un problema de continuidad \cite{Driesse_Jensen_Perez_2024}.
+
+\subsubsection{Células fotovoltaicas}
+
+Anteriormente se detallaba sobre los materiales y algunas tecnologías de la fotovoltaica. Esta sección se centra en células planas convencionales, en especial las de silicio, que son las más extendidas.
+
+Estos dispositivos semiconductores son similares en construcción a un diodo, donde la unión toma una gran superficie que es la que se usa para recolectar la radiación. Se considera que la radiación que llega es proporcional a la corriente que se genera: esta se denomina fotocorriente. Sin embargo, por tratarse de un diodo, este deja pasar corriente en el sentido inverso al de la generación de energía, lo que implica que hay pérdidas debidas a la propia construcción del diodo. El siguiente circuito eléctrico representa un modelo simplificado de una célula solar:
+
+\begin{figure}[H]
+      \centering
+      \includegraphics[width=0.5\textwidth]{./images/SoA_irrad/Solar_cell_equivalent_circuit_latex.png}
+      \caption{Modelo simplificado de un diodo de una célula solar. Obtenido de Em3rgent0rdr - propio, CC BY-SA 4.0, \url{https://commons.wikimedia.org/w/index.php?curid=149538519}.}
+      \label{fig:solar_cell_model}
+\end{figure}
+
+$I_L$ representa la fotocorriente, $I_D$ la corriente que circula por el diodo, $I_{SH}$ la corriente de pérdidas en paralelo por la resistencia ``shunt'' $R_{SH}$, e $I_{OUT}$ la corriente de salida que circula por $R_{S}$, la resistencia en serie. Estas resistencias de pérdidas se deben a la construcción de las células solares, las uniones entre el semiconductor y los contactos metálicos, y a la propia resistencia del material semiconductor.
+
+\subsubsection{Curva I-V: la característica de una célula solar}
+
+Del circuito anterior se deduce por tanto que a igualdad de irradiancia incidente, y por ende, de fotocorriente, la tensión y la corriente que se extraerá dependerá del punto de trabajo de la célula. Cuanta más corriente se extraiga, más caerá la tensión antes del diodo y este hará que se pierda menos corriente en la propia célula, pero también que se reduzca esta tensión.
+
+La curva que se genera al cambiar la tensión de trabajo de la célula y medir la corriente que sale de ella se conoce como curva I-V. En la figura \ref{fig:iv_curve} se puede observar una curva I-V típica de una célula solar:
+
+\begin{figure}[H]
+      \centering
+      \includegraphics[width=0.7\textwidth]{./images/SoA_irrad/Solar_Cell_I-V_Curve_Schematic.png}
+      \caption{Curva I-V de una célula solar. Recuperado de \cite[Fig. 4.6]{Perpinan2020}.}
+      \label{fig:iv_curve}
+\end{figure}
+
+La curva sólida inferior es el producto de la tensión y la corriente en cada punto, la potencia de salida. Esta curva se conoce como curva P-V. Se puede observar que la máxima potencia de salida está en un punto que se conoce como punto de máxima potencia (MPP, \textit{Maximum Power Point}). Este punto es el que interesa para la producción de energía eléctrica.
+
+Una tensión de célula que no excede 0.7 V es típica de las hechas con silicio. Esta tensión es muy pequeña para ser extraída eficientemente, por ello que se deben crear módulos fotovoltaicos con muchas de ellas para solventar este problema.
+
+\subsubsection{Respuesta espectral y eficiencia cuántica externa}
+
+En realidad la radiación solar no es homogénea en todas las longitudes de onda, y una célula solar tampoco es igual de sensible a ellas. La curva de respuesta espectral se define como la capacidad de convertir una potencia lumínica a determinada longitud de onda en una corriente de cortocircuito. Esta métrica se cuantifica en $[A/W]$ y depende del material y otros aspectos constructivos, según se puede observar en la figura \ref{fig:spectral_response}:
+
+\begin{figure}[H]
+      \centering
+      \includegraphics[width=0.7\textwidth]{./images/SoA_irrad/Spectral_Response_PV.jpg}
+      \caption{Respuesta espectral de una célula solar. Recuperado de \url{https://pvpmc.sandia.gov/modeling-guide/2-dc-module-iv/effective-irradiance/spectral-response/}.}
+      \label{fig:spectral_response}
+\end{figure}
+
+La eficiencia cuántica externa es una medida similar, pero en este caso se mide cuál es la fracción de fotones incidentes a una longitud de onda determinada que se convierten en corriente. Es un número adimensional y se relaciona con la respuesta espectral mediante la ecuación:
+
+\begin{equation} \label{eq:relacion_sr_eqe}
+      SR(\lambda) = \frac{q \cdot \lambda}{h \cdot c} \cdot EQE(\lambda)
+\end{equation}
+
+\subsubsection{Módulos}
+
+Las células solares se conectan en serie para que la tensión de todas las células se sume y se pueda extraer una tensión mayor \cite{victoria2024fundamentals}, con una corriente que es la misma que la de una sola célula. Al no aumentar la corriente, se evitan pérdidas mayores debidas al efecto Joule por la resistencia de las conexiones.
+
+Un módulo también presenta una curva I-V, que idealmente será la misma que la de una célula pero escalada en la tensión en función del número de células. En realidad, por pequeñas variaciones en la construcción de las células y la conexión de estas, la curva I-V de un módulo no es exactamente la misma que la de una célula. Además, este problema se ve muy agravado cuando la irradiancia no es homogénea en todas las células del módulo y puede suponer un riesgo en el caso extremo de haber sombras. Por esta razón se emplean diodos de derivación o \textit{bypass} para evitar que una célula sombreada disipe energía en forma de calor y se dañe ella o el propio módulo. Se detalla este efecto en la sección \ref{sssct:efecto-sombra}.
+
+\subsubsection{Efecto de la temperatura}
+
+La temperatura hace que el diodo en el equivalente circuital en \ref{fig:solar_cell_model} conduzca mucho más, aumentando las pérdidas que se disiparían en este. Por ello, la eficiencia de las células disminuye con la temperatura \cite{Perpinan2020}. La temperatura de las células se estima mediante modelos empíricos basados en la disipación de calor por conducción, convección y radiación.
+
+Por esta razón se plantean sistemas fotovoltaicos algo más inusuales, como los sistemas flotantes sobre cuerpos de agua, que permiten refrigerar las células con el agua.
+
+\subsubsection{Sombra y diodos de \textit{bypass}} \label{sssct:efecto-sombra}
+
+Es necesario tener en cuenta factores de pérdidas como la sombra, la suciedad o la nieve en el diseño de sistemas fotovoltaicos. Cualquier obstrucción de la radiación sobre una célula genera una afección a la producción parcial o completa de un módulo. Las células se conectan en serie, por lo que la corriente que pasa por una es la misma que pasa por todas. Si una célula está sombreada, las demás células forzarán la corriente que pasa por ella, haciendo que esta se comporte como una carga y disipe energía en forma de calor \cite{Perpinan2020}.
+
+Esta energía disipada en la célula sombreada se convierte en calor, y puede llegar a dañar el módulo.
+
+Este efecto se conoce como \textit{hot spot} y puede dañar la integridad del módulo. Se emplean diodos de derivación o \textit{bypass} para mitigarlo. Estos permiten que la corriente mayoritaria de las células más iluminadas circule por el diodo y no se vea limitada por las células sombreadas. En las aplicaciones industriales típicas, sistemas de autoconsumo en la superficie terrestre, se emplea un diodo para proteger a un grupo de células. Normalmente se encuentran tres por módulo; se trata del compromiso entre el coste de poner diodos adicionales, la mitigación de los \textit{hot spots} y las pérdidas por sombreado.
+
+\subsubsection{Sistemas fotovoltaicos}
+
+Se llama sistema fotovoltaico al acople de los módulos junto con componentes y dispositivos eléctricos para hacer que la energía producida por los paneles sea utilizable. Entre este equipamiento adicional destacan:
+
+\begin{itemize}
+      \item Inversores: son los encargados de convertir la corriente continua producida por los módulos en corriente alterna, que es la que se emplea en la red eléctrica.
+      \item Convertidores DC-DC: permiten adaptar la tensión y la corriente de los módulos a la que se necesita en el sistema.
+      \item Seguidor del punto de máxima potencia: el MPP varía en función de las condiciones irradiancia y temperatura de los módulos, por lo que se emplean sistemas que maximizan la producción de energía mediante algoritmos que hayan este punto. Normalmente bien el convertidor DC-DC o el inversor incorpora esta función.
+      \item Seguidores solares: son estructuras que orientan los módulos hacia el Sol a lo largo del día para maximizar la producción de energía.
+      \item Sistemas de almacenamiento: permiten almacenar la energía producida por los módulos para su uso posterior mediante baterías.
+      \item Sistemas de monitorización: para controlar el rendimiento de los módulos y detectar fallos en el sistema.
+\end{itemize}
+
+No todos los sistemas incorporan los equipos mencionados anteriormente. Se han desarrollado diferentes configuraciones, cada una con sus propias ventajas y dificultades, como sistemas conectados a la red, sistemas autónomos y sistemas de bombeo \cite{Perpinan2020}:
+
+\begin{itemize}
+      \item Sistemas conectados a la red: son los más comunes y se emplean para inyectar energía en la red eléctrica. Se necesitan inversores que conviertan la corriente continua en alterna.
+      \item Sistemas autónomos: se emplean en lugares remotos donde no llega la red eléctrica o es inestable el acceso. Usan sistemas de almacenamiento y de gestión de la energía.
+      \item Sistemas de bombeo: se emplean para bombear agua durante las horas diurnas a un depósito. Solo requieren un seguidor del punto de máxima potencia que trabaje adecuadamente con el motor de la bomba.
+\end{itemize}
+
+En todos estos casos, es fundamental contar con herramientas de simulación y análisis para evaluar el rendimiento de los sistemas, optimizar su diseño y diagnosticar fallos a partir de datos meteorológicos.
 
 \section{Simulación de sistemas fotovoltaicos} \label{sct:simulaciones}
 
-La importancia de simulaciones y análisis previo a la implantación de sistemas fotovoltaicos tanto para inversores, operaciones de financiación y diseñadores ha dado lugar a múltiples herramientas software y modelos como PVWatts, PVGIS, PV-Online, PV*SOL, PVsyst, System Advisor Model (SAM) y muchas más \cite{stein_models_2009, Kumar_2017}. Normalmente estas herramientas propietarias ponen el foco en calcular el rédito energético y económico de una instalación fotovoltaica, pero no en el desarrollo de la investigación y validación de modelos científicos. La Sección \ref{sct:pvlib} mostrará que la librería \textit{pvlib-python} se centra en la investigación y validación de modelos científicos para la simulación de sistemas fotovoltaicos, mientras se obvia el cálculo de coste y rédito económico.
+La simulación de sistemas es fundamental para diseñarlos y dimensionarlos adecuadamente.
 
-Dentro de este grupo de herramientas, surge la iniciativa de código abierto PV\_LIB-MatLab con origen en la institución \textit{Sandia National Laboratories, EEUU}, hacia el año 2009 \cite{Stein_Holmgren_Forbess_Hansen_2016}. Posteriormente, en 2013\footnote{Véase \url{https://web.archive.org/web/20240411190506/https://pvlib-python.readthedocs.io/en/stable/\#history-and-acknowledgement}.} se inicia el desarrollo una versión traducida en Python \cite{Anderson_Hansen_Holmgren_Jensen_Mikofski_Driesse_2023, Stein_2012, Andrews_Stein_Hansen_Riley_2014, Holmgren_Andrews_Lorenzo_Stein_2015, Holmgren_Groenendyk_2016}, que es sobre la que versa este trabajo.
+Toda simulación de un sistema fotovoltaico habitual necesita calcular la radiación solar incidente en la superficie de los módulos. Las variables de partida de una simulación siempre involucran valores meteorológicos como la radiación solar, la temperatura ambiente y la velocidad del viento \cite{Perpinan2020}. Adicionalmente, se emplean modelos empíricos para obtener valores como la radiación solar extraterrestre en la superficie de la atmósfera y deducir otros parámetros de entrada para el resto del flujo de cálculos, en función de los instantes de tiempo que se vayan a analizar.
 
-La librería \textit{pvlib-python} aporta una serie de mejoras entre las que destacan la infraestructura de tests, la documentación y otros procedimientos de Integración Continua y Desarrollo Continuo (\textit{CI/CD}) que facilitan el desarrollo. Además, está escrita en un lenguaje de programación libre y gratuito. Por el contrario, en PV\_LIB-MatLab no existen tests, el control de versiones resulta más confuso e inaccesible al estar en un documento de Microsoft Word y, en general, hay falta de mantenimiento\footnote{Véase \url{http://web.archive.org/web/20211207215130/https://pvlib-python.readthedocs.io/en/v0.9.0/comparison_pvlib_matlab.html}.}.
+La infografía \ref{fig:pv_simulation_flow} detalla los efectos que normalmente se tienen en cuenta para simular todo un sistema fotovoltaico:
 
-\section{La librería pvlib-python} \label{sct:pvlib}
+\begin{figure}[H]
+      \centering
+      \includegraphics[width=0.7\textwidth]{./images/SoA_irrad/pv_simulation_flow.png}
+      \caption{Flujo de cálculo en la simulación de un sistema fotovoltaico. Recuperado de \url{https://pvpmc.sandia.gov/}}
+      \label{fig:pv_simulation_flow}
+\end{figure}
 
-La librería \textit{pvlib-python} es una biblioteca de código abierto que proporciona herramientas para la simulación, análisis e investigación de sistemas fotovoltaicos. Se encuentra desarrollada para el lenguaje de programación interpretado Python \cite{CS-R9526}, que es ampliamente utilizado en las comunidades científica y de desarrollo de software por su sintaxis sencilla, facilidad de desarrollo y diseño orientado a objetos.
+El primer punto son datos meteorológicos y las componentes de la irradiancia.
 
-Como todo proyecto de código abierto que se encuentra en constante desarrollo, esta librería cuenta con un grupo de desarrolladores y colaboradores que contribuyen a su mantenimiento y mejora continua. Estas personas partícipes del proyecto son mayoritariamente personal dedicado a la ciencia e investigación en diferentes instituciones y universidades públicas, aunque también existe personal de ingeniería e investigación del ámbito privado. El código y la colaboración se realiza a través del repositorio de código abierto en GitHub\footnote{Véase \url{https://github.com/pvlib/pvlib-python}.}.
+Se comprueba la necesidad de establecer numéricamente las coordenadas del Sol en el cielo para hacer cálculos y comprobar las medidas. Se emplea un sistema de coordenadas esféricas con dos ángulos: el cenit y el acimut. El cenit es el ángulo entre una línea vertical y el Sol, y el acimut es el ángulo entre el norte y la proyección del Sol en el plano horizontal. Debe denotarse que en ocasiones se emplea el ángulo de elevación, que es el ángulo entre el Sol y el plano horizontal; es decir, el ángulo complementario al cenit. En la figura \ref{fig:solar_angles} se pueden observar los ángulos solares mencionados, donde $\beta_s$ es la elevación y $\gamma_s$ es el acimut:
 
-El código se encuentra disponible al público bajo la licencia \textit{BSD 3-Clause}\footnote{Texto de la licencia disponible en \url{https://opensource.org/license/BSD-3-clause}.}, que permite su uso, modificación, redistribución y uso en otros proyectos siempre que haga la atribución de autoría pertinente y no emplee la imagen de \textit{pvlib-python} con fines publicitarios o promotores. La librería se distribuye a través del índice de paquetes de Python, PyPI\footnote{Véase \url{https://pypi.org/project/pvlib/}.}, y en el canal de \textit{conda-forge}\footnote{Véase \url{https://anaconda.org/conda-forge/pvlib}.} para la distribución \textit{Conda}, orientada a facilitar conjuntos de librerías para ciencia de datos de forma estable y robusta. \textit{Conda} se distribuye en dos \textit{flavours} -sabores o conjuntos de librerías- conocidas como \textit{Anaconda} y \textit{Miniconda}, cada una con sus propias características y ventajas en tiempo de instalación, espacio en disco y paquetes preinstalados.
+\begin{figure}[H]
+      \centering
+      \includegraphics[width=0.6\textwidth]{./images/SoA_irrad/Anderson_Mikofski_Fig2.png}
+      \caption{Ángulos solares. Recuperado de \cite[Fig. 2]{Anderson_Mikofski_2020}.}
+      \label{fig:solar_angles}
+\end{figure}
 
-La documentación de la librería\footnote{Accesible en \url{https://pvlib-python.readthedocs.io/en/stable/}} se encuentra disponible en la plataforma\\ \mbox{\textit{ReadTheDocs}}, donde se detallan las funcionalidades, los ejemplos de uso, la estructura del código -la API\footnote{API es la contracción de \textit{Application Programming Interface} y se trata del conjunto de utilidades del que disponen los usuarios de la librería.}-, las herramientas de desarrollo, las directrices para contribuir al proyecto y la historia de cambios y versiones. La documentación se encuentra disponible exclusivamente en inglés.
+Por definición de ángulos complementarios, el cenit $\theta_s$ se relaciona con la elevación $\beta_s$ mediante la ecuación $\theta_s = 90^\circ - \beta_s$.
 
-\subsection{Objetivos de la librería} \label{ssct:pvlib:objetivos}
+A partir de los valores de irradiancia solar \textit{GHI}, \textit{DNI} y \textit{DHI}, se puede calcular la irradiancia por componentes que llega a la superficie de los módulos: la directa, la difusa y la reflejada. La componente directa es la que proviene de la dirección del sol y llega directamente a la superficie de los módulos, la irradiancia difusa es la que proviene del resto del cielo y se dispersa en todas direcciones, y la irradiancia reflejada o albedo es la que proviene de la reflexión y emisión de radiación sobre superficies cercanas. Estas componentes se suman para obtener la radiación total incidente en la superficie de los módulos, que es la que se emplea para calcular la producción de energía.
 
-Como se ha comentado anteriormente, la librería \textit{pvlib-python} tiene como objetivo principal proporcionar herramientas para la simulación, análisis e investigación de sistemas fotovoltaicos. Para ello, cuenta con una serie de funciones y clases que permiten realizar cálculos de radiación solar, generación de energía, sombreado, eficiencia de módulos y pérdidas de energía, entre otros. Estas herramientas se basan en modelos científicos y métodos de cálculo validados por la comunidad científica y se han implementado en Python para facilitar su uso y extensión. Es importante denotar que los autores pretenden establecer la implementación de la librería como una referencia fiable y certera de los modelos científicos que se emplean en la simulación de sistemas fotovoltaicos, poniendo un enfoque especial en la rigurosidad de las publicaciones y artículos científicos que se emplean como base.
+El siguiente paso es cuantificar el efecto de la temperatura: la eficiencia de las células disminuye conforme aumenta la temperatura debido a la recombinación interna y la reducción de la banda prohibida. La temperatura de las células se estima mediante modelos empíricos que, como mínimo, suelen depender de la estructura del módulo, la irradiancia, la temperatura ambiente y la velocidad del viento.
 
-Enumerando los objetivos de la librería, se pueden destacar los siguientes:
+Algunos factores de pérdidas se toman en cuenta en este instante como el ajuste espectral o una corrección por no-uniformidad de la radiación, que suelen afectar a la irradiancia incidente.
 
-\begin{enumerate}
-      \item Proporcionar herramientas para la simulación y análisis de sistemas fotovoltaicos.
-      \item Implementar modelos científicos y métodos de cálculo validados por la comunidad científica.
-      \item Establecer un referente fiable de las implementaciones de las características citadas anteriormente.
-      \item Auditar las contribuciones para garantizar la funcionalidad de las aportaciones.
-      \item Facilitar la integración con servicios de datos meteorológicos y bases de datos de radiación solar.
-      \item Fomentar la colaboración y la contribución de la comunidad científica y de desarrollo de software.
-\end{enumerate}
+Por otra parte, otros factores de pérdidas somo la sombra, las pérdidas en los conductores, la suciedad o la nieve se tienen en cuenta en la potencia de salida de los módulos. A continuación se modelan la integración de los inversores, sistemas de almacenamiento o transformadores, si procede en cada caso.
 
-Cabe destacar que también hay fines que se excluyen de ser objetivos, es decir, características que no se pretenden implementar o documentar. Entre estos destacan:
+Finalmente se obtiene la producción horaria de energía, que se puede integrar en el tiempo para obtener la producción, asignarle un retorno económico y estimar la viabilidad del proyecto de instalación fotovoltaica \cite{Rosa-Clot_Tina_2020}.
 
-\begin{enumerate}
-      \item Proporcionar contenido didáctico sobre la energía solar fotovoltaica, más allá del estrictamente necesario para entender y aplicar las utilidades disponibles.
-      \item Hacer inferencias, sugerencias o recomendaciones que no estén publicadas formalmente sobre el uso de los modelos implementados.
-      \item Facilitar un sistema \textit{ready-to-go} para usuarios finales.
-\end{enumerate}
+\subsection{Herramientas de simulación}
 
-Puede parecer que excluir estos objetivos son limitantes en cuanto a la divulgación y al alcance, pero en realidad se trata de una forma de garantizar la calidad y la fiabilidad de la librería. Así el esfuerzo limitado de los mantenedores y los contribuyentes se centra en la implementación rigurosa de publicaciones de la comunidad científica.
+La importancia de simulaciones y análisis previo a la implantación de sistemas fotovoltaicos tanto para promotores, operaciones de financiación y diseñadores ha dado lugar a múltiples herramientas software y modelos como PVWatts, PVGIS, PV-Online, PV*SOL, PVsyst, System Advisor Model (SAM) y muchas más \cite{stein_models_2009, Kumar_2017}. Normalmente estas herramientas propietarias ponen el foco en calcular el rédito energético y económico de una instalación fotovoltaica, pero no en el desarrollo de la investigación y validación de modelos científicos.
 
-Una nota importante, en especial sobre el último punto, es que la definición de la misma librería es que se trata de una \textit{toolbox}\footnote{En español, ``caja de herramientas''. \url{https://github.com/pvlib/pvlib-python/blob/99619e8fc5aea5c5dc4dacabb75b617786cc4a1a/README.md?plain=1\#L61}}. Esta nota es en contraposición a las herramientas de simulación y análisis de sistemas fotovoltaicos comerciales, que limitan y simplifican la experiencia del usuario, varias veces dejando de lado la documentación y la transparencia de los cálculos\footnote{Como hecho anecdótico, se puede observar alguna crítica sobre esto entre los partícipes del proyecto, por ejemplo en \url{https://github.com/pvlib/pvlib-python/issues/2057\#issuecomment-2197279047}.}.
-
-\subsection{Funcionalidades} \label{ssct:pvlib:funcionalidades}
-
-El proyecto de código abierto \textit{pvlib-python} cuenta múltiples características que abarcan un amplio rango de temas relacionados con la producción de energía solar fotovoltaica. Al momento de la redacción de este documento, la versión de la librería es la 0.11.0, publicada el 21 de junio de 2024. A continuación, se detallan algunas de las funcionalidades más destacadas:
-
-\begin{itemize}
-      \item Cálculo de la posición del sol: para determinar la posición del sol en el cielo en función de la localización y la hora del día, en el submódulo \texttt{pvlib.solarposition}.
-      \item Cálculo de valores estándares de la radiación solar: la librería proporciona herramientas para calcular la radiación solar en una superficie plana y horizontal en función de la localización, la posición del sol y parámetros atmosféricos. Véase \texttt{pvlib.solarposition} y \texttt{pvlib.clearsky}.
-      \item Procedimientos de descomposición, transposición y transposición inversa de la radiación solar: se emplean para, a partir de la irradiance solar en una superficie plana y horizontal, obtener la incidente en un colector plano orientado arbitrariamente. Y una vez obtenidas las componentes directa, difusa y de albedo de esta irradiancia, aplicar correcciones convenientes para obtener la radiación efectiva colectada en la superficie. También se puede realizar el proceso inverso, de las componentes en el plano inclinado a la radiación en una superficie plana y horizontal. Estas utilidades se encuentran en el submódulo \texttt{pvlib.irradiance}.
-      \item Obtención de parámetros atmosféricos como la columna o masa de aire, un número que representa cuánta atmósfera hay, relativa a la columna completamente vertical (\texttt{AM=1}), en el submódulo \texttt{pvlib.atmosphere}.
-      \item Valores de albedo predefinidos, bien de materiales sólidos o de superficies naturales de agua, en \texttt{pvlib.albedo}.
-      \item Corrección de la radiación incidente en función del ángulo de incidencia: debido a la reflexión que sufre la luz solar al incidir en una superficie de forma oblicua. Las utilidades se encuentran en el submódulo \texttt{pvlib.iam}.
-      \item Producción fotovoltaica: mediante puntos característicos como el de máxima potencia (\textit{MPP}) o calculando curvas I-V completas. Se emplean modelos de eficiencia de módulos y pérdidas de energía para estimar la producción de energía en un sistema fotovoltaico, mediante el modelo de un único diodo. Se encuentra en el submódulo \texttt{pvlib.singlediode}.
-      \item Cálculo de sombreado: métodos analíticos para calcular la fracción sombreada de hileras de filas. Véase el submódulo \texttt{pvlib.shading}.
-      \item Cálculo de ángulos de seguimiento: para seguidores de uno y dos ejes, que permitan colectar la máxima radiación solar directa, que normalmente se corresponderá con la máxima producción de energía. Véase el submódulo \texttt{pvlib.tracking}.
-      \item Cálculo de temperatura de los módulos: normalmente empíricos, facilitan estimar la producción de energía ya que, habitualmente, la eficiencia de las células es bastante susceptible a la temperatura. Estas utilidades se encuentran en \texttt{pvlib.temperature}.
-      \item Estimación de ganancias o pérdidas por efectos del espectro solar: pues en función de la composición del espectro solar incidente en los módulos, la eficiencia de los mismos puede variar. En \texttt{pvlib.spectrum}.
-      \item Modelado de eficiencia de inversores: para estimar la eficiencia de los inversores DC-AC en función de la potencia de entrada y sus demás características. En \texttt{pvlib.inverter}.
-      \item Modelado de pérdidas en transformadores: para estimar las pérdidas en los transformadores de conexión a red. En \texttt{pvlib.transformer}.
-      \item Modelado de pérdidas en cables: para estimar las pérdidas resistivas en los cables. En \texttt{pvlib.pvsystem}.
-      \item Integración de APIs externas para la obtención de datos meteorológicos relacionados con la fotovoltaica, en \texttt{pvlib.iotools}.
-      \item Abstracciones de los componentes que conforman una instalación fotovoltaica, mediante las clases \texttt{Location}, \texttt{Array}, \texttt{PVSystem} y la clase que agrupa el flujo computacional \texttt{Modelchain}, en los submódulos \texttt{pvlib.location}, \texttt{pvlib.pvsystem} y \texttt{pvlib.modelchain}.
-      \item Cálculos adicionales para sistemas bifaciales, que son aquellos colectores planos que permiten la captación de radiación solar por ambas caras del módulo. En \texttt{pvlib.bifacial}.
-
-\end{itemize}
-
-\subsection{Repositorio del proyecto} \label{ssct:pvlib:repositorio}
-
-Como se ha mencionado anteriormente, el código de la librería \textit{pvlib-python} se encuentra alojado en un repositorio de código abierto. Un repositorio es una carpeta que contiene una series de archivos, de los cuales los más importantes se gestionan mediante un sistema de control de versiones, \textit{VCS} por sus siglas en inglés. Este sistema permite llevar un registro de los cambios realizados en los archivos, así como la posibilidad de volver a versiones anteriores en caso de que se produzca un error o un fallo en el código. El uso de esta herramienta es indispensable en proyectos de software, ya que facilita la colaboración entre los desarrolladores y la gestión de las versiones del código.
-
-En el caso de \textit{pvlib-python}, el repositorio se encuentra alojado en la plataforma GitHub, que es una de las más populares para el alojamiento de proyectos de código abierto.
-
-El repositorio cuenta con múltiples archivos y sub-carpetas que configuran el proyecto. Algunos de los más destacables son:
-
-\begin{itemize}
-      \item \texttt{README.md}: es el primer archivo en verse en la plataforma online y contiene la descripción del proyecto, su propósito y cómo instalarlo, entre otros.
-      \item \texttt{LICENSE}: es el archivo que contiene la licencia del proyecto, en este caso la licencia \textit{BSD 3-Clause}.
-      \item \texttt{pyproject.toml}, \texttt{setup.cfg}, \texttt{setup.py}, \texttt{MANIFEST.in}: son los archivos que definen la configuración del proyecto, como el nombre, la versión, la descripción, las dependencias, los archivos que componen una distribución precompilada o de código fuente, etc. que las personas usuarias verán en la plataformas de distribución de paquetes.
-      \item \texttt{docs/}: es la carpeta que contiene archivos de configuración y explicativos que permiten generar la documentación del proyecto. No obstante, el código que se expone públicamente se documenta automáticamente a partir de unos comentarios en el código.
-      \item \texttt{pvlib/}: es la carpeta que contiene el código fuente de la librería, organizado en sub-carpetas y archivos según su funcionalidad. Los tests unitarios y de integración se encuentran en esta carpeta.
-      \item \texttt{AUTHORS.md}, \texttt{CODE\_OF\_CONDUCT.md}, \texttt{codecov.yml}, \texttt{readthedocs.yml}, \texttt{paper/}, \texttt{ci/}, \texttt{benchmarks/} y \texttt{.github/}: son archivos y carpetas que contienen información adicional sobre el proyecto y la configuración de todos los flujos de integración continua: destacan los tests, los benchmarks y la documentación.
-
-\end{itemize}
-
-\subsection{Frameworks de desarrollo del proyecto} \label{sct:pvlib:dev}
-
-Como tal, el desarrollo del proyecto requiere el conocimiento de algunas herramientas que permiten la colaboración con el repositorio principal y cumplir con las directrices para contribuir al proyecto. Estas se suelen denominar \textit{frameworks} de desarrollo, literalmente marcos de trabajo, que normalizan la forma de desarrollar y colaborar en el proyecto.
-
-La elección de las herramientas empleadas corresponde a una preferencia en cuanto a uso y extensión en el desarrollo software, pero pueden variar en el futuro, como ya lo ha hecho en el pasado.
-
-En el lado de las utilidades esenciales, se encuentran:
-
-\begin{itemize}
-      \item \textit{Git}: como sistema de control de versiones que se emplea para gestionar los cambios en el código.
-      \item \textit{GitHub}: es la plataforma de alojamiento de proyectos de código abierto que se emplea para colaborar en el desarrollo del proyecto. Permite crear \textit{issues} o discusiones para reportar errores o sugerir mejoras; y proponer cambios y revisarlos públicamente en \textit{pull requests}. Además proporciona máquinas virtuales para ejecutar los procedimientos de integración y desarrollo continuos.
-      \item \textit{ReadTheDocs} junto con \textit{sphinx}: es la plataforma que se emplea para ejecutar \textit{sphinx}, el entorno de trabajo que produce la documentación en formato HTML, y alojar el producto. La documentación se escribe en formato \textit{reStructuredText} y se genera automáticamente a partir de los comentarios en el código, scripts con los ejemplos y archivos fuente con el cuerpo más general.
-      \item \textit{pytest}: es la librería de Python que se emplea para escribir y ejecutar tests unitarios y de integración en el código. Facilita la creación de \textit{mocks} u observadores del estado de partes del mismo proyecto, la reutilización de datos de tests, la ejecución opcional de los tests en función de las dependencias disponibles y visualizar los resultados en un informe. Posiblemente la mejor característica es poder ejecutar los tests uno a uno, por grupo o todos a la vez.
-      \item \textit{Codecov}: es la plataforma que se emplea para medir la cobertura de los tests en el código. Permite visualizar la cobertura de los tests en un informe y comprobar si se están realizando pruebas suficientes en el código.
-      \item \textit{flake8}: es una utilidad que detecta errores de estilo en el código, como la longitud de las líneas, la indentación, la presencia de espacios en blanco, entre otros. Facilita la escritura de código limpio y legible, por ende, mantenible.
-      Además, facilita la detección de errores estáticos en el código; esto es, condicionales que nunca se cumplen, variables que no se usan, importación innecesaria de módulos, identificadores duplicadas o que no siguen la convención de nombres, entre otros.
-
-\end{itemize}
-
+La Sección \ref{sct:pvlib} mostrará que la librería \pvlibpy, y su predecesor en MatLab, se centra en la investigación y validación de modelos científicos para la simulación de sistemas fotovoltaicos, mientras que se obvia el cálculo de coste y rédito económico.

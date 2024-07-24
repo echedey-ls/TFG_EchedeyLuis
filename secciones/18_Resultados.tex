@@ -1,13 +1,13 @@
 \chapter{Resultados y conclusiones} \label{chp:resultados}
 
-En este capítulo se resumen los resultados obtenidos en el desarrollo del Trabajo Fin de Grado, aquellos tanto satisfactorios como los que no, y se extraen conclusiones personales del estudiante. Además, se proponen posibles líneas de trabajo futuro, algunas que seguirán desarrollándose y otras que se podrían seguir a partir de este TFG.
+En este capítulo se resumen los resultados obtenidos en el desarrollo del Trabajo Fin de Grado, aquellos tanto satisfactorios como los que no, y el impacto que ha tenido la participación en \pvlibpy. Además, se proponen posibles líneas de trabajo futuro, algunas que seguirán desarrollándose y otras que se podrían seguir a partir de este TFG.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Resultados} \label{sct:resultados_resultados}
 
-A pesar de que los ciclos de revisiones y correcciones toman un elevado tiempo de desarrollo, se han conseguido implementar varios modelos y funcionalidades nuevos en \textit{pvlib-python}. Además, se ha mejorado la documentación de la librería y se han corregido errores en la misma. Cabe destacar:
+A pesar de que los ciclos de revisiones y correcciones toman un elevado tiempo de desarrollo, se han conseguido implementar varios modelos y funcionalidades nuevos en \pvlibpy. Además, se ha mejorado la documentación de la librería y se han corregido errores en la misma. Cabe destacar:
 
 \begin{enumerate}
     \item Exponer el cálculo de la proyección del cenit solar sobre las coordenadas de un colector.
@@ -23,38 +23,96 @@ A pesar de que los ciclos de revisiones y correcciones toman un elevado tiempo d
     \item Aportar ideas y planteamientos que faciliten contribuir a la librería.
 \end{enumerate}
 
-Algunas cifras significativas, para la librería \textit{pvlib-python} son:
+Algunas cifras significativas, para la librería \pvlibpy{} son:
 
 \begin{itemize}
+    \item Se han añadido $4653$ líneas de código y documentación, y otras $2004$ de datos. Solo se han sustituido $771$ líneas de código y documentación, y $2003$ de un archivo de datos.
     \item Se ha abierto 34 \textit{pull requests}\footnote{Consultar última información en \url{https://github.com/pvlib/pvlib-python/pulls?q=is\%3Apr+author\%3Aechedey-ls+}.}.
-    \begin{itemize}
-        \item De las cuales 23 se han aceptado.
-        \item De las cuales 5 se han desestimado.
-        \item De las cuales 6 se mantienen abiertas.
-    \end{itemize}
-    \item Se ha revisado 16 \textit{pull requests} de otros usuarios\footnote{Consultar última información en \url{https://github.com/pvlib/pvlib-python/pulls?q=is\%3Apr+reviewed-by\%3Aechedey-ls+-author\%3Aechedey-ls+}.}.
+          \begin{itemize}
+              \item De las cuales 23 se han aceptado.
+              \item De las cuales 5 se han desestimado.
+              \item De las cuales 6 se mantienen abiertas.
+          \end{itemize}
+    \item Se ha revisado 18 \textit{pull requests} de otros usuarios\footnote{Consultar última información en \url{https://github.com/pvlib/pvlib-python/pulls?q=is\%3Apr+reviewed-by\%3Aechedey-ls+-author\%3Aechedey-ls+}.}.
     \item Se ha abierto 19 \textit{issues}\footnote{Consultar última información en \url{https://github.com/pvlib/pvlib-python/issues?q=is\%3Aissue+author\%3Aechedey-ls+}.}.
-    \begin{itemize}
-        \item De las cuales se han cerrado 11.
-    \end{itemize}
-    \item Se ha participado en 26 \textit{issues} de otros usuarios\footnote{Consultar última información en \url{https://github.com/pvlib/pvlib-python/issues?q=is\%3Aissue+-author\%3Aechedey-ls+involves\%3Aechedey-ls+}.}.
-    \begin{itemize}
-        \item De las cuales se han cerrado 13.
-    \end{itemize}
+          \begin{itemize}
+              \item De las cuales se han cerrado 11.
+          \end{itemize}
+    \item Se ha participado en 28 \textit{issues} de otros usuarios\footnote{Consultar última información en \url{https://github.com/pvlib/pvlib-python/issues?q=is\%3Aissue+-author\%3Aechedey-ls+involves\%3Aechedey-ls+}.}.
+          \begin{itemize}
+              \item De las cuales se han cerrado 13.
+          \end{itemize}
+    \item Se han creado 5 ejemplos completamente nuevos.
 \end{itemize}
 
-Adicionalmente se aprecia impacto en otros repositorios como:
+Asimismo este proyecto ha tenido impacto en otros proyectos, como se detalla en la sección \ref{sssct:impacto:otrosproyectos}.
+
+\section{Impacto} \label{chp:impacto}
+
+En esta sección se analizará el valor que aporta el trabajo realizado en este TFG.
+
+El impacto se divide en dos partes: la primera sección se centrará en el impacto general del trabajo, mientras que la segunda sección analizará el impacto específico en relación con los Objetivos de Desarrollo Sostenible (ODS).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Impacto general} \label{sssct:impacto:general}
+
+Este Trabajo Fin de Grado permite visibilizar y extender el uso de algunos modelos científicos relacionados con la fotovoltaica. Además, se ha facilitado el mantenimiento de la librería \pvlibpy{} y se ha mejorado la documentación de la misma, contribuyendo así a la persistencia de este proyecto. Incluso sin haberse añadido algunas de las contribuciones propuestas, el trabajo realizado ha permitido reforzar líneas de trabajo que antes ni se consideraban.
+
+Se espera que algunos de los modelos sean bastante útiles para la comunidad científica y técnica, en especial aquellos que consisten en modelos de pérdidas. Estos modelos permiten optimizar el diseño de plantas y mejorar el rendimiento económico de las instalaciones. Además, la mejora de la documentación de la librería \pvlibpy{} facilita su uso y extensión, lo que puede llevar a un aumento de la comunidad de usuarios y contribuidores.
+
+Dentro del programa subvencionado \textit{Google Summer of Code}, se ha trabajado estrechamente con otros compañeros desarrolladores y se les ha ayudado a que se familiaricen con las herramientas de desarrollo y la forma de colaborar en el proyecto. Esto ha permitido que se hayan añadido nuevas funcionalidades a la librería y se haya mejorado la calidad del código.
+
+Asimismo, este trabajo se alinea con los objetivos de la Universidad pública de promover la investigación, la transferencia y democratización libre del conocimiento.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Impacto en otros proyectos} \label{sssct:impacto:otrosproyectos}
 
 \begin{itemize}
-    \item \textit{pvlib/solarfactors}: un repositorio para el cálculo de factores de vista de sistemas bifaciales, en una escena 2D.
-    \begin{itemize}
-        \item Se ha informado de problemas de compatibilidad con la versión de Python 3.12 por el uso de la dependencia \texttt{shapely<2}\footnote{Véase \url{https://github.com/pvlib/solarfactors/issues/16}.}. Esta problemática es la anteriormente descrita en \ref{sct:desarrollo:soporte_tecnico}.
-    \end{itemize}
-    \item \textit{openpvtools/pv-foss-engagement}: una página con información sobre distintas librerías de Python empleadas en fotovoltaica.
-    \begin{itemize}
-        \item Se ha informado de la ausencia de \textit{solarfactors} en la lista de librerías\footnote{Véase \url{https://github.com/openpvtools/pv-foss-engagement/issues/8}.} y se han iniciado los cambios para mostrarlo en la web.
-    \end{itemize}
+
+    \item \textbf{En \textit{pvlib/solarfactors}}:
+
+          Este repositorio se trata de un clon de \textit{pvfactors}, que se emplea para calcular factores de vista de sistemas fotovoltaicos bifaciales. Es un clon porque \textit{pvfactors} inició dentro de una empresa, que contaba con los permisos para administrar sus cambios, pero dejó de mantenerla. La comunidad de \textit{pvlib}, ya que la usaba en el repositorio \pvlibpy, decidió clonarla y mantenerla.
+
+          \begin{itemize}
+              \item \issue{16}[https://github.com/pvlib/solarfactors]
+          \end{itemize}
+
+          Se detecta y se informa sobre un problema de las dependencias de \textit{solarfactors} en \textit{Python 3.12}, y se ha propuesto eliminar la dependencia de \textit{Shapely} en favor de código nativo de Python. Se ha iniciado el trabajo, pero no se ha completado por dificulta técnica y falta de vinculación con los objetivos de este trabajo.
+
+    \item \textbf{En \textit{openpvtools/pv-foss-engagement}}:
+
+          Este pequeño proyecto es un compendio de librerías de código abierto de fotovoltaica, con sus datos de contribuciones, contribuyentes y otras métricas relativas al impacto e interés que generan.
+
+          Se puede consultar en \url{https://openpvtools.github.io/pv-foss-engagement/}.
+
+          \begin{itemize}
+              \item \issue{8}[https://github.com/openpvtools/pv-foss-engagement]
+              \item \pr{9}[https://github.com/openpvtools/pv-foss-engagement]
+          \end{itemize}
+
+          Se detecta y se informa sobre la ausencia del clon citado anteriormente, \textit{pvlib/solarfactors}, en este repositorio. Un mantenedor añade las estadísticas para que posteriormente se hagan las modificaciones pertinentes para que se muestren en la web.
+
+          Dentro de este TFG se realiza el archivo y las modificaciones necesarias para poder ver las estadísticas de \textit{solarfactors} en la web. Se incluyen los datos a fecha de esta redacción.
+
 \end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Objetivos de Desarrollo Sostenible} \label{sssct:impacto:ods}
+
+Con este trabajo se ha contribuido a la consecución de los Objetivos de Desarrollo Sostenible (ODS):
+
+\begin{itemize}
+    \item \textbf{ODS 3: Salud y bienestar}. Al potenciar el uso de energías renovables, se contribuye a la reducción de la contaminación y, por tanto, a la mejora de la salubridad del medio ambiente.
+    \item \textbf{ODS 7: Energía asequible y no contaminante}. Debido a que se facilitan herramientas de diseño y análisis de instalaciones fotovoltaicas, se contribuye a la mejora de la eficiencia de las mismas y, por tanto, a la reducción del impacto de instalar paneles solares.
+    \item \textbf{ODS 9: Industria, innovación e infraestructura}. Se ha trabajado en la mejora de la infraestructura de la librería \pvlibpy, lo que facilita la innovación y desarrollo en el sector de la energía fotovoltaica.
+    \item \textbf{ODS 11: Ciudades y comunidades sostenibles}. Las mejoras facilitadas permiten implementar instalaciones fotovoltaicas de forma más fiable, lo que contribuye a su implantación.
+    \item \textbf{ODS 13: Acción por el clima}. Este ODS sigue en la misma línea que los demás: como fuente de energía renovable, y en especial por ser la fotovoltaica, se reduce la emisión de gases de efecto invernadero y se contribuye a la lucha contra el cambio climático.
+\end{itemize}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,7 +121,7 @@ Adicionalmente se aprecia impacto en otros repositorios como:
 
 Con la realización de este Trabajo Fin de Grado, se promueven y mejoran proyectos de código abierto ya establecidos, lo que garantiza la usabilidad de las aportaciones aceptadas.
 
-Se han mejorado múltiples aspectos de la librería \textit{pvlib-python}, desde errores menores en el código a la implementación de nuevos modelos y funcionalidades. Se ha mejorado la documentación, dotando al proyecto de una mayor usabilidad. El aporte que realiza este TFG es enriquece transversalmente a todos los efectos de este repositorio y se espera que sea de utilidad para la comunidad científica y técnica. Se espera que además se facilite el acceso de nuevos contribuyentes a la librería.
+Se han mejorado múltiples aspectos de la librería \pvlibpy, desde errores menores en el código a la implementación de nuevos modelos y funcionalidades. Se ha mejorado la documentación, dotando al proyecto de una mayor usabilidad. El aporte que realiza este TFG es enriquece transversalmente a todos los efectos de este repositorio y se espera que sea de utilidad para la comunidad científica y técnica. Se espera que además se facilite el acceso de nuevos contribuyentes a la librería.
 
 Desde un punto de vista de los logros, es destacable el impacto que este proyecto tiene iniciativas de código abierto. Por otro lado, hay dos dificultades principales que cabría destacar:
 
@@ -87,3 +145,5 @@ Hay varias líneas de desarrollo que sería deseable continuar en el futuro, alg
     \item Además, posiblemente se intente continuar en la línea de solventar el problema de la dependencia \texttt{shapely<2} en \textit{solarfactors}, en función de si el equipo decide trabajar en ello.
     \item Por último, se ayudará a mejorar la documentación sobre cómo contribuir, y plantear una hoja de ruta para futuros contribuyentes que no hayan visto cómo programar en esta librería antes, pues se identifica que no todos los contribuyentes reciben formación sobre el uso de control de versiones en sus titulaciones.
 \end{enumerate}
+
+Se espera que este trabajo contribuya y motive el desarrollo de algunas áreas de estudio, así como que extienda y facilite la implantación de esta energía renovable en la sociedad.

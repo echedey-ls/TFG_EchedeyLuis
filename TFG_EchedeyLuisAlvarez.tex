@@ -18,7 +18,6 @@
 %% Numeración romana:
 \frontmatter
 \input{secciones/00_Resumen}
-\input{secciones/02_PreContexto}
 \input{secciones/03_Agradecimientos}
 
 %%-----------------------------------------------
@@ -43,18 +42,20 @@
 %%-----------------------------------------------
 \input{secciones/11_Introduccion}
 \input{secciones/12_TrabajoArte}
+\input{secciones/13_FOSS}
 \input{secciones/16_Desarrollo}
-% Secciones creadas por alumno
-\input{secciones/17_Impacto}
 \input{secciones/18_Resultados}
 
 \printbibliography[heading=bibintoc]
 
 %%-----------------------------------------------
 %% Anexos
-% \appendix
-% \clearpage
-% \addcontentsline{toc}{chapter}{\annexname}
-% \input{secciones/20_Anexos}
+\appendix
+\clearpage
+\addcontentsline{toc}{chapter}{Anexos}
+\input{secciones/20_Anexo_doc_funcs}
+\input{secciones/22_Anexo_doc_examples}
+
+
 %%-----------------------------------------------
 \end{document}

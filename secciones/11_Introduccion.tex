@@ -1,36 +1,27 @@
 \chapter{Introducción} \label{chp:intro}
 
-El cambio climático es un tema de actualidad que plantea un reto social, económico y tecnológico. Dentro de este marco, las energías renovables se presentan como una solución tecnológica a la dependencia de los combustibles fósiles, que son los principales responsables de la emisión de gases de efecto invernadero. Una de las tantas fuentes de energía renovables más prometedoras es la solar fotovoltaica, ya que es renovable y no contamina en su explotación directa.
+El cambio climático es un tema de actualidad que plantea un reto social, económico y tecnológico. Dentro de este marco, las energías renovables se presentan como una solución tecnológica a la dependencia de los combustibles fósiles, que son los principales responsables de la emisión de gases de efecto invernadero. Una de las tantas fuentes de energía renovables más prometedoras es la solar fotovoltaica \cite{Breyer_Bogdanov_Gulagi_Aghahosseini_Barbosa_Koskinen_Barasa_Caldera_Afanasyeva_Child_et_al_2017}, ya que es renovable y no contamina en su explotación directa.
 
-Este Trabajo de Fin de Grado pretende potenciar la adquisición, investigación e implementación de la energía solar, mejorando herramientas de simulación y diseño de instalaciones fotovoltaicas. Para ello, se han realizado múltiples contribuciones a un proyecto de código abierto llamado \textit{pvlib-python}, que es una biblioteca de herramientas escrita en Python para el análisis de sistemas fotovoltaicos.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Motivación del proyecto} \label{sct:intro:motivacion}
-
-La motivación del alumno para realizar este Trabajo de Fin de Grado se fundamenta en su interés por las energías renovables, el código libre y su experiencia previa en desarrollo de software en Python, también de acceso abierto.
-
-Asimismo una de las principales inquietudes del alumno es aplicar sus conocimientos en generar o facilitar nueva ciencia de forma accesible y contrastable, y que pueda ser utilizada por la comunidad científica y técnica de manera completamente transparente.
+Este Trabajo de Fin de Grado pretende potenciar la adquisición, investigación e implementación de la energía solar, mejorando herramientas de simulación y diseño de instalaciones fotovoltaicas. Para ello, se han realizado múltiples contribuciones a un proyecto de código abierto llamado \pvlibpy{} \cite{Anderson_Hansen_Holmgren_Jensen_Mikofski_Driesse_2023, Stein_2012, Andrews_Stein_Hansen_Riley_2014, Holmgren_Andrews_Lorenzo_Stein_2015, Holmgren_Groenendyk_2016}, que es una biblioteca de herramientas escrita en Python para el análisis de sistemas fotovoltaicos.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Contexto del proyecto} \label{sct:intro:contexto}
 
-Con el incremento del interés por las energías renovables y las facilidades del desarrollo software como caldo de cultivo, se ha propuesto al alumno la realización de este Trabajo Fin de Grado, que consiste en apoyar en el desarrollo de la biblioteca \textit{pvlib-python}.
+Con el incremento del interés por las energías renovables y las facilidades del desarrollo software como caldo de cultivo, se ha propuesto la realización de este Trabajo Fin de Grado, que consiste en apoyar en el desarrollo de la biblioteca \pvlibpy.
 
-La propuesta parte de los tutores del alumno, que son miembros del grupo de investigación \textit{Instruments and Systems Integration} del \textit{Instituto de Energía Solar} de la propia Universidad Politécnica de Madrid. Asimismo, el proyecto \textit{pvlib-python} es un proyecto de código abierto que se encuentra en desarrollo por otros investigadores de centros de investigación y universidades públicas de múltiples países, y algunos miembros de empresas privadas del mismo campo.
+El proyecto \pvlibpy{} es un proyecto de código abierto que se encuentra en desarrollo por otros investigadores de centros de investigación y universidades públicas de múltiples países, y algunos miembros de empresas privadas del mismo campo.
 
 El perfil de las personas usuarias de esta biblioteca se puede clasificar entre 3 grupos principales:
 
 \begin{itemize}
 
-    \item[•] Personal investigador que desean realizar simulaciones y estudios de sistemas fotovoltaicos.
+    \item Personal investigador que desean realizar simulaciones y estudios de sistemas fotovoltaicos.
 
-    \item[•] Personal técnico y de ingeniería que desean optimizar el diseño de instalaciones fotovoltaicas.
+    \item Personal técnico y de ingeniería que desean optimizar el diseño de instalaciones fotovoltaicas.
 
-    \item[•] Personal técnico y de ingeniería que quieren identificar fallos en este tipo de instalaciones, mediante la comparación de datos reales con simulaciones.
+    \item Personal técnico y de ingeniería que quieren identificar fallos en este tipo de instalaciones, mediante la comparación de datos reales con simulaciones.
 
 \end{itemize}
 
@@ -39,41 +30,68 @@ Por supuesto, tratándose de un proyecto de código abierto, cualquier persona p
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Motivación del proyecto} \label{sct:intro:motivacion}
+
+La motivación para realizar este Trabajo de Fin de Grado se fundamenta en el interés por las energías renovables, el código libre y el querer poner a disposición global conocimiento para facilitar una transición energética.
+
+Asimismo se espera generar o facilitar el desarrollo de nueva ciencia de forma accesible y contrastable, y que esta pueda ser utilizada por la comunidad científica y técnica de manera completamente transparente y democrática.
+
+Con este TFG se pretende mejorar la fiabilidad de las simulaciones de sistemas fotovoltaicos.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Objetivos} \label{sct:intro:objetivos}
 
-La línea principal de este trabajo es la adición de nuevas funcionalidades a la biblioteca \textit{pvlib-python}, que permitan mejorar la simulación, investigación y diseño de plantas fotovoltaicas. Para ello, se han establecido los siguientes objetivos:
+La línea principal de este trabajo es la adición de nuevas funcionalidades a la biblioteca \pvlibpy, que permitan mejorar la simulación, investigación y diseño de plantas fotovoltaicas. Para ello, se han establecido los siguientes objetivos:
 
-\begin{itemize}
+\begin{enumerate}
 
-    \item[•] Contribuir con la aportación de modelos científicos variados en propósito y utilidad.
-
-    \item[•] Añadir otras funcionalidades, que no siendo modelos, sean útiles para las personas usuarias.
-
-    \item[•] Validar el funcionamiento mediante tests unitarios.
-
-    \item[•] Hacer que cada contribución sea accesible aportando una documentación completa y concisa, y didáctica si fuera necesario.
-
-    \item[•] Seguir los rigurosos estándares de calidad de un proyecto científico de código libre.
+    \item Realizar contribuciones que mejoren las características que brinde el proyecto:
     
-    \item[•] Promover la discusión sobre temas relacionados con la mejora de la biblioteca.
+    \begin{itemize}
+        \item Contribuir con la aportación de modelos científicos variados en propósito y utilidad.
 
-    \item[•] Participar en la revisión del código de otros contribuyentes.
+        \item Añadir otras funcionalidades, que no siendo modelos, sean útiles para las personas usuarias.
+    
+        \item Validar el funcionamiento mediante tests unitarios.
+    
+        \item Hacer que cada contribución sea accesible aportando una documentación completa y concisa, y didáctica si fuera necesario.
+    
+        \item Seguir los rigurosos estándares de calidad de un proyecto científico de código libre.
+    \end{itemize}
 
-    \item[•] Ayudar a la comunidad usuaria de la biblioteca resolviendo dudas y problemas.
+    \item Participar y aportar positivamente a la comunidad de desarrolladores y potenciales contribuyentes:
+    
+    \begin{itemize}
+        \item Promover la discusión sobre temas relacionados con la mejora de la biblioteca.
 
-    \item[•] Animar e intentar involucrar a nuevas personas en el proyecto.
+        \item Participar en la revisión del código de otros contribuyentes.
+    
+        \item Ayudar a la comunidad usuaria de la biblioteca resolviendo dudas y problemas.
+    
+        \item Animar e intentar involucrar a nuevas personas en el proyecto.
+    \end{itemize}
 
-    \item[•] Ayudar a mantener la biblioteca actualizada para mejorar su ciclo de vida y arreglar errores de forma preventiva.
+    \item Reforzar la iniciativa y la comunidad que rodea a la biblioteca:
+    
+    \begin{itemize}
+        \item Ayudar a mantener la biblioteca actualizada para mejorar su ciclo de vida y arreglar errores de forma preventiva.
+        
+        \item Identificar posibles mejoras en los procedimientos marcados para el desarrollo, bien sean realizados manualmente o consistan en una secuencia automática de instrucciones.
 
-\end{itemize}
+        \item Trabajar en áreas que no sean prioritarias, pero puedan ser útiles de cara a mejorar la longevidad del proyecto.
+    \end{itemize}
+
+\end{enumerate}
 
 Por otra parte, entre los objetivos secundarios destacan:
 
 \begin{itemize}
 
-    \item [•] Dar visibilidad a autores nacionales y de la Universidad Politécnica de Madrid.
+    \item Dar visibilidad a autores nacionales y de la Universidad Politécnica de Madrid.
 
-    \item [•] Potenciar proyectos accesibles desde la Universidad pública.
+    \item Potenciar proyectos accesibles desde la Universidad pública.
 
 \end{itemize}
 
@@ -88,19 +106,19 @@ La estructura de este Trabajo de Fin de Grado pretende ser intuitiva y distribui
 
 \begin{itemize}
 
-    \item[•] \fullref{chp:state-of-the-art}: da a conocer el estado actual de la energía solar fotovoltaica y algunas de las herramientas de simulación utilizadas.
+    \item \fullref{chp:state-of-the-art}: da a conocer el estado actual de la energía solar fotovoltaica y algunas de las herramientas de simulación utilizadas.
 
         \begin{itemize}
-            \item[•] \fullref{sct:pvlib}: expone las características de la biblioteca \textit{pvlib-python}.
+            \item \fullref{sct:pvlib}: expone las características de la biblioteca \pvlibpy.
         \end{itemize}
 
-    \item[•] \fullref{chp:desarrollo}: detalla el desarrollo de las contribuciones propuestas a la biblioteca, con factores tanto técnicos como humanos sobre el resultado.
+    \item \fullref{chp:desarrollo}: detalla el desarrollo de las contribuciones propuestas a la biblioteca, con factores tanto técnicos como humanos sobre el resultado.
 
-    \item[•] \fullref{chp:impacto}: presenta el impacto de las contribuciones realizadas tanto en esta biblioteca como en otras, y en la comunidad del proyecto.
+    \item \fullref{chp:impacto}: presenta el impacto de las contribuciones realizadas tanto en esta biblioteca como en otras, y en la comunidad del proyecto.
 
-    \item[•] \fullref{chp:resultados}: resume y hace una valoración global de los resultados obtenidos.
+    \item \fullref{chp:resultados}: resume y hace una valoración global de los resultados obtenidos.
 
-        %% \item[•] En el Capítulo \ref{chp:conclusiones}, se presentan las conclusiones y se proponen futuras líneas de trabajo TODO
+        %% \item En el Capítulo \ref{chp:conclusiones}, se presentan las conclusiones y se proponen futuras líneas de trabajo TODO
 
 \end{itemize}
 
