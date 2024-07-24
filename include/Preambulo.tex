@@ -6,6 +6,7 @@
 \usepackage{bookman}
 \decimalpoint
 \usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{amsfonts,amsgen,amsmath,amssymb,siunitx}
 \usepackage[top=3cm, bottom=3cm, right=2.54cm, left=2.54cm]{geometry}
 \usepackage{afterpage}
@@ -15,7 +16,12 @@
   pdftex,
   pdfauthor={\NombreAutor{}},
   pdftitle={Trabajo de Fin de Grado},
-  pdfborder={0 0 0}
+  pdfborder={0 0 0},
+  colorlinks=true,        % false: boxed links; true: colored links
+  linkcolor=Brown,        % color of internal links
+  citecolor=BrickRed,     % color of links to bibliography
+  filecolor=black,        % color of file links
+  urlcolor=Blue           % color of external links 
 ]{hyperref}
 \usepackage{pdfpages}
 \usepackage{url}
