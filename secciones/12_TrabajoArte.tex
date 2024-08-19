@@ -216,7 +216,7 @@ El primer punto son datos meteorológicos y las componentes de la irradiancia.
 
 Se comprueba la necesidad de establecer numéricamente las coordenadas del Sol en el cielo para hacer cálculos y comprobar las medidas. Se emplea un sistema de \gls{coordenadas esféricas} con dos ángulos: el \gls{cenit} y el \gls{acimut}. El cenit es el ángulo entre una línea vertical y el Sol, y el acimut es el ángulo entre el norte y la proyección del Sol en el plano horizontal. Debe denotarse que en ocasiones se emplea el \gls{ángulo de elevación}, que es el ángulo entre el Sol y el plano horizontal; es decir, el ángulo complementario al cenit. En la figura \ref{fig:solar_angles} se pueden observar los ángulos solares mencionados, donde $\beta_s$ es la elevación y $\gamma_s$ es el acimut:
 
-\begin{figure}[H]
+\begin{figure}[h]
       \centering
       \includegraphics[width=0.6\textwidth]{./images/SoA_irrad/Anderson_Mikofski_Fig2.png}
       \caption{Ángulos solares. Recuperado de \cite[Fig. 2]{Anderson_Mikofski_2020}.}
@@ -229,9 +229,11 @@ A partir de los valores de irradiancia solar \textit{\gls{GHI}}, \textit{\gls{DN
 
 El siguiente paso es cuantificar el efecto de la temperatura: la eficiencia de las células disminuye conforme aumenta la temperatura debido a la \gls{recombinación interna} y la reducción de la \gls{banda prohibida}. La temperatura de las células se estima mediante modelos empíricos que, como mínimo, suelen depender de la estructura del \gls{módulo}, la irradiancia, la temperatura ambiente y la velocidad del viento.
 
-Algunos factores de pérdidas se toman en cuenta en este instante como el \gls{ajuste espectral} o una corrección por no-uniformidad de la radiación, que suelen afectar a la irradiancia incidente.
+Algunos factores de pérdidas se toman en cuenta en este instante como el \gls{ajuste espectral}, corrección por no-uniformidad de la radiación, la suciedad y la nieve, que suelen afectar a la irradiancia incidente. Por otra parte, otros factores de pérdidas somo la \gls{sombra} y las pérdidas en los conductores por \gls{efecto Joule}, se aplican respecto la potencia de salida de los módulos.
 
-Por otra parte, otros factores de pérdidas somo la \gls{sombra}, las pérdidas en los conductores, la suciedad o la nieve se tienen en cuenta en la potencia de salida de los módulos. A continuación se modelan la integración de los \gls{inversores}, \gls{sistemas de almacenamiento} o \gls{transformadores}, si procede en cada caso.
+En general, dependerá del modelo en cuestión y cómo se haya planteado originalmente, pero cabe destacar esta diferencia entre aplicar modelos a la radiación incidente o a la potencia de salida.
+
+A continuación, se modela la integración de los \gls{inversores}, \gls{sistemas de almacenamiento} o \gls{transformadores}, si procede en cada caso.
 
 Finalmente se obtiene la producción horaria de energía, que se puede integrar en el tiempo para obtener la producción, asignarle un retorno económico y estimar la viabilidad del proyecto de instalación fotovoltaica \cite{Rosa-Clot_Tina_2020}.
 
