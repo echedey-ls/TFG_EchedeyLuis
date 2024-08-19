@@ -1,0 +1,75 @@
+% !TeX root = TFG_Luis_Alvarez_Echedey.tex
+%%-----------------------------------------------
+%% Cargar datos relativos al TFG:
+\input{secciones/_DatosTFG}
+
+%%-----------------------------------------------
+%% Importar Preámbulo:
+\input{include/Preambulo}
+
+
+%%-----------------------------------------------
+%% Importar Glosario:
+\input{include/Glossaries.tex}
+
+
+%%-----------------------------------------------
+%% Importar Bibliografía:
+\addbibresource{bibliography.bib}
+
+
+%%-----------------------------------------------
+%% Documento:
+\begin{document}
+
+\input{include/Portada_ETSIDI}
+
+%%-----------------------------------------------
+%% Numeración romana:
+\frontmatter
+\input{secciones/00_Resumen}
+\input{secciones/03_Agradecimientos}
+
+%%-----------------------------------------------
+\tableofcontents
+
+% Comentar las dos siguientes lineas si no se usan figuras
+\renewcommand\listfigurename{Índice de Figuras}
+\listoffigures
+
+% Comentar las dos siguientes lineas si no se usan tablas
+\renewcommand\listtablename{Índice de Tablas}
+\listoftables
+
+% Comentar las dos siguientes lineas si no se usan listings de código
+\renewcommand\lstlistlistingname{Índice de Listings}
+\lstlistoflistings
+
+%%-----------------------------------------------
+%% Numeración arábiga:
+\mainmatter
+
+%%-----------------------------------------------
+\input{secciones/11_Introduccion}
+\input{secciones/12_TrabajoArte}
+\input{secciones/13_FOSS}
+\input{secciones/16_Desarrollo}
+\input{secciones/18_Resultados}
+
+\printbibliography[heading=bibintoc, title={Bibliografía}]
+
+%%-----------------------------------------------
+%% Anexos
+\appendix
+\clearpage
+\addcontentsline{toc}{chapter}{Anexos}
+
+% Glosario
+\printglossary[title=Glosario, toctitle=Glosario]
+
+\input{secciones/34_Anexo_doc_funcs}
+\input{secciones/35_Anexo_doc_examples}
+
+
+%%-----------------------------------------------
+\end{document}

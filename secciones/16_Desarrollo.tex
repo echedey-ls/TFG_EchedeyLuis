@@ -15,23 +15,23 @@ Se ha separado en tres secciones, atendiendo principalmente a su tamaño y compl
 
 Con estas se pretende mejorar las capacidades que ofrece la librería \pvlibpy{} en forma de utilidades completamente novedosas como modelos científicos.
 
-\subsection{Modelado de ajuste espectral}
+\subsection{Modelo de ajuste espectral}
 
 \begin{itemize}
     \item \pr{1658}
 \end{itemize}
 
-Esta propuesta plantea incluir otro modelo de ajuste espectral, un factor que toma un valor en torno a $1$ y que se emplea para corregir la irradiancia incidente en un módulo fotovoltaico debido a la variación del espectro de la luz solar. El modelo se basa en la tesis doctoral de Nuria Martín Chivelet \cite{Martín_Chivelet_1999} y en un artículo de la misma autora \cite{Martín_Ruiz_1999}.
+Esta propuesta plantea incluir otro \gls{modelo} de \gls{ajuste espectral}, un factor que toma un valor en torno a $1$ y que se emplea para corregir la \gls{irradiancia} incidente en un \gls{módulo} fotovoltaico debido a la variación del espectro de la luz solar. El modelo se basa en la tesis doctoral de Nuria Martín Chivelet \cite{Martín_Chivelet_1999} y en un artículo de la misma autora \cite{Martín_Ruiz_1999}.
 
-Este modelo es de gran interés para la librería ya que depende de dos variables que se pueden obtener con extrema facilidad y normalmente se encuentran en el flujo de simulación: la masa de aire absoluta y el índice de claridad. Sin embargo, otros modelos dependen de la cantidad de agua en la atmósfera, que no es tan sencillo de obtener, o son un polinomio en una sola variable, lo que disminuye la precisión del ajuste. 
+Este modelo es de gran interés para la librería ya que depende de dos variables que se pueden obtener con extrema facilidad y normalmente se encuentran en el flujo de simulación: la masa de aire absoluta y el \gls{índice de claridad}. Sin embargo, otros modelos dependen de la cantidad de agua en la atmósfera, que no es tan sencillo de obtener, o son un polinomio en una sola variable, lo que disminuye la precisión del ajuste.
 
 La propuesta finalmente se cierra sin incluirse los cambios en la librería al detectar que el modelo necesita otros modelos para funcionar, pero estos segundos no son fácilmente accesibles.
 
 \subsubsection{Fundamento teórico}
 
-El modelo \cite{Martín_Ruiz_1999} plantea una relación entre la efectividad bajo un espectro estándar y la efectividad bajo un espectro arbitrario caracterizado por la masa de aire y el índice de claridad. Originalmente esto se confunde al desarrollar esta aportación con un modelo de ajuste similar a otros en la literatura que corrigen la irradiancia incidente, para dar lugar a la efectiva; ejemplos de estos modelos se encuentran en la librería, como el modelo desarrollado por la empresa \textit{First Solar} descrito en \cite{Lee_Panchula_2016} o el de Caballero et al. en \cite{Caballero_Fernández_Theristis_Almonacid_Nofuentes_2018}. Los modelos en cuestión crean un factor de ajuste $M$ que se define, según el estándar IEC 60904-7 \cite[Eq. (2)]{Caballero_Fernández_Theristis_Almonacid_Nofuentes_2018}:
+El modelo \cite{Martín_Ruiz_1999} plantea una relación entre la efectividad bajo un \gls{espectro estándar} y la efectividad bajo un \gls{espectro arbitrario} caracterizado por la masa de aire y el índice de claridad. Originalmente esto se confunde al desarrollar esta aportación con un modelo de ajuste similar a otros en la literatura que corrigen la irradiancia incidente, para dar lugar a la efectiva; ejemplos de estos modelos se encuentran en la librería, como el modelo desarrollado por la empresa \textit{First Solar} descrito en \cite{Lee_Panchula_2016} o el de Caballero et al. en \cite{Caballero_Fernández_Theristis_Almonacid_Nofuentes_2018}. Los modelos en cuestión crean un factor de ajuste $M$ que se define, según el \gls{estándar} IEC 60904-7 \cite[Eq. (2)]{Caballero_Fernández_Theristis_Almonacid_Nofuentes_2018}:
 
-\begin{equation}
+\begin{equation} \label{eq:ajuste_espectral}
     M = \frac
     {\int_{\lambda_1}^{\lambda_2} E(\lambda) SR(\lambda) d\lambda \int_{\lambda_3}^{\lambda_4} E^*(\lambda) d\lambda}
     {\int_{\lambda_1}^{\lambda_2} E^*(\lambda) SR(\lambda) d\lambda \int_{\lambda_3}^{\lambda_4} E(\lambda) d\lambda}
@@ -43,7 +43,7 @@ Sin embargo, el modelo en \cite{Martín_Ruiz_1999} no se ajustaba a esta descrip
     \frac{S_{efE(\lambda)}}{S_{ef\bar{G}(\lambda)}} = c \exp^{a (K_t - 0.74) + b (AM - 1.5)}
 \end{equation}
 
-Donde $S_{efE(\lambda)}$ es la efectividad bajo un espectro arbitrario, $S_{ef\bar{G}(\lambda)}$ es la efectividad bajo un espectro estándar, $K_t$ es el índice de claridad, $AM$ es la masa de aire, y $a$, $b$ y $c$ son constantes que dependen del material del módulo fotovoltaico y de cada componente de la irradiancia.
+Donde $S_{efE(\lambda)}$ es la efectividad bajo un espectro arbitrario, $S_{ef\bar{G}(\lambda)}$ es la efectividad bajo un espectro estándar, $K_t$ es el índice de claridad, $AM$ es la masa de aire, y $a$, $b$ y $c$ son constantes que dependen del material del \gls{módulo} fotovoltaico y de cada componente de la irradiancia.
 
 Esta constituye la primera fracción de las tres relaciones que se plantean en la tesis doctoral de Nuria Martín Chivelet \cite{Martín_Chivelet_1999}, que es:
 
@@ -61,9 +61,9 @@ Este patrón de código crea un poco de complejidad en la implementación, pero 
 
 La documentación creada para la función es extensa y detallada; se puede consultar en \ref{sct:doc_modelo_nuria}.
 
-Además, se crea un ejemplo de uso para mostrar su uso en un contexto más amplio, que se puede consultar en \ref{sct:doc_ej_modelo_nuria}. Sobre este ejemplo se realiza una comparativa con los otros modelos de ajuste espectral de la librería y se detecta que no sigue las tendencias esperadas gracias a las dos últimas gráficas realizadas con este propósito.
+Además, se crea un ejemplo de uso para mostrar su uso en un contexto más amplio, que se puede consultar en \ref{sct:doc_ej_modelo_nuria}. Sobre este ejemplo se realiza una comparativa con los modelos de ajuste espectral existentes en la librería \cite{Lee_Panchula_2016} y \cite{osti919131}, y se detecta que no sigue las tendencias esperadas gracias a las dos últimas gráficas realizadas con este propósito.
 
-Si bien el modelo del artículo \cite{Martín_Ruiz_1999} se demuestra que no funciona para el propósito de ajuste espectral, se desestima la posibilidad de incluir todo el desarrollo elaborado en la tesis \cite{Martín_Chivelet_1999} por las siguientes razones:
+Si bien el modelo del artículo \cite{Martín_Ruiz_1999} se demuestra que no funciona para el propósito de ajuste espectral según la ecuación \ref{eq:ajuste_espectral}, y en la tesis \cite{Martín_Chivelet_1999} se detalla un procedimiento completo para llegar a un factor de ajuste razonable, se desestima su inclusión en la librería por las siguientes razones:
 
 \begin{itemize}
     \item La imposibilidad de acceder al documento de forma online.
@@ -79,7 +79,7 @@ Estos puntos son determinantes, pues es imprescindible la referencia de una impl
     \item \pr{1904}
 \end{itemize}
 
-Esta es la primera de una trilogía de contribuciones que se plantean para aplicar un modelo de pérdidas por sombreado en módulos con diodos bypass. El objetivo de esta primera contribución es calcular la proyección del cenit solar sobre las coordenadas de un colector, y se utiliza para calcular la fracción de sombra unidimensional en geometrías de paneles que comparten eje de rotación en común.
+Esta es la primera de una trilogía de contribuciones que se plantean para aplicar un \gls{modelo} de pérdidas por sombreado en módulos con diodos bypass. El objetivo de esta primera contribución es calcular la proyección del \gls{cenit} solar sobre las coordenadas de un colector, y se utiliza para calcular la fracción de \gls{sombra} unidimensional en geometrías de paneles que comparten eje de rotación en común.
 
 Las otras dos contribuciones se detallan en \fullref{sct:desarrollo:contribuciones_cientificas:fraccion_sombra} y en \fullref{sct:desarrollo:contribuciones_cientificas:perdidas_sombreado}.
 
@@ -87,22 +87,55 @@ Esta funcionalidad ya existía integrada en el código de una función de la lib
 
 \subsubsection{Fundamento teórico}
 
-Dos cálculos de bastante interés en geometría solar son obtener los ángulos óptimos de seguimiento para un colector y calcular la fracción de sombra incidente. Ambos cálculos tienen en común un paso muy importante, que es saber con qué ángulo inciden los rayos directos del Sol sobre la superficie del colector, pero referenciado al plano de rotación del mismo. Este plano de rotación equivale a la sección transversal de los colectores, por ello que sea de utilidad en la resolución de problemas analíticos.
+Dos cálculos de bastante interés en geometría solar son obtener los \gls{ángulos óptimos de seguimiento} para un colector y calcular la fracción de \gls{sombra} incidente. Ambos cálculos tienen en común un paso muy importante, que es saber con qué ángulo inciden los rayos directos del Sol sobre la superficie del colector, pero referenciado al plano de rotación del mismo. Este plano de rotación equivale a la sección transversal de los colectores, por ello que sea de utilidad en la resolución de problemas analíticos.
 
 Para facilitar el entendimiento de este concepto, es preferible imaginar un sistema de rotación de un solo eje. Se puede considerar que un colector fijo, es decir, donde los módulos no rotan, es un caso particular de un seguidor uniaxial. Así será posible definir algunos conceptos relevantes para la geometría de una forma más sencilla.
 
 Se encuentran estos dos casos de uso:
 
 \begin{itemize}
-    \item Para el cálculo de los ángulos óptimos de seguimiento en seguidores de un solo eje, asumiendo que interesa seguir al Sol en su trayectoria diaria, se debe conocer el ángulo de incidencia de los rayos solares sobre la superficie del colector en el plano de rotación del mismo. Es decir, proyectar el cenit solar en el plano perpendicular al eje de rotación del colector, que es aquel que contiene todos los vectores normales al plano del colector.
-    \item En el caso de la fracción unidimensional de sombra, interesa saber en donde impactan los límites del colector frontal sobre el trasero. Para ello, se proyecta el cenit solar en el plano perpendicular al eje de rotación del colector, que es aquel que contiene los dos vectores normales a los planos de los colectores.
+    \item Para el cálculo de los \gls{ángulos óptimos de seguimiento} en seguidores de un solo eje, asumiendo que interesa seguir al Sol en su trayectoria diaria, se debe conocer el ángulo de incidencia de los rayos solares sobre la superficie del colector en el plano de rotación del mismo. Es decir, proyectar el cenit solar en el plano perpendicular al eje de rotación del colector, que es aquel que contiene todos los vectores normales al plano del colector.
+    \item En el caso de la fracción unidimensional de \gls{sombra}, interesa saber en donde impactan los límites del colector frontal sobre el trasero. Para ello, se proyecta el cenit solar en el plano perpendicular al eje de rotación del colector, que es aquel que contiene los dos vectores normales a los planos de los \gls{colectores}.
 \end{itemize}
 
-Se puede encontrar en más detalle en el artículo de Lorenzo, Narvarte y Muñoz en \cite{Lorenzo_Narvarte_Muñoz_2011} a partir del cual continúa el trabajo de \cite{Anderson_Mikofski_2020}, sección sobre \textit{True-Tracking Angle}. Esta última referencia es ampliamente utilizada a lo largo del repositorio.
+Se puede encontrar en más detalle en el artículo de Lorenzo, Narvarte y Muñoz \cite{Lorenzo_Narvarte_Muñoz_2011} a partir del cual continúa el trabajo de Anderson y Mikofski \cite{Anderson_Mikofski_2020}, sección sobre \textit{True-Tracking Angle}. Esta última referencia es ampliamente utilizada a lo largo del repositorio y es de la que se toman las ecuaciones y nomenclatura de referencia.
+
+Mediante tres cálculos consecutivos se consigue esta proyección del cenit:
+
+\begin{enumerate}
+    \item Se calculan las coordenadas solares referidas a un sistema alineado con semieje X+ hacia el Este, semieje Y+ hacia el Norte, y semieje Z+ hacia el cenit de la ubicación de interés a partir de los ángulos de cenit $\beta_s$ y azimuth $\gamma_s$ solares según \ref{eq:coordenadas_solares_normales}:
+          \begin{equation} \label{eq:coordenadas_solares_normales}
+              \begin{bmatrix}
+                  s_x \\
+                  s_y \\
+                  s_z
+              \end{bmatrix} = \begin{bmatrix}
+                  \cos(\beta_s) \sin(\gamma_s) \\
+                  \cos(\beta_s) \cos(\gamma_s) \\
+                  \sin(\beta_s)
+              \end{bmatrix}
+          \end{equation}
+    \item Se traducen al sistema coordenado de referencia del seguidor con \ref{eq:coordenadas_solares_referido}, donde $\beta_a$ y $\gamma_a$ indican la inclinación y el azimuth del eje de rotación del colector:
+          \begin{equation} \label{eq:coordenadas_solares_referido}
+              \begin{bmatrix}
+                  s_x\prime \\
+                  s_y\prime \\
+                  s_z\prime
+              \end{bmatrix} = \begin{bmatrix}
+                  s_x \cos(\gamma_a) - s_y \sin(\gamma_a)                                                 \\
+                  s_x \sin(\gamma_a) \cos(\beta_a) + s_y \cos(\beta_a) \cos(\gamma_a) - s_z \sin(\beta_a) \\
+                  s_x \sin(\gamma_a) \sin(\beta_a) + s_y \sin(\beta_a) \cos(\gamma_a) + s_z \cos(\beta_a)
+              \end{bmatrix}
+          \end{equation}
+    \item La proyección del ángulo de interés se hace en el plano XZ según \ref{eq:proyeccion_cenit}:
+          \begin{equation} \label{eq:proyeccion_cenit}
+              \theta_T = \arctan2(s_x\prime, s_z\prime)
+          \end{equation}
+\end{enumerate}
 
 \subsubsection{Resultado}
 
-Se crea una nueva función en el módulo \texttt{pvlib.shading} llamada \texttt{projected\_solar\_zenith\_angle}, que se encarga de calcular la proyección del cenit solar sobre las coordenadas de un colector.
+Se crea una nueva función en el \gls{módulo} \texttt{pvlib.shading} llamada \texttt{projected\_solar\_zenith\_angle}, que se encarga de calcular la proyección del cenit solar sobre las coordenadas de un colector.
 
 Esta función cuenta con un reducido número de parámetros de entrada: el cenit y el azimut solar y la orientación y la inclinación del eje del colector.
 
@@ -112,33 +145,33 @@ La propuesta es bien recibida y se incluyen los cambios como parte de la librer�
 
 Accesible en \linkDocsFunction{pvlib.shading.projected\_solar\_zenith\_angle}.
 
-\subsection{Cálculo de fracción de sombra unidimensional} \label{sct:desarrollo:contribuciones_cientificas:fraccion_sombra}
+\subsection{Cálculo de fracción de \gls{sombra} unidimensional} \label{sct:desarrollo:contribuciones_cientificas:fraccion_sombra}
 
 \begin{itemize}
     \item \issue{1689}
     \item \pr{1962}
 \end{itemize}
 
-Esta propuesta es la segunda de la trilogía de propuestas para poder aplicar un modelo de pérdidas por sombreado. Continúa con la propuesta anterior, y se encarga de calcular la fracción de sombra unidimensional en paneles con determinadas geometrías.
+Esta propuesta es la segunda de la trilogía de propuestas para poder aplicar un modelo de pérdidas por sombreado. Continúa con la propuesta anterior, y se encarga de calcular la fracción de \gls{sombra} unidimensional en paneles con determinadas geometrías.
 
-Aquí se plantea la aplicación de un modelo para conocer la fracción de sombra unidimensional en paneles que comparten eje de rotación en común. La implementación se basa en \cite{Anderson_Jensen_2024}.
+Aquí se plantea la aplicación de un modelo para conocer la fracción de \gls{sombra} unidimensional en paneles que comparten eje de rotación en común. La implementación se basa en \cite{Anderson_Jensen_2024}.
 
 Este es un tema de interés sobre el que ya existían propuestas y discusiones en el repositorio, pero no se había llegado a implementar ninguna. Como contexto previo a la realización de esta propuesta, se puede mencionar la número \#1725 fundada en un póster desarrollado por \textit{First Solar} en la librería \pvlibpy, que se puede consultar en \url{https://github.com/pvlib/pvlib-python/pull/1725}.
 
 \subsubsection{Fundamento teórico}
 
-El modelo propuesto en \cite{Anderson_Jensen_2024} parte de un diseño de dos colectores de un eje que comparten la misma dirección del eje, y uno se encuentra más cercano al Sol que el otro. Lo interesante de este diseño es que tiene en cuenta múltiples variables de diseño, como la pendiente, la separación entre el eje y el plano colector, e inclinaciones distintas del colector sombreado y el que sombrea.
+El \gls{modelo} propuesto en \cite{Anderson_Jensen_2024} parte de un diseño de dos \gls{colectores} de un eje que comparten la misma dirección del eje, y uno se encuentra más cercano al Sol que el otro. Lo interesante de este diseño es que tiene en cuenta múltiples variables de diseño, como la pendiente, la separación entre el eje y el plano colector, e inclinaciones distintas del colector sombreado y el que sombrea.
 
-Se requiere conocer el ángulo proyectado del cenit. A partir de este ángulo, mediante intersección de rectas, se puede conocer la fracción de sombra unidimensional. Realmente se trata de una función muy compleja por el número de entradas que tiene, pues adicionalmente el cálculo de esta proyección se hace internamente en la función para simplificar la API - es decir, la interfaz programática que usarán los usuarios.
+Se requiere conocer el ángulo proyectado del \gls{cenit}. A partir de este ángulo, mediante intersección de rectas, se puede conocer la fracción de \gls{sombra} unidimensional. Realmente se trata de una función muy compleja por el número de entradas que tiene, pues adicionalmente el cálculo de esta proyección se hace internamente en la función para simplificar la \gls{API} - es decir, la interfaz programática que usarán los usuarios.
 
-Se llama fracción de sombra \textbf{unidimensional} porque mide la fracción de sombra a lo largo de la línea del avance para una misma azimuth pero una elevación solar distinta. Normalmente este valor es el que dota de mayor información, pues los cambios de la sombra debido a la azimuth no cobran tanta importancia en la mayoría de ubicaciones terrestres. Son aquellas latitudes más cercanas a los polos las que más se ven afectados por la cambiante azimuth.
+Se llama fracción de \gls{sombra} \textbf{unidimensional} porque mide la fracción de \gls{sombra} a lo largo de la línea del avance para una misma azimuth pero una elevación solar distinta. Normalmente este valor es el que dota de mayor información, pues los cambios de la \gls{sombra} debido a la azimuth no cobran tanta importancia en la mayoría de ubicaciones terrestres. Son aquellas latitudes más cercanas a los polos las que más se ven afectados por la cambiante azimuth.
 
-Para facilitar la comprensión de este apartado se muestra un esquema de la sección de dos colectores con distinta inclinación y el ángulo de incidencia solar proyectado, en la imagen \ref{fig:fraccion_sombra}. $f_s$ representa la fracción sombreada del colector 2 por el colector 1:
+Para facilitar la comprensión de este apartado se muestra un esquema de la sección de dos \gls{colectores} con distinta inclinación y el ángulo de incidencia solar proyectado, en la imagen \ref{fig:fraccion_sombra}. $f_s$ representa la fracción sombreada del colector 2 por el colector 1:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{./images/shading_1d/Anderson_Jensen_Fig3.png}
-    \caption{Esquema dos colectores parametrizados, donde uno sombrea al otro. La nomenclatura corresponde la ecuación \ref{eq:sombra_t}.\\Fuente: Figura 3 en \cite{Anderson_Jensen_2024}.}
+    \caption{Esquema dos \gls{colectores} parametrizados, donde uno sombrea al otro. La nomenclatura corresponde la ecuación \ref{eq:sombra_t}.\\Fuente: Figura 3 en \cite{Anderson_Jensen_2024}.}
     \label{fig:fraccion_sombra}
 \end{figure}
 
@@ -165,9 +198,9 @@ Las ecuaciones relevantes implementadas son (12) y (13) de \cite{Anderson_Jensen
 
 Después de 102 comentarios en la propuesta, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.0}.
 
-Se ha creado un ejemplo de uso para facilitar su uso y aplicar un patrón que facilita cambiar entre los valores adecuados de fracción de sombra, pues esta función solo entiende de los ángulos del seguidor que sombrea y del que es sombreado, pero no de cómo cambian sus roles a lo largo del día en el caso de un sistema con eje orientado Norte-Sur.
+Se ha creado un ejemplo de uso para facilitar su uso y aplicar un patrón que facilita cambiar entre los valores adecuados de fracción de \gls{sombra}, pues esta función solo entiende de los ángulos del seguidor que sombrea y del que es sombreado, pero no de cómo cambian sus roles a lo largo del día en el caso de un sistema con eje orientado Norte-Sur.
 
-La documentación de la función se puede previsualizar en \ref{sct:doc_fraccion_sombra}, y la del caso de uso en \ref{sct:doc_ej_fraccion_sombra}.
+La vista previa de la documentación de la función se puede encontrar en \ref{sct:doc_fraccion_sombra}, y la del caso de uso en \ref{sct:doc_ej_fraccion_sombra}.
 
 Accesible en \linkDocsFunction{pvlib.shading.shaded\_fraction1d}.
 
@@ -180,36 +213,36 @@ Además, como anécdota se ha de mencionar que durante el desarrollo de esta pro
     \item \pr{2070}
 \end{itemize}
 
-Con esta propuesta finaliza la trilogía de contribuciones del modelo de pérdidas por sombreado en módulos con diodos de bypass.
+Con esta propuesta finaliza la trilogía de contribuciones del \gls{modelo} de pérdidas por sombreado en módulos con \gls{diodos de bypass}.
 
-La propuesta es del modelo planteado por Martínez-Moreno, F., Muñoz, J. y Lorenzo, E., en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}. Este se encarga de calcular las pérdidas por sombreado en módulos con diodos de bypass.
+La propuesta es del modelo planteado por Martínez-Moreno, F., Muñoz, J. y Lorenzo, E., en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}. Este se encarga de calcular las pérdidas por sombreado en módulos con \gls{diodos de bypass}.
 
 \subsubsection{Fundamento teórico}
 
-Los módulos de paneles solares de silicio se conforman de múltiples células fotovoltaicas. Una célula, cuando es irradiada por la luz solar, genera una corriente eléctrica. Si conectamos todas las células en serie, la corriente generada por todas las células es la misma, pero la tensión generada por cada célula se suma. Si una célula se sombrea, la corriente generada por ella disminuye, y hará que el resto de las células deban forzar la corriente por ella. Esta célula sombreada, polarizada inversamente, se comporta como una carga para el resto, y disipará energía en forma de calor.
+Los módulos de paneles solares de silicio se conforman de múltiples células fotovoltaicas. Una célula, cuando es irradiada por la luz solar, genera una corriente eléctrica. Si conectamos todas las células en serie, la corriente generada por todas las células es la misma, pero la tensión generada por cada célula se suma. Si una célula se sombrea, la corriente generada por ella disminuye, y hará que el resto de las células deban forzar la corriente por ella. Esta célula sombreada, polarizada inversamente, se comporta como una \gls{carga} para el resto, y disipará energía en forma de calor.
 
-Este efecto no es proporcional a la superficie de la sombra, sino que varía en función de la geometría de la sombra, de la geometría de las células y la conexión de los diodos de bypass.
+Este efecto no es proporcional a la superficie de la \gls{sombra}, sino que varía en función de la geometría de la \gls{sombra}, de la geometría de las células y la conexión de los \gls{diodos de bypass}.
 
-Un riesgo que supone que un célula trabaje disipando energía, en vez de generando, es que puede calentarse excesivamente y dañar las capas materiales de su módulo.
+Un riesgo que supone que un célula trabaje disipando energía, en vez de generando, es que puede calentarse excesivamente y dañar las capas materiales de su \gls{módulo}.
 
-La solución que se emplea industrialmente consiste en añadir \textit{diodos de bypass}. Estos permiten que, cuando una serie de células tiene sombra, la corriente mayoritaria generada por el resto de células que están bien iluminadas fluya a través de este diodo, evitando así atravesar la célula sombreada; de esta forma, se protege frente al sobrecalentamiento y la degradación temprana.
+La solución que se emplea industrialmente consiste en añadir \textit{diodos de bypass}. Estos permiten que, cuando una serie de células tiene \gls{sombra}, la corriente mayoritaria generada por el resto de células que están bien iluminadas fluya a través de este diodo, evitando así atravesar la célula sombreada; de esta forma, se protege frente al sobrecalentamiento y la degradación temprana.
 
 Ha de hacerse énfasis en que cada diodo de bypass protege varias células, ya que no es rentable económicamente poner un diodo por cada célula. El planteamiento que nos encontramos en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010} consiste en que, a partir del número de grupos de células protegidos por un diodo que se encuentran sombreados, se puede asumir que el aporte de potencia de este grupo es casi nulo por tener un diodo en conducción y cancelar la potencia proporcional de este grupo frente al total.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{./images/bypass_diodes/bypass_diodes.png}
-    \caption{Esquema de un módulo con 3 diodos de bypass. Si un grupo cuenta con una célula sombreada, el exceso de corriente que no puede fluir a través de ella pasa por el diodo de bypass de su grupo.\\Fuente: Figura 5, a) en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}.}
+    \caption{Esquema de un módulo con 3 \gls{diodos de bypass}. Si un grupo cuenta con una célula sombreada, el exceso de corriente que no puede fluir a través de ella pasa por el diodo de bypass de su grupo.\\Fuente: Figura 5, a) en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}.}
     \label{fig:diodos_bypass}
 \end{figure}
 
 En la imagen \ref{fig:diodos_bypass}, suponiendo que la célula número 1 está sombreada, la corriente mayoritaria generada por los grupos 17 a 32 y 33 a 48 fluye a través del diodo que está en paralelo con las células 1 a 16. No importa en este caso la corriente del grupo 1 a 16, pues la tensión de este grupo es nula por tener un diodo en conducción.
 
-Nótese que estos grupos se definen en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010} como \textit{bloques}, y según los datos provistos en sus datos originales, un bloque está sombreado en cuanto una de sus células recibe una fracción infinitesimal de sombra.
+Nótese que estos grupos se definen en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010} como \textit{bloques}, y según los datos provistos en sus datos originales, un bloque está sombreado en cuanto una de sus células recibe una fracción infinitesimal de \gls{sombra}.
 
-Lo más complicado de esta contribución es explicar en detalle cómo identificar el número de bloques y su disposición en el módulo, pues existen varias posibilidades. Hay módulos lo suficientemente pequeños para que solo tengan un diodo, los hay con dos y con tres diodos, y los hay \textit{half-cut} que también tienen 3 diodos, pero con una disposición que crea 6 bloques en vez de 3. Además, la progresión de los bloques que se va sombreando depende del sistema y la geometría de las sombras.
+Lo más complicado de esta contribución es explicar en detalle cómo identificar el número de bloques y su disposición en el \gls{módulo}, pues existen varias posibilidades. Hay módulos lo suficientemente pequeños para que solo tengan un diodo, los hay con dos y con tres diodos, y los hay \textit{half-cut} que también tienen 3 diodos, pero con una disposición que crea 6 bloques en vez de 3. Además, la progresión de los bloques que se va sombreando depende del sistema y la geometría de las sombras.
 
-El resultado de este modelo establece la cantidad de potencia que se perdería respecto de las mismas condiciones sin sombra, $SL = 1 - \frac{P_\text{sombreado}}{P_{no\,sombreado}}$. Además, anular la potencia de un bloque sombreado se hace sobre la componente directa de la irradiancia, que es la que normalmente genera las sombras, pues la componente difusa sigue impactando en las células sombreadas y creando un mínima parte de aporte energético.
+El resultado de este modelo establece la cantidad de potencia que se perdería respecto de las mismas condiciones sin \gls{sombra}, $SL = 1 - \frac{P_\text{sombreado}}{P_{no\,sombreado}}$. Además, anular la potencia de un bloque sombreado se hace sobre la componente \gls{directa} de la irradiancia, que es la que normalmente genera las sombras, pues la componente \gls{difusa} sigue impactando en las células sombreadas y creando un mínima parte de aporte energético.
 
 La expresión de pérdidas de potencia es la ecuación \ref{eq:perdidas_sombreado}, Eqs. [6] y [8] en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}.
 
@@ -222,9 +255,9 @@ La expresión de pérdidas de potencia es la ecuación \ref{eq:perdidas_sombread
 
 \subsubsection{Resultado}
 
-Se plantea una función que toma como entrada las irradiancias global y directa; los números de bloques total y sombreados, y la fracción de sombra. Se deduce internamente la irradiancia difusa tanto del cielo como de albedo, y se calcula el factor de pérdidas por sombreado.
+Se plantea una función que toma como entrada las irradiancias global y directa; los números de bloques total y sombreados, y la fracción de \gls{sombra}. Se deduce internamente la irradiancia \gls{difusa} tanto del cielo como de \gls{albedo}, y se calcula el factor de pérdidas por sombreado.
 
-La documentación de la función cuenta con un pequeño ejemplo de uso, y se puede consultar en \ref{sct:doc_modelo_perdidas_sombra}. Además, se incluye un ejemplo de uso en \ref{sct:doc_ej_perdidas_sombra} que compara distintas disposiciones de bloques por módulo a lo largo de un día, tanto en un solo módulo como en un sistema de módulos.
+La documentación de la función cuenta con un pequeño ejemplo de uso, y se puede consultar en \ref{sct:doc_modelo_perdidas_sombra}. Además, se incluye un ejemplo de uso en \ref{sct:doc_ej_perdidas_sombra} que compara distintas disposiciones de bloques por \gls{módulo} a lo largo de un día, tanto en un solo módulo como en un sistema de módulos.
 
 Tras unos 85 comentarios, finalmente se incluyen los cambios como parte de la librería en la versión \texttt{0.11.0}.
 
@@ -237,13 +270,13 @@ Accesible en \linkDocsFunction{pvlib.shading.direct\_martinez}.
     \item \pr{2048}
 \end{itemize}
 
-Esta contribución se trata de un pequeño modelo que abre un nuevo tema en la librería: la agrivoltaica. La agrivoltaica es una técnica en la que coexisten la producción de energía solar y la producción agrícola en un mismo terreno. La ventaja es que un exceso de irradiancia puede no aumentar la producción agrícola e incluso llegar a ser perjudicial para la plantación, y el retorno económico del terreno puede ser mayor que si solo se dedicase únicamente a la producción de energía solar o de alimentos. Además, disminuye el uso exclusivo de suelo para producción energética, que en ocasiones es un tema controversial\footnote{Por ejemplo, el siguiente artículo periodístico: \url{https://www.bbc.com/news/uk-politics-65926756}.}.
+Esta contribución se trata de un pequeño modelo que abre un nuevo tema en la librería: la \gls{agrivoltaica}. La agrivoltaica es una técnica en la que coexisten la producción de energía solar y la producción agrícola en un mismo terreno. La ventaja es que un exceso de irradiancia puede no aumentar la producción agrícola e incluso llegar a ser perjudicial para la plantación, y el retorno económico del terreno puede ser mayor que si solo se dedicase únicamente a la producción de energía solar o de alimentos. Además, disminuye el uso exclusivo de suelo para producción energética, que en ocasiones es un tema controversial\footnote{Por ejemplo, el siguiente artículo periodístico: \url{https://www.bbc.com/news/uk-politics-65926756}.}.
 
-El modelo en cuestión es la continuación de un trabajo realizado por Spitters C. J. T. et al. que cubre la separación de irradiación en directa y difusa en general \cite{Spitters_Toussaint_Goudriaan_1986}, y que posteriormente él desglosa en dos expresiones en \cite{Spitters_1986}, que se pueden sustituir una en la otra. El objetivo de este modelado es calcular la fracción de irradiación difusa que es útil para las plantas -es decir, fotosintetizable- a partir de la fracción de irradiación difusa global.
+El modelo en cuestión es la continuación de un trabajo realizado por Spitters C. J. T. et al. que cubre la separación de \gls{irradiación} en \gls{directa} y \gls{difusa} en general \cite{Spitters_Toussaint_Goudriaan_1986}, y que posteriormente él desglosa en dos expresiones en \cite{Spitters_1986}, que se pueden sustituir una en la otra. El objetivo de este modelado es calcular la fracción de irradiación difusa que es útil para las plantas -es decir, fotosintetizable- a partir de la fracción de irradiación difusa global.
 
 \subsubsection{Fundamento teórico}
 
-La irradiación difusa fotosintetizable (\textit{PAR}, por sus siglas en inglés), es la radiación difusa que se encuentra en el rango de longitudes de onda que las plantas pueden absorber y utilizar para la fotosíntesis. Es interesante de cara a simular el crecimiento y producción de las plantas, y se emplea en modelos de cultivo. Esto último queda fuera del alcance de la librería, pero se plantea como un paso para motivar y facilitar el diseño de sistemas agrivoltaicos.
+La \gls{irradiación} difusa fotosintetizable (\textit{PAR}, por sus siglas en inglés), es la radiación difusa que se encuentra en el rango de longitudes de onda que las plantas pueden absorber y utilizar para la fotosíntesis. Es interesante de cara a simular el crecimiento y producción de las plantas, y se emplea en modelos de cultivo. Esto último queda fuera del alcance de la librería, pero se plantea como un paso para motivar y facilitar el diseño de sistemas agrivoltaicos.
 
 Se utiliza irradiación diaria $[J/m^2/dia]$, en vez del valor instantáneo irradiancia propio de la simulación de sistemas fotovoltaicos $[W/m^2]$.
 
@@ -273,34 +306,36 @@ Accesible en \linkDocsFunction{pvlib.irradiance.diffuse\_par\_spitters}.
 \begin{itemize}
     \item \issue{1541}
     \item \pr{2046}
+    \item \pr{2147}
+    \item \pr[https://github.com/NREL/bifacial_radiance]{520} en \textit{NREL/bifacial\_radiance}
 \end{itemize}
 
-Esta contribución implementa un modelo de pérdidas sobre la potencia de salida para módulos bifaciales, es decir, aquellos que pueden recibir irradiación solar tanto por una cara delantera como por la trasera. El modelo se aplica para tener en cuenta irradiancia que no es homogénea en la superficie del módulo. Se trata del trabajo descrito en \cite{Deline_Ayala_Pelaez_MacAlpine_Olalla_2020}.
-Presenta interés en sistemas bifaciales, donde la cara trasera normalmente se expone a la luz reflejada por el suelo y otras obstrucciones, y por tanto la irradiancia de esa cara no es homogénea.
+Esta contribución implementa un modelo de pérdidas sobre la potencia de salida para \gls{módulos bifaciales}, es decir, aquellos que pueden recibir \gls{irradiancia} solar tanto por una cara delantera como por la trasera. El modelo se aplica para tener en cuenta irradiancia que no es homogénea en la superficie del \gls{módulo}. Se trata del trabajo descrito en \cite{Deline_Ayala_Pelaez_MacAlpine_Olalla_2020}.
+Presenta interés en sistemas bifaciales, donde la cara trasera normalmente se expone a la luz \gls{reflejada} por el suelo y otras obstrucciones, y por tanto la irradiancia de esa cara no es homogénea.
 
 En la cara frontal la irradiancia es mucho más homogénea, así que no se suele tener en cuenta este efecto. No obstante, este modelo se aplica para el valor global de las irradiancias a nivel de célula, o sea, de la suma de la frontal y de la trasera.
 
 \subsubsection{Fundamento teórico}
 
-Anteriormente se explicaba el mecanismo de interconexión de células solares fotovoltaicas, y cómo una célula sombreada puede evitar la producción de energía de las células circundantes. De forma similar ocurre a pequeña escala, cuando una o varias células reciben valores de irradiancia ligeramente distintos al resto. La célula que recibe menos irradiancia limita la corriente, y la potencia de salida del módulo se ve reducida. Sin embargo, por darse en una escala mucho menor, no se puede considerar que la célula sombreada anule la potencia de las demás ya que los diodos de bypass no entran en conducción, sino que simplemente la reduce ligeramente.
+Anteriormente se explicaba el mecanismo de interconexión de células solares fotovoltaicas, y cómo una célula sombreada puede evitar la producción de energía de las células circundantes. De forma similar ocurre a pequeña escala, cuando una o varias células reciben valores de irradiancia ligeramente distintos al resto. La célula que recibe menos irradiancia limita la corriente, y la potencia de salida del módulo se ve reducida. Sin embargo, por darse en una escala mucho menor, no se puede considerar que la célula sombreada anule la potencia de las demás ya que los \gls{diodos de bypass} no entran en conducción, sino que simplemente la reduce ligeramente.
 
 Desde un punto de vista computacional, resolver un sistema de múltiples células, cada una con su propia irradiancia, es realmente costoso en tiempo y en recursos. Cada célula tendría su propia curva I-V, que representa cuanta corriente y tensión genera dependiendo del punto de tensión de trabajo. El planteamiento que se hace en \cite{Deline_Ayala_Pelaez_MacAlpine_Olalla_2020} es realizar un trabajo previo de caracterización de la heterogeneidad, cuantificarla y establecer un modelo de menor orden de complejidad.
 
 Para caracterizar distribuciones de irradiancia, en el artículo de Deline et al. \cite{Deline_Ayala_Pelaez_MacAlpine_Olalla_2020} se plantea utilizar la desviación estándar, muy común para distribuciones normales, o la \textit{Diferencia Absoluta Media Relativa} (\textit{RMAD}, por sus siglas en inglés), que es una medida de dispersión que se argumenta ser más adecuada para distribuciones no normales \cite{Ginis_mean_difference_2003}.
 
-La pérdida de potencia de salida $M$ se calcula con un polinomio evaluado en \textit{RMAD}:
+La pérdida de potencia de salida $M$ se calcula con un polinomio de segundo grado evaluado en \textit{RMAD} que pasa por el origen, pues sin heterogeneidad no pueden haber pérdidas:
 
 \begin{equation} \label{eq:perdidas_heterogeneidad}
-    M = 1 - \frac{P_\text{array}}{\sum P_\text{cells}}
+    M = 1 - \frac{P_\text{array}}{\sum P_\text{cells}} = a_1 \cdot \text{RMAD} + a_2 \cdot \text{RMAD}^2
 \end{equation}
 
-donde $P_\text{array}$ es la potencia de salida del módulo, y $P_\text{cells}$ es la potencia máxima de salida de cada célula.
+donde $P_\text{array}$ es la potencia de salida del módulo, $P_\text{cells}$ es la potencia máxima de salida de cada célula y $a_i$ son coeficientes propios para cada distribución de no homogeneidad.
 
-Se proponen dos modelos para el polinomio que define $M$, para dos perfiles de irradiancias globales distintos: uno para sistemas sujetos fijos y otro para seguidores de un eje. No obstante, solo se implementa el de sistemas fijos ya que la referencia indica que para valores anuales parece ser más preciso.
+Se proponen dos modelos para el polinomio que define $M$, para dos perfiles de irradiancias globales distintos: uno para \gls{sistemas sujetos fijos} y otro para \gls{seguidores de un eje}. No obstante, solo se implementa el de sistemas fijos ya que la referencia indica que para valores anuales parece ser más preciso.
 
 \subsubsection{Resultado}
 
-La implementación del modelo es casi directa, pues el patrón para evaluar un polinomio en determinados valores es directo con el uso de la librería \textit{NumPy}. Se añade un parámetro opcional para que la persona usuaria final pueda especificar su propio polinomio o emplear alguno otro provisto en el artículo original; y se añaden dos parámetros que corrigen el factor de pérdidas en función de los factores de forma de las células.
+La implementación del modelo es casi directa, pues el patrón para evaluar un polinomio en determinados valores es directo con el uso de la librería \textit{NumPy}. Se añade un \gls{parámetro} opcional para que la persona usuaria final pueda especificar su propio polinomio o emplear alguno otro provisto en el artículo original; y se añaden dos parámetros que corrigen el factor de pérdidas en función de los factores de forma de las células.
 
 Esta documentación es extensa porque es clave para su buen uso y entendimiento. Abarca desde la interfaz general hasta las ecuaciones que describen la entrada de \textit{RMAD} y cómo la heterogeneidad de la irradiancia trasera se propaga a la global. Se recomienda revisar la documentación de la función en \ref{sct:doc_modelo_ajuste_no_uniformidad}.
 
@@ -310,7 +345,9 @@ Tras involucrarse 7 personas y generar 86 comentarios en los que se plantean dis
 
 Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
 
-Los autores originales del modelo científico piden contrastar la implementación con la suya, y se valora hacerlo en un futuro próximo antes de la siguiente versión de la librería. Se plantea como tarea futura.
+Los autores originales del modelo científico piden contrastar la implementación con la suya. Como resultado de esta comparación se detectan dos diferencias, una que se puede atribuir a confundir el significado del acrónimo \textit{RMAD} como \textit{Relative Mean Absolute Deviation} en vez de \textit{Relative Mean Absolute Difference}, que son parámetros estadísticos distintos. La otra diferencia es en el código proporcionado para la comparación, disponible en el repositorio \href{https://github.com/NREL/bifacial_radiance/}{NREL/bifacial\_radiance}, en el que se confunden las unidades de entrada y salida de la función, en este caso en porcentajes.
+
+A partir de aquí se realizan cambios en el mismo proyecto de \pvlibpy{} para corregir la primera diferencia y mejorar ligeramente la documentación. Se plantea otra propuesta para corregir la segunda diferencia en el código de los autores originales en \href{https://github.com/NREL/bifacial_radiance/pull/520}{NREL/bifacial\_radiance/\#520}.
 
 \subsection{Transformación de respuesta espectral a eficiencia cuántica externa y viceversa}
 
@@ -321,17 +358,17 @@ Los autores originales del modelo científico piden contrastar la implementació
 
 Esta contribución podría calificarse de menor debido a la ausencia de dificultades en su implementación. No obstante, por dotar de una nueva funcionalidad científica a la librería, se incluye en este apartado.
 
-La propuesta consiste en dos funciones, una que convierte la respuesta espectral a la eficiencia cuántica externa y otra que hace la operación inversa. Ambas son medidas de la eficiencia de una célula solar para determinadas longitudes de onda de la luz, la primera como corriente generada en función de la potencia recibida y la segunda como la razón de fotones incidentes que generan una corriente eléctrica.
+La propuesta consiste en dos funciones, una que convierte la \gls{respuesta espectral} a la \gls{eficiencia cuántica externa} y otra que hace la operación inversa. Ambas son medidas de la eficiencia de una \gls{célula solar} para determinadas longitudes de onda de la luz, la primera como corriente generada en función de la potencia recibida y la segunda como la razón de fotones incidentes que generan una corriente eléctrica.
 
 \subsubsection{Fundamento teórico}
 
-La eficiencia cuántica externa es una medida de la eficiencia de una célula solar, y se define como la razón de fotones incidentes que generan una corriente eléctrica para determinado color de la luz. La respuesta espectral es la corriente generada por una célula solar en función de la longitud de onda de la luz incidente.
+La eficiencia cuántica externa es una medida de la eficiencia de una célula solar, y se define como la razón de fotones incidentes que generan una corriente eléctrica para determinado color de la luz. La respuesta espectral es la corriente generada por una célula solar en función de la \gls{longitud de onda} de la luz incidente.
 
-La relación entre ambas es la siguiente \cite[pp. 15-16, Eq. \brackettext{7}]{Markvart2012-un}. Se puede encontrar en la ecuación \ref{eq:relacion_sr_eqe}:
+La relación entre ambas se establece mediante la ecuación \ref{eq:relacion_sr_eqe} \cite[pp. 15-16, Eq. \brackettext{7}]{Markvart2012-un}.
 
 \subsubsection{Resultado}
 
-Ambas funciones se diseñan con un patrón que permite que la entrada sea única a través de una tabla tabulada e indexada por la longitud de onda en un \texttt{pandas.Series} o \texttt{pandas.DataFrame}, o bien mediante dos listas de irradiancias y longitudes de onda.
+Ambas funciones se diseñan con un patrón que permite que la entrada sea única a través de una \gls{tabla tabulada e indexada} por la \gls{longitud de onda} en un \texttt{pandas.Series} o \texttt{pandas.DataFrame}, o bien mediante dos listas de irradiancias y longitudes de onda.
 
 Además, se añade la posibilidad de normalizar los valores de salida, es decir, hacer que el máximo retornado sea 1. Esta utilidad es interesante porque las medidas de eficiencia cuántica externa y respuesta espectral es habitual que sean relativas al dispositivo de medida, y se necesite hacer un tratamiento posterior para deducir los valores absolutos.
 
@@ -355,11 +392,11 @@ Accesibles en:
     \item \pr{2038}
 \end{itemize}
 
-Con esta propuesta se pretendía añadir una serie de respuestas espectrales o de eficiencia cuántica externa de células solares de distintas tecnologías comunes, para facilitar la investigación.
+Con esta propuesta se pretendía añadir una serie de respuestas espectrales o de \gls{eficiencia cuántica externa} de células solares de distintas tecnologías comunes, para facilitar la investigación.
 
 \subsubsection{Fundamento teórico}
 
-Una curva de respuesta espectral indica la capacidad que tiene un semiconductor fotovoltaico en convertir la luz incidente en corriente eléctrica en función de la longitud de onda. La eficiencia cuántica externa similarmente es una medida de la eficiencia de una célula solar para convertir fotones en pares electrón-hueco.
+Una curva de \gls{respuesta espectral} indica la capacidad que tiene un \gls{semiconductor} fotovoltaico en convertir la luz incidente en corriente eléctrica en función de la \gls{longitud de onda}. La eficiencia cuántica externa similarmente es una medida de la eficiencia de una célula solar para convertir fotones en pares electrón-hueco.
 
 Dependiendo de la tecnología de cada material, la respuesta varía. Además, se puede argumentar que otros aspectos constructivos también afectan, como los espesores de las capas y la presencia de impurezas.
 
@@ -367,33 +404,33 @@ Dependiendo de la tecnología de cada material, la respuesta varía. Además, se
 
 La propuesta no se llegó a añadir en la librería ya que los datos provistos de un repositorio público (en Duramat\footnote{Véase \url{https://www.osti.gov/biblio/2204677}.}) no estaban respaldados por un procedimiento que garantizase que los datos fueran representativos. Tras unas semanas sin mostrarse interés en la propuesta se solicita retroalimentación para tomar una decisión y procede a cerrarse.
 
-\subsection{Adición de espectro estándar completo ASTM G173-03}
+\subsection{Adición de espectro \gls{estándar} completo ASTM G173-03}
 
 \begin{itemize}
     \item \issue{2039}
     \item \pr{1963}
 \end{itemize}
 
-Esta adición plantea añadir las componentes de irradiancia directa y extraterrestre del estándar ASTM G173-03, que es un espectro de referencia para la radiación solar en la superficie terrestre. La componente global ya se encontraba en la librería. Se aprovecha para añadir flexibilidad y prevenir la adición de nuevos estándares, como el similar ASTM G173-23 en un futuro.
+Esta adición plantea añadir las componentes de irradiancia \gls{directa} y extraterrestre del estándar ASTM G173-03, que es un espectro de referencia para la \gls{radiación solar} en la superficie terrestre. La componente global ya se encontraba en la librería. Se aprovecha para añadir flexibilidad y prevenir la adición de nuevos estándares, como el similar ASTM G173-23 en un futuro.
 
 \subsubsection{Fundamento teórico}
 
-Un espectro estándar es de gran utilidad para comparar módulos y establecer métodos idénticos para tomar las medidas en la industria. En el caso del espectro estándar ASTM G173-03, se establecen una serie de puntos entre los 280 nm y los 4000 nm que simulan una distribución espectral bastante plausible.
+Un \gls{espectro estándar} es de gran utilidad para comparar módulos y establecer métodos idénticos para tomar las medidas en la industria. En el caso del espectro estándar ASTM G173-03, se establecen una serie de puntos entre los 280 nm y los 4000 nm que simulan una distribución espectral bastante plausible.
 
 La irradiancia extraterrestre es la irradiancia que se recibe en el espacio, y la irradiancia directa es la irradiancia que se recibe en la superficie terrestre sin ser dispersada por la atmósfera, y la global es toda la que se recibe en la superficie terrestre.
 
-El estándar ASTM G173-03 se encuentra en \cite{astm_g173-03}, pero los valores del espectro están disponibles abiertamente en \url{https://www.nrel.gov/grid/solar-resource/spectra-am1.5.html}.
+El \gls{estándar} ASTM G173-03 se encuentra en \cite{astm_g173-03}, pero los valores del espectro están disponibles abiertamente en \url{https://www.nrel.gov/grid/solar-resource/spectra-am1.5.html}.
 La nueva revisión ASTM G173-23 se encuentra en \cite{astm_g173-23}, pero no cuenta con datos abiertos en la red a día de la redacción de este documento.
 
 Las componentes de este espectro se pueden consultar en la Figura \ref{sct:doc_ej_espectro_astm}.
 
 \subsubsection{Resultado}
 
-Esta implementación permite obtener el estándar completo y todas sus componentes, lo que hace que la antigua función que solo devolvía la componente global quede obsoleta (\linkDocsFunction{pvlib.spectrum.get\_am15g}). Se aportan cambios y se añaden tests para asegurar que la función obsoleta se elimina adecuadamente en el futuro.
+Esta implementación permite obtener el \gls{estándar} completo y todas sus componentes, lo que hace que la antigua función que solo devolvía la componente global quede obsoleta (\linkDocsFunction{pvlib.spectrum.get\_am15g}). Se aportan cambios y se añaden tests para asegurar que la función obsoleta se elimina adecuadamente en el futuro.
 
 Se aplica un patrón que permitirá añadir otros estándares en el futuro sin necesidad de modificar la interfaz de los usuarios. Tanto los tests como la documentación requerirán modificaciones menores para añadir los nuevos estándares.
 
-La documentación de esta utilidad se puede consultar en \ref{sct:doc_espectro_astm-173-03}. Además, se añade un ejemplo de uso, disponible para previsualizar en \ref{sct:doc_ej_espectro_astm}.
+La documentación de esta utilidad se puede consultar en \ref{sct:doc_espectro_astm-173-03}. Además, se añade un ejemplo de uso, disponible su vista previa en \ref{sct:doc_ej_espectro_astm}.
 
 Se incluyen los cambios en la versión \texttt{0.11.0} de la librería.
 
@@ -406,7 +443,7 @@ Accesible en \linkDocsFunction{pvlib.spectrum.get\_reference\_spectra}.
     \item \pr{2106}
 \end{itemize}
 
-Se ha podido comprobar que el cálculo de sombras en sistemas fotovoltaicos dentro de \pvlibpy{} es un tema de interés que gracias a este TFG se ha mejorado. Adicionalmente, se ha podido comprobar que la librería no cuenta con una función que permita calcular sombras a partir de objetos en 3D, pero realmente parece ser un tema sobre el que hay literatura. Además, \textit{PVsyst}, un software de simulación de sistemas fotovoltaicos ampliamente conocido cuenta con esta funcionalidad.
+Se ha podido comprobar que el cálculo de sombras en sistemas fotovoltaicos dentro de \pvlibpy{} es un tema de interés que gracias a este TFG se ha mejorado. Adicionalmente, se ha podido comprobar que la librería no cuenta con una función que permita calcular sombras a partir de objetos en 3D, pero realmente parece ser un tema sobre el que hay literatura. Además, \textit{PVsyst}, un \gls{software} de simulación de sistemas fotovoltaicos ampliamente conocido cuenta con esta funcionalidad.
 
 Todo esto se puede explorar en un artículo sobre el sombreado de campos de cultivo en sistemas agrivoltaicos \cite{Zainali_Ma_Lu_Stridh_Avelin_Amaducci_Colauzzi_Campana_2023}.
 
@@ -430,7 +467,7 @@ No se ahonda en estos detalles que generalmente nos brindan algunas librerías d
 
 \begin{itemize}
     \item \textit{NumPy} para operaciones con vectores y matrices de forma muy veloz.
-    \item \textit{SciPy} para cálculos matemáticos más complejos, particularmente en este caso para hacer rotaciones según que convención se desee, y aplicarla rápidamente mediante el uso de cuaterniones, una manera de representar de rotaciones más compacta y veloz computacionalmente.
+    \item \textit{SciPy} para cálculos matemáticos más complejos, particularmente en este caso para hacer rotaciones según que convención se desee, y aplicarla rápidamente mediante el uso de \glspl{cuaternión}, una manera de representar de rotaciones más compacta y veloz computacionalmente.
     \item \textit{Shapely} para operaciones geoespaciales (según un modelo topológico que permite operaciones geométricas con polígonos). En este caso, se emplea para limitar las sombras a una superficie de interés y representar los objetos de forma uniforme.
 \end{itemize}
 
@@ -442,22 +479,20 @@ Lo primero que necesita un flujo de trabajo de este tipo es definir coordenadas 
 
 Posteriormente, una vez creadas las superficies, tanto las sombreadas como las que generan sombras, se debe calcular el vector de posición solar. Este vector se calcula a partir de la posición del Sol en el cielo, que se puede obtener con la función \linkDocsFunction{pvlib.solarposition.get\_solarposition} y con relaciones trigonométricas.
 
-A continuación, se proyectan los vértices de las superficies que sombrean sobre el plano sombreado, y estos puntos definirán una sombra en la escena 3D. Nótese por tanto que esta sombra puede y debe tener tres coordenadas.
+A continuación, se proyectan los vértices de las superficies que sombrean sobre el plano sombreado, y estos puntos definirán una \gls{sombra} en la escena 3D. Nótese por tanto que esta \gls{sombra} cuenta con coordenadas en $\mathbb{R}^3$.
 
-Para obtener la sombra 3D final, debe limitarse los límites de esta a la superficie de interés. Para esto se emplea \textit{Shapely}, que permite realizar operaciones geométricas con polígonos.
+Para obtener la \gls{sombra} 3D final, debe limitarse los límites de esta a la superficie de interés. Para esto se emplea \textit{Shapely}, que permite realizar operaciones geométricas con polígonos.
 
-Si se desease obtener la sombra en un plano 2D, para realizar otros cálculos y facilitar la visualización, se debe realizar una traslación que ubique la figura en un plano que pase por el origen y unas rotaciones contrarias a las que definen el plano sobre la que se proyectó. Este paso se hace trasladando los puntos del objeto en 3D tomando una referencia cualquiera en su mismo plano.
+Si se desea obtener la \gls{sombra} en un plano 2D, para realizar otros cálculos y facilitar la visualización de los límites de la \gls{sombra}, se debe realizar una traslación que ubique la figura en un plano que pase por el origen y unas rotaciones contrarias a las que definen el plano sobre la que se proyectó. Este paso se hace trasladando los puntos del objeto en 3D tomando una referencia cualquiera en su mismo plano. Así la tercera coordenada en Z queda nula y se puede hacer uso de las nuevas coordenadas en $\mathbb{R}^2$.
 
 \subsubsection{Resultado}
 
-Ahondando en los detalles, para la resolución de este problema se decide aplicar un paradigma orientado a objectos para facilitar el uso de esta funcionalidad. Se plantean dos objetos:
+Ahondando en los detalles, para la resolución de este problema se decide aplicar un paradigma orientado a objectos para facilitar el uso de esta funcionalidad. Se plantean los dos siguientes objetos:
 
 \begin{itemize}
-    \item \texttt{FlatSurface}: una superficie poligonal en el espacio 3D, genérica y que implementa las operaciones que no dependen de la geometría de la superficie, como el cálculo de la sombra que le llega.
+    \item \texttt{FlatSurface}: una superficie poligonal en el espacio 3D, genérica y que implementa las operaciones que no dependen de la geometría de la superficie, como el cálculo de la \gls{sombra} que le llega.
     \item \texttt{RectangularSurface}: una especialización de \texttt{FlatSurface} que permite definir superficies rectangulares, que son las más comunes en sistemas fotovoltaicos. En especial, este objeto facilita la creación de superficies a partir de los parámetros más habituales en una instalación fotovoltaica.
 \end{itemize}
-
-uno base para cualquier superficie poligonal (\texttt{FlatSurface}) y una especialización para superficies rectangulares, que son las más comunes en sistemas fotovoltaicos (\texttt{RectangularSurface}).
 
 El diagrama UML resultante sería:
 
@@ -468,7 +503,7 @@ El diagrama UML resultante sería:
     \label{fig:uml_sombreado}
 \end{figure}
 
-La elección de un diagrama tan sencillo no es arbitraria: aquí prima la simplicidad y la facilidad de revisar el código para determinar si tiene valor o no dentro de la librería \pvlibpy. Y realmente se logra sintetizar la API con un buen compromiso entre lo automatizado y la intervención de una persona usuaria. Véase el ejemplo elaborado a continuación:
+La elección de un diagrama tan sencillo no es arbitraria: aquí prima la simplicidad y la facilidad de revisar el código para determinar si tiene valor o no dentro de la librería \pvlibpy. Y realmente se logra sintetizar la \gls{API} con un buen compromiso entre lo automatizado y la intervención de una persona usuaria. Véase el ejemplo elaborado a continuación:
 
 \begin{lstlisting}[language=Python, caption={Caso de uso de ejemplo para la propuesta de cálculo de sombras en 3D.}, label={lst:sombreado_3d}]
 from pvlib.spatial import RectangularSurface
@@ -547,7 +582,7 @@ Debe denotarse que la mayor parte del código supone imprimir la escena y las so
     \label{fig:sombreado_3d}
 \end{figure}
 
-Puede consultarse la documentación de los dos objetos planteados en \ref{sct:doc_sombras_3d} y de los dos ejemplos de uso en \ref{sct:doc_ej_sombras_3d}. Uno de los ejemplos es una simulación temporal en la que se puede observar cómo varía la sombra a lo largo de los equinoccios y los solsticios, mientras que la otra es la misma escena planteada aquí arriba, pero con el texto explicativo propio de un ejemplo.
+Puede consultarse la documentación de los dos objetos planteados en \ref{sct:doc_sombras_3d} y de los dos ejemplos de uso en \ref{sct:doc_ej_sombras_3d}. Uno de los ejemplos es una simulación temporal en la que se puede observar cómo varía la \gls{sombra} a lo largo de los equinoccios y los solsticios, mientras que la otra es la misma escena planteada aquí arriba, pero con el texto explicativo propio de un ejemplo.
 
 Se deja abierto el aporte a la librería, con opiniones diversas sobre si incluir o no la propuesta.
 
@@ -563,7 +598,7 @@ Son aquellas que requieren trabajar con el código base y hacer modificaciones p
     \item \pr{2007}
 \end{itemize}
 
-Un test empezó a fallar en la librería, se desconoce las causas, pero solo afectaba a las versiones de la librería cuando se instalaba en Windows con Conda. Este test comprobaba que una curva I-V de una célula solar - esto es, la tensión que aparece en sus terminales en función de la corriente que deja pasar la carga - resultaba válida, y específicamente esperaba que para determinado valor de entrada, la función devolviese un cero prácticamente exacto. Empezó a fallar y retornar un valor igualmente cercano a cero, pero fuera de la tolerancia que se suponía debía de estar.
+Un test empezó a fallar en la librería, se desconoce las causas, pero solo afectaba a las versiones de la librería cuando se instalaba en Windows con Conda. Este test comprobaba que una \gls{curva I-V} de una \gls{célula solar} - esto es, la tensión que aparece en sus terminales en función de la corriente que deja pasar la \gls{carga} - resultaba válida, y específicamente esperaba que para determinado valor de entrada, la función devolviese un cero prácticamente exacto. Empezó a fallar y retornar un valor igualmente cercano a cero, pero fuera de la tolerancia que se suponía debía de estar.
 
 Algunos de los mantenedores determinaron que no era necesario replantear ni el test ni conocer el motivo la causa, sino que se trataba de un exceso en la precisión que se le pedía al test. Se modificó para que aceptase un margen de error mayor.
 
@@ -582,11 +617,11 @@ El cambio se incluyó con éxito con bastante rapidez y fue agradecido por los m
 
 Los procedimientos de integración continua supusieron un gran cambio de cara a garantizar la calidad del código en versiones posteriores a la implantación de los mismos. Previo a esto, algunas erratas permanecieron vigentes hasta día de la elaboración de este TFG.
 
-Hoy se identifican fallos de análisis estático en el código nada más hacer una propuesta de cambios. Estos fallos son aquellos que se pueden identificar sin necesidad de ejecutar el código, como el de este caso, que se trataba de un parámetro que no se estaba utilizando en una función.
+Hoy se identifican fallos de análisis estático en el código nada más hacer una propuesta de cambios. Estos fallos son aquellos que se pueden identificar sin necesidad de ejecutar el código, como el de este caso, que se trataba de un \gls{parámetro} que no se estaba utilizando en una función.
 
-Este parámetro fue encontrado gracias al resaltado de sintaxis del entorno de desarrollo y se procedió a modificar la función para que cumplir con su propósito: establecer la tolerancia absoluta de convergencia de un método numérico.
+Este parámetro fue encontrado gracias al resaltado de sintaxis del \gls{entorno de desarrollo} y se procedió a modificar la función para que cumplir con su propósito: establecer la tolerancia absoluta de convergencia de un método numérico.
 
-El parámetro es \texttt{xtol} de la función \linkDocsFunction{pvlib.irradiance.ghi\_from\_poa\_driesse\_2023}. Esta función hace una transposición inversa, que es deducir la irradiancia global horizontal a partir de la irradiancia en un plano inclinado. El parámetro \texttt{xtol} es la tolerancia absoluta en la convergencia del método numérico y es un factor determinante en el tiempo de ejecución de la función.
+El parámetro es \texttt{xtol} de la función\\ \linkDocsFunction{pvlib.irradiance.ghi\_from\_poa\_driesse\_2023}. Esta función hace una \gls{transposición inversa}, que es deducir la irradiancia global horizontal a partir de la irradiancia en un plano inclinado. El parámetro \texttt{xtol} es la tolerancia absoluta en la convergencia del método numérico y es un factor determinante en el tiempo de ejecución de la función.
 
 \subsubsection{Resultado}
 
@@ -609,7 +644,7 @@ El modelo al que le faltaba dar soporte era un interpolador de datos ángulo-mod
 
 El cambio se incluyó con éxito y ahora se encuentra disponible su interfaz en la \texttt{Modelchain}, en \linkDocsFunction{pvlib.modelchain.ModelChain.interp\_aoi\_loss}.
 
-Además, en un plano igual o más importante, se detectó un error en la implementación que ignoraba un parámetro opcional en otro de los modelos que se pueden emplear para simular este efecto.
+Además, en un plano igual o más importante, se detectó un error en la implementación que ignoraba un \gls{parámetro} opcional en otro de los modelos que se pueden emplear para simular este efecto.
 
 \subsection{Suprimir una advertencia al publicar la distribución en PyPI}
 
@@ -628,7 +663,7 @@ Siguiendo este criterio, se revisa manualmente el proceso:
     \item Publicación de prueba en TestPyPI: se detecta una advertencia sobre el formato de la descripción que se obtiene de \texttt{README.md}, el archivo de presentación del proyecto.
 \end{enumerate}
 
-No se trata de nada crítico: tan sólo es la plataforma PyPI que solicita explícitamente el formato del texto de la descripción del proyecto. Puede aportarse en texto plano, MarkDown o reStructuredText.
+No se trata de nada crítico: tan sólo es la plataforma PyPI que solicita explícitamente el formato del texto de la descripción del proyecto. Puede aportarse en texto plano, MarkDown o \gls{reStructuredText}.
 
 \subsubsection{Resultado}
 
@@ -643,7 +678,7 @@ Se suprime adecuadamente la advertencia especificando que el formato es reStruct
 
 Esta contribución da inicio con la solicitud de un usuario que desea modificar los parámetros de tolerancia de unas funciones que resuelven las curvas I-V de las células o módulos fotovoltaicos.
 
-Estas curvas son de especial interés para saber cómo se va a comportar eléctricamente el circuito cuando se conecte una carga y hallar el punto de máxima potencia, pero la complejidad matemática que suponen hacen que se resuelvan mediante métodos numéricos. Estos métodos son iterativos y requieren de una precisión para converger.
+Estas curvas son de especial interés para saber cómo se va a comportar eléctricamente el circuito cuando se conecte una \gls{carga} y hallar el punto de máxima potencia, pero la complejidad matemática que suponen hacen que se resuelvan mediante métodos numéricos. Estos métodos son iterativos y requieren de una precisión para converger.
 
 Por defecto esta tolerancia es de $10^{-6}$ [voltios, amperios o vatios], lo que a este usuario le parecía excesivo y quería agilizar el proceso modificando dicho valor. Este caso no es extensible a todos los contextos, pero el planteamiento es completamente válido sobre las hipótesis que plantea el usuario.
 
@@ -661,7 +696,7 @@ Este último apartado supuso la mayor dificultad en implementarse, pero se consi
     \item \pr{2082}
 \end{itemize}
 
-Originalmente la librería empleó un framework de testing que especificaba las tolerancias como número de decimales después de la coma. Al cambiar de framework al nuevo y más moderno \textit{pytest}, no se modificaron estos números para reflejar el nuevo significado de las tolerancias, como un margen absoluto en torno al que deben estar los números.
+Originalmente la librería empleó un \gls{framework} de testing que especificaba las tolerancias como número de decimales después de la coma. Al cambiar de framework al nuevo y más moderno \textit{pytest}, no se modificaron estos números para reflejar el nuevo significado de las tolerancias, como un margen absoluto en torno al que deben estar los números.
 
 Supuso que números enteros que representaban número de ceros hasta el primer uno se empezasen a interpretar como una tolerancia absoluta. Por ejemplo, donde antes había un $6$ ahora debía escribirse un $1e-6 = 10^{-6}$.
 
@@ -678,7 +713,7 @@ El cambio se incluyó con éxito, sin diagnosticar ningún fallo derivado de est
     \item \pr{2020}
 \end{itemize}
 
-En \pvlibpy{} existe la función \linkDocsFunction{pvlib.pvsystem.retrieve\_sam} que permite leer de bases de datos ya inclusas en la librería o remotas mediante una URL, mediante dos parámetros distintos. Resulta que si se especificaban ambos parámetros, solo se leía la base de datos de la distribución, y no la remota, sin emitir ningún aviso.
+En \pvlibpy{} existe la función \linkDocsFunction{pvlib.pvsystem.retrieve\_sam} que permite leer de bases de datos ya inclusas en la librería o remotas mediante una URL, mediante dos parámetros distintos. Un usuario detecta un \gls{bug}: si se especifican ambos parámetros, solo se lee la base de datos que se incluye con la distribución, y no la remota, sin emitir ningún aviso.
 
 \subsubsection{Resultado}
 
@@ -698,12 +733,12 @@ Se prioriza que el renovado entorno pueda pasar el mayor tiempo posible sin gene
 
 Entre las características más destacables de la nueva documentación está el atajo de teclado para realizar búsquedas; tema gráfico para cambiar entre unos colores claros y otros oscuros según la preferencia del lector, y una ubicación un poco más estética de algunos elementos.
 
-Se han aceptado los cambios, que serán visibles en la rama estable de la documentación a partir de la próxima versión \texttt{0.11.1}.
+Se han aceptado los cambios, que serán visibles en la \gls{rama} estable de la documentación a partir de la próxima versión \texttt{0.11.1}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Contribuciones menores} \label{sct:desarrollo:contribuciones_menores}
 
-Aquí se tratan aquellas que no suponen un desafío ni técnico ni científico, si bien suponen y parten de la interacción en el repositorio y la identificación particular de necesidades. En especial, son cambios que únicamente modifican la documentación o no requieren de un análisis profundo.
+Aquí se tratan aquellas que no suponen un desafío ni técnico ni científico, si bien suponen y parten de la interacción en el \gls{repositorio} y la identificación particular de necesidades. En especial, son cambios que únicamente modifican la documentación o no requieren de un análisis profundo.
 
 \subsection{Añadir una utilidad para obtener los ficheros de ejemplo internos de la librería}
 
@@ -712,7 +747,7 @@ Aquí se tratan aquellas que no suponen un desafío ni técnico ni científico, 
     \item \pr{1763}
 \end{itemize}
 
-El objetivo consistió en añadir una función que ahorrase escribir la instrospección de la ubicación de la librería para formar las rutas manualmente.
+El objetivo consistió en añadir una función que ahorrase escribir la introspección de la ubicación de la librería para formar las rutas manualmente.
 
 \begin{lstlisting}[language=python, caption={Fragmento de código utilizado normalmente para obtener la ruta de los ficheros de la librería}, label={lst:example_files_current}]
 import os
@@ -761,7 +796,7 @@ Son pequeñas modificaciones que no requieren mayor explicación: actualizar la 
 
 En Python existe un patrón de diseño que consiste en darle el valor \texttt{None} a los parámetros opcionales, y luego comprobar si efectivamente son \texttt{None} con el fin de asignarles un valor por defecto o ignorarlos si fuese el caso.
 
-Normalmente, a la hora de documentarlo lo recomendable es indicar que el parámetro es opcional, pero lo habitual hasta antes de esta contribución era indicar que el valor por defecto es \texttt{None}, lo cual es redundante y obfusca las intenciones del código.
+Normalmente, a la hora de documentarlo lo recomendable es indicar que el \gls{parámetro} es opcional, pero lo habitual hasta antes de esta contribución era indicar que el valor por defecto es \texttt{None}, lo cual es redundante y obfusca las intenciones del código.
 
 Se cambiaron todas las ocurrencias de \texttt{default None} a \texttt{optional}, aunque hubo que iterar múltiples veces para dar con todos los falsos negativos y no obtener falsos positivos. Para esta tarea se empleó el buscador en archivos integrado en \textit{Visual Studio Code}, que está basado en \textit{ripgrep} y hace uso de expresiones regulares, una forma de búsqueda y sustitución muy potente: las expresiones regulares son un lenguaje formal que permite buscar patrones en texto, por ejemplo sustituyendo un carácter por grupos de caracteres, o buscando un patrón que se repite un número determinado de veces.
 
@@ -771,7 +806,7 @@ Se emplearon múltiples expresiones regulares, escritas en el sabor PCRE2, que e
     \centering
     \begin{adjustbox}{max width=\textwidth}
         \begin{tabular}{l|l}
-            Expresión regular                                                                                       & Patrón de sustitución              \\
+            \Gls{expresión regular}                                                                                       & Patrón de sustitución              \\
             \hline
             \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*), default:? None\textbackslash{}.?}               & \texttt{\$1\$2 : \$3, optional}    \\
             \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*), default:? None\.?}                              &                                    \\
@@ -824,7 +859,7 @@ Sin embargo, por el hecho de introducir nuevas herramientas que no eran del todo
     \item \pr{1818}
 \end{itemize}
 
-En los inicios del repositorio, los ejemplos se redactaban en \textit{Jupyter Notebooks}, que son documentos interactivos para ejecutar código. Sin embargo, no se facilita su acceso desde la página web, y por la complejidad que suponen, no se ejecutan cada vez que se hacen comprobaciones al repositorio. Por ende, quedaron obsoletos pronto.
+En los inicios del \gls{repositorio}, los ejemplos se redactaban en \textit{Jupyter Notebooks}, que son documentos interactivos para ejecutar código. Sin embargo, no se facilita su acceso desde la página web, y por la complejidad que suponen, no se ejecutan cada vez que se hacen comprobaciones al repositorio. Por ende, quedaron obsoletos pronto.
 
 En esta propuesta se extrajeron todos los comentarios de texto y los fragmentos de código y se estilizan para que se puedan ejecutar y ver en la página web. Se desestima por tratarse de ejemplos obsoletos, con poco valor didáctico y utilizable. A día de hoy, se pueden encontrar en la carpeta \texttt{docs/tutorials}.
 
@@ -834,7 +869,7 @@ En esta propuesta se extrajeron todos los comentarios de texto y los fragmentos 
     \item \pr{1794}
 \end{itemize}
 
-Otra de las mejoras que se identifica como necesaria a lo largo de este proyecto es comprobar que los links externos de la documentación funcionan correctamente. Resulta que el entorno de desarrollo de la documentación \textit{sphinx} permite realizar esto periódicamente de forma sencilla, pero debe configurarse los comandos para crear el procedimiento de integración continua.
+Otra de las mejoras que se identifica como necesaria a lo largo de este proyecto es comprobar que los links externos de la documentación funcionan correctamente. Resulta que el \gls{entorno de desarrollo} de la documentación \textit{sphinx} permite realizar esto periódicamente de forma sencilla, pero debe configurarse los comandos para crear el procedimiento de integración continua.
 
 Las opiniones de los mantenedores quedan divididas respecto a este tema: unos muestran interés en incluirlo, otros prefieren añadir pasos manuales para hacer la verificación aunque suponga un costo en tiempo y asigne la responsabilidad a una sola persona.
 
@@ -848,7 +883,7 @@ A día de la redacción de este documento, no se ha tomado una decisión definit
     \item \pr{2131}
 \end{itemize}
 
-La ubicación de la función \linkDocsFunction{pvlib.atmosphere.first\_solar\_spectral\_correction}\footnote{Este link podría no funcionar si finalmente se elimina.} se encontraba obsoleta tras plantear una reorganización de aquellos modelos relativos a correcciones espectrales. Se hubo avisado de su obsoleta ubicación en la versión \texttt{0.10.0}, pero no se eliminó en la siguiente versión menor, \texttt{0.11.0}, que son aquellas que admiten cambios que pueden romper el código de los usuarios.
+La ubicación de la función \linkDocsFunction{pvlib.atmosphere.first\_solar\_spectral\_correction}\footnote{Este link dejará de funcionar tras eliminarse la referencia.} se encontraba obsoleta tras plantear una reorganización de aquellos modelos relativos a correcciones espectrales. Se hubo avisado de su obsoleta ubicación en la versión \texttt{0.10.0}, pero no se eliminó en la siguiente versión menor, \texttt{0.11.0}, que son aquellas que admiten cambios que pueden romper el código de los usuarios.
 
 Se plantea eliminar la presencia de dicha interfaz que no tiene fecha para su desaparición, pero lo más probable es que hasta una versión menor posterior no se elimine ya que supone cambios que pueden romper el código de usuarios. La siguiente es la versión menor \texttt{0.12.0}, aunque la versión de arreglos \texttt{0.11.1} se encuentra en desarrollo y se espera que se publique en Septiembre.
 

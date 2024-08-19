@@ -1,0 +1,710 @@
+\makeglossaries
+
+\newglossaryentry{fotovoltaica}
+{
+    name={fotovoltaica},
+    description={Rama de la ingeniería dedicada a la generación de energía eléctrica a partir del efecto fotoeléctrico}
+}
+
+\newglossaryentry{código libre}
+{
+    name={código libre},
+    description={Cualidad de proyectos \gls{software} cuyo código fuente se distribuye públicamente bajo una \gls{licencia} que admite la modificación de los usuarios}
+}
+
+\newglossaryentry{simulación}
+{
+    name={simulación},
+    description={Procedimientos y cálculos que se emplean para predecir el comportamiento de sistemas ante situaciones reales}
+}
+
+\newglossaryentry{sistema fotovoltaico}
+{
+    name={sistema fotovoltaico},
+    description={Conjunto de elementos mecánicos, componentes eléctricos y dispositivos electrónicos que conforman una instalación de generación de energía fotovoltaica}
+}
+
+\newglossaryentry{radiación solar}
+{
+    name={radiación solar},
+    description={Potencia que transporta la luz proveniente del Sol. Depende de la distancia a la que el objeto que la recibe esté}
+}
+
+\newglossaryentry{espectro solar}
+{
+    name={espectro solar},
+    description={Distribución de la energía radiante proveniente del Sol en función de cada \gls{longitud de onda}}
+}
+
+\newglossaryentry{transposición}
+{
+    name={transposición},
+    description={Cálculo de las componentes de la irradiancia en un plano arbitrario a partir de las componentes meteorológicas de la radiación solar, \gls{DNI}, \gls{DHI} y \gls{GHI}}
+}
+
+\newglossaryentry{irradiancia}
+{
+    name={irradiancia},
+    description={Potencia lumínica que incide en una superficie}
+}
+
+\newglossaryentry{colectores}
+{
+    name={colectores},
+    description={Dispositivos que reciben luz solar con el fin de captar la energía. Se clasifican en si son planos, y prácticamente toda la superficie admite recibir irradiancia desde todos los ángulos, o si son de concentración, y por el contrario solo captan la luz alineada con el eje de los focos de la lente}
+}
+
+\newglossaryentry{irradiación}
+{
+    name={irradiación},
+    description={Energía de la luz incidente en una superficie, en determinado rango de tiempo. Es la integral de la irradiancia con respecto al tiempo}
+}
+
+\newglossaryentry{célula solar}
+{
+    name={célula solar},
+    description={Componente electrónico \gls{semiconductor} que es capaz de transformar radiación electromagnética incidente en energía eléctrica}
+}
+
+\newglossaryentry{curva I-V}
+{
+    name={curva I-V},
+    description={Cantidad de corriente que pasa por una célula fotovoltaica en función de la tensión que aparece en una \gls{carga} variable conectada a la misma}
+}
+
+\newglossaryentry{sombra}
+{
+    name={sombra},
+    description={Zona de una superficie que no se encuentra irradiada por la luz \gls{directa}}
+}
+
+\newglossaryentry{diodo}
+{
+    name={diodo},
+    description={Componente electrónico \gls{semiconductor} que solo deja pasar la corriente en un sentido}
+}
+
+\newglossaryentry{diodos de bypass}
+{
+    name={diodos de bypass},
+    description={Diodo que ofrece un camino alternativo a la corriente cuando una corriente generada por una serie de células fotovoltaicas se encuentra una célula que supone una \gls{carga} al circuito}
+}
+
+\newglossaryentry{commit}
+{
+    name={commit},
+    description={En un sistema de control de versiones, entrada en el historial de cambios. Estos cambios son las líneas de los ficheros que son diferentes entre la versión de ese commit y el anterior}
+}
+
+\newglossaryentry{issue}
+{
+    name={issue},
+    description={Tema concreto de discusión en un proyecto de \gls{software}. En general, se emplea para reportar errores o solicitar características nuevas}
+}
+
+\newglossaryentry{pull request}
+{
+    name={pull request},
+    description={Propuesta con cambios concretos en el código fuente de un proyecto}
+}
+
+\newglossaryentry{discussion}
+{
+    name={discussion},
+    description={Tema amplios de discusión sobre el rumbo, características o paradigma de diseño de un proyecto \gls{software}, así como para la resolución de dudas de las personas usuarias}
+}
+
+\newglossaryentry{test unitario}
+{
+    name={test unitario},
+    description={Procedimiento para comprobar el buen funcionamiento de cada parte que constituye un proyecto de \gls{software}}
+}
+
+\newglossaryentry{efecto fotoeléctrico}
+{
+    name={efecto fotoeléctrico},
+    description={Acción por la cuál la radiación electromagnética es capaz de mover cargas dentro de un \gls{semiconductor} y generar un potencial entre dos puntos}
+}
+
+\newglossaryentry{banda de valencia}
+{
+    name={banda de valencia},
+    description={Nivel energético de los electrones que se encuentran en los enlaces entre átomos}
+}
+
+\newglossaryentry{banda de conducción}
+{
+    name={banda de conducción},
+    description={Nivel energético de los electrones que se pueden mover libremente por un material}
+}
+
+\newglossaryentry{par electrón-hueco}
+{
+    name={par electrón-hueco},
+    description={Cuando un fotón incide en un electrón que forma parte de la capa de valencia - es decir, un enlace - y este se promueve a la capa de conducción, entonces este electrón se mueve libremente y deja un hueco en los enlaces, que puede moverse más lentamente a través de otros enlaces. Este diferencial de cargas es el que produce la diferencia de potencial eléctrico entre las bornas de una célula fotovoltaica}
+}
+
+\newglossaryentry{excitón}
+{
+    name={excitón},
+    description={Véase \Gls{par electrón-hueco}}
+}
+
+\newglossaryentry{carga}
+{
+    name={carga},
+    description={Dispositivo eléctrico que consume energía}
+}
+
+\newglossaryentry{semiconductor}
+{
+    name={semiconductor},
+    description={Material que, desde un punto de vista electrónico, puede tener tanto electrones libres como fijos, y actuar por tanto como conductor o como aislante predeciblemente}
+}
+
+\newglossaryentry{silicio amorfo}
+{
+    name={silicio amorfo},
+    description={Silicio donde sus átomos no siguen ninguna distribución regular}
+}
+
+\newglossaryentry{silicio monocristalino}
+{
+    name={silicio monocristalino},
+    description={Silicio que constituye un solo grano de grandes dimensiones o, dicho de otra forma, cuyos átomos están ubicados regularmente}
+}
+
+\newglossaryentry{silicio policristalino}
+{
+    name={silicio policristalino},
+    description={Silicio compuesto por múltiples granos, es decir, con varias porciones marcadas donde los átomos se distribuyen regularmente}
+}
+
+\newglossaryentry{banda prohibida}
+{
+    name={banda prohibida},
+    description={Zona energética donde los electrones no existen de forma estable. Es la diferencia de la energía asociada a la \gls{banda de valencia} y a la \gls{banda de conducción}}
+}
+
+\newglossaryentry{sistemas de concentración}
+{
+    name={sistemas de concentración},
+    description={Sistema fotovoltaico que utiliza lentes para captar luz en una superficie grande y dirigirla a una región menor con célula fotovoltaica}
+}
+
+\newglossaryentry{células multiunión o tándem}
+{
+    name={células multiunión o tándem},
+    description={Son aquellas compuestas por varios materiales de forma que se apilan varias células una encima de otra. Se hacen para que la \gls{respuesta espectral} del conjunto abarque mejor el espectro al que será sometida}
+}
+
+\newglossaryentry{células orgánicas}
+{
+    name={células orgánicas},
+    description={Células solares fotovoltaicas basadas en materiales orgánicos, es decir, con carbono}
+}
+
+\newglossaryentry{longitud de onda}
+{
+    name={longitud de onda},
+    description={Distancia entre dos crestas o dos valles consecutivos de una onda}
+}
+
+\newglossaryentry{ultravioleta}
+{
+    name={ultravioleta},
+    description={Radiación electromagnética más energética que la luz visible, con frecuencia mayor o lo que es lo mismo, \gls{longitud de onda} menor}
+}
+
+\newglossaryentry{infrarrojo}
+{
+    name={infrarrojo},
+    description={Radiación electromagnética menos energética que la luz visible, con frecuencia menor o lo que es lo mismo, \gls{longitud de onda} mayor}
+}
+
+\newglossaryentry{modelo}
+{
+    name={modelo},
+    description={Simplificación de un sistema físico con el objeto de facilitar su simulación}
+}
+
+\newglossaryentry{radiación extraterrestre}
+{
+    name={radiación extraterrestre},
+    description={Radiación solar que llega a la capa más exterior de la atmósfera terrestre}
+}
+
+\newglossaryentry{estándar}
+{
+    name={estándar},
+    description={Documento técnico de ámbito muy concreto que detalla procedimientos o datos con el fin de normalizar una parte de la industria}
+}
+
+\newglossaryentry{módulo}
+{
+    name={módulo},
+    description={Unidad de montaje de sistemas fotovoltaicos, popularmente panel solar}
+}
+
+\newglossaryentry{piranómetros}
+{
+    name={piranómetros},
+    description={Instrumento de medida de la radiación, capaz de medir un semiesfera de la bóveda del cielo}
+}
+
+\newglossaryentry{pirheliómetros}
+{
+    name={pirheliómetros},
+    description={Instrumento de medida de la radiación, que mide en una }
+}
+
+\newglossaryentry{GHI}
+{
+    name={GHI},
+    description={\textit{Global Horizontal Irradiance}, irradiancia global horizontal; es la irradiancia total que recibe un plano horizontal}
+}
+
+\newglossaryentry{DNI}
+{
+    name={DNI},
+    description={\textit{Direct Normal Irradiance}, irradiancia normal directa; es la irradiancia en la dirección de los rayos del Sol}
+}
+
+\newglossaryentry{DHI}
+{
+    name={DHI},
+    description={\textit{Diffuse Horizontal Irradiance}, irradiancia difusa horizontal; es la irradiancia que llega difusa en un plano horizontal, es decir, exceptuando la que llega directamente desde el Sol}
+}
+
+\newglossaryentry{circunsolar}
+{
+    name={circunsolar},
+    description={Es un término parecido a la radiación \gls{directa}, pero con la particularidad de que esta incluye expresamente un radio mayor de recepción de luz del Sol. Se suele dar por hecho en la definición de radiación \gls{directa}}
+}
+
+\newglossaryentry{albedo}
+{
+    name={albedo},
+    description={Véase \Gls{reflejada}. También se refiere a la proporción de irradiancia que refleja un material}
+}
+
+\newglossaryentry{shunt}
+{
+    name={shunt},
+    description={Resistencia de bajo valor que se pone en serie en circuitos para medir la corriente que pasa}
+}
+
+\newglossaryentry{curva P-V}
+{
+    name={curva P-V},
+    description={Es similar a la \gls{curva I-V}, pero esta vez se mide la potencia de salida de la célula ante una \gls{carga} variable}
+}
+
+\newglossaryentry{eficiencia cuántica externa}
+{
+    name={eficiencia cuántica externa},
+    description={Relación entre los electrones que salen de una célula respecto de los fotones incidentes}
+}
+
+\newglossaryentry{respuesta espectral}
+{
+    name={respuesta espectral},
+    description={Relación entre la corriente de salida de una célula y la potencia lumínica que recibe}
+}
+
+\newglossaryentry{efecto Joule}
+{
+    name={efecto Joule},
+    description={Fenómeno por el cual la corriente eléctrica que pasa por un conductor con determinada resistencia, se calienta. En muchas ocasiones se trata de una pérdida de energía, en otras es el fin}
+}
+
+\newglossaryentry{sistemas flotantes}
+{
+    name={sistemas flotantes},
+    description={Sistemas fotovoltaicos que se ubican encima de masas de agua para facilitar su refrigeración y su consecuente mejora de rendimiento}
+}
+
+\newglossaryentry{inversores}
+{
+    name={inversores},
+    description={Dispositivo que convierte electricidad de corriente continua en corriente alterna, que es usada por los aparatos eléctricos más habitualmente}
+}
+
+\newglossaryentry{convertidores dc-dc}
+{
+    name={convertidores dc-dc},
+    description={Dispositivo electrónico que convierte corriente continua a determinada tensión en otra a distinta tensión}
+}
+
+\newglossaryentry{seguidores solares}
+{
+    name={seguidores solares},
+    description={Sistema mecánico que orienta los módulos fotovoltaicos con el fin de colectar una mayor cantidad de potencia}
+}
+
+\newglossaryentry{sistemas de almacenamiento}
+{
+    name={sistemas de almacenamiento},
+    description={Tecnologías que permiten almacenar energía eléctrica en otra formas, por ejemplo, baterías de forma química o presas de bombeo de forma potencial}
+}
+
+\newglossaryentry{sistemas de monitorización}
+{
+    name={sistemas de monitorización},
+    description={Equipo que toma medidas y comprueba el buen funcionamiento de una planta}
+}
+
+\newglossaryentry{sistemas autónomos}
+{
+    name={sistemas autónomos},
+    description={O sistemas \textit{off-grid} en inglés; son aquellos que funcionan aislados de la red eléctrica}
+}
+
+\newglossaryentry{sistemas de bombeo}
+{
+    name={sistemas de bombeo},
+    description={Son instalaciones fotovoltaicas diseñadas para extraer agua de pozos o galerías y almacenarla en tanques. Se suelen instalar en campos de cultivo, donde la conexión a red es más costosa por la lejanía}
+}
+
+\newglossaryentry{coordenadas esféricas}
+{
+    name={coordenadas esféricas},
+    description={En matemáticas, una forma de representar puntos en el espacio tridimensional mediante una longitud desde el origen, un \gls{ángulo de elevación} y un ángulo de orientación plano (\gls{acimut}). En el caso de la fotovoltaica, la distancia se ignora, pues se asume muy grande, y se conservan los dos ángulos que definen la ubicación del Sol en el cielo}
+}
+
+\newglossaryentry{cenit}
+{
+    name={cenit},
+    description={En \gls{coordenadas esféricas}, ángulo entre el eje vertical y la línea que une el origen con el punto de interés. Es el ángulo complementario a la elevación}
+}
+
+\newglossaryentry{acimut}
+{
+    name={acimut},
+    description={En \gls{coordenadas esféricas}, ángulo entre un eje del plano horizontal y la proyección del punto de interés sobre este plano. En ingeniería solar, se suele tomar $\text{Norte}=0^\circ, \text{Este}=90^\circ, \text{Sur}=180^\circ, \text{Oeste}=270^\circ$}
+}
+
+\newglossaryentry{ángulo de elevación}
+{
+    name={ángulo de elevación},
+    description={En \gls{coordenadas esféricas}, ángulo entre el plano horizontal y la línea que une el origen con el punto de interés. Es el ángulo complementario al \gls{cenit}}
+}
+
+\newglossaryentry{directa}
+{
+    name={directa},
+    description={Componente de la irradiación solar que proviene desde la misma dirección del Sol. Normalmente es la mayoritaria}
+}
+
+\newglossaryentry{difusa}
+{
+    name={difusa},
+    description={Componente de la irradiación solar que proviene de todo el cielo, exceptuando la parte donde está el Sol}
+}
+
+\newglossaryentry{reflejada}
+{
+    name={reflejada},
+    description={Componente de la irradiación solar que proviene de la reflexión de la luz sobre objetos del entorno}
+}
+
+\newglossaryentry{ángulos complementarios}
+{
+    name={ángulos complementarios},
+    description={Par de ángulos que suman $90^\circ$}
+}
+
+\newglossaryentry{recombinación interna}
+{
+    name={recombinación interna},
+    description={Efecto por el cual un \gls{par electrón-hueco} desaparece: el electrón pierde energía y ocupa el espacio del hueco. Es un proceso perjudicial en la producción de energía}
+}
+
+\newglossaryentry{ajuste espectral}
+{
+    name={ajuste espectral},
+    description={Debido a que la respuesta de una célula fotovoltaica no es la misma a lo largo de todo el espectro lumínico, en función de cómo se distribuya dicho espectro puede obtenerse mayor o menor cantidad de energía a una misma potencia de la irradiancia. En modelado y simulación, se habla de ajuste espectral para tener en cuenta este efecto}
+}
+
+\newglossaryentry{transformadores}
+{
+    name={transformadores},
+    description={Dispositivos eléctricos de potencia que cambian la tensión e intensidad de entrada en otro par de tensión e intensidad a la salida. Se usa para facilitar el transporte de electricidad sin que existan grandes pérdidas por el paso de la corriente}
+}
+
+\newglossaryentry{MATLAB}
+{
+    name={MATLAB},
+    description={Lenguaje propietario de programación orientado a cálculos matemáticos}
+}
+
+\newglossaryentry{FOSS}
+{
+    name={FOSS},
+    description={\textit{Free and Open-Source Software}, \Gls{software} de código abierto y libre; es la denominación de algunos proyectos basados en la libre cooperación y el uso gratuito}
+}
+
+\newglossaryentry{repositorio}
+{
+    name={repositorio},
+    description={Carpeta accesible remotamente con el código de un proyecto \gls{software}}
+}
+
+\newglossaryentry{software}
+{
+    name={software},
+    description={Conjunto de ficheros que conforman un producto con utilidades que se ejecutan en un sistema computador}
+}
+
+\newglossaryentry{VCS}
+{
+    name={VCS},
+    description={\textit{Version Control System}, sistema de control de versiones; utilidad \gls{software} que permite llevar un registro claro de los cambios que sufren archivos}
+}
+
+\newglossaryentry{interfaz gráfica}
+{
+    name={interfaz gráfica},
+    description={Elementos que facilitan la interacción con los usuarios mediante utilidades no interactivas e interactivas, a partir de métodos de entrada estándares y cómodos}
+}
+
+\newglossaryentry{clonar}
+{
+    name={clonar},
+    description={Acción de copiar un \gls{repositorio} en un sistema local}
+}
+
+\newglossaryentry{rama}
+{
+    name={rama},
+    description={En el contexto de la gestión de código con un \gls{VCS}, cambios consecutivos de cada usuario en un entorno en concreto, con el fin de trabajar aisladamente sobre una misma característica}
+}
+
+\newglossaryentry{línea de comandos}
+{
+    name={línea de comandos},
+    description={Utilidad de un sistema operativo para realizar algunas operaciones de forma programática, mediante una entrada de texto exclusivamente}
+}
+
+\newglossaryentry{documentación}
+{
+    name={documentación},
+    description={Conjunto de información que explica el funcionamiento de un proyecto de \gls{software}. Normalmente cuenta con explicaciones detalladas sobre cómo usar cada utilidad expuesta, guías de uso, ejemplos completos y otras instrucciones de interés para un usuario final}
+}
+
+\newglossaryentry{licencia}
+{
+    name={licencia},
+    description={Documento con los permisos que autorizan hacer cambios, modificaciones de un proyecto, y en especial, de su distribución y su uso comercial}
+}
+
+\newglossaryentry{librería}
+{
+    name={librería},
+    description={Conjunto de código que conforma un proyecto \gls{software} y que se puede instalar por completo, con un fin específico}
+}
+
+\newglossaryentry{Python}
+{
+    name={Python},
+    description={Lenguaje de alto nivel, libre y de código abierto de programación orientado a objetos, con un fin multipropósito}
+}
+
+\newglossaryentry{transposición inversa}
+{
+    name={transposición inversa},
+    description={A partir de la irradiancia en un plano cuya orientación es conocida, efecto de deducir qué irradiancia recibiría un plano horizontal}
+}
+
+\newglossaryentry{submódulo}
+{
+    name={submódulo},
+    description={Parte de una \gls{librería} que agrupa ciertas funcionalidades}
+}
+
+\newglossaryentry{módulos bifaciales}
+{
+    name={módulos bifaciales},
+    description={Módulos fotovoltaicos cuya cara posterior también deja pasar la luz, por lo que reciben irradiancia por ambas caras. Permiten una mayor producción de energía}
+}
+
+\newglossaryentry{HTML}
+{
+    name={HTML},
+    description={\textit{HyperText Markup Language}, un formato de presentar información en la web, poco legible para humanos}
+}
+
+\newglossaryentry{reStructuredText}
+{
+    name={reStructuredText},
+    description={Formato legible para la redacción de documentos, que permite su fácil entendimiento sin alteraciones, así como su traducción a archivos más complejos con otras funcionalidades, como \gls{HTML}}
+}
+
+\newglossaryentry{mocks}
+{
+    name={mocks},
+    description={Del inglés, \textit{imitación}; son objetos que mimetizan a otros, con el fin de comprobar los cambios que ocurren a lo largo de un test}
+}
+
+\newglossaryentry{indentación}
+{
+    name={indentación},
+    description={Alineación del comienzo de las líneas de código, a veces por requerimiento del lenguaje de programación empleado y otras veces por legibilidad y estilo}
+}
+
+\newglossaryentry{scripts}
+{
+    name={scripts},
+    description={Conjunto de instrucciones programadas para un fin en concreto, por ejemplo, los cálculos y pasos para una simulación fotovoltaica}
+}
+
+\newglossaryentry{debugging}
+{
+    name={debugging},
+    description={Acción de comprobar la ejecución de un código, usualmente paso a paso y comprobando los valores que toman las variables}
+}
+
+\newglossaryentry{merges}
+{
+    name={merges},
+    description={Efecto de incluir los cambios de una \gls{rama} y mezclarlos en otra rama de desarrollo, normalmente la principal}
+}
+
+\newglossaryentry{docstring}
+{
+    name={docstring},
+    description={Comentario de texto que acompaña a una función, método, clase o constante en el código y que documenta su propósito y uso}
+}
+
+\newglossaryentry{valores de retorno}
+{
+    name={valores de retorno},
+    description={Resultado de ejecutar una función o método, y que se puede asignar a una variable para su posterior uso}
+}
+
+\newglossaryentry{entorno de desarrollo}
+{
+    name={entorno de desarrollo},
+    description={Conjunto de herramientas para editar código, comprobar, \gls{VCS} y, en general, desarrollar \gls{software}}
+}
+
+\newglossaryentry{comando}
+{
+    name={comando},
+    description={Instrucción que se escribe en la \gls{línea de comandos}}
+}
+
+\newglossaryentry{estrategia de comprobación}
+{
+    name={estrategia de comprobación},
+    description={Método para establecer la forma de comprobar el buen funcionamiento de una porción de código}
+}
+
+\newglossaryentry{hojas de cálculo}
+{
+    name={hojas de cálculo},
+    description={Programas que ofrecen utilidades para trabajar con tablas y cálculos numéricos}
+}
+
+\newglossaryentry{índice de claridad}
+{
+    name={índice de claridad},
+    description={Relación entre la irradiancia terrestre y la irradiancia extraterrestre sobre una superficie horizontal al suelo, en ambos casos}
+}
+
+\newglossaryentry{espectro estándar}
+{
+    name={espectro estándar},
+    description={Una distribución lumínica de referencia bajo la que se hacen tests}
+}
+
+\newglossaryentry{espectro arbitrario}
+{
+    name={espectro arbitrario},
+    description={Una distribución lumínica cualquiera, que podría recibir un panel bajo determinadas condiciones}
+}
+
+\newglossaryentry{masa de aire relativa}
+{
+    name={masa de aire relativa},
+    description={Cantidad relativa de columna de aire que atraviesan los rayos de luz proveniente del Sol}
+}
+
+\newglossaryentry{ángulos óptimos de seguimiento}
+{
+    name={ángulos óptimos de seguimiento},
+    description={Se refiere al ángulo de un seguidor solar que maximiza la recolección de luz, y por ende, de producción eléctrica}
+}
+
+\newglossaryentry{API}
+{
+    name={API},
+    description={\textit{Application Programming Interface}, Interfaz de Programación de Aplicaciones; es el conjunto de funciones, constantes y objetos que se expone para que el usuario utilice en sus \gls{scripts}}
+}
+
+\newglossaryentry{agrivoltaica}
+{
+    name={agrivoltaica},
+    description={Rama de la ingeniería solar fotovoltaica dedicada a integrar la producción de energía en campos de cultivo}
+}
+
+\newglossaryentry{sistemas sujetos fijos}
+{
+    name={sistemas sujetos fijos},
+    description={Sistemas fotovoltaicos caracterizados por tener los módulos en una posición fija}
+}
+
+\newglossaryentry{seguidores de un eje}
+{
+    name={seguidores de un eje},
+    description={Sistemas fotovoltaicos cuya característica principal es la rotación de los módulos alrededor de un eje principal. Normalmente los ejes se alinean de Norte a Sur}
+}
+
+\newglossaryentry{tabla tabulada e indexada}
+{
+    name={tabla tabulada e indexada},
+    description={Conjunto de datos separados en columnas y en filas, que cuenta con un índice y facilita la recuperación de valores}
+}
+
+\newglossaryentry{cuaternión}
+{
+    name={cuaternión},
+    description={Representación matemática compacta de la operación rotación}
+}
+
+\newglossaryentry{IAM}
+{
+    name={IAM},
+    description={\textit{Incidence Angle Modifier}, Modificador del Ángulo de Incidencia; se trata de un factor de ajuste de la irradiancia para tener en cuenta la reflexión de la luz sobre el vidrio cuando incide oblicuamente}
+}
+
+\newglossaryentry{framework}
+{
+    name={framework},
+    description={Entorno \gls{software} con utilidades que facilitan el desarrollo de otros softwares}
+}
+
+\newglossaryentry{bug}
+{
+    name={bug},
+    description={Error en el código; se entiende como un problema concreto que hace que la implementación no cumpla con el pliego de condiciones, normalmente su misma \gls{documentación}}
+}
+
+\newglossaryentry{parámetro}
+{
+    name={parámetro},
+    description={Cada una de las variables de entrada de una función}
+}
+
+\newglossaryentry{expresión regular}
+{
+    name={expresión regular},
+    description={Cadena de caracteres que representa un patrón de búsqueda de texto}
+}
+
+\newglossaryentry{función}
+{
+    name={función},
+    description={Algoritmo aislado dentro de un programa, que puede tener parámetros de entrada y devolver un resultado}
+}
+
