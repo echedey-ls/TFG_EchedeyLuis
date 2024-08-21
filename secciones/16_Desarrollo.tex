@@ -347,7 +347,7 @@ Accesible en \linkDocsFunction{pvlib.bifacial.power\_mismatch\_deline}.
 
 Los autores originales del modelo científico piden contrastar la implementación con la suya. Como resultado de esta comparación se detectan dos diferencias, una que se puede atribuir a confundir el significado del acrónimo \textit{RMAD} como \textit{Relative Mean Absolute Deviation} en vez de \textit{Relative Mean Absolute Difference}, que son parámetros estadísticos distintos. La otra diferencia es en el código proporcionado para la comparación, disponible en el repositorio \href{https://github.com/NREL/bifacial_radiance/}{NREL/bifacial\_radiance}, en el que se confunden las unidades de entrada y salida de la función, en este caso en porcentajes.
 
-A partir de aquí se realizan cambios en el mismo proyecto de \pvlibpy{} para corregir la primera diferencia y mejorar ligeramente la documentación. Se plantea otra propuesta para corregir la segunda diferencia en el código de los autores originales en \href{https://github.com/NREL/bifacial_radiance/pull/520}{NREL/bifacial\_radiance/\#520}.
+A partir de aquí se realizan cambios en el mismo proyecto de \pvlibpy{} para corregir la primera diferencia y mejorar ligeramente la documentación. En el repositorio de referencia se hacen las mejoras y arreglos al modelo existente y se añade una copia del mismo con los coeficientes recomendados en \cite{Deline_Ayala_Pelaez_MacAlpine_Olalla_2020}; este cambio se puede consultar en \href{https://github.com/NREL/bifacial_radiance/pull/520}{NREL/bifacial\_radiance/\#520}.
 
 \subsection{Transformación de respuesta espectral a eficiencia cuántica externa y viceversa}
 
