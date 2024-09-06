@@ -49,7 +49,7 @@ La radiación es una onda electromagnética que se propaga a la velocidad de la 
 
 Por un lado, la \gls{irradiancia} (radiación incidente) tiene unidades de potencia por unidad de área $[W/m^2]$, y el espectro solar es la distribución de este mismo por cada \gls{longitud de onda}, por lo que se mide en $[W/m^2/nm]$.
 
-Dependiendo de las condiciones atmosféricas, la cantidad de masa de aire que debe atravesar y la presencia de unos gases u otros en diferentes concentraciones, la \gls{radiación extraterrestre} sufre una reducción en ciertas longitudes de onda. Se debe a la absorción que presentan algunos gases. La forma que toma la \gls{radiación solar} en la superficie terrestre es lo que se conoce como espectro solar terrestre. El \gls{estándar} ASTM G173-03 \cite{astm_g173-03} describe un \gls{espectro estándar} para analizar la radiación solar en la superficie terrestre. En la siguiente figura se puede observar el espectro solar terrestre global, el directo que proviene del Sol sin contar con reflexiones, y el extraterrestre:
+Dependiendo de las condiciones atmosféricas, la cantidad de masa de aire que debe atravesar y la presencia de unos gases u otros en diferentes concentraciones, la \gls{radiación extraterrestre} sufre una reducción en ciertas longitudes de onda. Se debe, entre otros fenómenos, al scattering o la reflexión que producen algunos gases de la atmósfera. La forma que toma la \gls{radiación solar} en la superficie terrestre es lo que se conoce como espectro solar terrestre. El \gls{estándar} ASTM G173-03 \cite{astm_g173-03} describe un \gls{espectro estándar} para analizar la radiación solar en la superficie terrestre. En la siguiente figura se puede observar el espectro solar terrestre global, el directo que proviene del Sol sin contar con reflexiones, y el extraterrestre:
 
 \begin{figure}[H]
       \centering
@@ -66,7 +66,7 @@ Hay tres medidas de la radiación solar que son interesantes para normalizar la 
 
 \begin{itemize}
       \item Global en una superficie horizontal (\textit{\gls{GHI}}, \textit{Global Horizontal Irradiance}): es la radiación que llega a una superficie horizontal.
-      \item Directa normal al Sol (\textit{\gls{DNI}}, \textit{Direct Normal Irradiance}): es la radiación que llega a una superficie normal al vector solar.
+      \item Directa normal (\textit{\gls{DNI}}, \textit{Direct Normal Irradiance}): es la radiación proveniente del disco solar que llega a una superficie perpendicular a los rayos solares.
       \item Difusa en una superficie horizontal (\textit{\gls{DHI}}, \textit{Diffuse Horizontal Irradiance}): es la radiación que llega a una superficie horizontal tras ser dispersada por la atmósfera.
 \end{itemize}
 
@@ -80,9 +80,9 @@ Donde $\theta$ es el ángulo cenital del Sol (o sea, el ángulo entre la línea 
 
 La ecuación \ref{eq:ghi_dni_dhi} es interesante porque facilita comprobar la calidad de las medidas si existen las tres, y si solo existen dos de ellas, permite deducir la tercera.
 
-Las unidades de las componentes de la radiación solar son $\si{\watt\per\meter\squared}$.
+Las unidades de las componentes de la irradiancia solar son $\si{\watt\per\meter\squared}$.
 
-Los instrumentos de medida en campo que permiten obtener estos parámetros son \gls{piranómetros} para medir \textit{\gls{GHI}}; \gls{pirheliómetros}, para \textit{\gls{DNI}}; y \gls{piranómetros} con disco para \textit{\gls{DHI}}. En la figura \ref{fig:irrad_componentes} se puede observar la relación entre las componentes de la radiación solar y los instrumentos de medida:
+Los instrumentos de medida en campo que permiten obtener estos parámetros son \gls{piranómetros} para medir \textit{\gls{GHI}}; \gls{pirheliómetros}, para \textit{\gls{DNI}}; y \gls{piranómetros} con bola de sombra del disco solar para \textit{\gls{DHI}}. En la figura \ref{fig:irrad_componentes} se puede observar la relación entre las componentes de la radiación solar y los instrumentos de medida:
 
 \begin{figure}[H]
       \centering
@@ -98,7 +98,7 @@ Al orientar un colector fotovoltaico, la radiación que llega a este dependerá 
 \begin{itemize}
       \item Componente \gls{directa} o circunsolar: es la radiación que llega directamente del Sol sin reflexiones. Es la mayoritaria en días despejados.
       \item Componente difusa: es la radiación que llega de la atmósfera tras ser dispersada por las partículas en suspensión y las nubes.
-      \item Componente difusa del suelo o albedo: es la reflejada por el entorno. Se puede asumir que es nula para un \gls{módulo} orientado horizontalmente.
+      \item Componente difusa del suelo y superficies circundantes, o albedo: es la reflejada por el entorno, como el suelo, la naturaleza u otras estructuras de la instalación fotovoltaica, como hileras de módulos adicionales. Se puede asumir que es nula para un \gls{módulo} \gls{monofacial} orientado horizontalmente hacia arriba.
 \end{itemize}
 
 Para calcular estas componentes en el plano del generador a partir de las medidas de radiación solar vistas en la sección anterior, se emplean modelos de \gls{transposición}. Se tratan de relaciones geométricas entre la \gls{irradiancia} en el plano horizontal y el inclinado. El \gls{modelo} más común es el de Pérez \cite{Perez_Ineichen_Seals_Michalsky_Stewart_1990}, pero hay otros como el Pérez-Driesse que solventa un problema de continuidad \cite{Driesse_Jensen_Perez_2024}.
@@ -122,7 +122,7 @@ $I_L$ representa la fotocorriente, $I_D$ la corriente que circula por el \gls{di
 
 Del circuito anterior se deduce por tanto que a igualdad de \gls{irradiancia} incidente, y por ende, de fotocorriente, la tensión y la corriente que se extraerá dependerá del punto de trabajo de la célula. Cuanta más corriente se extraiga, más caerá la tensión antes del \gls{diodo} y este hará que se pierda menos corriente en la propia célula, pero también que se reduzca esta tensión.
 
-La curva que se genera al cambiar la tensión de trabajo de la célula y medir la corriente que sale de ella se conoce como \gls{curva I-V}. En la figura \ref{fig:iv_curve} se puede observar una curva I-V típica de una célula solar:
+La curva que se observa al cambiar la tensión de trabajo de la célula y medir la corriente que sale de ella se conoce como \gls{curva I-V}. En la figura \ref{fig:iv_curve} se puede observar una curva I-V típica de una célula solar:
 
 \begin{figure}[H]
       \centering
@@ -137,7 +137,7 @@ Una tensión de célula que no excede 0.7 V es típica de las hechas con silicio
 
 \subsubsection{Respuesta espectral y eficiencia cuántica externa}
 
-En realidad la \gls{radiación solar} no es homogénea en todas las longitudes de onda, y una \gls{célula solar} tampoco es igual de sensible a ellas. La curva de \gls{respuesta espectral} se define como la capacidad de convertir una potencia lumínica a determinada \gls{longitud de onda} en una corriente de cortocircuito. Esta métrica se cuantifica en $[A/W]$ y depende del material y otros aspectos constructivos, según se puede observar en la figura \ref{fig:spectral_response}:
+En realidad la \gls{radiación solar} no es homogénea en todas las longitudes de onda, y una \gls{célula solar} tampoco es igual de sensible a ellas. La curva de \gls{respuesta espectral} se define como la capacidad de convertir una potencia lumínica a determinada \gls{longitud de onda} en una corriente. Esta métrica se cuantifica en $[A/W]$ y depende del material y otros aspectos constructivos, según se puede observar en la figura \ref{fig:spectral_response}:
 
 \begin{figure}[H]
       \centering
@@ -146,7 +146,7 @@ En realidad la \gls{radiación solar} no es homogénea en todas las longitudes d
       \label{fig:spectral_response}
 \end{figure}
 
-La \gls{eficiencia cuántica externa} $EQE(\lambda)$ es una medida similar, pero en este caso se mide cuál es la fracción de fotones incidentes a una \gls{longitud de onda} determinada que se convierten en corriente. Es un número adimensional y se relaciona con la \gls{respuesta espectral} $SR(\lambda)$ mediante la ecuación:
+La \gls{eficiencia cuántica externa} $EQE(\lambda)$ es una medida similar, pero en este caso se mide cuál es la fracción de fotones incidentes a una \gls{longitud de onda} determinada que se convierten en electrones de fotocorriente. Es un número adimensional y se relaciona con la \gls{respuesta espectral} $SR(\lambda)$ mediante la ecuación:
 
 \begin{equation} \label{eq:relacion_sr_eqe}
       SR(\lambda) = \frac{q \cdot \lambda}{h \cdot c} \cdot EQE(\lambda)
@@ -158,7 +158,19 @@ Donde $q$ es la carga electrostática del electrón, $h$ es la constante de Plan
 
 Las células solares se conectan en serie para que la tensión de todas las células se sume y se pueda extraer una tensión mayor \cite{victoria2024fundamentals}, con una corriente que es la misma que la de una sola célula. Al no aumentar la corriente, se evitan pérdidas mayores debidas al \gls{efecto Joule} por la resistencia de las conexiones.
 
-Un \gls{módulo} también presenta una curva I-V, que idealmente será la misma que la de una célula pero escalada en la tensión en función del número de células. En realidad, por pequeñas variaciones en la construcción de las células y la conexión de estas, la \gls{curva I-V} de un módulo no es exactamente la misma que la de una célula. Además, este problema se ve muy agravado cuando la \gls{irradiancia} no es homogénea en todas las células del módulo y puede suponer un riesgo en el caso extremo de haber sombras. Por esta razón se emplean diodos de derivación o \textit{bypass} para evitar que una célula sombreada disipe energía en forma de calor y se dañe ella o el propio módulo. Se detalla este efecto en la sección \ref{sssct:efecto-sombra}.
+Un \gls{módulo} también presenta una curva I-V, que idealmente será la misma que la de una célula pero escalada en la tensión en función del número de células. En realidad, por pequeñas variaciones en la construcción de las células y la conexión de estas, la \gls{curva I-V} de un módulo no es exactamente la misma que la de una célula. Además, este problema se ve muy agravado cuando la \gls{irradiancia} no es homogénea en todas las células del módulo y puede suponer un riesgo en el caso extremo de haber sombras. Por esta razón se emplean diodos de derivación o \textit{bypass} para evitar que una célula sombreada disipe energía en forma de calor y se dañe ella o el propio módulo.
+
+Un ejemplo de curvas I-V y P-V de un grupo de módulos -de dos \glspl{string} en paralelo, de 4 módulos cada una- en condiciones de ausencia de sombra y con sombras parciales se puede observar en la figura \ref{fig:iv_pv_curve}:
+
+\begin{figure}[H]
+      \centering
+      \includegraphics[width=0.7\textwidth]{./images/SoA_irrad/IV_PV_Curve_Module_Under_Shading.jpg}
+      \caption{Curvas I-V y P-V de un grupo de módulos en distintas condiciones de sombra. Fuente: F. Martínez-Moreno et al., ``Experimental model to estimate shading losses on PV arrays'', 2010. \cite[Fig. 3]{Martínez-Moreno_Muñoz_Lorenzo_2010}.}
+      \label{fig:iv_pv_curve}
+      Sin sombra (rojo/$\bigcirc$), 3 módulos de una misma \gls{string} sombreados (negro/$\triangle$) y dos módulos de una misma \gls{string} parcialmente sombreados (azul/$\times$).
+\end{figure}
+
+Es por esto que el efecto que produce una sombra parcial sobre un módulo o un conjunto de módulos es muy perjudicial. Se ahonda en este tema en más detalle en la sección \ref{sssct:efecto-sombra}.
 
 \subsubsection{Efecto de la temperatura}
 
@@ -227,7 +239,7 @@ Por definición de \gls{ángulos complementarios}, el \gls{cenit} $\theta_s$ se 
 
 A partir de los valores de irradiancia solar \textit{\gls{GHI}}, \textit{\gls{DNI}} y \textit{\gls{DHI}}, se puede calcular la irradiancia por componentes que llega a la superficie de los módulos: la \gls{directa}, la \gls{difusa} y la \gls{reflejada}. La componente directa es la que proviene de la dirección del sol y llega directamente a la superficie de los módulos, la irradiancia difusa es la que proviene del resto del cielo y se dispersa en todas direcciones, y la irradiancia reflejada o \gls{albedo} es la que proviene de la reflexión y emisión de radiación sobre superficies cercanas. Estas componentes se suman para obtener la radiación total incidente en la superficie de los módulos, que es la que se emplea para calcular la producción de energía.
 
-El siguiente paso es cuantificar el efecto de la temperatura: la eficiencia de las células disminuye conforme aumenta la temperatura debido a la \gls{recombinación interna} y la reducción de la \gls{banda prohibida}. La temperatura de las células se estima mediante modelos empíricos que, como mínimo, suelen depender de la estructura del \gls{módulo}, la irradiancia, la temperatura ambiente y la velocidad del viento.
+El siguiente paso es cuantificar el efecto de la temperatura: la eficiencia de las células disminuye conforme aumenta la temperatura debido a la \gls{recombinación interna} y la reducción de la \gls{banda prohibida}. La temperatura de las células se estima mediante modelos empíricos que, como mínimo, dependen de la estructura de montaje de los \glspl{módulo}, la irradiancia, la temperatura ambiente y la velocidad del viento.
 
 Algunos factores de pérdidas se toman en cuenta en este instante como el \gls{ajuste espectral}, corrección por no-uniformidad de la radiación, la suciedad y la nieve, que suelen afectar a la irradiancia incidente. Por otra parte, otros factores de pérdidas somo la \gls{sombra} y las pérdidas en los conductores por \gls{efecto Joule}, se aplican respecto la potencia de salida de los módulos.
 
