@@ -2,7 +2,7 @@
 
 En este capítulo se detallan las aportaciones realizadas a la librería \pvlibpy{} dentro del marco de este Trabajo Fin de Grado.
 
-Se ha separado en tres secciones, atendiendo principalmente a su tamaño y complejidad del desarrollo:
+Se ha separado en tres secciones, atendiendo principalmente a su tamaño, complejidad del desarrollo y origen de la propuesta:
 
 \begin{itemize}
     \item En \fullref{sct:desarrollo:contribuciones_cientificas} se tratan aquellas que se espera que tengan mayor peso en los usuarios finales, pues incluyen modelos y utilidades alineadas con una mejor simulación de los sistemas fotovoltaicos.
@@ -10,10 +10,26 @@ Se ha separado en tres secciones, atendiendo principalmente a su tamaño y compl
     \item En \fullref{sct:desarrollo:contribuciones_menores} se agrupan aportaciones que solo afectan al renderizado de la documentación, erratas o el tamaño de los cambios es reducido.
 \end{itemize}
 
+Con el objetivo de realizar contribuciones significativas que mejoran las características que brinda el proyecto, se han seguido una serie de pautas que se detallan a continuación:
+
+\begin{itemize}
+    \item Contribuir con la aportación de modelos científicos variados en propósito y utilidad.
+
+    \item Añadir otras funcionalidades, que no siendo modelos, sean útiles para las personas usuarias.
+
+    \item Validar el funcionamiento mediante tests unitarios.
+
+    \item Hacer que cada contribución sea accesible aportando una \gls{documentación} completa y concisa, y didáctica si fuera necesario.
+
+    \item Seguir los rigurosos estándares de calidad existentes en el proyecto.
+\end{itemize}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Contribuciones científicas} \label{sct:desarrollo:contribuciones_cientificas}
+\section{Contribuciones de modelos científicos} \label{sct:desarrollo:contribuciones_cientificas}
 
 Con estas se pretende mejorar las capacidades que ofrece la librería \pvlibpy{} en forma de utilidades completamente novedosas como modelos científicos.
+
+En esta sección se ha partido de una tanda de artículos científicos que plantean acercamientos a problemas de la fotovoltaica con ecuaciones que los resuelven. A partir de estos artículos y atendiendo a su relevancia, se han analizado algunas de sus referencias si fuere necesario para documentar y aplicar los modelos.
 
 \subsection{Modelo de ajuste espectral}
 
@@ -156,7 +172,7 @@ Esta propuesta es la segunda de la trilogía de propuestas para poder aplicar un
 
 Aquí se plantea la aplicación de un modelo para conocer la fracción de \gls{sombra} unidimensional en paneles que comparten eje de rotación en común. La implementación se basa en \cite{Anderson_Jensen_2024}.
 
-Este es un tema de interés sobre el que ya existían propuestas y discusiones en el repositorio, pero no se había llegado a implementar ninguna. Como contexto previo a la realización de esta propuesta, se puede mencionar la número \#1725 fundada en un póster desarrollado por \textit{First Solar} en la librería \pvlibpy, que se puede consultar en \url{https://github.com/pvlib/pvlib-python/pull/1725}.
+Este es un tema de interés sobre el que ya existían propuestas y discusiones en el repositorio, pero no se había llegado a implementar ninguna. Como contexto previo a la realización de esta propuesta, se puede mencionar la número \#1725 fundada en un póster desarrollado por \textit{First Solar} en la librería \pvlibpy{}, que se puede consultar en \url{https://github.com/pvlib/pvlib-python/pull/1725}.
 
 \subsubsection{Fundamento teórico}
 
@@ -171,7 +187,7 @@ Para facilitar la comprensión de este apartado se muestra un esquema de la secc
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{./images/shading_1d/Anderson_Jensen_Fig3.png}
-    \caption{Esquema dos \gls{colectores} parametrizados, donde uno sombrea al otro. La nomenclatura corresponde la ecuación \ref{eq:sombra_t}.\\Fuente: Figura 3 en \cite{Anderson_Jensen_2024}.}
+    \caption{Esquema dos \gls{colectores} parametrizados, donde uno sombrea al otro. La nomenclatura corresponde la ecuación \ref{eq:sombra_t}.\\Fuente: K. Anderson, A. Jensen, ``Shaded fraction and backtracking in single-axis trackers on rolling terrain'', 2024. \cite[Fig. 3]{Anderson_Jensen_2024}.}
     \label{fig:fraccion_sombra}
 \end{figure}
 
@@ -232,7 +248,7 @@ Ha de hacerse énfasis en que cada diodo de bypass protege varias células, ya q
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{./images/bypass_diodes/bypass_diodes.png}
-    \caption{Esquema de un módulo con 3 \gls{diodos de bypass}. Si un grupo cuenta con una célula sombreada, el exceso de corriente que no puede fluir a través de ella pasa por el diodo de bypass de su grupo.\\Fuente: Figura 5, a) en \cite{Martínez-Moreno_Muñoz_Lorenzo_2010}.}
+    \caption{Esquema de un módulo con 3 \gls{diodos de bypass}. Si un grupo cuenta con una célula sombreada, el exceso de corriente que no puede fluir a través de ella pasa por el diodo de bypass de su grupo.\\Fuente: F. Martínez-Moreno et al., ``Experimental model to estimate shading losses on PV arrays'', 2010. \cite[Fig. 5, a)]{Martínez-Moreno_Muñoz_Lorenzo_2010}.}
     \label{fig:diodos_bypass}
 \end{figure}
 
@@ -503,7 +519,7 @@ El diagrama UML resultante sería:
     \label{fig:uml_sombreado}
 \end{figure}
 
-La elección de un diagrama tan sencillo no es arbitraria: aquí prima la simplicidad y la facilidad de revisar el código para determinar si tiene valor o no dentro de la librería \pvlibpy. Y realmente se logra sintetizar la \gls{API} con un buen compromiso entre lo automatizado y la intervención de una persona usuaria. Véase el ejemplo elaborado a continuación:
+La elección de un diagrama tan sencillo no es arbitraria: aquí prima la simplicidad y la facilidad de revisar el código para determinar si tiene valor o no dentro de la librería \pvlibpy{}. Y realmente se logra sintetizar la \gls{API} con un buen compromiso entre lo automatizado y la intervención de una persona usuaria. Véase el ejemplo elaborado a continuación:
 
 \begin{lstlisting}[language=Python, caption={Caso de uso de ejemplo para la propuesta de cálculo de sombras en 3D.}, label={lst:sombreado_3d}]
 from pvlib.spatial import RectangularSurface
@@ -590,6 +606,8 @@ Se deja abierto el aporte a la librería, con opiniones diversas sobre si inclui
 \section{Contribuciones técnicas} \label{sct:desarrollo:contribuciones_tecnicas}
 
 Son aquellas que requieren trabajar con el código base y hacer modificaciones pertinentes para mejorar las prestaciones de la librería. Por ejemplo, aquí se encontrarán algunos errores que se han arreglado o pequeñas funcionalidades que se han expuesto a la interfaz.
+
+Las mejoras aquí expuestas se identifican bien durante el desarrollo de las demás contribuciones o por las dificultades que reportan otros usuarios.
 
 \subsection{Arreglo a los tests de integración continua en Windows con Conda}
 
@@ -806,7 +824,7 @@ Se emplearon múltiples expresiones regulares, escritas en el sabor PCRE2, que e
     \centering
     \begin{adjustbox}{max width=\textwidth}
         \begin{tabular}{l|l}
-            \Gls{expresión regular}                                                                                       & Patrón de sustitución              \\
+            \Gls{expresión regular}                                                                                 & Patrón de sustitución              \\
             \hline
             \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*), default:? None\textbackslash{}.?}               & \texttt{\$1\$2 : \$3, optional}    \\
             \texttt{(? \{8\}| \{4\})(?\textbackslash{}w*) ?: (?.*), default:? None\.?}                              &                                    \\

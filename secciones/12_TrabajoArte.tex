@@ -1,14 +1,14 @@
-\chapter{Fundamento Teórico y Estado del Arte} \label{chp:state-of-the-art}
+\chapter{Fundamentos teóricos y estado del arte} \label{chp:state-of-the-art}
 
-En este capítulo se cubre el estado del arte de la energía solar \gls{fotovoltaica} y, particularmente, de la \gls{librería} \pvlibpy. Se podrá encontrar en las siguientes secciones:
+En este capítulo se cubre el estado del arte de la energía solar \gls{fotovoltaica} y, particularmente, de la \gls{librería} \pvlibpy{}. Se podrá encontrar en las siguientes secciones:
 
 \begin{itemize}
 
       \item \fullref{sct:energia-solar}: explica el estado actual de la energía solar \gls{fotovoltaica} y su fundamento teórico base.
 
-      \item \fullref{sct:simulaciones}: detalla las herramientas de \gls{simulación} utilizadas en el sector fotovoltaico y el marco general de comparación de la librería \pvlibpy.
+      \item \fullref{sct:simulaciones}: detalla las herramientas de \gls{simulación} utilizadas en el sector fotovoltaico y el marco general de comparación de la librería \pvlibpy{}.
 
-      \item \fullref{sct:pvlib}: presenta las características de la biblioteca \pvlibpy.
+      \item \fullref{sct:pvlib}: presenta las características de la biblioteca \pvlibpy{}.
 
 \end{itemize}
 
@@ -54,7 +54,7 @@ Dependiendo de las condiciones atmosféricas, la cantidad de masa de aire que de
 \begin{figure}[H]
       \centering
       \includegraphics[width=0.7\textwidth]{./images/SoA_irrad/astm_g173-03.png}
-      \caption{Espectro solar terrestre. Recuperado del ejemplo de este documento en \ref{sct:doc_ej_espectro_astm}.}
+      \caption{Espectro solar terrestre. Fuente: ejemplo de este documento en \ref{sct:doc_ej_espectro_astm} añadido a \pvlibpy{}.}
       \label{fig:solar_spectrum}
 \end{figure}
 
@@ -87,7 +87,7 @@ Los instrumentos de medida en campo que permiten obtener estos parámetros son \
 \begin{figure}[H]
       \centering
       \includegraphics[width=0.7\textwidth]{./images/SoA_irrad/dni-dhi-ghi-1-768x437.png}
-      \caption{Componentes de la radiación solar y los instrumentos de medida. Recuperado de \url{http://web.archive.org/web/20230624215046/https://yellowhaze.in/wp-content/uploads/2017/01/dni-dhi-ghi-1-768x437.png}}
+      \caption{Componentes de la radiación solar y los instrumentos de medida. Fuente: Yellow Haze Sustainable, 2017. \href{http://web.archive.org/web/20230624215046/https://yellowhaze.in/wp-content/uploads/2017/01/dni-dhi-ghi-1-768x437.png}{Enlace}.}
       \label{fig:irrad_componentes}
 \end{figure}
 
@@ -127,7 +127,7 @@ La curva que se genera al cambiar la tensión de trabajo de la célula y medir l
 \begin{figure}[H]
       \centering
       \includegraphics[width=0.7\textwidth]{./images/SoA_irrad/Solar_Cell_I-V_Curve_Schematic.png}
-      \caption{\Gls{curva I-V} de una \gls{célula solar}. Recuperado de \cite[Fig. 4.6]{Perpinan2020}.}
+      \caption{\Gls{curva I-V} de una \gls{célula solar}. Fuente: Óscar Perpiñán, ``Energía Solar Fotovoltaica'', 2020. \cite[Fig. 4.6]{Perpinan2020}.}
       \label{fig:iv_curve}
 \end{figure}
 
@@ -142,7 +142,7 @@ En realidad la \gls{radiación solar} no es homogénea en todas las longitudes d
 \begin{figure}[H]
       \centering
       \includegraphics[width=0.7\textwidth]{./images/SoA_irrad/Spectral_Response_PV.jpg}
-      \caption{\Gls{respuesta espectral} de una \gls{célula solar}. Recuperado de \url{https://pvpmc.sandia.gov/modeling-guide/2-dc-module-iv/effective-irradiance/spectral-response/}.}
+      \caption{\Gls{respuesta espectral} de una \gls{célula solar}. Fuente: Sandia National Laboratories, ``Image of Spectral\_Response\_PV'', 2024. \href{https://pvpmc.sandia.gov/modeling-guide/2-dc-module-iv/effective-irradiance/spectral-response/}{Enlace}.}
       \label{fig:spectral_response}
 \end{figure}
 
@@ -208,7 +208,7 @@ La infografía \ref{fig:pv_simulation_flow} detalla los efectos que normalmente 
 \begin{figure}[H]
       \centering
       \includegraphics[width=0.7\textwidth]{./images/SoA_irrad/pv_simulation_flow.png}
-      \caption{Flujo de cálculo en la simulación de un sistema fotovoltaico. Recuperado de \url{https://pvpmc.sandia.gov/}}
+      \caption{Flujo de cálculo en la simulación de un sistema fotovoltaico. Fuente: Sandia National Laboratories, PV Performance Modeling Collaborative (PVPMC), 2024. \href{https://pvpmc.sandia.gov/}{Enlace}.}
       \label{fig:pv_simulation_flow}
 \end{figure}
 
@@ -219,7 +219,7 @@ Se comprueba la necesidad de establecer numéricamente las coordenadas del Sol e
 \begin{figure}[h]
       \centering
       \includegraphics[width=0.6\textwidth]{./images/SoA_irrad/Anderson_Mikofski_Fig2.png}
-      \caption{Ángulos solares. Recuperado de \cite[Fig. 2]{Anderson_Mikofski_2020}.}
+      \caption{Ángulos solares. Fuente: K. Anderson, M. Mikofski, ``Slope-Aware Backtracking for Single-Axis Trackers'', 2020. \cite[Fig. 2]{Anderson_Mikofski_2020}.}
       \label{fig:solar_angles}
 \end{figure}
 
@@ -241,4 +241,4 @@ Finalmente se obtiene la producción horaria de energía, que se puede integrar 
 
 La importancia de simulaciones y análisis previo a la implantación de sistemas fotovoltaicos tanto para promotores, operaciones de financiación y diseñadores ha dado lugar a múltiples herramientas \gls{software} y modelos como PVWatts, PVGIS, PV-Online, PV*SOL, PVsyst, System Advisor Model (SAM) y muchas más \cite{stein_models_2009, Kumar_2017}. Normalmente estas herramientas propietarias ponen el foco en calcular el rédito energético y económico de una instalación fotovoltaica, pero no en el desarrollo de la investigación y validación de modelos científicos.
 
-La Sección \ref{sct:pvlib} mostrará que la librería \pvlibpy, y su predecesor en \gls{MATLAB}, se centra en la investigación y validación de modelos científicos para la simulación de sistemas fotovoltaicos, mientras que se obvia el cálculo de coste y rédito económico.
+La Sección \ref{sct:pvlib} mostrará que la librería \pvlibpy{}, y su predecesor en \gls{MATLAB}, se centra en la investigación y validación de modelos científicos para la simulación de sistemas fotovoltaicos, mientras que se obvia el cálculo de coste y rédito económico.

@@ -20,15 +20,15 @@ La elección de realizar este trabajo sobre código abierto y libre se debe espe
 
 Se ha mencionado anteriormente que dichas iniciativas se nutren de la colaboración entre múltiples personas -no solo desarrolladoras, sino también usuarias, entre otras- para identificar y producir mejoras, y mantener el proyecto. Es necesario por tanto establecer un marco de trabajo común sobre el que realizar estas aportaciones.
 
-En general, cualquier proyecto de código con unos requisitos mínimos de calidad contará con un sistema de control de versiones (\gls{VCS}). Esta herramienta facilitará ver un historial de cambios, hacerlos de forma independiente pero simultánea entre desarrolladores, revisarlos, trazar errores y arbitrar los cambios que conforman cada nueva versión que se va publicando. Existen varios sistemas de control de versiones, como \textit{Mercurial} o \textit{Subversion}, pero el más popular y extendido es \textit{Git}; este último es el que se emplea en \pvlibpy.
+En general, cualquier proyecto de código con unos requisitos mínimos de calidad contará con un sistema de control de versiones (\gls{VCS}). Esta herramienta facilitará ver un historial de cambios, hacerlos de forma independiente pero simultánea entre desarrolladores, revisarlos, trazar errores y arbitrar los cambios que conforman cada nueva versión que se va publicando. Existen varios sistemas de control de versiones, como \textit{Mercurial} o \textit{Subversion}, pero el más popular y extendido es \textit{Git}; este último es el que se emplea en \pvlibpy{}.
 
-Tradicionalmente estas propuestas se realizaban a través de listas de correo electrónico, pero actualmente se emplean plataformas como \textit{GitHub}, \textit{GitLab} o \textit{Bitbucket} que facilitan ver el código fuente y las propuestas con una \gls{interfaz gráfica} intuitiva. En el caso de \pvlibpy, se emplea \textit{GitHub}, una plataforma muy conocida por las iniciativas de código abierto y libre que pertenece al grupo \textit{Microsoft}.
+Tradicionalmente estas propuestas se realizaban a través de listas de correo electrónico, pero actualmente se emplean plataformas como \textit{GitHub}, \textit{GitLab} o \textit{Bitbucket} que facilitan ver el código fuente y las propuestas con una \gls{interfaz gráfica} intuitiva. En el caso de \pvlibpy{}, se emplea \textit{GitHub}, una plataforma muy conocida por las iniciativas de código abierto y libre que pertenece al grupo \textit{Microsoft}.
 
 Además, estas plataformas brindan una serie de características indispensables para la administración actual de proyectos:
 
 \begin{itemize}
     \item \textit{Issues}: son temas de discusión que puedan tener un impacto concreto en el \gls{repositorio}. Aquí se suelen informar sobre los errores, posibles mejoras o tareas relacionadas en el proyecto. Cualquier persona con una cuenta en \textit{GitHub} puede abrir una \textit{\gls{issue}} y comentar en ella. Habitualmente se etiquetan para clasificarlos, priorizarlos y distinguir la fuente del error.
-    \item \textit{Pull Requests}: son las propuestas con cambios que plantean desarrolladores del proyecto. Se pueden revisar, comentar y aprobar o rechazar. En la administración de un proyecto serio y riguroso como \pvlibpy, es un paso imprescindible para aportar cualquier cambio al código. Las propuestas pasan un proceso de revisión y triage para garantizar la calidad y asignarlas a una versión apropiada a la tipología del cambio.
+    \item \textit{Pull Requests}: son las propuestas con cambios que plantean desarrolladores del proyecto. Se pueden revisar, comentar y aprobar o rechazar. En la administración de un proyecto serio y riguroso como \pvlibpy{}, es un paso imprescindible para aportar cualquier cambio al código. Las propuestas pasan un proceso de revisión y triage para garantizar la calidad y asignarlas a una versión apropiada a la tipología del cambio.
     \item \textit{Discussions}: son foros para tratar cualquier tema, normalmente menos serios que una \textit{\gls{issue}}. Es uno de los lugares más apropiados para plantear dudas o sugerencias sin formalizar ni una aportación ni requerir la atención inmediata.
 \end{itemize}
 
@@ -78,9 +78,9 @@ Por comodidad, \textit{GitHub} proporciona un programa gráfico para ordenador q
 
 Otras opciones para contribuir van desde usar \textit{Git} por \gls{línea de comandos}, otros clientes como \textit{SourceTree} o características integradas en los programas de edición de código.
 
-\section{La librería \pvlibpy} \label{sct:pvlib}
+\section{La librería \pvlibpy{}} \label{sct:pvlib}
 
-Antes de proseguir con las contribuciones, es necesario tratar sobre qué es y qué aporta la \gls{librería} \pvlibpy.
+Antes de proseguir con las contribuciones, es necesario tratar sobre qué es y qué aporta la \gls{librería} \pvlibpy{}.
 
 \pvlibpy{} es una biblioteca de código abierto que proporciona herramientas para la simulación, análisis e investigación de sistemas fotovoltaicos. Se encuentra desarrollada para el lenguaje de programación interpretado \gls{Python} \cite{CS-R9526}, que es ampliamente utilizado en las comunidades científica y de desarrollo de \gls{software} por su gratuidad, sintaxis sencilla, facilidad de desarrollo y diseño orientado a objetos.
 
@@ -150,7 +150,7 @@ El proyecto de código abierto \pvlibpy{} cuenta múltiples características que
 
 Como se ha mencionado anteriormente, el código de la librería \pvlibpy{} se encuentra alojado en un \gls{repositorio} de código abierto. Un repositorio es una carpeta que contiene una series de archivos, de los cuales los más importantes se gestionan mediante un sistema de control de versiones (\gls{VCS}). Este sistema permite llevar un registro de los cambios realizados en los archivos, así como la posibilidad de volver a versiones anteriores en caso de que se produzca un error o un fallo en el código. El uso de esta herramienta es indispensable en proyectos de software, ya que facilita la colaboración entre los desarrolladores y la gestión de las versiones del código.
 
-En el caso de \pvlibpy, el repositorio se encuentra alojado en la plataforma GitHub, que es una de las más populares para el alojamiento de proyectos de código abierto.
+En el caso de \pvlibpy{}, el repositorio se encuentra alojado en la plataforma GitHub, que es una de las más populares para el alojamiento de proyectos de código abierto.
 
 El repositorio cuenta con múltiples archivos y sub-carpetas que configuran el proyecto. Algunos de los más destacables son:
 
@@ -245,7 +245,7 @@ La \textit{\gls{docstring}} de cada \gls{función}, que es el comentario que se 
 
 A continuación se muestra como ejemplo una función mínima con su plantilla de documentación y de código de una función escrita con este fin:
 
-\begin{lstlisting}[language=Python, caption={Ejemplo de documentación de una función en \pvlibpy.}, label={lst:doc_function_example}]
+\begin{lstlisting}[language=Python, caption={Ejemplo de documentación de una función en \pvlibpy{}.}, label={lst:doc_function_example}]
 def example_model(param1, param2):
     """
     Brief model description.
@@ -294,13 +294,13 @@ Esta \gls{función}, una vez listada en el archivo correspondiente del índice q
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{./images/how_to_document/function_stretch.png}
-    \caption{Un ejemplo de renderizado de la documentación de una función en \pvlibpy.}
+    \caption{Un ejemplo de renderizado de la documentación de una función en \pvlibpy{}.}
     \label{fig:doc_function_example}
 \end{figure}
 
 Por otro lado, la siguiente estructura pertenece a la redacción de un ejemplo en la documentación. Se emplea para mostrar cómo se usa una \gls{función} dentro de un contexto más elaborado en cuanto a variables de entrada y salida. Puede incluir todas las características de la documentación de una función:
 
-\begin{lstlisting}[language=Python, caption={Plantilla para elaborar un ejemplo en \pvlibpy.}, label={lst:how_to_document_example}]
+\begin{lstlisting}[language=Python, caption={Plantilla para elaborar un ejemplo en \pvlibpy{}.}, label={lst:how_to_document_example}]
 """
 Example title
 =============
@@ -331,7 +331,7 @@ El texto anterior constituye un archivo que, ubicado en la carpeta correcta (aqu
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{./images/how_to_document/example_stretch.png}
-    \caption{Un ejemplo de uso en la documentación de \pvlibpy.}
+    \caption{Un ejemplo de uso en la documentación de \pvlibpy{}.}
     \label{fig:doc_use_example}
 \end{figure}
 
@@ -345,7 +345,7 @@ Por último queda construir la documentación. A continuación se muestran los c
     \item Y realizando una instalación local mediante \textit{pip}.
 \end{itemize}
 
-\begin{lstlisting}[language=bash, caption={Comandos para construir la documentación de \pvlibpy.}, label={lst:doc_build}]
+\begin{lstlisting}[language=bash, caption={Comandos para construir la documentación de \pvlibpy{}.}, label={lst:doc_build}]
 # instalar Python 3.8 desde el repositorio de deadsnakes,
 # en las librerias por defecto de Ubuntu no se encuentra disponible por antiguedad
 sudo add-apt-repository ppa:deadsnakes/ppa -y

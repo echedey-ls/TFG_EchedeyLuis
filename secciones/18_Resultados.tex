@@ -1,13 +1,13 @@
 \chapter{Resultados y conclusiones} \label{chp:resultados}
 
-En este capítulo se resumen los resultados obtenidos en el desarrollo del Trabajo Fin de Grado, aquellos tanto satisfactorios como los que no, y el impacto que ha tenido la participación en \pvlibpy. Además, se proponen posibles líneas de trabajo futuro, algunas que seguirán desarrollándose y otras que se podrían seguir a partir de este TFG.
+En este capítulo se resumen los resultados obtenidos en el desarrollo del Trabajo Fin de Grado, aquellos tanto satisfactorios como los que no, y el impacto que ha tenido la participación en \pvlibpy{}. Además, se proponen posibles líneas de trabajo futuro, algunas que seguirán desarrollándose y otras que se podrían seguir a partir de este TFG.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Resultados} \label{sct:resultados_resultados}
 
-A pesar de que los ciclos de revisiones y correcciones toman un elevado tiempo de desarrollo, se han conseguido implementar varios modelos y funcionalidades nuevos en \pvlibpy. Además, se ha mejorado la documentación de la librería y se han corregido errores en la misma. Cabe destacar:
+A pesar de que los ciclos de revisiones y correcciones toman un elevado tiempo de desarrollo, se han conseguido implementar varios modelos y funcionalidades nuevos en \pvlibpy{}. Además, se ha mejorado la documentación de la librería y se han corregido errores en la misma. Cabe destacar:
 
 \begin{enumerate}
     \item Exponer el cálculo de la proyección del \gls{cenit} solar sobre las coordenadas de un colector.
@@ -61,7 +61,28 @@ El impacto se divide en dos partes: la primera sección se centrará en el impac
 
 \subsection{Impacto general} \label{sssct:impacto:general}
 
-Este Trabajo Fin de Grado permite visibilizar y extender el uso de algunos modelos científicos relacionados con la fotovoltaica. Además, se ha facilitado el mantenimiento de la librería \pvlibpy{} y se ha mejorado la documentación de la misma, contribuyendo así a la persistencia de este proyecto. Incluso sin haberse añadido algunas de las contribuciones propuestas, el trabajo realizado ha permitido reforzar líneas de trabajo que antes ni se consideraban.
+Este Trabajo Fin de Grado permite visibilizar y extender el uso de algunos modelos científicos relacionados con la fotovoltaica. Además, se ha facilitado el mantenimiento de la librería \pvlibpy{} y se ha mejorado la documentación de la misma, contribuyendo así a la persistencia de este proyecto. Incluso sin haberse añadido algunas de las contribuciones propuestas, el trabajo realizado ha permitido reforzar líneas de trabajo que antes ni se consideraban:
+
+\begin{itemize}
+    \item Participar y apoyar positivamente a la comunidad de desarrolladores y potenciales contribuyentes:
+    \item \begin{itemize}
+        \item Promover la discusión sobre temas relacionados con la mejora de la biblioteca.
+
+        \item Participar en la revisión del código de otros contribuyentes.
+    
+        \item Ayudar a la comunidad usuaria de la biblioteca resolviendo dudas y problemas.
+    
+        \item Animar e intentar involucrar a nuevas personas en el proyecto.
+    \end{itemize}
+
+    \item Reforzar la iniciativa y la comunidad que rodea a la biblioteca:
+    \begin{itemize}
+        \item Ayudar a mantener la biblioteca actualizada para mejorar su ciclo de vida y arreglar errores de forma preventiva.
+        
+        \item Identificar posibles mejoras en los procedimientos marcados para el desarrollo, bien sean realizados manualmente o consistan en una secuencia automática de instrucciones.
+    \end{itemize}
+
+\end{itemize}
 
 Se espera que algunos de los modelos sean bastante útiles para la comunidad científica y técnica, en especial aquellos que consisten en modelos de pérdidas. Estos modelos permiten optimizar el diseño de plantas y mejorar el rendimiento económico de las instalaciones. Además, la mejora de la documentación de la librería \pvlibpy{} facilita su uso y extensión, lo que puede llevar a un aumento de la comunidad de usuarios y contribuidores.
 
@@ -79,7 +100,7 @@ A lo largo del desarrollo de este trabajo, se ha encontrado la posibilidad de me
 
     \item \textbf{En \textit{pvlib/solarfactors}}:
 
-          Este \gls{repositorio} se trata de un clon de \textit{pvfactors}, que se emplea para calcular factores de vista de sistemas fotovoltaicos bifaciales. Es un clon porque \textit{pvfactors} inició dentro de una empresa, que contaba con los permisos para administrar sus cambios, pero dejó de mantenerla. La comunidad de \textit{pvlib}, ya que la usaba en el repositorio \pvlibpy, decidió clonarla y mantenerla.
+          Este \gls{repositorio} se trata de un clon de \textit{pvfactors}, que se emplea para calcular factores de vista de sistemas fotovoltaicos bifaciales. Es un clon porque \textit{pvfactors} inició dentro de una empresa, que contaba con los permisos para administrar sus cambios, pero dejó de mantenerla. La comunidad de \textit{pvlib}, ya que la usaba en el repositorio \pvlibpy{}, decidió clonarla y mantenerla.
 
           \begin{itemize}
               \item \issue[https://github.com/pvlib/solarfactors]{16}
@@ -117,7 +138,7 @@ Con este trabajo se ha contribuido a la consecución de los Objetivos de Desarro
 \begin{itemize}
     \item \textbf{ODS 3: Salud y bienestar}. Al potenciar el uso de energías renovables, se contribuye a la reducción de la contaminación y, por tanto, a la mejora de la salubridad del medio ambiente.
     \item \textbf{ODS 7: Energía asequible y no contaminante}. Debido a que se facilitan herramientas de diseño y análisis de instalaciones fotovoltaicas, se contribuye a que se extienda el uso y se mejore la eficiencia de las mismas y, por tanto, se reduzca la dependencia de otras fuentes de energía no renovables.
-    \item \textbf{ODS 9: Industria, innovación e infraestructura}. Se ha trabajado en la mejora de la librería \pvlibpy ampliamente utilizada por el sector industrial, lo que facilita la innovación y desarrollo de la energía fotovoltaica.
+    \item \textbf{ODS 9: Industria, innovación e infraestructura}. Se ha trabajado en la mejora de la librería \pvlibpy{} ampliamente utilizada por el sector industrial, lo que facilita la innovación y desarrollo de la energía fotovoltaica.
     \item \textbf{ODS 11: Ciudades y comunidades sostenibles}. Las mejoras facilitadas permiten analizar instalaciones fotovoltaicas de forma más fiable, lo que contribuye a su implantación distribuida en entornos más agresivos de sombras, como las ciudades.
     \item \textbf{ODS 13: Acción por el clima}. Este ODS sigue en la misma línea que los demás: como fuente de energía renovable, y en especial por ser la fotovoltaica, se sustituyen las fuentes de mayor emisión de gases de efecto invernadero y se contribuye a la lucha contra el cambio climático.
 \end{itemize}
@@ -130,7 +151,7 @@ Con este trabajo se ha contribuido a la consecución de los Objetivos de Desarro
 
 Con la realización de este Trabajo Fin de Grado, se promueven y mejoran proyectos de código abierto ya establecidos, lo que garantiza la usabilidad de las aportaciones aceptadas.
 
-Se han mejorado múltiples aspectos de la librería \pvlibpy, desde errores menores en el código a la implementación de nuevos modelos y funcionalidades. Se ha mejorado la documentación, dotando al proyecto de una mayor usabilidad. El aporte que realiza este TFG es enriquece transversalmente a todos los efectos de este \gls{repositorio} y se espera que sea de utilidad para la comunidad científica y técnica. Se espera que además se facilite el acceso de nuevos contribuyentes a la librería.
+Se han mejorado múltiples aspectos de la librería \pvlibpy{}, desde errores menores en el código a la implementación de nuevos modelos y funcionalidades. Se ha mejorado la documentación, dotando al proyecto de una mayor usabilidad. El aporte que realiza este TFG es enriquece transversalmente a todos los efectos de este \gls{repositorio} y se espera que sea de utilidad para la comunidad científica y técnica. Se espera que además se facilite el acceso de nuevos contribuyentes a la librería.
 
 Desde un punto de vista de los logros, es destacable el impacto que este proyecto tiene iniciativas de código abierto. Por otro lado, hay dos dificultades principales que cabría destacar:
 
