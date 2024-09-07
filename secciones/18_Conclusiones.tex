@@ -1,34 +1,92 @@
-\chapter{Resultados y conclusiones} \label{chp:resultados}
+\chapter{Conclusiones} \label{chp:conclusiones}
 
 En este capítulo se resumen los resultados obtenidos en el desarrollo del Trabajo Fin de Grado, aquellos tanto satisfactorios como los que no, y el impacto que ha tenido la participación en \pvlibpy{}. Además, se proponen posibles líneas de trabajo futuro, algunas que seguirán desarrollándose y otras que se podrían seguir a partir de este TFG.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Resultados} \label{sct:resultados_resultados}
+\section{Consecución de objetivos}
 
-A pesar de que los ciclos de revisiones y correcciones toman un elevado tiempo de desarrollo, se han conseguido implementar varios modelos y funcionalidades nuevos en \pvlibpy{}. Además, se ha mejorado la documentación de la librería y se han corregido errores en la misma. Cabe destacar:
+Este Trabajo Fin de Grado ha cumplido con los objetivos planteados al inicio del proyecto: se han seleccionado y estudiado modelos recientes para la simulación de sistemas fotovoltaicos, se han propuesto e implementado la mayor parte de ellos en la librería \pvlibpy{}, y se ha contribuido a mejorar la documentación y ejemplos de uso de la misma.
+
+Sobre estas contribuciones de modelos y utilidades científicas que originalmente se perseguían, se ha logrado aportar las siguientes mejoras:
 
 \begin{enumerate}
     \item Exponer el cálculo de la proyección del \gls{cenit} solar sobre las coordenadas de un colector.
     \item Implementar un cálculo de la fracción de \gls{sombra} unidimensional.
     \item La implementación de un modelo de pérdidas de potencia por sombreado, según número de \gls{diodos de bypass}.
     \item Un modelo de fracción de irradiancia difusa fotosintetizable, en función de la irradiancia \gls{difusa} global.
-    \item Un modelo de pérdidas de potencia por heterogeneidad en la irradiancia incidente, de interés para \gls{módulos bifaciales}.
-    \item Dos funciones de conversión recíprocas de responsividad espectral y \gls{eficiencia cuántica externa}, con posibilidad de normalizar la salida.
-    \item Adición de una función general para obtener espectros estándares, que cuenta con el \gls{estándar} ASTM G173-03, pero que será muy fácilmente extendible.
-    \item Solventar 5 bugs y 2 características nuevas de las que han informado usuarios varios.
+    \item Un modelo de pérdidas de potencia por heterogeneidad en la irradiancia incidente, de interés para \glspl{módulo bifacial}.
+    \item Dos funciones de conversión recíprocas de \gls{respuesta espectral} y \gls{eficiencia cuántica externa}, con posibilidad de normalizar la salida.
+    \item Adición de una función general para obtener espectros estándares, que cuenta con el \gls{estándar} ASTM G173-03, pero que será muy fácilmente extendible en el futuro.
+\end{enumerate}
+
+Con la realización de este Trabajo Fin de Grado se promueven y mejoran proyectos de código abierto ya establecidos, lo que potencialmente garantiza la utilización de las aportaciones aceptadas.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Impacto} \label{sct:resultados:impacto}
+
+En esta sección se analizará el valor que aporta el trabajo realizado en este TFG.
+
+El impacto se divide en dos partes: la primera sección se centra en el impacto general del trabajo, mientras que la segunda sección analiza el impacto específico en relación con los Objetivos de Desarrollo Sostenible (ODS).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Impacto general} \label{sssct:impacto:general}
+
+Se han mejorado múltiples aspectos de la librería \pvlibpy{}, desde errores menores en el código a la implementación de nuevos modelos y funcionalidades. Se ha mejorado la documentación, dotando al proyecto de una mayor usabilidad. El aporte que realiza este TFG enriquece transversalmente a todos los efectos de este \gls{repositorio} y se espera que sea de utilidad para la comunidad científica y técnica. Se espera que además se facilite el acceso de nuevos contribuyentes a la librería.
+
+Además, se ha facilitado el mantenimiento de la librería \pvlibpy{} contribuyendo así a la persistencia de este proyecto.
+
+Cabe destacar que se han logrado varios retos adicionales respecto la adición de modelos científicos que aportan valor a la comunidad de \pvlibpy{}:
+
+\begin{enumerate}
+    \item Solventar 5 bugs y 2 características nuevas planteadas por personas usuarias.
     \item Mejorar la documentación ya existente de forma amplia.
     \item Participar en detectar posibles contribuciones para primeros contribuyentes en el futuro.
     \item Aportar ideas y planteamientos que faciliten contribuir a la librería.
 \end{enumerate}
 
-Algunas cifras significativas, para la librería \pvlibpy{} son:
+Incluso sin haberse planteado originalmente, cabe destacar que se han realizado pequeños gestos para hacer de \pvlibpy{} un lugar más inclusivo, como identificar y mitigar el sesgo hacia los ejemplos de fotovoltaica exclusivamente orientada al sur, el recibimiento a nuevos contribuyentes o la resolución de algunas dudas.
+
+Estas líneas de trabajo relacionadas con potenciar la comunidad y el funcionamiento a largo plazo del proyecto se resumen en los siguientes puntos:
+
+\begin{itemize}
+    \item Participar y apoyar positivamente a la comunidad de desarrolladores y potenciales contribuyentes:
+          \begin{itemize}
+              \item Promover la discusión sobre temas relacionados con la mejora de la biblioteca.
+
+              \item Participar en la revisión del código de otros contribuyentes.
+
+              \item Ayudar a la comunidad usuaria de la biblioteca resolviendo dudas y problemas.
+
+              \item Animar e intentar involucrar a nuevas personas en el proyecto.
+          \end{itemize}
+
+    \item Reforzar la iniciativa y la comunidad que rodea a la biblioteca:
+          \begin{itemize}
+              \item Ayudar a mantener la biblioteca actualizada para mejorar su ciclo de vida y arreglar errores de forma preventiva.
+
+              \item Identificar posibles mejoras en los procedimientos marcados para el desarrollo, bien sean realizados manualmente o consistan en una secuencia automática de instrucciones.
+          \end{itemize}
+
+\end{itemize}
+
+Se espera que algunos de los modelos sean bastante útiles para la comunidad científica y técnica, en especial aquellos que consisten en modelos de pérdidas. Estos modelos permiten optimizar el diseño de plantas y mejorar el rendimiento de las instalaciones. Además, la mejora de la documentación de la librería \pvlibpy{} facilita su uso y extensión, lo que puede llevar a un aumento de la comunidad de usuarios y contribuidores.
+
+Dentro del programa subvencionado \textit{Google Summer of Code}, se ha trabajado estrechamente con otros compañeros desarrolladores y se les ha ayudado a que se familiaricen con las herramientas de desarrollo y la forma de colaborar en el proyecto. Esto ha permitido que se hayan añadido nuevas funcionalidades a la librería y se haya mejorado la calidad del código.
+
+Asimismo, este trabajo se alinea con los objetivos de la Universidad pública de promover la investigación, la transferencia y democratización libre del conocimiento.
+
+Algunas cifras significativas sobre la continuada contribución en la librería \pvlibpy{} son:
 
 \begin{itemize}
     \item Se han realizado $35$ \textit{commits} en la \gls{rama} principal, con la aportación de $6904$ líneas de texto y la sustitución de $2782$\footnote{Fuente: \url{https://github.com/pvlib/pvlib-python/graphs/contributors}.}.
           \begin{itemize}
-            \item De las líneas aportadas y sustituidas, tan sólo $2004$ corresponden a ficheros de datos, en el caso de la contribución de espectro \gls{estándar} ASTM G173-03.
+              \item De las líneas aportadas y sustituidas, tan sólo $2004$ corresponden a ficheros de datos, que corresponden a una parte de la contribución de espectro \gls{estándar} ASTM G173-03.
           \end{itemize}
     \item Se han abierto 35 \textit{pull requests}\footnote{Fuente: \url{https://github.com/pvlib/pvlib-python/pulls?q=is\%3Apr+author\%3Aechedey-ls+}.}.
           \begin{itemize}
@@ -48,47 +106,7 @@ Algunas cifras significativas, para la librería \pvlibpy{} son:
     \item Se han creado 5 ejemplos completamente nuevos.
 \end{itemize}
 
-Asimismo este proyecto ha tenido impacto en otros proyectos, como se detalla en la sección \ref{sssct:impacto:otrosproyectos}.
-
-\section{Impacto} \label{chp:impacto}
-
-En esta sección se analizará el valor que aporta el trabajo realizado en este TFG.
-
-El impacto se divide en dos partes: la primera sección se centrará en el impacto general del trabajo, mientras que la segunda sección analizará el impacto específico en relación con los Objetivos de Desarrollo Sostenible (ODS).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Impacto general} \label{sssct:impacto:general}
-
-Este Trabajo Fin de Grado permite visibilizar y extender el uso de algunos modelos científicos relacionados con la fotovoltaica. Además, se ha facilitado el mantenimiento de la librería \pvlibpy{} y se ha mejorado la documentación de la misma, contribuyendo así a la persistencia de este proyecto. Incluso sin haberse añadido algunas de las contribuciones propuestas, el trabajo realizado ha permitido reforzar líneas de trabajo que antes ni se consideraban:
-
-\begin{itemize}
-    \item Participar y apoyar positivamente a la comunidad de desarrolladores y potenciales contribuyentes:
-    \item \begin{itemize}
-        \item Promover la discusión sobre temas relacionados con la mejora de la biblioteca.
-
-        \item Participar en la revisión del código de otros contribuyentes.
-    
-        \item Ayudar a la comunidad usuaria de la biblioteca resolviendo dudas y problemas.
-    
-        \item Animar e intentar involucrar a nuevas personas en el proyecto.
-    \end{itemize}
-
-    \item Reforzar la iniciativa y la comunidad que rodea a la biblioteca:
-    \begin{itemize}
-        \item Ayudar a mantener la biblioteca actualizada para mejorar su ciclo de vida y arreglar errores de forma preventiva.
-        
-        \item Identificar posibles mejoras en los procedimientos marcados para el desarrollo, bien sean realizados manualmente o consistan en una secuencia automática de instrucciones.
-    \end{itemize}
-
-\end{itemize}
-
-Se espera que algunos de los modelos sean bastante útiles para la comunidad científica y técnica, en especial aquellos que consisten en modelos de pérdidas. Estos modelos permiten optimizar el diseño de plantas y mejorar el rendimiento económico de las instalaciones. Además, la mejora de la documentación de la librería \pvlibpy{} facilita su uso y extensión, lo que puede llevar a un aumento de la comunidad de usuarios y contribuidores.
-
-Dentro del programa subvencionado \textit{Google Summer of Code}, se ha trabajado estrechamente con otros compañeros desarrolladores y se les ha ayudado a que se familiaricen con las herramientas de desarrollo y la forma de colaborar en el proyecto. Esto ha permitido que se hayan añadido nuevas funcionalidades a la librería y se haya mejorado la calidad del código.
-
-Asimismo, este trabajo se alinea con los objetivos de la Universidad pública de promover la investigación, la transferencia y democratización libre del conocimiento.
+Este trabajo se ha extralimitado y ha tenido un impacto en otros proyectos, como se detalla en la sección \ref{sssct:impacto:otrosproyectos}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -124,7 +142,7 @@ A lo largo del desarrollo de este trabajo, se ha encontrado la posibilidad de me
           Dentro de este TFG se realiza el archivo y las modificaciones necesarias para poder ver las estadísticas de \textit{solarfactors} en la web. Se incluyen los datos a fecha de esta redacción.
 
     \item \textbf{En \textit{NREL/bifacial\_radiance}}:
-    
+
           Este \gls{repositorio} facilita \gls{software} de simulación de sistemas fotovoltaicos bifaciales. Durante la comparación del código aportado a \pvlibpy{} en la propuesta \ref{sct:desarrollo:contribuciones_cientificas:heterogeneidad_irradiancia} sobre irradiancia distribuida no uniformemente en la cara posterior del \gls{módulo}, se detectan un error de unidades y deficiencias en la documentación del modelo de referencia. Se corrigen los fallos de su implementación y se añade un modelo con unos coeficientes más apropiados.
 
 \end{itemize}
@@ -143,37 +161,24 @@ Con este trabajo se ha contribuido a la consecución de los Objetivos de Desarro
     \item \textbf{ODS 13: Acción por el clima}. Este ODS sigue en la misma línea que los demás: como fuente de energía renovable, y en especial por ser la fotovoltaica, se sustituyen las fuentes de mayor emisión de gases de efecto invernadero y se contribuye a la lucha contra el cambio climático.
 \end{itemize}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Conclusiones} \label{sct:resultados:conclusiones}
-
-Con la realización de este Trabajo Fin de Grado, se promueven y mejoran proyectos de código abierto ya establecidos, lo que garantiza la usabilidad de las aportaciones aceptadas.
-
-Se han mejorado múltiples aspectos de la librería \pvlibpy{}, desde errores menores en el código a la implementación de nuevos modelos y funcionalidades. Se ha mejorado la documentación, dotando al proyecto de una mayor usabilidad. El aporte que realiza este TFG es enriquece transversalmente a todos los efectos de este \gls{repositorio} y se espera que sea de utilidad para la comunidad científica y técnica. Se espera que además se facilite el acceso de nuevos contribuyentes a la librería.
-
-Desde un punto de vista de los logros, es destacable el impacto que este proyecto tiene iniciativas de código abierto. Por otro lado, hay dos dificultades principales que cabría destacar:
-
-\begin{itemize}
-    \item La exploración de artículos con modelos candidatos, a pesar de partir de una tanda inicial, encontrar otras posibles contribuciones adicionales supone un elevado esfuerzo y un resultado reducido.
-    \item La planificación del trabajo, que responde a ciclos de trabajo extensos por el aprendizaje paralelo al desarrollo y, en especial, al lanzamiento de versiones, que es el factor principal que motiva la revisión de las propuestas.
-\end{itemize}
-
-Asimismo cabe destacar que se hay pequeños gestos que han hecho del proyecto un lugar más inclusivo, como identificar el sesgo hacia los ejemplos de fotovoltaica exclusivamente orientada al sur, el recibimiento a nuevos contribuyentes o la resolución de algunas dudas.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Trabajo futuro} \label{sct:resultados:trabajofuturo}
+\section{Trabajo futuro y dificultades} \label{sct:resultados:trabajofuturo}
 
 Hay varias líneas de desarrollo que sería deseable continuar en el futuro, algunas de las cuales se han planteado en este TFG:
 
 \begin{enumerate}
-    \item Inicialmente se trabajará en contrastar la implementación del modelo descrito en \ref{sct:desarrollo:contribuciones_cientificas:heterogeneidad_irradiancia}, cuyos autores solicitan y facilitan información para contrastar la implementación con la suya.
-    \item Se continuarán las propuestas ya planteadas, tanto dentro como fuera del programa subvencionado \textit{Google Summer of Code}. Y se priorizará dotar a la web de una mejor estética y usabilidad empleando las últimas versiones posibles.
+    \item Inicialmente, se continuarán las propuestas ya planteadas, tanto dentro como fuera del programa subvencionado \textit{Google Summer of Code}.
     \item Además, posiblemente se intente continuar en la línea de solventar el problema de la dependencia \texttt{shapely<2} en \textit{solarfactors}, en función de si el equipo decide trabajar en ello.
     \item Por último, se ayudará a mejorar la documentación sobre cómo contribuir, y plantear una hoja de ruta para futuros contribuyentes que no hayan visto cómo programar en esta librería antes, pues se identifica que no todos los contribuyentes reciben formación sobre el uso de control de versiones en sus titulaciones.
 \end{enumerate}
 
-Se espera que este trabajo contribuya y motive el desarrollo de algunas áreas de estudio, así como que extienda y facilite la implantación de esta energía renovable en la sociedad.
+La presencia de estas líneas de trabajo se justifica debido a dos dificultades principales que se han encontrado y responden a la existencia de interaccionar con la comunidad científica y la comunidad de desarrolladores:
+
+\begin{itemize}
+    \item La exploración de artículos con modelos candidatos, a pesar de partir de una tanda inicial, encontrar otras posibles contribuciones adicionales supone un elevado esfuerzo con un escaso resultado.
+    \item La planificación del trabajo, que responde a ciclos de trabajo extensos por el aprendizaje paralelo al desarrollo y, en especial, al lanzamiento de versiones, que es el factor principal que motiva la revisión de las propuestas.
+\end{itemize}
+
+Se espera que este Trabajo Fin de Grado inspire a la realización de trabajos académicos similares, contribuya y motive a la investigación de algunas áreas de estudio emergentes en fotovoltaica, así como que extienda y facilite la implantación de esta energía renovable en la sociedad.

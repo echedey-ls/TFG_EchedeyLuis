@@ -137,12 +137,12 @@ El proyecto de código abierto \pvlibpy{} cuenta múltiples características que
     \item Cálculo de ángulos de seguimiento: para seguidores de uno y dos ejes, que permitan colectar la máxima radiación solar \gls{directa}, que normalmente se corresponderá con la máxima producción de energía. Véase el submódulo \texttt{pvlib.tracking}.
     \item Cálculo de temperatura de los módulos: normalmente empíricos, facilitan estimar la producción de energía ya que, habitualmente, la eficiencia de las células es bastante susceptible a la temperatura. Estas utilidades se encuentran en \texttt{pvlib.temperature}.
     \item Estimación de ganancias o pérdidas por efectos del espectro solar: pues en función de la composición del espectro solar incidente en los módulos, la eficiencia de los mismos puede variar. En \texttt{pvlib.spectrum}.
-    \item Modelado de eficiencia de inversores: para estimar la eficiencia de los \gls{inversores} DC-AC en función de la potencia de entrada y sus demás características. En \texttt{pvlib.inverter}.
+    \item Modelado de eficiencia de inversores: para estimar la eficiencia de los \glspl{inversor} DC-AC en función de la potencia de entrada y sus demás características. En \texttt{pvlib.inverter}.
     \item Modelado de pérdidas en transformadores: para estimar las pérdidas en los \gls{transformadores} de conexión a red. En \texttt{pvlib.transformer}.
     \item Modelado de pérdidas en cables: para estimar las pérdidas resistivas en los cables. En \texttt{pvlib.pvsystem}.
     \item Integración de APIs externas para la obtención de datos meteorológicos relacionados con la fotovoltaica, en \texttt{pvlib.iotools}.
     \item Abstracciones de los componentes que conforman una instalación fotovoltaica, mediante las clases \texttt{Location}, \texttt{Array}, \texttt{PVSystem} y la clase que agrupa el flujo computacional \texttt{Modelchain}, en los submódulos \texttt{pvlib.location}, \texttt{pvlib.pvsystem} y \texttt{pvlib.modelchain}.
-    \item Cálculos adicionales para sistemas con \gls{módulos bifaciales}, que son aquellos \gls{colectores} planos que permiten la captación de radiación solar por ambas caras del módulo. En \texttt{pvlib.bifacial}.
+    \item Cálculos adicionales para sistemas con \glspl{módulo bifacial}, que son aquellos \gls{colectores} planos que permiten la captación de radiación solar por ambas caras del módulo. En \texttt{pvlib.bifacial}.
 
 \end{itemize}
 
@@ -175,7 +175,7 @@ En el lado de las utilidades esenciales, se encuentran:
 \begin{itemize}
     \item \textit{Git}: como sistema de control de versiones (\gls{VCS}) que se emplea para gestionar los cambios en el código.
     \item \textit{GitHub}: es la plataforma de alojamiento de proyectos de código abierto que se emplea para colaborar en el desarrollo del proyecto. Permite crear \textit{issues} o discusiones para reportar errores o sugerir mejoras; y proponer cambios y revisarlos públicamente en \textit{pull requests}. Además proporciona máquinas virtuales para ejecutar los procedimientos de integración y desarrollo continuos.
-    \item \textit{ReadTheDocs} junto con \textit{sphinx}: es la plataforma que se emplea para ejecutar \textit{sphinx}, el entorno de trabajo que produce la documentación en formato \gls{HTML}, y alojar el producto. La documentación se escribe en formato \textit{\gls{reStructuredText}} y se genera automáticamente a partir de los comentarios en el código, \gls{scripts} con los ejemplos y archivos fuente con el cuerpo más general.
+    \item \textit{ReadTheDocs} junto con \textit{sphinx}: es la plataforma que se emplea para ejecutar \textit{sphinx}, el entorno de trabajo que produce la documentación en formato \gls{HTML}, y alojar el producto. La documentación se escribe en formato \textit{\gls{reStructuredText}} y se genera automáticamente a partir de los comentarios en el código, \glspl{script} con los ejemplos y archivos fuente con el cuerpo más general.
     \item \textit{pytest}: es la librería de \gls{Python} que se emplea para escribir y ejecutar tests unitarios y de integración en el código. Facilita la creación de \textit{\gls{mocks}} u observadores del estado de partes del mismo proyecto, la reutilización de datos de tests, la ejecución opcional de los tests en función de las dependencias disponibles y visualizar los resultados en un informe. Posiblemente la mejor característica es poder ejecutar los tests uno a uno, por grupo o todos a la vez.
     \item \textit{Codecov}: es la plataforma que se emplea para medir la cobertura de los tests en el código. Permite visualizar la cobertura de los tests en un informe y comprobar si se están realizando pruebas suficientes en el código.
     \item \textit{flake8}: es una utilidad que detecta errores de estilo en el código, como la longitud de las líneas, la \gls{indentación}, la presencia de espacios en blanco, entre otros. Facilita la escritura de código limpio y legible, por ende, mantenible.
@@ -214,7 +214,7 @@ Para el desarrollo de este trabajo se emplea el siguiente \gls{software} para el
 
           \end{itemize}
 
-    \item \textit{GitHub Desktop}: es la \gls{interfaz gráfica} que se emplea para colaborar en el desarrollo del proyecto. Permite visualizar los cambios, crear \textit{ramas}, hacer \textit{commits}, \textit{pull requests} y \textit{\gls{merges}}, entre otros. En resumen, administra nuestra copia del repositorio para que los desarrolladores del proyecto puedan revisar y aceptar las propuestas.
+    \item \textit{GitHub Desktop}: es la \gls{interfaz gráfica} que se emplea para colaborar en el desarrollo del proyecto. Permite visualizar los cambios, crear \textit{ramas}, hacer \textit{commits}, \textit{pull requests} y \textit{\glspl{merge}}, entre otros. En resumen, administra nuestra copia del repositorio para que los desarrolladores del proyecto puedan revisar y aceptar las propuestas.
     \item \textit{pip} y \textit{venv}: como gestor de paquetes y entornos aislados de desarrollo de Python nativos. Se emplean para instalar las dependencias del proyecto y usar entornos con las versiones específicas requeridas aislado del resto del sistema.
 
 \end{itemize}

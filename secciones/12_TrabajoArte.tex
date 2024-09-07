@@ -1,4 +1,4 @@
-\chapter{Fundamentos teóricos y estado del arte} \label{chp:state-of-the-art}
+\chapter{\pvlibpy{}: fotovoltaica y simulaciones} \label{chp:state-of-the-art}
 
 En este capítulo se cubre el estado del arte de la energía solar \gls{fotovoltaica} y, particularmente, de la \gls{librería} \pvlibpy{}. Se podrá encontrar en las siguientes secciones:
 
@@ -82,7 +82,7 @@ La ecuación \ref{eq:ghi_dni_dhi} es interesante porque facilita comprobar la ca
 
 Las unidades de las componentes de la irradiancia solar son $\si{\watt\per\meter\squared}$.
 
-Los instrumentos de medida en campo que permiten obtener estos parámetros son \gls{piranómetros} para medir \textit{\gls{GHI}}; \gls{pirheliómetros}, para \textit{\gls{DNI}}; y \gls{piranómetros} con bola de sombra del disco solar para \textit{\gls{DHI}}. En la figura \ref{fig:irrad_componentes} se puede observar la relación entre las componentes de la radiación solar y los instrumentos de medida:
+Los instrumentos de medida en campo que permiten obtener estos parámetros son \glspl{piranómetro} para medir \textit{\gls{GHI}}; \glspl{pirheliómetro}, para \textit{\gls{DNI}}; y \glspl{piranómetro} con bola de sombra del disco solar para \textit{\gls{DHI}}. En la figura \ref{fig:irrad_componentes} se puede observar la relación entre las componentes de la radiación solar y los instrumentos de medida:
 
 \begin{figure}[H]
       \centering
@@ -202,7 +202,7 @@ Se llama \gls{sistema fotovoltaico} al acople de los módulos junto con componen
 No todos los sistemas incorporan los equipos mencionados anteriormente. Se han desarrollado diferentes configuraciones, cada una con sus propias ventajas y dificultades, como sistemas conectados a la red, \gls{sistemas autónomos} y \gls{sistemas de bombeo} \cite{Perpinan2020}:
 
 \begin{itemize}
-      \item Sistemas conectados a la red: son los más comunes y se emplean para inyectar energía en la red eléctrica. Se necesitan \gls{inversores} que conviertan la corriente continua en alterna.
+      \item Sistemas conectados a la red: son los más comunes y se emplean para inyectar energía en la red eléctrica. Se necesitan \glspl{inversor} que conviertan la corriente continua en alterna.
       \item Sistemas autónomos: se emplean en lugares remotos donde no llega la red eléctrica o es inestable el acceso. Usan \gls{sistemas de almacenamiento} y de gestión de la energía.
       \item Sistemas de bombeo: se emplean para bombear agua durante las horas diurnas a un depósito. Solo requieren un seguidor del punto de máxima potencia que trabaje adecuadamente con el motor de la bomba.
 \end{itemize}
@@ -245,7 +245,7 @@ Algunos factores de pérdidas se toman en cuenta en este instante como el \gls{a
 
 En general, dependerá del modelo en cuestión y cómo se haya planteado originalmente, pero cabe destacar esta diferencia entre aplicar modelos a la radiación incidente o a la potencia de salida.
 
-A continuación, se modela la integración de los \gls{inversores}, \gls{sistemas de almacenamiento} o \gls{transformadores}, si procede en cada caso.
+A continuación, se modela la integración de los \glspl{inversor}, \gls{sistemas de almacenamiento} o \gls{transformadores}, si procede en cada caso.
 
 Finalmente se obtiene la producción horaria de energía, que se puede integrar en el tiempo para obtener la producción, asignarle un retorno económico y estimar la viabilidad del proyecto de instalación fotovoltaica \cite{Rosa-Clot_Tina_2020}.
 
@@ -253,4 +253,48 @@ Finalmente se obtiene la producción horaria de energía, que se puede integrar 
 
 La importancia de simulaciones y análisis previo a la implantación de sistemas fotovoltaicos tanto para promotores, operaciones de financiación y diseñadores ha dado lugar a múltiples herramientas \gls{software} y modelos como PVWatts, PVGIS, PV-Online, PV*SOL, PVsyst, System Advisor Model (SAM) y muchas más \cite{stein_models_2009, Kumar_2017}. Normalmente estas herramientas propietarias ponen el foco en calcular el rédito energético y económico de una instalación fotovoltaica, pero no en el desarrollo de la investigación y validación de modelos científicos.
 
-La Sección \ref{sct:pvlib} mostrará que la librería \pvlibpy{}, y su predecesor en \gls{MATLAB}, se centra en la investigación y validación de modelos científicos para la simulación de sistemas fotovoltaicos, mientras que se obvia el cálculo de coste y rédito económico.
+La Sección \ref{sct:pvlib} mostrará que la librería \pvlibpy{}, y su predecesor en \gls{MATLAB}, se centran en la investigación y validación de modelos científicos para la simulación de sistemas fotovoltaicos, mientras que se obvia el cálculo de coste y rédito económico.
+
+A continuación se presentan algunas de estas herramientas con especial detalle en sus limitaciones. Para más detalle se recomienda la revisión de \cite{stein_models_2009} y \cite{Kumar_2017}.
+
+\subsubsection{PVWatts}
+
+Es una herramienta en línea desarrollada por el \gls{NREL} que permite calcular la producción de energía de un sistema fotovoltaico en función de la localización geográfica, la inclinación y orientación de los módulos, y otros parámetros de entrada. Se emplea para estimar la producción de energía y el retorno económico de una instalación fotovoltaica.
+
+Es apta para perfiles no profesionales, pero no permite modificar los modelos de cálculo ni adaptarlos a las necesidades del usuario. Además, fija las posibilidades de simulación, por ejemplo los materiales y sus eficiencias (solo silicio cristalino de 19\% o 21\% o de capa delgada de 18\% de eficiencia) así como sus parámetros térmicos y los algoritmos de seguimiento.
+
+\subsubsection{PVGIS}
+
+Es una herramienta en línea subvencionada por la comisión Europea que permite calcular la producción de energía de un sistema fotovoltaico en función de la localización geográfica, y las propiedades técnicas de la instalación. Se emplea para estimar la producción de energía y el retorno económico de una instalación fotovoltaica. Algunos puntos fuertes de esta herramienta son la posibilidad de obtener y utilizar el perfil del horizonte, emplear datos de la red eléctrica para calcular el retorno económico, mayor variedad de tecnologías y optimizaciones de parámetros de diseños.
+
+Sin embargo, esta herramienta solo es utilizable en las regiones de Europa, África y Asia. Además, los sistemas que se simulan son exclusivamente de montaje fijo o integrados en edificios, y no se pueden simular sistemas de seguimiento solar. Por último, asume que la \gls{capacidad DC-AC} es fija en $1.1$.
+
+\subsubsection{PV-Online}
+
+Es una herramienta en línea desarrollada por Valentin Software que permite simular sistemas de hasta $10 \si{\kilo\watt}p$ en gran parte del mundo. Se enfoca en las tres tecnologías más comunes de silicio: amorfo, monocristalino y policristalino.
+
+Limita las posibilidades de inclinación de los módulos a pasos de $15^\circ$ y de acimut a pasos de $45^\circ$. Además, no permite simular sistemas de seguimiento solar ni tener en cuenta las sombras.
+
+\subsubsection{PV*SOL}
+
+El concepto de esta herramienta es similar al de \textit{PV-Online}, pero admite orientar el sistema con la precisión de $1^\circ$ y aporta utilidades para encontrar el mejor \gls{inversor} que se adapta al sistema.
+
+De la misma forma que su predecesor, no cuenta con la posibilidad de simular sistemas de seguimiento solar, simular el efecto de sombras y las posibilidades de elegir módulos e inversores son limitadas.
+
+\subsubsection{PVsyst}
+
+Es una herramienta gráfica para Windows muy reconocida en el sector que permite simular grandes sistemas fotovoltaicos con propósitos variados (autoconsumo, bombeo, conectado a red) y presta especial detalle en las sombras mediante un editor 3D. Permite simular sistemas de seguimiento solar y sistemas de almacenamiento.
+
+Si bien en la futura versión 8 se espera poder interaccionar con la herramienta mediante línea de comandos, hacer pequeñas modificaciones para optimizar el sistema siempre ha sido un proceso manual y tedioso. Además, una licencia anual es especialmente costosa ($\sim 640 $ \texteuro) y se imponen muchas restricciones sobre el uso de la herramienta, como que no puede ser en un servidor o mediante una conexión remota.
+
+\subsubsection{System Advisor Model (SAM)}
+
+Es una herramienta desarrollada por el \gls{NREL} que permite simular sistemas fotovoltaicos y también está muy extendida en el sector. Es muy completa: permite simular sistemas de seguimiento solar, sistemas de almacenamiento y sistemas híbridos con otros muchos tipos de energías. Además, permite simular sistemas de concentración solar y sistemas de energía eólica entre otros.
+
+Sin embargo, la interfaz gráfica es muy compleja y no es intuitiva. Además, la herramienta no permite simular sistemas de bombeo y no es posible interactuar con ella mediante línea de comandos.
+
+\section{\pvlibpy{} en el contexto de otras alternativas}
+
+En general, existe una gran cantidad de herramientas en el sector, pero normalmente se centran mucho en el resultado energético y/o económico y la facilidad de uso del usuario, pero no tanto en la investigación y personalización de los flujos de simulación. Es más, la mayoría de las herramientas o bien hacen varias simplificaciones para trabajar con sistemas de seguimiento o no tienen en cuenta el impacto de las sombras del todo correctamente.
+
+\pvlibpy{} ocupa este nicho para usuarios más expertos, que desean investigar y validar modelos o realizar simulaciones variando todo tipo de parámetros. Además, por ser de código abierto, es un referente para la implementación de algoritmos en sistemas embebidos y la garantía de implementación de los modelos científicos. En \fullref{chp:FOSS} se detalla esta propiedad que hace de \pvlibpy{} una herramienta única y se ahonda en más detalle en sus capacidades.

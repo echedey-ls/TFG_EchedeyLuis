@@ -1,4 +1,4 @@
-\chapter{Desarrollo} \label{chp:desarrollo}
+\chapter{Desarrollo y resultados} \label{chp:desarrollo}
 
 En este capítulo se detallan las aportaciones realizadas a la librería \pvlibpy{} dentro del marco de este Trabajo Fin de Grado.
 
@@ -326,7 +326,7 @@ Accesible en \linkDocsFunction{pvlib.irradiance.diffuse\_par\_spitters}.
     \item \pr[https://github.com/NREL/bifacial_radiance]{520} en \textit{NREL/bifacial\_radiance}
 \end{itemize}
 
-Esta contribución implementa un modelo de pérdidas sobre la potencia de salida para \gls{módulos bifaciales}, es decir, aquellos que pueden recibir \gls{irradiancia} solar tanto por una cara delantera como por la trasera. El modelo se aplica para tener en cuenta irradiancia que no es homogénea en la superficie del \gls{módulo}. Se trata del trabajo descrito en \cite{Deline_Ayala_Pelaez_MacAlpine_Olalla_2020}.
+Esta contribución implementa un modelo de pérdidas sobre la potencia de salida para \glspl{módulo bifacial}, es decir, aquellos que pueden recibir \gls{irradiancia} solar tanto por una cara delantera como por la trasera. El modelo se aplica para tener en cuenta irradiancia que no es homogénea en la superficie del \gls{módulo}. Se trata del trabajo descrito en \cite{Deline_Ayala_Pelaez_MacAlpine_Olalla_2020}.
 Presenta interés en sistemas bifaciales, donde la cara trasera normalmente se expone a la luz \gls{reflejada} por el suelo y otras obstrucciones, y por tanto la irradiancia de esa cara no es homogénea.
 
 En la cara frontal la irradiancia es mucho más homogénea, así que no se suele tener en cuenta este efecto. No obstante, este modelo se aplica para el valor global de las irradiancias a nivel de célula, o sea, de la suma de la frontal y de la trasera.
